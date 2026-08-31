@@ -117,6 +117,12 @@ export default function HeroTitleReveal({
   }
 
   const showBar = !reducedMotion && phase !== "pre" && phase !== "done";
+  // The bar only fully covers the text once "grow" finishes, so the text
+  // stays hidden through "grow"/"hold" and only turns opaque right as
+  // "shrink" starts — at that instant the bar is at 100% coverage, so the
+  // flip is invisible, and the retreating bar then wipes the text into view
+  // instead of it ever flashing through underneath.
+  const textVisible = reducedMotion || phase === "shrink" || phase === "done";
 
   return (
     <h1
@@ -124,7 +130,7 @@ export default function HeroTitleReveal({
       data-cursor="interactive"
       className="hero-title relative inline-block max-w-3xl select-none text-3xl leading-tight text-fg-primary sm:text-4xl md:text-5xl"
     >
-      <span style={{ opacity: reducedMotion || phase !== "pre" ? 1 : 0 }}>
+      <span style={{ opacity: textVisible ? 1 : 0 }}>
         {text}
       </span>
 

@@ -9,7 +9,9 @@ const GROW_MS = 500;
 const HOLD_MS = 200;
 const SHRINK_MS = 500;
 const TOTAL = 9;
-const TALLY_MS = 700;
+const TALLY_STEP_MS = 90;
+const TALLY_PAUSE_AT = 4;
+const TALLY_PAUSE_MS = 320;
 const LABEL = "систем работают прямо сейчас";
 
 function easeOutCubic(t: number) {
@@ -91,27 +93,38 @@ export default function SystemsCounter({ start, onDone }: SystemsCounterProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase, reducedMotion]);
 
-  // Tally only starts once the number has appeared.
+  // Tally only starts once the number has appeared. Ticks at a steady pace
+  // with one deliberate pause part-way through (rather than a uniform sweep
+  // to 9) so the count reads as counting rather than a fast blur.
   useEffect(() => {
     if (!numberVisible || reducedMotion) return;
 
     let n = 0;
-    const stepMs = TALLY_MS / TOTAL;
-    const id = window.setInterval(() => {
+    let timer = 0;
+
+    function tick() {
       n += 1;
       setCount(n);
       if (n >= TOTAL) {
-        window.clearInterval(id);
         onDone?.();
+        return;
       }
-    }, stepMs);
-    return () => window.clearInterval(id);
+      const delay = n === TALLY_PAUSE_AT ? TALLY_STEP_MS + TALLY_PAUSE_MS : TALLY_STEP_MS;
+      timer = window.setTimeout(tick, delay);
+    }
+
+    timer = window.setTimeout(tick, TALLY_STEP_MS);
+    return () => window.clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [numberVisible, reducedMotion]);
 
   if (!start && !reducedMotion) return <div className="h-6" aria-hidden="true" />;
 
   const showBar = !reducedMotion && phase !== "pre" && phase !== "done";
+  // Same fix as HeroTitleReveal: the label only turns opaque once the bar
+  // has fully covered it (start of "shrink"), so it can never flash through
+  // before the wipe reveals it.
+  const labelVisible = reducedMotion || phase === "shrink" || phase === "done";
 
   return (
     <div className="flex items-center gap-2 text-sm text-fg-muted">
@@ -128,7 +141,7 @@ export default function SystemsCounter({ start, onDone }: SystemsCounterProps) {
           {count}
         </span>{" "}
         <span className="relative inline-block">
-          <span style={{ opacity: reducedMotion || phase !== "pre" ? 1 : 0 }}>
+          <span style={{ opacity: labelVisible ? 1 : 0 }}>
             {LABEL}
           </span>
           {showBar && (
