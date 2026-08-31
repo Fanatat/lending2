@@ -1,0 +1,20 @@
+:root {
+  --bg-void: #0a0a0a;
+  --bg-panel: #101012;
+  --fg-primary: #e8e8e8;
+  --fg-muted: #7a7a7a;
+  --accent: #ffc53d;
+  --line: rgba(255, 255, 255, 0.12);
+  --line-glow: var(--accent);
+  --matrix-bg: #0a0a0a;
+  --matrix-fg: #00ff41;
+}
+
+html.matrix-mode {
+  --bg-void: var(--matrix-bg);
+  --bg-panel: #050505;
+  --fg-primary: var(--matrix-fg);
+  --fg-muted: #0a8f2b;
+  --accent: var(--matrix-fg);
+  --line: rgba(0, 255, 65, 0.18);
+}

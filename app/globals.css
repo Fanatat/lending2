@@ -1,0 +1,303 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "../styles/tokens.css";
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background: var(--bg-void);
+  color: var(--fg-primary);
+}
+
+body {
+  font-family: var(--font-jetbrains-mono), "Fira Code", ui-monospace, monospace;
+  line-height: 1.5;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg-void);
+}
+
+/* Default cursor stays visible; components/effects/CustomCursor takes over
+   on devices with a real pointer once mounted (see prefers-reduced-motion /
+   pointer:coarse guards there). */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Custom cursor (components/effects/CustomCursor.tsx) — only ever active on
+   devices with a real mouse; touch devices never get these classes. */
+.custom-cursor-active,
+.custom-cursor-active * {
+  cursor: none;
+}
+
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  pointer-events: none;
+  z-index: 9999;
+  transition: width 0.15s ease, height 0.15s ease, background 0.15s ease,
+    border-radius 0.15s ease;
+}
+
+.cursor-dot--interactive {
+  width: 16px;
+  height: 16px;
+  border-radius: 0;
+  background: linear-gradient(var(--accent), var(--accent)) center / 2px 100%
+      no-repeat,
+    linear-gradient(var(--accent), var(--accent)) center / 100% 2px no-repeat;
+}
+
+.cursor-click-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  animation: cursor-click-ring 200ms ease-out forwards;
+}
+
+@keyframes cursor-click-ring {
+  from {
+    width: 8px;
+    height: 8px;
+    opacity: 0.9;
+  }
+  to {
+    width: 48px;
+    height: 48px;
+    opacity: 0;
+  }
+}
+
+@keyframes status-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes typing-cursor-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.typing-cursor {
+  display: inline-block;
+  width: 0.5em;
+  margin-left: 1px;
+  animation: typing-cursor-blink 1s steps(1) infinite;
+}
+
+@keyframes hero-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.92;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-title:hover {
+    animation: hero-pulse 2.4s ease-in-out infinite;
+  }
+}
+
+.hp100-ecg-path path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hp100-ecg-path path {
+    stroke-dashoffset: 1;
+    animation: ecg-draw 900ms ease-out forwards;
+  }
+}
+
+@keyframes ecg-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes sensor-blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  96% {
+    transform: scaleY(0.15);
+  }
+}
+
+.bridge-pipe {
+  position: relative;
+  height: 20px;
+}
+
+.bridge-pipe::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--line);
+  transform: translateY(-50%);
+}
+
+.bridge-pipe--broken::before {
+  background: transparent;
+  border-top: 1px dashed rgba(255, 93, 93, 0.6);
+}
+
+.bridge-packet {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  margin-top: -4px;
+  animation: packet-move 2.4s linear infinite;
+}
+
+@keyframes packet-move {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+    background: var(--accent);
+  }
+  88% {
+    transform: translateX(94%);
+    opacity: 1;
+    background: var(--accent);
+  }
+  95% {
+    background: #3ddc6a;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+    background: #3ddc6a;
+  }
+}
+
+@keyframes unicorn-hue {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+@keyframes flip-number {
+  0% {
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
+  45% {
+    transform: rotateX(90deg);
+    opacity: 0.3;
+  }
+  55% {
+    transform: rotateX(-90deg);
+    opacity: 0.3;
+  }
+  100% {
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes thumb-float {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(-16px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+}
+
+@keyframes avatar-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes edge-vibrate {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-0.3px);
+  }
+  75% {
+    transform: translateX(0.3px);
+  }
+}
+
+/* Purely decorative, looping animations (breathing avatars, running packets,
+   pulsing dots, etc.) opt in to this class. Functional transitions (reveal on
+   scroll, page transitions) are handled per-component via the useReducedMotion
+   hook in lib/motion.ts instead, so they can degrade to a simpler variant
+   rather than being nuked outright. */
+@media (prefers-reduced-motion: reduce) {
+  .decorative-loop {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,160 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { useReducedMotion } from "@/lib/motion";
+import ProjectCardLink from "@/components/transitions/ProjectCardLink";
+import { NODES, EDGES, COMPROMISED_EDGE } from "./nodes";
+
+const DWELL_MS = 15000;
+const TOAST_MS = 3000;
+
+function isCompromised(a: string, b: string) {
+  return (
+    (a === COMPROMISED_EDGE[0] && b === COMPROMISED_EDGE[1]) ||
+    (a === COMPROMISED_EDGE[1] && b === COMPROMISED_EDGE[0])
+  );
+}
+
+function nodeById(id: string) {
+  return NODES.find((n) => n.id === id)!;
+}
+
+export default function PerimeterMap() {
+  const reducedMotion = useReducedMotion();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [hackerVisible, setHackerVisible] = useState(false);
+  const [neutralized, setNeutralized] = useState(false);
+  const [shake, setShake] = useState(false);
+  const [toast, setToast] = useState(false);
+
+  useEffect(() => {
+    if (reducedMotion) return;
+    const el = containerRef.current;
+    if (!el) return;
+    let timer: number | undefined;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          timer = window.setTimeout(() => setHackerVisible(true), DWELL_MS);
+        } else if (timer) {
+          window.clearTimeout(timer);
+        }
+      },
+      { threshold: 0.6 }
+    );
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      if (timer) window.clearTimeout(timer);
+    };
+  }, [reducedMotion]);
+
+  function neutralizeThreat() {
+    setShake(true);
+    setNeutralized(true);
+    window.setTimeout(() => setShake(false), 300);
+    window.setTimeout(() => {
+      setHackerVisible(false);
+      setNeutralized(false);
+    }, 700);
+    setToast(true);
+    window.setTimeout(() => setToast(false), TOAST_MS);
+  }
+
+  return (
+    <div className="relative w-full max-w-sm">
+      <div
+        ref={containerRef}
+        className="relative aspect-square w-full border border-line bg-panel"
+        style={{ transform: shake ? "translateX(2px)" : undefined }}
+      >
+        <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full">
+          {EDGES.map(([a, b]) => {
+            const na = nodeById(a);
+            const nb = nodeById(b);
+            const compromised = isCompromised(a, b);
+            const pathId = `edge-${a}-${b}`;
+            return (
+              <g key={pathId}>
+                <path
+                  id={pathId}
+                  d={`M ${na.x} ${na.y} L ${nb.x} ${nb.y}`}
+                  fill="none"
+                  stroke={compromised ? "#ff5d5d" : "var(--line)"}
+                  strokeWidth={compromised ? 0.8 : 0.5}
+                  className={compromised ? "decorative-loop" : undefined}
+                  style={
+                    compromised
+                      ? { animation: "edge-vibrate 0.4s linear infinite" }
+                      : undefined
+                  }
+                />
+                {!reducedMotion && (
+                  <circle r={1.1} fill={compromised ? "#ff5d5d" : "var(--accent)"}>
+                    <animateMotion
+                      dur={compromised ? "1.1s" : "2.4s"}
+                      repeatCount="indefinite"
+                    >
+                      <mpath href={`#${pathId}`} />
+                    </animateMotion>
+                  </circle>
+                )}
+              </g>
+            );
+          })}
+        </svg>
+
+        {NODES.map((n) => (
+          <div
+            key={n.id}
+            className="absolute -translate-x-1/2 -translate-y-1/2"
+            style={{ left: `${n.x}%`, top: `${n.y}%` }}
+          >
+            <ProjectCardLink
+              href="/projects/perimeter"
+              ariaLabel={`Открыть отчёт по узлу: ${n.label}`}
+              className="flex flex-col items-center gap-1"
+            >
+              <div className="relative h-2.5 w-2.5 rounded-full border border-line bg-void">
+                {n.vulnerable && (
+                  <span
+                    className="decorative-loop absolute -inset-1 rounded-full bg-[#ff5d5d]"
+                    style={{ animation: "status-blink 0.8s steps(1) infinite" }}
+                    aria-hidden="true"
+                  />
+                )}
+              </div>
+              <span
+                className="whitespace-nowrap text-[9px] text-fg-muted"
+                style={{ marginTop: "8px" }}
+              >
+                {n.label}
+              </span>
+            </ProjectCardLink>
+          </div>
+        ))}
+
+        {hackerVisible && (
+          <button
+            type="button"
+            data-cursor="interactive"
+            onClick={neutralizeThreat}
+            aria-label="Нейтрализовать угрозу"
+            className="absolute right-1 top-1 flex h-6 w-6 items-center justify-center border border-[#ff5d5d] bg-void text-[10px] text-[#ff5d5d]"
+          >
+            {neutralized ? "×" : "?"}
+          </button>
+        )}
+      </div>
+
+      {toast && (
+        <div
+          role="status"
+          className="absolute -bottom-10 left-1/2 -translate-x-1/2 whitespace-nowrap border border-accent bg-void px-3 py-1 text-[10px] text-accent"
+        >
+          THREAT NEUTRALIZED. Периметр закрыт.
+        </div>
+      )}
+    </div>
+  );
+}
