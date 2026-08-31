@@ -6,6 +6,7 @@ import SmokeField from "@/components/effects/SmokeField";
 import CustomCursor from "@/components/effects/CustomCursor";
 import ScrollProgress from "@/components/effects/ScrollProgress";
 import MatrixModeController from "@/components/effects/MatrixModeController";
+import MatrixRain from "@/components/effects/MatrixRain";
 import SoundToggle from "@/components/effects/SoundToggle";
 import ProjectTransitionOverlay from "@/components/transitions/ProjectTransitionOverlay";
 import PacketPile from "@/components/effects/PacketPile";
@@ -34,6 +35,7 @@ export default function RootLayout({
     <html lang="ru" className={jetbrainsMono.variable}>
       <body>
         <MatrixModeController />
+        <MatrixRain />
         <ParticleDust />
         <SmokeField />
         <ScrollProgress />

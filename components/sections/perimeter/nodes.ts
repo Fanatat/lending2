@@ -4,12 +4,26 @@ export interface NetNode {
   x: number;
   y: number;
   vulnerable?: boolean;
+  /**
+   * "bottom" (default) puts the label under the dot. "right" puts it beside
+   * the dot instead — needed for perimeter/server/router, which sit on one
+   * vertical line (x: 50): a label sitting directly under any of them would
+   * be drawn right on top of the edge continuing down to the next node.
+   */
+  labelSide?: "right";
 }
 
 export const NODES: NetNode[] = [
-  { id: "perimeter", label: "Внешний периметр", x: 50, y: 8 },
-  { id: "server", label: "Сервер", x: 50, y: 30, vulnerable: true },
-  { id: "router", label: "Роутер", x: 50, y: 55 },
+  { id: "perimeter", label: "Внешний периметр", x: 50, y: 8, labelSide: "right" },
+  {
+    id: "server",
+    label: "Сервер",
+    x: 50,
+    y: 30,
+    vulnerable: true,
+    labelSide: "right",
+  },
+  { id: "router", label: "Роутер", x: 50, y: 55, labelSide: "right" },
   { id: "pc1", label: "ПК 1", x: 18, y: 82 },
   { id: "pc2", label: "ПК 2", x: 50, y: 90 },
   { id: "laptop", label: "Ноутбук", x: 82, y: 82 },

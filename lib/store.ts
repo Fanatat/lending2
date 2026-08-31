@@ -65,10 +65,14 @@ export const useLabStore = create<LabStore>((set, get) => ({
     persistFound(next);
   },
   hydrateFromStorage: () => {
+    // `found` is a permanent "discovered this egg once" record used for
+    // achievement tracking — it must not double as the live matrixMode
+    // toggle, or the mint/matrix look would come back on every visit after
+    // the first time someone finds it instead of needing the 5-click trigger
+    // again.
     const found = loadFound();
     set({
       foundEasterEggs: found,
-      matrixMode: found.includes("matrix"),
       soundEnabled: loadSoundEnabled(),
     });
   },

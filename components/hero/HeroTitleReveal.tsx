@@ -9,7 +9,6 @@ type Phase = "pre" | "grow" | "hold" | "shrink" | "done";
 const GROW_MS = 500;
 const HOLD_MS = 200;
 const SHRINK_MS = 500;
-const INITIAL_DELAY_MS = 250;
 
 const CLICK_RESET_GAP_MS = 1000;
 const CLICKS_TO_TOGGLE = 5;
@@ -20,6 +19,7 @@ function easeOutCubic(t: number) {
 
 interface HeroTitleRevealProps {
   text: string;
+  start: boolean;
   onRevealed?: () => void;
 }
 
@@ -27,34 +27,39 @@ interface HeroTitleRevealProps {
  * "Не резюме..." headline reveal: a rectangle grows left-to-right to the
  * text's right edge, holds 0.2s, then narrows away from the left (right
  * edge pinned) while the text underneath wipes into view along the same
- * edge — both driven by one rAF tween so they stay perfectly in sync. Five
- * quick clicks (gap <=1s between each) toggle Matrix mode.
+ * edge — both driven by one rAF tween so they stay perfectly in sync.
+ * `start` is owned by Hero so this and SystemsCounter's label wipe fire on
+ * the exact same tick. Five quick clicks (gap <=1s between each) toggle
+ * Matrix mode.
  */
 export default function HeroTitleReveal({
   text,
+  start,
   onRevealed,
 }: HeroTitleRevealProps) {
   const reducedMotion = useReducedMotion();
   const [phase, setPhase] = useState<Phase>(reducedMotion ? "done" : "pre");
   const barRef = useRef<HTMLSpanElement>(null);
-  const textRef = useRef<HTMLSpanElement>(null);
   const rafRef = useRef(0);
+  const startedRef = useRef(false);
   const clickCountRef = useRef(0);
   const lastClickRef = useRef(0);
   const matrixMode = useLabStore((s) => s.matrixMode);
   const setMatrixMode = useLabStore((s) => s.setMatrixMode);
   const markFound = useLabStore((s) => s.markFound);
 
-  // Phase sequencing.
+  // Kick off the grow phase once `start` flips true (reduced-motion users
+  // get the full text immediately, independent of that gate).
   useEffect(() => {
     if (reducedMotion) {
       onRevealed?.();
       return;
     }
-    const t1 = window.setTimeout(() => setPhase("grow"), INITIAL_DELAY_MS);
-    return () => window.clearTimeout(t1);
+    if (!start || startedRef.current) return;
+    startedRef.current = true;
+    setPhase("grow");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [reducedMotion]);
+  }, [start, reducedMotion]);
 
   useEffect(() => {
     if (reducedMotion || phase === "pre" || phase === "done") return;
@@ -65,10 +70,10 @@ export default function HeroTitleReveal({
     }
 
     const duration = phase === "grow" ? GROW_MS : SHRINK_MS;
-    const start = performance.now();
+    const startTime = performance.now();
 
     function frame(now: number) {
-      const t = Math.min(1, (now - start) / duration);
+      const t = Math.min(1, (now - startTime) / duration);
       const eased = easeOutCubic(t);
       const bar = barRef.current;
 
@@ -119,12 +124,7 @@ export default function HeroTitleReveal({
       data-cursor="interactive"
       className="hero-title relative inline-block max-w-3xl select-none text-3xl leading-tight text-fg-primary sm:text-4xl md:text-5xl"
     >
-      <span
-        ref={textRef}
-        style={{
-          opacity: reducedMotion || phase !== "pre" ? 1 : 0,
-        }}
-      >
+      <span style={{ opacity: reducedMotion || phase !== "pre" ? 1 : 0 }}>
         {text}
       </span>
 

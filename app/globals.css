@@ -203,12 +203,12 @@ a {
 
 @keyframes packet-move {
   0% {
-    transform: translateX(0);
+    left: 0%;
     opacity: 1;
     background: var(--accent);
   }
   88% {
-    transform: translateX(94%);
+    left: 94%;
     opacity: 1;
     background: var(--accent);
   }
@@ -216,9 +216,31 @@ a {
     background: #3ddc6a;
   }
   100% {
-    transform: translateX(100%);
+    left: 100%;
     opacity: 0;
     background: #3ddc6a;
+  }
+}
+
+.bridge-packet--broken {
+  animation-name: packet-approach-gap;
+}
+
+@keyframes packet-approach-gap {
+  0% {
+    left: 0%;
+    opacity: 1;
+    background: var(--accent);
+  }
+  92% {
+    left: 48%;
+    opacity: 1;
+    background: var(--accent);
+  }
+  100% {
+    left: 50%;
+    opacity: 0;
+    background: #ff5d5d;
   }
 }
 

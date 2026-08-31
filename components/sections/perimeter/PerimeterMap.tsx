@@ -106,43 +106,54 @@ export default function PerimeterMap() {
           })}
         </svg>
 
-        {NODES.map((n) => (
-          <div
-            key={n.id}
-            className="absolute"
-            style={{
-              left: `${n.x}%`,
-              top: `${n.y}%`,
-              // Center the dot itself (first child, h-2.5 = 10px) on (x%, y%)
-              // — matches the SVG edges' coordinates. A plain -translate-y-1/2
-              // would center the whole dot+label stack instead, pulling the
-              // dot noticeably above where the edges actually meet it.
-              transform: "translate(-50%, -5px)",
-            }}
-          >
-            <ProjectCardLink
-              href="/projects/perimeter"
-              ariaLabel={`Открыть отчёт по узлу: ${n.label}`}
-              className="flex flex-col items-center gap-1"
+        {NODES.map((n) => {
+          const sideLabel = n.labelSide === "right";
+          return (
+            <div
+              key={n.id}
+              className="absolute"
+              style={{
+                left: `${n.x}%`,
+                top: `${n.y}%`,
+                // Center the dot itself (h-2.5 = 10px, so half is 5px) on
+                // (x%, y%) — matches the SVG edges' coordinates. For a
+                // bottom label that's -50%/-5px (dot centered horizontally,
+                // nudged up); for a side label the row starts at the dot
+                // instead of being centered on it, so only the dot's own
+                // half-width/half-height needs subtracting.
+                transform: sideLabel
+                  ? "translate(-5px, -5px)"
+                  : "translate(-50%, -5px)",
+              }}
             >
-              <div className="relative h-2.5 w-2.5 rounded-full border border-line bg-void">
-                {n.vulnerable && !resolved && (
-                  <span
-                    className="decorative-loop absolute -inset-1 rounded-full bg-[#ff5d5d]"
-                    style={{ animation: "status-blink 0.8s steps(1) infinite" }}
-                    aria-hidden="true"
-                  />
-                )}
-              </div>
-              <span
-                className="whitespace-nowrap text-[9px] text-fg-muted"
-                style={{ marginTop: "8px" }}
+              <ProjectCardLink
+                href="/projects/perimeter"
+                ariaLabel={`Открыть отчёт по узлу: ${n.label}`}
+                className={
+                  sideLabel
+                    ? "flex flex-row items-center gap-2"
+                    : "flex flex-col items-center gap-1"
+                }
               >
-                {n.label}
-              </span>
-            </ProjectCardLink>
-          </div>
-        ))}
+                <div className="relative h-2.5 w-2.5 shrink-0 rounded-full border border-line bg-void">
+                  {n.vulnerable && !resolved && (
+                    <span
+                      className="decorative-loop absolute -inset-1 rounded-full bg-[#ff5d5d]"
+                      style={{ animation: "status-blink 0.8s steps(1) infinite" }}
+                      aria-hidden="true"
+                    />
+                  )}
+                </div>
+                <span
+                  className="whitespace-nowrap text-[9px] text-fg-muted"
+                  style={sideLabel ? undefined : { marginTop: "8px" }}
+                >
+                  {n.label}
+                </span>
+              </ProjectCardLink>
+            </div>
+          );
+        })}
 
         {hackerVisible && (
           <button

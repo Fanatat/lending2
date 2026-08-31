@@ -11,14 +11,20 @@ const BODY =
 const FOOTNOTE =
   "Все задачи решаются за 2000 рублей в месяц. Доказательства ниже.";
 
+const INITIAL_DELAY_MS = 250;
 const FOOTNOTE_DELAY_MS = 2000;
 
-/** Hero section — headline reveal → counter tally → typed body → delayed footnote. */
+/** Hero section — headline + counter reveal together → typed body → delayed footnote. */
 export default function Hero() {
-  const [titleRevealed, setTitleRevealed] = useState(false);
+  const [revealStart, setRevealStart] = useState(false);
   const [counterDone, setCounterDone] = useState(false);
   const [paragraphDone, setParagraphDone] = useState(false);
   const [footnoteStart, setFootnoteStart] = useState(false);
+
+  useEffect(() => {
+    const t = window.setTimeout(() => setRevealStart(true), INITIAL_DELAY_MS);
+    return () => window.clearTimeout(t);
+  }, []);
 
   useEffect(() => {
     if (!paragraphDone) return;
@@ -31,8 +37,8 @@ export default function Hero() {
 
   return (
     <section className="flex min-h-screen flex-col justify-center gap-6 px-6 py-24 sm:px-10 md:px-16">
-      <HeroTitleReveal text={TITLE} onRevealed={() => setTitleRevealed(true)} />
-      <SystemsCounter start={titleRevealed} onDone={() => setCounterDone(true)} />
+      <HeroTitleReveal text={TITLE} start={revealStart} />
+      <SystemsCounter start={revealStart} onDone={() => setCounterDone(true)} />
       <TypewriterLine
         text={BODY}
         start={counterDone}

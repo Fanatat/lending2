@@ -7,7 +7,12 @@ import { useReducedMotion } from "@/lib/motion";
 
 const TOGGLE_WINDOW_MS = 5000;
 const TOGGLES_FOR_UNICORN = 10;
-const FALL_SPAWN_MS = 550;
+
+// Packets travel the full pipe in 2.4s (0.9s in unicorn mode). When the pipe
+// is broken they only travel the first half before tripping into the gap, so
+// that leg takes half as long.
+const TRAVEL_MS = 2.4;
+const TRAVEL_MS_UNICORN = 0.9;
 
 function Pipe({
   broken,
@@ -20,26 +25,32 @@ function Pipe({
   packetCount: number;
   pipeRef?: RefObject<HTMLDivElement>;
 }) {
+  const fullDuration = unicorn ? TRAVEL_MS_UNICORN : TRAVEL_MS;
+  const duration = broken ? fullDuration / 2 : fullDuration;
+
   return (
     <div
       ref={pipeRef}
       className={`bridge-pipe flex-1 lg:flex-[4.5] ${broken ? "bridge-pipe--broken" : ""}`}
       aria-hidden="true"
     >
-      {!broken &&
-        Array.from({ length: packetCount }).map((_, i) => (
-          <span
-            key={i}
-            className="bridge-packet"
-            style={{
-              animationDelay: `${-(i * (2.4 / packetCount)).toFixed(2)}s`,
-              animationDuration: unicorn ? "0.9s" : "2.4s",
-              ...(unicorn
-                ? { animationName: "packet-move, unicorn-hue" }
-                : {}),
-            }}
-          />
-        ))}
+      {Array.from({ length: packetCount }).map((_, i) => (
+        <span
+          key={i}
+          className={`bridge-packet ${broken ? "bridge-packet--broken" : ""}`}
+          style={{
+            animationDelay: `${-(i * (duration / packetCount)).toFixed(2)}s`,
+            animationDuration: `${duration}s`,
+            ...(unicorn
+              ? {
+                  animationName: broken
+                    ? "packet-approach-gap, unicorn-hue"
+                    : "packet-move, unicorn-hue",
+                }
+              : {}),
+          }}
+        />
+      ))}
     </div>
   );
 }
@@ -56,13 +67,20 @@ export default function BridgeDiagram() {
 
   useEffect(() => {
     if (!ipv6Broken || reducedMotion) return;
+    const packetCount = unicornMode ? 6 : 2;
+    const fullDuration = unicornMode ? TRAVEL_MS_UNICORN : TRAVEL_MS;
+    const brokenDuration = (fullDuration / 2) * 1000;
+    const spawnEveryMs = brokenDuration / packetCount;
     const id = window.setInterval(() => {
       const el = rightPipeRef.current;
       if (!el) return;
       const r = el.getBoundingClientRect();
-      const x = r.left + Math.random() * r.width;
-      spawnFalling(x, r.top, unicornMode);
-    }, FALL_SPAWN_MS);
+      // Packets trip exactly at the midpoint of the pipe — see
+      // packet-approach-gap in globals.css, which vanishes them there too.
+      const x = r.left + r.width / 2;
+      const y = r.top + r.height / 2;
+      spawnFalling(x, y, unicornMode);
+    }, spawnEveryMs);
     return () => window.clearInterval(id);
   }, [ipv6Broken, unicornMode, reducedMotion, spawnFalling]);
 
