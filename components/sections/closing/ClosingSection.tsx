@@ -1,8 +1,59 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import RevealOnScroll from "@/components/effects/RevealOnScroll";
+import { useReducedMotion } from "@/lib/motion";
 
 const TELEGRAM_URL = "https://t.me/fanatat";
 
+/**
+ * Shakes the CTA in proportion to scroll speed, settling the instant
+ * scrolling stops — the closest analogue, without an actual camera, to
+ * "text reacts to camera movement". Deliberately the only place on the site
+ * that does this; everywhere else uses the four deterministic reveal
+ * animations.
+ */
+function useScrollJitter<T extends HTMLElement>(reducedMotion: boolean) {
+  const ref = useRef<T>(null);
+
+  useEffect(() => {
+    if (reducedMotion) return;
+
+    let rafId = 0;
+    let lastY = window.scrollY;
+    let velocity = 0;
+
+    function frame() {
+      const y = window.scrollY;
+      velocity = velocity * 0.85 + (y - lastY) * 0.15;
+      lastY = y;
+
+      const el = ref.current;
+      if (el) {
+        const amount = Math.min(6, Math.abs(velocity) * 0.6);
+        if (amount > 0.05) {
+          const dx = (Math.random() - 0.5) * amount;
+          const dy = (Math.random() - 0.5) * amount;
+          const rot = (Math.random() - 0.5) * amount * 0.4;
+          el.style.transform = `translate(${dx.toFixed(2)}px, ${dy.toFixed(2)}px) rotate(${rot.toFixed(2)}deg)`;
+        } else {
+          el.style.transform = "";
+        }
+      }
+
+      rafId = requestAnimationFrame(frame);
+    }
+
+    rafId = requestAnimationFrame(frame);
+    return () => cancelAnimationFrame(rafId);
+  }, [reducedMotion]);
+
+  return ref;
+}
+
 export default function ClosingSection() {
+  const reducedMotion = useReducedMotion();
+  const ctaRef = useScrollJitter<HTMLAnchorElement>(reducedMotion);
   return (
     <section
       id="closing"
@@ -43,6 +94,7 @@ export default function ClosingSection() {
 
         <RevealOnScroll index={4}>
           <a
+            ref={ctaRef}
             href={TELEGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"

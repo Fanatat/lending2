@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import SmoothScroll from "@/components/effects/SmoothScroll";
 import ParticleDust from "@/components/effects/ParticleDust";
 import SmokeField from "@/components/effects/SmokeField";
 import CustomCursor from "@/components/effects/CustomCursor";
 import ScrollProgress from "@/components/effects/ScrollProgress";
+import TrunkNav from "@/components/effects/TrunkNav";
 import MatrixModeController from "@/components/effects/MatrixModeController";
 import MatrixRain from "@/components/effects/MatrixRain";
 import SoundToggle from "@/components/effects/SoundToggle";
@@ -34,11 +36,13 @@ export default function RootLayout({
   return (
     <html lang="ru" className={jetbrainsMono.variable}>
       <body>
+        <SmoothScroll />
         <MatrixModeController />
         <MatrixRain />
         <ParticleDust />
         <SmokeField />
         <ScrollProgress />
+        <TrunkNav />
         <CustomCursor />
         <SoundToggle />
         <div className="relative z-10">{children}</div>

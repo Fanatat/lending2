@@ -24,7 +24,7 @@ interface HeroTitleRevealProps {
 }
 
 /**
- * "Не резюме..." headline reveal: a rectangle grows left-to-right to the
+ * "#НЕРЕЗЮМЕ..." headline reveal: a rectangle grows left-to-right to the
  * text's right edge, holds 0.2s, then narrows away from the left (right
  * edge pinned) while the text underneath wipes into view along the same
  * edge — both driven by one rAF tween so they stay perfectly in sync.

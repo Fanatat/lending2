@@ -12,9 +12,10 @@ interface RevealOnScrollProps {
 }
 
 /**
- * Fades + lifts its children into place the first time they enter the
- * viewport, staggered by `index * 100ms` to read as sequential module
- * initialization. Instant (no delay/offset) under prefers-reduced-motion.
+ * Fades + lifts its children into place whenever they enter the viewport,
+ * staggered by `index * 100ms` to read as sequential module initialization
+ * — and fades them back out (rather than snapping away) when scrolled past
+ * in either direction. Instant (no delay/offset) under prefers-reduced-motion.
  */
 export default function RevealOnScroll({
   children,
@@ -32,10 +33,7 @@ export default function RevealOnScroll({
     const observer = new IntersectionObserver(
       (entries) => {
         const entry = entries[0];
-        if (entry?.isIntersecting) {
-          setRevealed(true);
-          observer.disconnect();
-        }
+        if (entry) setRevealed(entry.isIntersecting);
       },
       { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
     );

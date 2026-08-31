@@ -5,16 +5,19 @@ import HeroTitleReveal from "./HeroTitleReveal";
 import SystemsCounter from "./SystemsCounter";
 import TypewriterLine from "./TypewriterLine";
 
-const TITLE = "Не резюме. Список реализованных задач.";
+const TITLE = "#НЕРЕЗЮМЕ а список реализованных задач";
 const BODY =
   "Девять автономных систем. Ноль сотрудников, ноль облачных подписок, ноль обещаний. Часть из них исполняет свои функции прямо сейчас, пока вы читаете эту строку.";
 const FOOTNOTE =
   "Все задачи решаются за 2000 рублей в месяц. Доказательства ниже.";
 
-const INITIAL_DELAY_MS = 250;
+// Matches the `hero-fly-in` CSS animation duration in globals.css — the
+// headline reveal starts the instant the fly-in lands, so the two read as
+// one continuous "arrival" instead of two separate effects.
+const FLY_IN_MS = 650;
 const FOOTNOTE_DELAY_MS = 2000;
 
-/** Hero section — headline + counter reveal together → typed body → delayed footnote. */
+/** Hero section — flies in on load, then headline + counter reveal together → typed body → delayed footnote. */
 export default function Hero() {
   const [revealStart, setRevealStart] = useState(false);
   const [counterDone, setCounterDone] = useState(false);
@@ -22,7 +25,7 @@ export default function Hero() {
   const [footnoteStart, setFootnoteStart] = useState(false);
 
   useEffect(() => {
-    const t = window.setTimeout(() => setRevealStart(true), INITIAL_DELAY_MS);
+    const t = window.setTimeout(() => setRevealStart(true), FLY_IN_MS);
     return () => window.clearTimeout(t);
   }, []);
 
@@ -36,7 +39,10 @@ export default function Hero() {
   }, [paragraphDone]);
 
   return (
-    <section className="flex min-h-screen flex-col justify-center gap-6 px-6 py-24 sm:px-10 md:px-16">
+    <section
+      id="hero"
+      className="hero-fly-in flex min-h-screen flex-col justify-center gap-6 px-6 py-24 sm:px-10 md:px-16"
+    >
       <HeroTitleReveal text={TITLE} start={revealStart} />
       <SystemsCounter start={revealStart} onDone={() => setCounterDone(true)} />
       <TypewriterLine
