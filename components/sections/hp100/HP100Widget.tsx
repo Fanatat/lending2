@@ -39,11 +39,12 @@ function EcgChart({ history }: { history: SeriesPoint[] }) {
     .join(" ");
 
   return (
-    <div className="mt-4 overflow-x-auto" aria-hidden="true">
+    <div className="mt-4" aria-hidden="true">
       <svg
-        width={width}
+        width="100%"
         height={height}
         viewBox={`0 0 ${width} ${height}`}
+        preserveAspectRatio="none"
         className="hp100-ecg-path"
       >
         <path
@@ -136,7 +137,6 @@ export default function HP100Widget() {
             <span>
               {HP100_METRICS.find((d) => d.key === selected)?.label} — 24ч
             </span>
-            <span>прокрутите для истории →</span>
           </div>
           <EcgChart history={snapshot[selected].history} />
         </div>

@@ -22,11 +22,11 @@ export default function PortfolioWidget() {
   const started = useRef(false);
 
   useEffect(() => {
+    const unsub = portfolioSource.subscribe(setValues);
     if (!started.current) {
       started.current = true;
       portfolioSource.start();
     }
-    const unsub = portfolioSource.subscribe(setValues);
     return () => {
       unsub();
       portfolioSource.stop();

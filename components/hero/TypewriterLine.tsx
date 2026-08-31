@@ -38,16 +38,21 @@ export default function TypewriterLine({
 
   const Comp = as;
 
-  if (!start) return null;
-
   return (
-    <Comp className={className}>
-      {output}
-      {showCursor && (
-        <span className="typing-cursor" aria-hidden="true">
-          |
-        </span>
+    <div className={`relative ${className ?? ""}`}>
+      <Comp aria-hidden="true" className="invisible">
+        {text}
+      </Comp>
+      {start && (
+        <Comp className="absolute inset-0">
+          {output}
+          {showCursor && (
+            <span className="typing-cursor" aria-hidden="true">
+              |
+            </span>
+          )}
+        </Comp>
       )}
-    </Comp>
+    </div>
   );
 }

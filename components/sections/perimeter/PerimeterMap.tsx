@@ -24,6 +24,7 @@ export default function PerimeterMap() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [hackerVisible, setHackerVisible] = useState(false);
   const [neutralized, setNeutralized] = useState(false);
+  const [resolved, setResolved] = useState(false);
   const [shake, setShake] = useState(false);
   const [toast, setToast] = useState(false);
 
@@ -52,6 +53,7 @@ export default function PerimeterMap() {
   function neutralizeThreat() {
     setShake(true);
     setNeutralized(true);
+    setResolved(true);
     window.setTimeout(() => setShake(false), 300);
     window.setTimeout(() => {
       setHackerVisible(false);
@@ -72,7 +74,7 @@ export default function PerimeterMap() {
           {EDGES.map(([a, b]) => {
             const na = nodeById(a);
             const nb = nodeById(b);
-            const compromised = isCompromised(a, b);
+            const compromised = !resolved && isCompromised(a, b);
             const pathId = `edge-${a}-${b}`;
             return (
               <g key={pathId}>
@@ -107,8 +109,16 @@ export default function PerimeterMap() {
         {NODES.map((n) => (
           <div
             key={n.id}
-            className="absolute -translate-x-1/2 -translate-y-1/2"
-            style={{ left: `${n.x}%`, top: `${n.y}%` }}
+            className="absolute"
+            style={{
+              left: `${n.x}%`,
+              top: `${n.y}%`,
+              // Center the dot itself (first child, h-2.5 = 10px) on (x%, y%)
+              // — matches the SVG edges' coordinates. A plain -translate-y-1/2
+              // would center the whole dot+label stack instead, pulling the
+              // dot noticeably above where the edges actually meet it.
+              transform: "translate(-50%, -5px)",
+            }}
           >
             <ProjectCardLink
               href="/projects/perimeter"
@@ -116,7 +126,7 @@ export default function PerimeterMap() {
               className="flex flex-col items-center gap-1"
             >
               <div className="relative h-2.5 w-2.5 rounded-full border border-line bg-void">
-                {n.vulnerable && (
+                {n.vulnerable && !resolved && (
                   <span
                     className="decorative-loop absolute -inset-1 rounded-full bg-[#ff5d5d]"
                     style={{ animation: "status-blink 0.8s steps(1) infinite" }}

@@ -71,19 +71,13 @@ export default function HeroTitleReveal({
       const t = Math.min(1, (now - start) / duration);
       const eased = easeOutCubic(t);
       const bar = barRef.current;
-      const textEl = textRef.current;
 
       if (phase === "grow" && bar) {
         bar.style.left = "0%";
         bar.style.width = `${eased * 100}%`;
-      } else if (phase === "shrink") {
-        if (bar) {
-          bar.style.left = `${eased * 100}%`;
-          bar.style.width = `${(1 - eased) * 100}%`;
-        }
-        if (textEl) {
-          textEl.style.clipPath = `inset(0 ${(1 - eased) * 100}% 0 0)`;
-        }
+      } else if (phase === "shrink" && bar) {
+        bar.style.left = `${eased * 100}%`;
+        bar.style.width = `${(1 - eased) * 100}%`;
       }
 
       if (t < 1) {
@@ -118,7 +112,6 @@ export default function HeroTitleReveal({
   }
 
   const showBar = !reducedMotion && phase !== "pre" && phase !== "done";
-  const initialClip = reducedMotion || phase === "done" ? "inset(0 0% 0 0)" : "inset(0 100% 0 0)";
 
   return (
     <h1
@@ -129,7 +122,6 @@ export default function HeroTitleReveal({
       <span
         ref={textRef}
         style={{
-          clipPath: initialClip,
           opacity: reducedMotion || phase !== "pre" ? 1 : 0,
         }}
       >

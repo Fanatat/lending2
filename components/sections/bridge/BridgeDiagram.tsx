@@ -23,7 +23,7 @@ function Pipe({
   return (
     <div
       ref={pipeRef}
-      className={`bridge-pipe flex-1 ${broken ? "bridge-pipe--broken" : ""}`}
+      className={`bridge-pipe flex-1 lg:flex-[4.5] ${broken ? "bridge-pipe--broken" : ""}`}
       aria-hidden="true"
     >
       {!broken &&
@@ -84,7 +84,7 @@ export default function BridgeDiagram() {
   }
 
   return (
-    <div className="w-full max-w-lg border border-line bg-panel p-6">
+    <div className="w-full max-w-lg border border-line bg-panel p-6 lg:max-w-2xl">
       <div className="flex items-center gap-3 text-center text-[10px] text-fg-muted">
         <div className="flex-1 border border-line px-2 py-3 text-fg-primary">
           Telegram

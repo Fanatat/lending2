@@ -41,14 +41,26 @@ class PortfolioMockSource {
   private timer: number | undefined;
 
   constructor() {
+    // Deterministic seed so server-rendered markup and the client's first
+    // hydration pass agree; real randomization only happens once start()
+    // runs on the client (see randomizeInitial), avoiding a hydration
+    // mismatch between server and client Math.random() calls.
     this.values = Object.fromEntries(
-      RISK_METRICS.map((m) => [m.key, m.min + Math.random() * (m.max - m.min)])
+      RISK_METRICS.map((m) => [m.key, (m.min + m.max) / 2])
     );
   }
 
   start() {
     if (this.timer !== undefined) return;
+    this.randomizeInitial();
     this.timer = window.setInterval(() => this.tick(), UPDATE_MS);
+  }
+
+  private randomizeInitial() {
+    for (const m of RISK_METRICS) {
+      this.values[m.key] = m.min + Math.random() * (m.max - m.min);
+    }
+    this.emit();
   }
 
   stop() {

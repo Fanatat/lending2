@@ -12,9 +12,10 @@ interface Blob {
   alpha: number;
 }
 
-const REPEL_RADIUS = 260;
-const REPEL_STRENGTH = 90;
-const EASE = 0.05;
+const REPEL_RADIUS = 340;
+const REPEL_STRENGTH = 220;
+const EASE = 0.06;
+const PARALLAX_FACTOR = 0.18;
 
 /**
  * Soft, low-opacity smoke blobs that gently get pushed away from the cursor
@@ -41,9 +42,10 @@ export default function SmokeField() {
     let blobs: Blob[] = [];
     let rafId = 0;
     let visible = document.visibilityState === "visible";
+    let lastScrollY = window.scrollY;
 
     function makeBlobs() {
-      const count = 6;
+      const count = 11;
       blobs = Array.from({ length: count }, () => {
         const x = Math.random() * width;
         const y = Math.random() * height;
@@ -95,7 +97,17 @@ export default function SmokeField() {
         rafId = requestAnimationFrame(tick);
         return;
       }
+      const scrollY = window.scrollY;
+      const scrollDelta = (scrollY - lastScrollY) * PARALLAX_FACTOR;
+      lastScrollY = scrollY;
+
       for (const b of blobs) {
+        if (scrollDelta !== 0) {
+          b.homeY -= scrollDelta;
+          const wrapMargin = height + b.r * 2;
+          if (b.homeY < -b.r) b.homeY += wrapMargin;
+          if (b.homeY > height + b.r) b.homeY -= wrapMargin;
+        }
         const dx = b.x - pointer.current.x;
         const dy = b.y - pointer.current.y;
         const dist = Math.hypot(dx, dy);

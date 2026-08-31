@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import RevealOnScroll from "@/components/effects/RevealOnScroll";
+import DetailsDisclosure from "./DetailsDisclosure";
 
 interface SectionShellProps {
   id: string;
@@ -9,7 +10,7 @@ interface SectionShellProps {
   title: string;
   line: string;
   details?: string;
-  /** Small mysterious footnote under the details (e.g. Ол Ин's "(но что?)"). */
+  /** Small mysterious aside right under the title (e.g. Ол Ин's "что?"). */
   footnote?: string;
   children?: ReactNode;
 }
@@ -33,7 +34,7 @@ export default function SectionShell({
       id={id}
       className="border-t border-line px-6 py-20 sm:px-10 md:px-16"
     >
-      <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+      <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
         <div>
           <RevealOnScroll index={0}>
             <div className="text-xs tracking-widest text-fg-muted">
@@ -45,6 +46,11 @@ export default function SectionShell({
               {title}
             </h2>
           </RevealOnScroll>
+          {footnote && (
+            <RevealOnScroll index={1}>
+              <p className="mt-1 text-[9px] text-fg-muted/60">{footnote}</p>
+            </RevealOnScroll>
+          )}
           <RevealOnScroll index={2}>
             <p className="mt-4 max-w-xl text-sm text-fg-primary/90 sm:text-base">
               {line}
@@ -52,22 +58,7 @@ export default function SectionShell({
           </RevealOnScroll>
           {details && (
             <RevealOnScroll index={3}>
-              <details className="mt-6 max-w-xl border-t border-line pt-4">
-                <summary
-                  data-cursor="interactive"
-                  className="cursor-pointer text-sm text-accent"
-                >
-                  ▸ Подробнее
-                </summary>
-                <p className="mt-3 text-sm leading-relaxed text-fg-muted">
-                  {details}
-                </p>
-              </details>
-            </RevealOnScroll>
-          )}
-          {footnote && (
-            <RevealOnScroll index={4}>
-              <p className="mt-3 text-[10px] text-fg-muted/60">{footnote}</p>
+              <DetailsDisclosure text={details} />
             </RevealOnScroll>
           )}
         </div>

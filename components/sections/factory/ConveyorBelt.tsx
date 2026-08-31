@@ -41,7 +41,7 @@ export default function ConveyorBelt() {
       const box = boxRef.current;
       if (track && box) {
         const trackWidth = track.clientWidth - box.clientWidth;
-        box.style.transform = `translateX(${progress * trackWidth}px)`;
+        box.style.transform = `translate(${progress * trackWidth}px, -50%)`;
       }
       rafId = requestAnimationFrame(frame);
     }
@@ -52,14 +52,14 @@ export default function ConveyorBelt() {
 
   return (
     <div className="w-full max-w-none">
-      <div
-        ref={trackRef}
-        className="relative overflow-x-auto border border-line bg-panel px-4 py-8"
-      >
-        <div className="relative flex min-w-[720px] items-center justify-between gap-2">
+      <div className="relative overflow-x-auto border border-line bg-panel px-4 py-8">
+        <div
+          ref={trackRef}
+          className="relative flex min-w-[720px] items-start justify-between gap-2"
+        >
           <div
             aria-hidden="true"
-            className="absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 bg-line"
+            className="absolute left-0 right-0 top-1 h-px -translate-y-1/2 bg-line"
           />
           {FACTORY_STAGES.map((stage, i) => (
             <div
@@ -98,7 +98,7 @@ export default function ConveyorBelt() {
             <div
               ref={boxRef}
               aria-hidden="true"
-              className="absolute left-0 top-1/2 z-20 h-3 w-3 -translate-y-1/2 border border-accent bg-void"
+              className="absolute left-0 top-1 z-20 h-3 w-3 -translate-y-1/2 border border-accent bg-void"
             />
           )}
         </div>
