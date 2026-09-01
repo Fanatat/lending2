@@ -1,12 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import {
-  HP100_METRICS,
-  hp100Source,
-  type Hp100MetricKey,
-  type SeriesPoint,
-} from "@/lib/mock/hp100";
+import { HP100_METRICS, type Hp100MetricKey, type SeriesPoint } from "@/lib/mock/hp100";
+import { hp100LiveSource } from "@/lib/hp100-live";
 import ProjectCardLink from "@/components/transitions/ProjectCardLink";
 
 function levelFor(value: number, normalMax: number, warnMax: number) {
@@ -60,19 +56,23 @@ function EcgChart({ history }: { history: SeriesPoint[] }) {
 }
 
 export default function HP100Widget() {
-  const [snapshot, setSnapshot] = useState(() => hp100Source.getSnapshot());
+  const [snapshot, setSnapshot] = useState(() => hp100LiveSource.getSnapshot());
+  const [status, setStatus] = useState(() => hp100LiveSource.getStatus());
   const [selected, setSelected] = useState<Hp100MetricKey | null>(null);
   const started = useRef(false);
 
   useEffect(() => {
     if (!started.current) {
       started.current = true;
-      hp100Source.start();
+      hp100LiveSource.start();
     }
-    const unsub = hp100Source.subscribe(setSnapshot);
+    const unsub = hp100LiveSource.subscribe((snap, st) => {
+      setSnapshot(snap);
+      setStatus(st);
+    });
     return () => {
       unsub();
-      hp100Source.stop();
+      hp100LiveSource.stop();
     };
   }, []);
 
@@ -83,8 +83,23 @@ export default function HP100Widget() {
   return (
     <div
       className="w-full max-w-sm border border-line bg-panel p-4"
-      aria-label="Показатели воздуха HP100 (демо-данные)"
+      aria-label={`Показатели воздуха HP100 (${status.live ? "живые данные" : "демо-данные"})`}
     >
+      <div className="mb-2 flex items-center justify-between">
+        <span className="text-[10px] uppercase tracking-wide text-fg-muted">
+          HP100
+        </span>
+        <span
+          className={
+            status.live
+              ? "border border-accent/60 px-1.5 py-0.5 text-[9px] uppercase tracking-wide text-accent"
+              : "border border-line/60 px-1.5 py-0.5 text-[9px] uppercase tracking-wide text-fg-muted"
+          }
+        >
+          {status.live ? "live" : "демо"}
+        </span>
+      </div>
+
       <div className="flex items-end justify-between gap-3">
         {HP100_METRICS.map((def) => {
           const state = snapshot[def.key];
@@ -143,7 +158,9 @@ export default function HP100Widget() {
       )}
 
       <p className="mt-3 text-[10px] leading-relaxed text-fg-muted">
-        Демо-данные: сервер платы HP100 ещё не подключён (см. ТЗ, раздел 7).
+        {status.live
+          ? "Живые данные с платы HP100."
+          : "Демо-данные: сервер платы HP100 сейчас недоступен, показан резервный сценарий."}
       </p>
 
       <ProjectCardLink
