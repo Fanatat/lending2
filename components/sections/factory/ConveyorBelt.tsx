@@ -52,10 +52,10 @@ export default function ConveyorBelt() {
 
   return (
     <div className="w-full max-w-none">
-      <div className="relative overflow-x-auto border border-line bg-panel px-4 py-8">
+      <div className="relative overflow-x-auto border border-line bg-panel px-4 py-8 [-webkit-overflow-scrolling:touch]">
         <div
           ref={trackRef}
-          className="relative flex min-w-[720px] items-start justify-between gap-2"
+          className="relative flex min-w-[640px] items-start justify-between gap-2 sm:min-w-[720px]"
         >
           <div
             aria-hidden="true"
@@ -105,6 +105,9 @@ export default function ConveyorBelt() {
       </div>
       <p className="mt-3 text-center text-xs text-fg-muted">
         Пока ты листал, серия уже готова.
+      </p>
+      <p className="mt-1 text-center text-[10px] text-fg-muted/60 sm:hidden">
+        ← смахните, чтобы увидеть весь конвейер →
       </p>
     </div>
   );

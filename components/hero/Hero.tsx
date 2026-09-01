@@ -74,7 +74,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      className="hero-fly-in flex min-h-screen flex-col justify-center gap-6 px-6 py-24 sm:px-10 md:px-16"
+      className="hero-fly-in flex min-h-[100svh] flex-col justify-center gap-6 px-4 py-20 sm:px-6 sm:py-24 md:px-10 lg:px-16"
     >
       <HeroTitleReveal text={TITLE} start={revealStart} />
       <SystemsCounter start={revealStart} onDone={() => setCounterDone(true)} />

@@ -14,7 +14,7 @@ export default function ProjectShell({ title, todo, children }: ProjectShellProp
   const router = useRouter();
 
   return (
-    <main className="min-h-screen px-6 py-16 sm:px-10 md:px-16">
+    <main className="min-h-[100svh] px-4 py-16 sm:px-6 md:px-10 lg:px-16">
       <button
         type="button"
         data-cursor="interactive"

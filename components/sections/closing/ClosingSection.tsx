@@ -57,7 +57,7 @@ export default function ClosingSection() {
   return (
     <section
       id="closing"
-      className="border-t border-line px-6 py-24 sm:px-10 md:px-16"
+      className="border-t border-line px-4 py-16 sm:px-6 sm:py-24 md:px-10 lg:px-16"
     >
       <div className="mx-auto max-w-2xl">
         <RevealOnScroll index={0}>
@@ -67,7 +67,7 @@ export default function ClosingSection() {
         </RevealOnScroll>
 
         <RevealOnScroll index={1}>
-          <p className="mt-6 text-sm leading-relaxed text-fg-primary/90 sm:text-base">
+          <p className="mt-6 text-left text-sm leading-relaxed text-fg-primary/90 sm:text-justify sm:text-base">
             Арендованный сервер: 300 рублей. Сторонний прокси: 200 рублей.
             Подписка на нейросеть, которая всё это разрабатывает и
             обслуживает: 1500 рублей. Больше не понадобилось.
@@ -75,7 +75,7 @@ export default function ClosingSection() {
         </RevealOnScroll>
 
         <RevealOnScroll index={2}>
-          <p className="mt-4 text-sm leading-relaxed text-fg-primary/90 sm:text-base">
+          <p className="mt-4 text-left text-sm leading-relaxed text-fg-primary/90 sm:text-justify sm:text-base">
             Я делаю системы, и иногда могу чересчур погрузиться в них. Чтобы
             лишний раз потом не ходить в поликлинику, за моей комнатой следит
             HP100. А чтобы всё это работало — нужно 2000 рублей в месяц.
@@ -83,7 +83,7 @@ export default function ClosingSection() {
         </RevealOnScroll>
 
         <RevealOnScroll index={3}>
-          <p className="mt-4 text-sm leading-relaxed text-fg-primary/90 sm:text-base">
+          <p className="mt-4 text-left text-sm leading-relaxed text-fg-primary/90 sm:text-justify sm:text-base">
             Я не беру заказы. Я беру задачи, которые мне искренне интересно
             решить — в этом залог моего творчества. Если у вас есть такая
             задача и понимание её ценности — напишите. Я посмотрю, стоит ли
@@ -92,7 +92,7 @@ export default function ClosingSection() {
           </p>
         </RevealOnScroll>
 
-        <RevealOnScroll index={4}>
+        <RevealOnScroll index={4} className="flex justify-center">
           <a
             ref={ctaRef}
             href={TELEGRAM_URL}

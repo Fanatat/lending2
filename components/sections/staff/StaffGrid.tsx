@@ -71,7 +71,7 @@ export default function StaffGrid() {
         ))}
       </svg>
 
-      <div className="grid grid-cols-4 gap-6 sm:grid-cols-4">
+      <div className="grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-4 sm:gap-6">
         {AGENTS.map((agent, i) => (
           <ProjectCardLink
             key={agent.id}

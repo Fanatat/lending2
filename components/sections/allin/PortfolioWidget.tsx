@@ -81,7 +81,7 @@ export default function PortfolioWidget() {
 
       <ProjectCardLink
         href="/projects/all-in"
-        ariaLabel="Открыть проект Ол Ин"
+        ariaLabel="Открыть проект All in"
         className="mt-3 inline-block text-[10px] text-accent"
       >
         Разбор логики Python-модуля →

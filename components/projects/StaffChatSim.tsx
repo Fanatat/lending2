@@ -72,7 +72,7 @@ export default function StaffChatSim() {
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
           placeholder="Сообщение..."
-          className="flex-1 bg-void px-3 py-2 text-sm text-fg-primary outline-none placeholder:text-fg-muted"
+          className="flex-1 bg-void px-3 py-2 text-base text-fg-primary outline-none placeholder:text-fg-muted sm:text-sm"
         />
         <button
           type="submit"

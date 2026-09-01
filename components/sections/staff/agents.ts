@@ -13,7 +13,7 @@ export const AGENTS: Agent[] = [
   { id: "hp100", initials: "HP", name: "Дежурный", status: "датчики HP100" },
   { id: "autopilot", initials: "АП", name: "Смотритель", status: "каналы" },
   { id: "bridge", initials: "МТ", name: "Инженер связи", status: "Мост" },
-  { id: "allin", initials: "OI", name: "Аналитик рисков", status: "Ол Ин" },
+  { id: "allin", initials: "OI", name: "Аналитик рисков", status: "All in" },
   { id: "factory", initials: "КЗ", name: "Продюсер сцен", status: "Контент-завод" },
   { id: "perimeter", initials: "ПР", name: "Служба безопасности", status: "Периметр" },
 ];

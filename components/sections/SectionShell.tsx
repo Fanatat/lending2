@@ -32,10 +32,10 @@ export default function SectionShell({
   return (
     <section
       id={id}
-      className="border-t border-line px-6 py-20 sm:px-10 md:px-16"
+      className="border-t border-line px-4 py-14 sm:px-6 sm:py-20 md:px-10 lg:px-16"
     >
-      <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
-        <div>
+      <div className="grid min-w-0 items-start gap-8 lg:grid-cols-2 lg:gap-16">
+        <div className="min-w-0">
           <RevealOnScroll index={0}>
             <div className="text-xs tracking-widest text-fg-muted">
               {number}
@@ -62,7 +62,10 @@ export default function SectionShell({
             </RevealOnScroll>
           )}
         </div>
-        <RevealOnScroll index={2} className="flex items-center justify-center">
+        <RevealOnScroll
+          index={2}
+          className="flex min-w-0 items-center justify-center"
+        >
           {children}
         </RevealOnScroll>
       </div>

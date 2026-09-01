@@ -31,7 +31,7 @@ function Pipe({
   return (
     <div
       ref={pipeRef}
-      className={`bridge-pipe flex-1 lg:flex-[4.5] ${broken ? "bridge-pipe--broken" : ""}`}
+      className={`bridge-pipe flex-[0.4] sm:flex-1 lg:flex-[4.5] ${broken ? "bridge-pipe--broken" : ""}`}
       aria-hidden="true"
     >
       {Array.from({ length: packetCount }).map((_, i) => (
@@ -102,15 +102,15 @@ export default function BridgeDiagram() {
   }
 
   return (
-    <div className="w-full max-w-lg border border-line bg-panel p-6 lg:max-w-2xl">
-      <div className="flex items-center gap-3 text-center text-[10px] text-fg-muted">
-        <div className="flex-1 border border-line px-2 py-3 text-fg-primary">
+    <div className="w-full max-w-lg border border-line bg-panel p-4 sm:p-6 lg:max-w-2xl">
+      <div className="flex items-center gap-1.5 text-center text-[9px] text-fg-muted sm:gap-3 sm:text-[10px]">
+        <div className="flex-1 border border-line px-1 py-3 text-fg-primary sm:px-2">
           Telegram
           <br />
           Desktop
         </div>
         <Pipe broken={false} unicorn={unicornMode} packetCount={unicornMode ? 6 : 2} />
-        <div className="flex-1 border border-line px-2 py-3 text-fg-primary">
+        <div className="flex-1 border border-line px-1 py-3 text-fg-primary sm:px-2">
           Мост
         </div>
         <Pipe
@@ -119,7 +119,7 @@ export default function BridgeDiagram() {
           packetCount={unicornMode ? 6 : 2}
           pipeRef={rightPipeRef}
         />
-        <div className="flex-1 border border-line px-2 py-3 text-fg-primary">
+        <div className="flex-1 border border-line px-1 py-3 text-fg-primary sm:px-2">
           HTTP
           <br />
           прокси

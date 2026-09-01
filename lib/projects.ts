@@ -34,7 +34,7 @@ export const PROJECTS: ProjectMeta[] = [
   },
   {
     slug: "all-in",
-    title: "Ол Ин",
+    title: "All in",
     todo: "Детерминированный график цены и разбор формул Python-модуля.",
   },
   {
