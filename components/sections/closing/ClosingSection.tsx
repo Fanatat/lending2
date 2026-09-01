@@ -92,7 +92,10 @@ export default function ClosingSection() {
           </p>
         </RevealOnScroll>
 
-        <RevealOnScroll index={4} className="flex justify-center">
+        <RevealOnScroll
+          index={4}
+          className="flex flex-col items-center gap-3"
+        >
           <a
             ref={ctaRef}
             href={TELEGRAM_URL}
@@ -101,7 +104,15 @@ export default function ClosingSection() {
             data-cursor="interactive"
             className="mt-8 inline-block border border-accent px-6 py-3 text-sm text-accent transition-[filter] duration-200 hover:[filter:drop-shadow(0_0_6px_var(--accent))]"
           >
-            Написать в Telegram
+            Написать в{" "}
+            <span className="text-fg-muted/50 line-through">Telegram</span>
+          </a>
+          <a
+            href="#"
+            data-cursor="interactive"
+            className="inline-block border border-accent px-6 py-3 text-sm text-accent transition-[filter] duration-200 hover:[filter:drop-shadow(0_0_6px_var(--accent))]"
+          >
+            Написать в MAX
           </a>
         </RevealOnScroll>
       </div>

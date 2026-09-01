@@ -105,7 +105,7 @@ export default function BridgeDiagram() {
     <div className="w-full max-w-lg border border-line bg-panel p-4 sm:p-6 lg:max-w-2xl">
       <div className="flex items-center gap-1.5 text-center text-[9px] text-fg-muted sm:gap-3 sm:text-[10px]">
         <div className="flex-1 border border-line px-1 py-3 text-fg-primary sm:px-2">
-          Telegram
+          <span className="text-fg-muted/50 line-through">Telegram</span>
           <br />
           Desktop
         </div>

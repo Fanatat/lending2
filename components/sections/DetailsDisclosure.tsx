@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import type { ReactNode } from "react";
 import { useReducedMotion } from "@/lib/motion";
 
 interface DetailsDisclosureProps {
-  text: string;
+  text: ReactNode;
 }
 
 /**

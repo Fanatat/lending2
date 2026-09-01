@@ -8,8 +8,8 @@ interface SectionShellProps {
   id: string;
   number: string;
   title: string;
-  line: string;
-  details?: string;
+  line: ReactNode;
+  details?: ReactNode;
   /** Small mysterious aside right under the title (e.g. Ол Ин's "что?"). */
   footnote?: string;
   children?: ReactNode;
