@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import RevealOnScroll from "@/components/effects/RevealOnScroll";
 import { useReducedMotion } from "@/lib/motion";
-
-const TELEGRAM_URL = "https://t.me/fanatat";
+import ContactPhonePanel from "./ContactPhonePanel";
 
 /**
  * Shakes the CTA in proportion to scroll speed, settling the instant
@@ -53,7 +52,8 @@ function useScrollJitter<T extends HTMLElement>(reducedMotion: boolean) {
 
 export default function ClosingSection() {
   const reducedMotion = useReducedMotion();
-  const ctaRef = useScrollJitter<HTMLAnchorElement>(reducedMotion);
+  const ctaRef = useScrollJitter<HTMLButtonElement>(reducedMotion);
+  const [phoneOpen, setPhoneOpen] = useState(false);
   return (
     <section
       id="closing"
@@ -96,17 +96,16 @@ export default function ClosingSection() {
           index={4}
           className="flex flex-col items-center gap-3"
         >
-          <a
+          <button
             ref={ctaRef}
-            href={TELEGRAM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            type="button"
+            onClick={() => setPhoneOpen(true)}
+            aria-expanded={phoneOpen}
             data-cursor="interactive"
             className="mt-8 inline-block border border-accent px-6 py-3 text-sm text-accent transition-[filter] duration-200 hover:[filter:drop-shadow(0_0_6px_var(--accent))]"
           >
-            Написать в{" "}
-            <span className="text-fg-muted/50 line-through">Telegram</span>
-          </a>
+            Написать в ТГ
+          </button>
           <a
             href="#"
             data-cursor="interactive"
@@ -116,6 +115,8 @@ export default function ClosingSection() {
           </a>
         </RevealOnScroll>
       </div>
+
+      <ContactPhonePanel open={phoneOpen} onClose={() => setPhoneOpen(false)} />
     </section>
   );
 }

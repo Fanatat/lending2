@@ -2,7 +2,10 @@
 
 import { create } from "zustand";
 
-export type EasterEggId = "matrix" | "unicorn" | "branch";
+export type EasterEggId = "matrix" | "system4" | "unicorn" | "branch";
+
+/** Canonical roster of every discoverable easter egg — drives the top-of-page counter's total. */
+export const ALL_EASTER_EGGS: EasterEggId[] = ["matrix", "system4", "unicorn", "branch"];
 
 const STORAGE_KEY = "lab-terminal:found-easter-eggs";
 

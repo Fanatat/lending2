@@ -112,7 +112,12 @@ export default function HeroTitleReveal({
       clickCountRef.current = 0;
       const next = !matrixMode;
       setMatrixMode(next);
-      if (next) markFound("matrix");
+      if (next) {
+        // One gesture, two eggs: the matrix theme itself, and the hidden
+        // СИСТЕМА 04 block that unfolds alongside it (see BridgeSection).
+        markFound("matrix");
+        markFound("system4");
+      }
     }
   }
 

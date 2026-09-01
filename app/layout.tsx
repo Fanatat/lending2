@@ -10,6 +10,7 @@ import TrunkNav from "@/components/effects/TrunkNav";
 import MatrixModeController from "@/components/effects/MatrixModeController";
 import MatrixRain from "@/components/effects/MatrixRain";
 import SoundToggle from "@/components/effects/SoundToggle";
+import EasterEggCounter from "@/components/effects/EasterEggCounter";
 import ProjectTransitionOverlay from "@/components/transitions/ProjectTransitionOverlay";
 import PacketPile from "@/components/effects/PacketPile";
 import AccessDeniedOverlay from "@/components/sections/allin/AccessDeniedOverlay";
@@ -45,6 +46,7 @@ export default function RootLayout({
         <TrunkNav />
         <CustomCursor />
         <SoundToggle />
+        <EasterEggCounter />
         <div className="relative z-10">{children}</div>
         <ProjectTransitionOverlay />
         <PacketPile />
