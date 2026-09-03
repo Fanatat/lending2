@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useTypewriter } from "@/lib/useTypewriter";
 
 interface TypewriterLineProps {
@@ -11,9 +10,20 @@ interface TypewriterLineProps {
   onDone?: () => void;
   className?: string;
   as?: "p" | "span";
+  /**
+   * Force the cursor off even though this line is done typing — set once
+   * the next line down starts, so the cursor reads as moving down with the
+   * typing action instead of blinking in two places at once. Leave unset
+   * on the last line on the page, where nothing follows it.
+   */
+  forceHideCursor?: boolean;
 }
 
-/** Renders `text` character by character with a blinking cursor at the tail. */
+/**
+ * Renders `text` character by character with a blinking cursor at the tail.
+ * The cursor keeps blinking in place once typing finishes (rather than
+ * disappearing) until `forceHideCursor` is set — see that prop.
+ */
 export default function TypewriterLine({
   text,
   start,
@@ -22,21 +32,12 @@ export default function TypewriterLine({
   onDone,
   className,
   as = "p",
+  forceHideCursor,
 }: TypewriterLineProps) {
-  const { output, done } = useTypewriter(text, { start, speedMs, sound, onDone });
-  const [showCursor, setShowCursor] = useState(false);
-
-  useEffect(() => {
-    if (start) setShowCursor(true);
-  }, [start]);
-
-  useEffect(() => {
-    if (!done) return;
-    const t = window.setTimeout(() => setShowCursor(false), 900);
-    return () => window.clearTimeout(t);
-  }, [done]);
+  const { output } = useTypewriter(text, { start, speedMs, sound, onDone });
 
   const Comp = as;
+  const showCursor = start && !forceHideCursor;
 
   return (
     <div className={`relative ${className ?? ""}`}>

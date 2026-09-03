@@ -1,5 +1,6 @@
 import SectionShell from "@/components/sections/SectionShell";
 import PortfolioWidget from "./PortfolioWidget";
+import PortfolioHealthCard from "./PortfolioHealthCard";
 
 export default function AllInSection() {
   return (
@@ -11,7 +12,10 @@ export default function AllInSection() {
       details="Система читает портфель на бирже и объясняет человеческим языком, что с ним происходит: точная картина денег, концентрация, просадка, ликвидность, календарь разлоков. Она видит изменившуюся ситуацию на рынке и потенциал заработать больше на переливе в другой актив или сменив способ дохода. Торговых сигналов она не даёт и цены не предсказывает по принципиальному решению. Все числа считает Python по специально выверенным формулам в отдельном модуле, языковая модель получает готовые цифры и пишет предложения, поэтому выдуманных чисел в отчёте не появляется. Каркас переносится на любой операционный мониторинг, где выводы формулирует ИИ."
       footnote="что?"
     >
-      <PortfolioWidget />
+      <div className="flex flex-wrap items-start justify-center gap-4">
+        <PortfolioWidget />
+        <PortfolioHealthCard />
+      </div>
     </SectionShell>
   );
 }

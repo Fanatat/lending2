@@ -18,7 +18,7 @@ export default function SoundToggle() {
       aria-label={soundEnabled ? "Выключить звук" : "Включить звук"}
       className="fixed bottom-4 left-4 z-40 border border-line px-2 py-1 text-[10px] tracking-widest text-fg-muted transition-colors hover:border-accent hover:text-accent"
     >
-      {soundEnabled ? "SND: ON" : "SND: OFF"}
+      {soundEnabled ? "Звук: вкл" : "Звук: выкл"}
     </button>
   );
 }

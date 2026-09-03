@@ -47,6 +47,7 @@ export default function HeroTitleReveal({
   const matrixMode = useLabStore((s) => s.matrixMode);
   const setMatrixMode = useLabStore((s) => s.setMatrixMode);
   const markFound = useLabStore((s) => s.markFound);
+  const setMatrixClickCount = useLabStore((s) => s.setMatrixClickCount);
 
   // Kick off the grow phase once `start` flips true (reduced-motion users
   // get the full text immediately, independent of that gate).
@@ -107,6 +108,12 @@ export default function HeroTitleReveal({
     }
     clickCountRef.current += 1;
     lastClickRef.current = now;
+
+    // Publish the running click count for the "АНОМАЛИЯ N/5" toast (see
+    // AnomalyBanner) — it hints that something's building well before the
+    // 5th click actually flips matrix mode. Published before the
+    // threshold reset below so the 5th click still reports 5, not 0.
+    setMatrixClickCount(clickCountRef.current);
 
     if (clickCountRef.current >= CLICKS_TO_TOGGLE) {
       clickCountRef.current = 0;

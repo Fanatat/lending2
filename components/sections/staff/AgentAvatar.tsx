@@ -1,10 +1,11 @@
 "use client";
 
-import { forwardRef, useEffect, useState } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import { useHasFinePointer, useMousePosition, useReducedMotion } from "@/lib/motion";
-import type { Agent } from "./agents";
+import { useTypewriter } from "@/lib/useTypewriter";
+import { CANNED_REPLIES, type Agent } from "./agents";
 
-const MAX_OFFSET = 4;
+const MAX_OFFSET = 3;
 
 const AgentAvatar = forwardRef<
   HTMLDivElement,
@@ -21,6 +22,24 @@ const AgentAvatar = forwardRef<
   const pointer = useMousePosition();
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [innerRef, setInnerRef] = useState<HTMLDivElement | null>(null);
+
+  // Cycles through the agent's canned replies on each new hover instead of
+  // always showing the first one, without reaching for Math.random() (see
+  // ParticleDust's note on why that's the one place that's allowed to).
+  const replies = CANNED_REPLIES[agent.id] ?? [];
+  const hoverCountRef = useRef(0);
+  const [replyIndex, setReplyIndex] = useState(0);
+  const reply = replies.length > 0 ? replies[replyIndex % replies.length]! : "";
+  const { output } = useTypewriter(reply, {
+    start: hovered && replies.length > 0,
+    speedMs: 26,
+  });
+
+  useEffect(() => {
+    if (!hovered) return;
+    setReplyIndex(hoverCountRef.current);
+    hoverCountRef.current += 1;
+  }, [hovered]);
 
   useEffect(() => {
     if (!hasFinePointer || reducedMotion || !innerRef) return;
@@ -40,32 +59,44 @@ const AgentAvatar = forwardRef<
       data-cursor="interactive"
       onMouseEnter={onHoverStart}
       onMouseLeave={onHoverEnd}
-      className="flex flex-col items-center gap-2"
+      className="relative"
     >
+      {hovered && replies.length > 0 && (
+        <div
+          role="status"
+          className="pointer-events-none absolute -top-2 left-1/2 z-20 w-40 -translate-x-1/2 -translate-y-full border border-accent bg-void px-2 py-1.5 text-center text-[9px] leading-snug text-accent"
+        >
+          {output}
+          <span className="typing-cursor" aria-hidden="true">
+            |
+          </span>
+        </div>
+      )}
       <div
         ref={setInnerRef}
-        className="decorative-loop relative flex h-14 w-14 items-center justify-center rounded-full border border-line text-xs text-fg-primary"
+        className="decorative-loop flex flex-col gap-2 border border-line bg-panel p-3"
         style={{
           animation: `avatar-breathe ${3.2 + index * 0.3}s ease-in-out ${index * 0.15}s infinite`,
           outline: hovered ? "1px solid var(--accent)" : undefined,
+          boxShadow: hovered ? "0 0 12px var(--accent)" : undefined,
+          transform: `translate(${offset.x}px, ${offset.y}px)`,
+          transition: "transform 150ms ease-out, box-shadow 150ms ease-out",
         }}
       >
-        {agent.initials}
-        <span
-          aria-hidden="true"
-          className="absolute text-accent"
-          style={{
-            transform: `translate(${offset.x}px, ${offset.y}px)`,
-            transition: "transform 150ms ease-out",
-          }}
-        >
-          <span className="typing-cursor">_</span>
-        </span>
-      </div>
-      <div className="text-center text-[10px] text-fg-muted">
-        {agent.name}
-        <br />
-        {agent.status}
+        <div className="flex items-center justify-between">
+          <div className="flex h-8 w-8 items-center justify-center border border-line text-[10px] text-fg-primary">
+            {agent.initials}
+          </div>
+          <span
+            aria-hidden="true"
+            className="decorative-loop h-2 w-2 shrink-0 rounded-full bg-[#3ddc6a]"
+            style={{ animation: "status-blink 1.6s ease-in-out infinite" }}
+          />
+        </div>
+        <div>
+          <div className="text-xs font-bold text-fg-primary">{agent.name}</div>
+          <div className="text-[10px] text-fg-muted">{agent.status}</div>
+        </div>
       </div>
     </div>
   );

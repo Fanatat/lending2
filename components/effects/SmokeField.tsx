@@ -12,16 +12,25 @@ interface Blob {
   alpha: number;
 }
 
-const REPEL_RADIUS = 340;
-const REPEL_STRENGTH = 220;
-const EASE = 0.06;
+const REPEL_RADIUS = 360;
+const REPEL_STRENGTH = 260;
+const EASE = 0.08;
 const PARALLAX_FACTOR = 0.18;
+
+function hexToRgb(hex: string): string {
+  const m = hex.trim().match(/^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i);
+  if (!m) return "255,255,255";
+  return `${parseInt(m[1]!, 16)},${parseInt(m[2]!, 16)},${parseInt(m[3]!, 16)}`;
+}
 
 /**
  * Soft, low-opacity smoke blobs that gently get pushed away from the cursor
  * and ease back to their home position. Cheap stand-in for real fluid
  * dynamics — a lerp-based repulsion reads the same at this scale and cost
- * far less per frame.
+ * far less per frame. Tinted with the live `--accent` color (read from the
+ * DOM, since canvas fill styles can't reference CSS custom properties
+ * directly) rather than plain white, so it reads as a warm ambient glow
+ * instead of grey haze — and follows matrix mode's green re-theme for free.
  */
 export default function SmokeField() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -43,9 +52,24 @@ export default function SmokeField() {
     let rafId = 0;
     let visible = document.visibilityState === "visible";
     let lastScrollY = window.scrollY;
+    let accentRgb = "255,197,61";
+
+    function readAccentColor() {
+      const raw = getComputedStyle(document.documentElement)
+        .getPropertyValue("--accent")
+        .trim();
+      if (raw) accentRgb = hexToRgb(raw);
+    }
+
+    readAccentColor();
+    const themeObserver = new MutationObserver(readAccentColor);
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
 
     function makeBlobs() {
-      const count = 11;
+      const count = 14;
       blobs = Array.from({ length: count }, () => {
         const x = Math.random() * width;
         const y = Math.random() * height;
@@ -54,8 +78,8 @@ export default function SmokeField() {
           homeY: y,
           x,
           y,
-          r: Math.min(width, height) * (0.18 + Math.random() * 0.12),
-          alpha: 0.025 + Math.random() * 0.02,
+          r: Math.min(width, height) * (0.16 + Math.random() * 0.16),
+          alpha: 0.03 + Math.random() * 0.03,
         };
       });
     }
@@ -83,8 +107,8 @@ export default function SmokeField() {
           b.y,
           b.r
         );
-        gradient.addColorStop(0, `rgba(255,255,255,${b.alpha})`);
-        gradient.addColorStop(1, "rgba(255,255,255,0)");
+        gradient.addColorStop(0, `rgba(${accentRgb},${b.alpha})`);
+        gradient.addColorStop(1, `rgba(${accentRgb},0)`);
         context.fillStyle = gradient;
         context.beginPath();
         context.arc(b.x, b.y, b.r, 0, Math.PI * 2);
@@ -149,6 +173,7 @@ export default function SmokeField() {
       window.removeEventListener("resize", resize);
       window.removeEventListener("pointermove", handlePointerMove);
       document.removeEventListener("visibilitychange", handleVisibility);
+      themeObserver.disconnect();
       cancelAnimationFrame(rafId);
     };
   }, [reducedMotion]);

@@ -135,7 +135,11 @@ export default function SystemsCounter({ start, onDone }: SystemsCounterProps) {
       />
       <span>
         <span
-          className={numberVisible ? "text-fg-primary" : "invisible"}
+          className={
+            numberVisible
+              ? "counter-number-glow text-xl font-bold text-accent"
+              : "invisible text-xl font-bold"
+          }
           aria-hidden={!numberVisible}
         >
           {count}

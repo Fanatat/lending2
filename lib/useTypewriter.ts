@@ -26,6 +26,14 @@ export function useTypewriter(text: string, opts: UseTypewriterOptions) {
   const soundEnabled = useLabStore((s) => s.soundEnabled);
   const onDoneRef = useRef(opts.onDone);
   onDoneRef.current = opts.onDone;
+  // Mirrored into refs so the running interval always reads the latest
+  // value without needing to restart — toggling sound mid-sentence used to
+  // re-run this whole effect (sound/soundEnabled were in its deps below),
+  // which reset `i` to 0 and restarted the typed text from scratch.
+  const soundRef = useRef(sound);
+  soundRef.current = sound;
+  const soundEnabledRef = useRef(soundEnabled);
+  soundEnabledRef.current = soundEnabled;
 
   useEffect(() => {
     if (!start) return;
@@ -43,7 +51,7 @@ export function useTypewriter(text: string, opts: UseTypewriterOptions) {
     const id = window.setInterval(() => {
       i += 1;
       setOutput(text.slice(0, i));
-      if (sound && soundEnabled) playTypingClick();
+      if (soundRef.current && soundEnabledRef.current) playTypingClick();
       if (i >= text.length) {
         window.clearInterval(id);
         setDone(true);
@@ -53,7 +61,7 @@ export function useTypewriter(text: string, opts: UseTypewriterOptions) {
 
     return () => window.clearInterval(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [start, text, speedMs, sound, soundEnabled, reducedMotion]);
+  }, [start, text, speedMs, reducedMotion]);
 
   return { output, done };
 }

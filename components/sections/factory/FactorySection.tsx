@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import SectionShell from "@/components/sections/SectionShell";
 import ProjectCardLink from "@/components/transitions/ProjectCardLink";
+import Odometer from "@/components/sections/autopilot/Odometer";
 
 const ConveyorBelt = dynamic(() => import("./ConveyorBelt"), {
   ssr: false,
@@ -8,6 +9,11 @@ const ConveyorBelt = dynamic(() => import("./ConveyorBelt"), {
     <div className="h-[140px] w-full border border-line bg-panel" />
   ),
 });
+
+// TODO(автор): реальные цифры производства — сейчас заглушка на тот же
+// случай, что и RUNNING_SINCE в AutopilotSection.
+const MATERIALS_RELEASED = 128;
+const DEFECT_RATE_PCT = 4;
 
 export default function FactorySection() {
   return (
@@ -20,6 +26,16 @@ export default function FactorySection() {
     >
       <div className="flex w-full flex-col items-center gap-3">
         <ConveyorBelt />
+        <div className="flex w-full max-w-sm items-center justify-center gap-8 border-t border-line pt-3 text-center">
+          <div>
+            <div className="text-[10px] text-fg-muted">Материалов выпущено</div>
+            <Odometer value={MATERIALS_RELEASED} />
+          </div>
+          <div>
+            <div className="text-[10px] text-fg-muted">Брак</div>
+            <div className="text-2xl font-bold text-fg-primary">{DEFECT_RATE_PCT}%</div>
+          </div>
+        </div>
         <ProjectCardLink
           href="/projects/content-factory"
           ariaLabel="Открыть проект Контент-завод"

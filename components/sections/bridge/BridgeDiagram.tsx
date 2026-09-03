@@ -31,7 +31,7 @@ function Pipe({
   return (
     <div
       ref={pipeRef}
-      className={`bridge-pipe flex-[0.4] sm:flex-1 lg:flex-[4.5] ${broken ? "bridge-pipe--broken" : ""}`}
+      className={`bridge-pipe flex-1 lg:flex-[4.5] ${broken ? "bridge-pipe--broken" : ""}`}
       aria-hidden="true"
     >
       {Array.from({ length: packetCount }).map((_, i) => (

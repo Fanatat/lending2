@@ -71,6 +71,26 @@ a {
     linear-gradient(var(--accent), var(--accent)) center / 100% 2px no-repeat;
 }
 
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 9998;
+  transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+}
+
+.cursor-ring--interactive {
+  width: 44px;
+  height: 44px;
+  opacity: 0.9;
+}
+
 .cursor-click-ring {
   position: fixed;
   top: 0;
@@ -123,7 +143,12 @@ a {
   display: inline-block;
   width: 0.5em;
   margin-left: 1px;
+  color: var(--accent);
   animation: typing-cursor-blink 1s steps(1) infinite;
+}
+
+.counter-number-glow {
+  text-shadow: 0 0 6px var(--accent), 0 0 18px var(--accent);
 }
 
 @keyframes hero-pulse {
@@ -142,16 +167,10 @@ a {
   }
 }
 
-.hp100-ecg-path path {
+.hp100-ecg-draw {
   stroke-dasharray: 1;
-  stroke-dashoffset: 0;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .hp100-ecg-path path {
-    stroke-dashoffset: 1;
-    animation: ecg-draw 900ms ease-out forwards;
-  }
+  stroke-dashoffset: 1;
+  animation: ecg-draw 900ms ease-out forwards;
 }
 
 @keyframes ecg-draw {
@@ -346,4 +365,36 @@ a {
   .decorative-loop {
     animation: none !important;
   }
+}
+
+@keyframes access-denied-flash {
+  0% {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* SudoEasterEgg's lock overlay is always in the DOM (server-rendered too)
+   so this rule has something to show the instant the boot script below
+   adds the html class — before React even hydrates, let alone runs its
+   own effects. --active is the post-hydration equivalent, driven by
+   React's own `locked` state once it takes over. */
+.sudo-lock-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  background: #ff5d5d;
+  text-align: center;
+}
+
+html.sudo-locked-boot .sudo-lock-overlay,
+.sudo-lock-overlay--active {
+  display: flex;
 }

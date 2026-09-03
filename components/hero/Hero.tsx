@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import HeroTitleReveal from "./HeroTitleReveal";
 import SystemsCounter from "./SystemsCounter";
 import TypewriterLine from "./TypewriterLine";
+import AnomalyBanner from "./AnomalyBanner";
 import { useReducedMotion } from "@/lib/motion";
 
 const TITLE = "#НЕРЕЗЮМЕ, а список реализованных задач";
@@ -77,12 +78,14 @@ export default function Hero() {
       className="hero-fly-in flex min-h-[100svh] flex-col justify-center gap-6 px-4 py-20 sm:px-6 sm:py-24 md:px-10 lg:px-16"
     >
       <HeroTitleReveal text={TITLE} start={revealStart} />
+      <AnomalyBanner />
       <SystemsCounter start={revealStart} onDone={() => setCounterDone(true)} />
       <TypewriterLine
         text={BODY}
         start={counterDone}
         sound
         onDone={() => setParagraphDone(true)}
+        forceHideCursor={footnoteStart}
         className="max-w-2xl text-base text-fg-primary sm:text-lg"
       />
       <TypewriterLine

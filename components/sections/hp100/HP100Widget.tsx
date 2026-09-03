@@ -4,20 +4,69 @@ import { useEffect, useRef, useState } from "react";
 import { HP100_METRICS, type Hp100MetricKey, type SeriesPoint } from "@/lib/mock/hp100";
 import { hp100LiveSource } from "@/lib/hp100-live";
 import ProjectCardLink from "@/components/transitions/ProjectCardLink";
+import { useReducedMotion } from "@/lib/motion";
 
-function levelFor(value: number, normalMax: number, warnMax: number) {
+type Level = "normal" | "warn" | "critical";
+
+function levelFor(value: number, normalMax: number, warnMax: number): Level {
   if (value <= normalMax) return "normal";
   if (value <= warnMax) return "warn";
   return "critical";
 }
 
-const LEVEL_COLOR: Record<string, string> = {
+const LEVEL_COLOR: Record<Level, string> = {
   normal: "#5fd0c0",
   warn: "#ffc53d",
   critical: "#ff5d5d",
 };
 
-function EcgChart({ history }: { history: SeriesPoint[] }) {
+/** Thin horizontal bar with the label/value row above it. */
+function HorizontalBar({
+  label,
+  value,
+  pct,
+  color,
+  blinking,
+}: {
+  label: string;
+  value: string;
+  pct: number;
+  color: string;
+  blinking?: boolean;
+}) {
+  return (
+    <div>
+      <div className="mb-1 flex items-center justify-between text-[10px] text-fg-muted">
+        <span>{label}</span>
+        <span className="text-xs" style={{ color: blinking ? color : "var(--fg-primary)" }}>
+          {value}
+        </span>
+      </div>
+      <div className="h-1.5 w-full overflow-hidden bg-void">
+        <div
+          className={blinking ? "decorative-loop h-full" : "h-full transition-[width] duration-700 ease-out"}
+          style={{
+            width: `${8 + pct * 92}%`,
+            background: color,
+            animation: blinking ? "status-blink 0.6s steps(1) infinite" : undefined,
+          }}
+        />
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Oscilloscope-style trace that redraws itself whenever fresh history comes
+ * in (poll cadence: hp100LiveSource, ~15s) — a stroke-dashoffset reveal
+ * replayed via a `key` remount on the path, rather than a single static
+ * line — plus a small pulsing dot marking the most recent reading. Recolors
+ * red when the selected metric is outside its normal range (no
+ * whole-chart blink; the color change plus the warning line below carry
+ * that on their own).
+ */
+function EcgChart({ history, level }: { history: SeriesPoint[]; level: Level }) {
+  const reducedMotion = useReducedMotion();
   const values = history.map((p) => p.v);
   const min = Math.min(...values);
   const max = Math.max(...values) || 1;
@@ -25,14 +74,19 @@ function EcgChart({ history }: { history: SeriesPoint[] }) {
   const height = 120;
   const step = width / Math.max(1, history.length - 1);
 
-  const d = history
-    .map((p, i) => {
-      const x = i * step;
-      const norm = max === min ? 0.5 : (p.v - min) / (max - min);
-      const y = height - norm * (height - 16) - 8;
-      return `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`;
-    })
+  const points = history.map((p, i) => {
+    const x = i * step;
+    const norm = max === min ? 0.5 : (p.v - min) / (max - min);
+    const y = height - norm * (height - 16) - 8;
+    return { x, y };
+  });
+  const d = points
+    .map((p, i) => `${i === 0 ? "M" : "L"}${p.x.toFixed(1)},${p.y.toFixed(1)}`)
     .join(" ");
+  const tail = points.at(-1);
+
+  const deviated = level !== "normal";
+  const color = deviated ? LEVEL_COLOR.critical : "var(--accent)";
 
   return (
     <div className="mt-4" aria-hidden="true">
@@ -41,15 +95,30 @@ function EcgChart({ history }: { history: SeriesPoint[] }) {
         height={height}
         viewBox={`0 0 ${width} ${height}`}
         preserveAspectRatio="none"
-        className="hp100-ecg-path"
       >
         <path
+          key={d}
           d={d}
           fill="none"
-          stroke="var(--accent)"
-          strokeWidth={1.5}
+          stroke={color}
+          strokeWidth={2}
+          strokeLinecap="round"
           pathLength={1}
+          className={reducedMotion ? undefined : "hp100-ecg-draw"}
+          style={{ filter: `drop-shadow(0 0 4px ${color})` }}
         />
+        {tail && (
+          <circle
+            cx={tail.x}
+            cy={tail.y}
+            r={3.5}
+            fill={color}
+            className={reducedMotion ? undefined : "decorative-loop"}
+            style={
+              reducedMotion ? undefined : { animation: "status-blink 1.2s ease-in-out infinite" }
+            }
+          />
+        )}
       </svg>
     </div>
   );
@@ -80,6 +149,12 @@ export default function HP100Widget() {
   const co2Def = HP100_METRICS[0]!;
   const co2Critical = co2 && co2.latest > co2Def.warnMax;
 
+  const selectedDef = selected ? HP100_METRICS.find((d) => d.key === selected) : null;
+  const selectedLevel =
+    selected && selectedDef
+      ? levelFor(snapshot[selected].latest, selectedDef.normalMax, selectedDef.warnMax)
+      : "normal";
+
   return (
     <div
       className="w-full max-w-sm border border-line bg-panel p-4"
@@ -100,7 +175,7 @@ export default function HP100Widget() {
         </span>
       </div>
 
-      <div className="flex items-end justify-between gap-3">
+      <div className="space-y-3">
         {HP100_METRICS.map((def) => {
           const state = snapshot[def.key];
           const pct = Math.min(
@@ -118,42 +193,37 @@ export default function HP100Widget() {
                 setSelected((s) => (s === def.key ? null : def.key))
               }
               aria-pressed={selected === def.key}
-              className="flex flex-1 flex-col items-center gap-2"
+              className="block w-full text-left"
             >
-              <div className="flex h-24 w-full items-end border border-line/60 bg-void">
-                <div
-                  className={
-                    isCo2Critical
-                      ? "decorative-loop w-full"
-                      : "w-full transition-[height] duration-700 ease-out"
-                  }
-                  style={{
-                    height: `${8 + pct * 92}%`,
-                    background: LEVEL_COLOR[level],
-                    animation: isCo2Critical
-                      ? "status-blink 0.6s steps(1) infinite"
-                      : undefined,
-                  }}
-                />
-              </div>
-              <span className="text-[10px] text-fg-muted">{def.label}</span>
-              <span className="text-xs text-fg-primary">
-                {state.latest.toFixed(def.key === "temperature" ? 1 : 0)}
-                {def.unit}
-              </span>
+              <HorizontalBar
+                label={def.label}
+                value={`${state.latest.toFixed(def.key === "temperature" ? 1 : 0)}${def.unit}`}
+                pct={pct}
+                color={LEVEL_COLOR[level]}
+                blinking={isCo2Critical}
+              />
             </button>
           );
         })}
       </div>
 
+      {co2Critical && (
+        <p className="mt-3 text-[10px] uppercase tracking-wide text-[#ff5d5d]">
+          Вентиляция: требуется приток // CO2 выше порога
+        </p>
+      )}
+
       {selected && (
-        <div className="border-t border-line pt-2">
+        <div className="mt-3 border-t border-line pt-2">
           <div className="flex items-center justify-between text-xs text-fg-muted">
             <span>
-              {HP100_METRICS.find((d) => d.key === selected)?.label} — 24ч
+              {selectedDef?.label} — 24ч
+              {selectedLevel !== "normal" && (
+                <span className="ml-2 text-[#ff5d5d]">— отклонение от нормы</span>
+              )}
             </span>
           </div>
-          <EcgChart history={snapshot[selected].history} />
+          <EcgChart history={snapshot[selected].history} level={selectedLevel} />
         </div>
       )}
 

@@ -10,6 +10,8 @@ interface Particle {
   vy: number;
   r: number;
   alpha: number;
+  twinklePhase: number;
+  twinkleSpeed: number;
 }
 
 /**
@@ -46,8 +48,10 @@ export default function ParticleDust() {
         y: Math.random() * height,
         vx: (Math.random() - 0.5) * 0.06,
         vy: (Math.random() - 0.5) * 0.06,
-        r: Math.random() * 1.2 + 0.3,
-        alpha: Math.random() * 0.1 + 0.04,
+        r: Math.random() * 1.3 + 0.3,
+        alpha: Math.random() * 0.12 + 0.05,
+        twinklePhase: Math.random() * Math.PI * 2,
+        twinkleSpeed: 0.0008 + Math.random() * 0.0012,
       }));
     }
 
@@ -73,7 +77,7 @@ export default function ParticleDust() {
       }
     }
 
-    function tick() {
+    function tick(now: number) {
       if (!visible) {
         rafId = requestAnimationFrame(tick);
         return;
@@ -86,9 +90,10 @@ export default function ParticleDust() {
         if (p.x > width) p.x = 0;
         if (p.y < 0) p.y = height;
         if (p.y > height) p.y = 0;
+        const twinkle = 0.7 + 0.3 * Math.sin(now * p.twinkleSpeed + p.twinklePhase);
         context.beginPath();
         context.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        context.fillStyle = `rgba(232,232,232,${p.alpha})`;
+        context.fillStyle = `rgba(232,232,232,${p.alpha * twinkle})`;
         context.fill();
       }
       rafId = requestAnimationFrame(tick);

@@ -12,6 +12,12 @@ const FONT_SIZE = 14;
  * Matrix easter egg (five quick clicks on the hero title toggles
  * html.matrix-mode in styles/tokens.css, which handles the text-color half).
  * Only mounts its render loop while matrixMode is on.
+ *
+ * Sized to the full document height and `position: absolute` (not `fixed`)
+ * so the rain is one continuous field spanning the whole page and scrolls
+ * with it — a `fixed` canvas would only ever draw the current viewport,
+ * which reads as the effect "riding along" with a fast scroll instead of
+ * covering the page's full length.
  */
 export default function MatrixRain() {
   const matrixMode = useLabStore((s) => s.matrixMode);
@@ -34,9 +40,17 @@ export default function MatrixRain() {
     let rafId = 0;
     let visible = document.visibilityState === "visible";
 
+    function documentHeight() {
+      const doc = document.documentElement;
+      return Math.max(doc.scrollHeight, doc.clientHeight, window.innerHeight);
+    }
+
     function resize() {
-      width = window.innerWidth;
-      height = window.innerHeight;
+      const newWidth = window.innerWidth;
+      const newHeight = documentHeight();
+      if (newWidth === width && newHeight === height) return;
+      width = newWidth;
+      height = newHeight;
       canvasEl.width = width;
       canvasEl.height = height;
       columns = Math.ceil(width / FONT_SIZE);
@@ -73,9 +87,17 @@ export default function MatrixRain() {
     document.addEventListener("visibilitychange", handleVisibility);
     rafId = requestAnimationFrame(tick);
 
+    // Page height changes independently of window resize (Подробнее
+    // disclosures, the СИСТЕМА 04 unfold, sensor data swapping in) — a
+    // ResizeObserver on <html> catches those too, so the canvas never ends
+    // up shorter than the page it's supposed to cover.
+    const observer = new ResizeObserver(() => resize());
+    observer.observe(document.documentElement);
+
     return () => {
       window.removeEventListener("resize", resize);
       document.removeEventListener("visibilitychange", handleVisibility);
+      observer.disconnect();
       cancelAnimationFrame(rafId);
     };
   }, [matrixMode, reducedMotion]);
@@ -86,7 +108,7 @@ export default function MatrixRain() {
     <canvas
       ref={canvasRef}
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-0"
+      className="pointer-events-none absolute inset-x-0 top-0 z-0"
     />
   );
 }

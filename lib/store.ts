@@ -2,10 +2,16 @@
 
 import { create } from "zustand";
 
-export type EasterEggId = "matrix" | "system4" | "unicorn" | "branch";
+export type EasterEggId = "matrix" | "system4" | "unicorn" | "branch" | "sudo";
 
 /** Canonical roster of every discoverable easter egg — drives the top-of-page counter's total. */
-export const ALL_EASTER_EGGS: EasterEggId[] = ["matrix", "system4", "unicorn", "branch"];
+export const ALL_EASTER_EGGS: EasterEggId[] = [
+  "matrix",
+  "system4",
+  "unicorn",
+  "branch",
+  "sudo",
+];
 
 const STORAGE_KEY = "lab-terminal:found-easter-eggs";
 
@@ -46,11 +52,17 @@ interface LabStore {
   unicornMode: boolean;
   foundEasterEggs: EasterEggId[];
   soundEnabled: boolean;
+  /** Running count of clicks on the Hero title toward the 5-click matrix
+   * gesture (see HeroTitleReveal's handleClick) — independent of
+   * foundEasterEggs. The "АНОМАЛИЯ N/5" toast (AnomalyBanner) reads this
+   * directly so it reflects click progress, not eggs already found. */
+  matrixClickCount: number;
   setMatrixMode: (on: boolean) => void;
   setUnicornMode: (on: boolean) => void;
   markFound: (id: EasterEggId) => void;
   hydrateFromStorage: () => void;
   toggleSound: () => void;
+  setMatrixClickCount: (n: number) => void;
 }
 
 export const useLabStore = create<LabStore>((set, get) => ({
@@ -58,8 +70,10 @@ export const useLabStore = create<LabStore>((set, get) => ({
   unicornMode: false,
   foundEasterEggs: [],
   soundEnabled: true,
+  matrixClickCount: 0,
   setMatrixMode: (on) => set({ matrixMode: on }),
   setUnicornMode: (on) => set({ unicornMode: on }),
+  setMatrixClickCount: (n) => set({ matrixClickCount: n }),
   markFound: (id) => {
     const current = get().foundEasterEggs;
     if (current.includes(id)) return;
