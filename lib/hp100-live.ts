@@ -1,29 +1,27 @@
 "use client";
 
 /**
- * Real data source for the HP100 widget — polls the sensor board's own
- * server (see ~/projects/health_air/airmonitor_vps.py, systemd service
- * `airmonitor.service`, not this repo). Falls back to the deterministic
- * demo source (`lib/mock/hp100.ts`) whenever the live server is
- * unreachable, so the widget never goes blank — it shows a "демо" badge
- * instead (wired up in HP100Widget).
+ * Real data source for the HP100 widget. The board's own server
+ * (~/projects/health_air/airmonitor_vps.py, systemd service
+ * `airmonitor.service`) only answers reliably on the VPS's own network —
+ * the public IP once used to reach it directly is a proxy with a single
+ * unrelated port forwarded, isn't reliably reachable from a visitor's
+ * browser, and is being retired regardless. So instead, a separate bot
+ * (~/projects/hp100-live-feed/update_feed.py, run standalone or via
+ * systemd, not this repo) polls that local server every 5 minutes and
+ * publishes the latest reading as JSON to a public GitHub repo; this file
+ * fetches that repo's raw.githubusercontent.com URL, which is always
+ * reachable from any browser with no CORS or mixed-content concerns.
  *
- * Real endpoints (confirmed against the actual server code, not guessed):
- *  - GET /current        → text/plain `key=value` lines (temp, hum, pres,
- *    lux, voc, nox, pm1, pm25, pm10, co2, noise, updated=<unix seconds>).
- *    Empty value = sensor hasn't reported yet.
- *  - GET /history?hours=N → JSON array of time-bucketed averages, same
- *    field names, `timestamp` as a naive UTC string "YYYY-MM-DD HH:MM".
+ * Falls back to the deterministic demo source (`lib/mock/hp100.ts`)
+ * whenever the feed is unreachable OR stale (the bot stopped running),
+ * so the widget never goes blank or silently claims "live" on stale data
+ * — it shows a "демо" badge instead (wired up in HP100Widget).
  *
- * TODO(founder): /current does not send Access-Control-Allow-Origin, so a
- * browser on a different origin cannot read it (silent CORS failure —
- * this file treats that the same as "server unreachable" and falls back
- * to demo). A one-line fix is staged in airmonitor_vps.py's /current
- * handler, but the service needs a restart to pick it up.
- * TODO(founder): NEXT_PUBLIC_HP100_API_URL defaults to the VPS's current
- * public IP over plain HTTP. If Lending2 ends up deployed over HTTPS,
- * browsers will block this as mixed content — needs a TLS-fronted URL
- * (or a same-origin proxy) once a real deploy target exists.
+ * Feed shape (see update_feed.py's `build_payload`):
+ *   { co2?, temperature?, humidity?, dust?, updated: <ISO 8601 string> }
+ * Only one point at a time — no rolling history from this source yet, so
+ * the widget's 24ч graph shows a single point in live mode.
  */
 
 import {
@@ -47,41 +45,23 @@ export interface Hp100Status {
 
 type Listener = (snapshot: Hp100Snapshot, status: Hp100Status) => void;
 
-const API_BASE = (
-  process.env.NEXT_PUBLIC_HP100_API_URL ?? "http://178.95.117.225:8080"
-).replace(/\/$/, "");
+const FEED_URL =
+  process.env.NEXT_PUBLIC_HP100_FEED_URL ??
+  "https://raw.githubusercontent.com/Fanatat/hp100-live-feed/master/latest.json";
 
-const POLL_MS = 15_000;
-const HISTORY_HOURS = 24;
+const POLL_MS = 60_000;
+// If the bot hasn't pushed a fresher reading than this, the feed counts as
+// stale (bot down, GitHub raw CDN serving an old cached copy, etc.) and we
+// fall back to demo rather than label old numbers "live". Comfortably
+// covers a couple of missed 5-minute cycles plus CDN lag.
+const STALE_AFTER_MS = 20 * 60 * 1000;
 
-// Плата отдаёт pm1/pm25/pm10 (три фракции пыли), виджет показывает одну.
-// PM2.5 выбран как "дыхательная" метрика: это стандартный индикатор в
-// WHO/AQI для мелкодисперсной пыли, проникающей глубже в лёгкие — ближе
-// к тому, о чём говорит текст блока ("CO2 и пыль невидимы"), чем PM10.
-const FIELD_MAP: Record<Hp100MetricKey, string> = {
-  co2: "co2",
-  temperature: "temp",
-  humidity: "hum",
-  dust: "pm25",
-};
-
-function parseCurrent(text: string): Partial<Record<string, number>> {
-  const values: Partial<Record<string, number>> = {};
-  for (const line of text.split("\n")) {
-    const eq = line.indexOf("=");
-    if (eq === -1) continue;
-    const key = line.slice(0, eq).trim();
-    const raw = line.slice(eq + 1).trim();
-    if (raw === "") continue;
-    const n = Number(raw);
-    if (!Number.isNaN(n)) values[key] = n;
-  }
-  return values;
-}
-
-interface HistoryRow {
-  timestamp: string;
-  [field: string]: number | string | null;
+interface FeedPayload {
+  co2?: number;
+  temperature?: number;
+  humidity?: number;
+  dust?: number;
+  updated?: string;
 }
 
 class Hp100LiveSource {
@@ -119,39 +99,24 @@ class Hp100LiveSource {
     if (this.inFlight) return;
     this.inFlight = true;
     try {
-      const [currentRes, historyRes] = await Promise.all([
-        fetch(`${API_BASE}/current`, { cache: "no-store" }),
-        fetch(`${API_BASE}/history?hours=${HISTORY_HOURS}`, {
-          cache: "no-store",
-        }),
-      ]);
-      if (!currentRes.ok || !historyRes.ok) {
-        throw new Error(`hp100 live: HTTP ${currentRes.status}/${historyRes.status}`);
+      const res = await fetch(FEED_URL, { cache: "no-store" });
+      if (!res.ok) throw new Error(`hp100 feed: HTTP ${res.status}`);
+      const payload = (await res.json()) as FeedPayload;
+
+      const updatedMs = payload.updated ? Date.parse(payload.updated) : NaN;
+      if (Number.isNaN(updatedMs) || Date.now() - updatedMs > STALE_AFTER_MS) {
+        throw new Error("hp100 feed: stale");
       }
-      const values = parseCurrent(await currentRes.text());
-      const rows = (await historyRes.json()) as HistoryRow[];
 
       const nextSnapshot = {} as Hp100Snapshot;
       for (const def of HP100_METRICS) {
-        const field = FIELD_MAP[def.key];
-        const history: SeriesPoint[] = [];
-        rows.forEach((row, i) => {
-          const raw = row[field];
-          if (typeof raw === "number") history.push({ t: i, v: raw });
-        });
-        const latestRaw = values[field];
-        const latest =
-          typeof latestRaw === "number"
-            ? latestRaw
-            : (history.at(-1)?.v ?? (def.min + def.normalMax) / 2);
-        nextSnapshot[def.key] = {
-          latest,
-          history: history.length > 0 ? history : [{ t: 0, v: latest }],
-        };
+        const raw = payload[def.key];
+        const latest = typeof raw === "number" ? raw : (def.min + def.normalMax) / 2;
+        nextSnapshot[def.key] = { latest, history: [{ t: 0, v: latest }] };
       }
 
       this.snapshot = nextSnapshot;
-      this.status = { live: true, lastUpdated: Date.now() };
+      this.status = { live: true, lastUpdated: updatedMs };
       this.emit();
     } catch {
       if (this.status.live) {
