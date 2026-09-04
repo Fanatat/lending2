@@ -12,10 +12,26 @@ export default function ConveyorBelt() {
   const reducedMotion = useReducedMotion();
   const boxRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const [hoveredStage, setHoveredStage] = useState<number | null>(null);
   const [burstKey, setBurstKey] = useState(0);
+  const [canScroll, setCanScroll] = useState(false);
   const hoveredRef = useRef<number | null>(null);
   hoveredRef.current = hoveredStage;
+
+  // The belt only needs the swipe hint when the track genuinely doesn't fit
+  // its container — that happens on real mobile widths, but also on some
+  // in-between desktop windows once the two-column layout kicks in, so this
+  // is measured rather than tied to a single fixed breakpoint.
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const check = () => setCanScroll(el.scrollWidth > el.clientWidth + 1);
+    check();
+    const observer = new ResizeObserver(check);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (reducedMotion) return;
@@ -52,10 +68,13 @@ export default function ConveyorBelt() {
 
   return (
     <div className="w-full max-w-none">
-      <div className="relative overflow-x-auto border border-line bg-panel px-4 py-8 [-webkit-overflow-scrolling:touch]">
+      <div
+        ref={scrollRef}
+        className="relative overflow-x-auto border border-line bg-panel px-4 py-8 [-webkit-overflow-scrolling:touch]"
+      >
         <div
           ref={trackRef}
-          className="relative flex min-w-[640px] items-start justify-between gap-2 sm:min-w-[720px]"
+          className="relative flex min-w-[640px] items-start justify-between gap-2 sm:min-w-[720px] lg:min-w-0 lg:w-full"
         >
           <div
             aria-hidden="true"
@@ -106,9 +125,11 @@ export default function ConveyorBelt() {
       <p className="mt-3 text-center text-xs text-fg-muted">
         Пока ты листал, серия уже готова.
       </p>
-      <p className="mt-1 text-center text-[10px] text-fg-muted/60 sm:hidden">
-        ← смахните, чтобы увидеть весь конвейер →
-      </p>
+      {canScroll && (
+        <p className="mt-1 text-center text-[10px] text-fg-muted/60">
+          ← смахните, чтобы увидеть весь конвейер →
+        </p>
+      )}
     </div>
   );
 }
