@@ -12,7 +12,18 @@ const TOTAL = 9;
 const TALLY_STEP_MS = 90;
 const TALLY_PAUSE_AT = 4;
 const TALLY_PAUSE_MS = 320;
-const LABEL = "систем работают прямо сейчас";
+
+/**
+ * Russian noun/verb agreement for the tally count. The count only ever
+ * ticks through 0-9 here (TOTAL above), so the 11-14 genitive-plural
+ * exception (which would otherwise apply to e.g. 11) never comes up — this
+ * covers exactly the range the animation passes through.
+ */
+function labelFor(n: number) {
+  if (n === 1) return "система работает прямо сейчас";
+  if (n >= 2 && n <= 4) return "системы работают прямо сейчас";
+  return "систем работают прямо сейчас";
+}
 
 function easeOutCubic(t: number) {
   return 1 - Math.pow(1 - t, 3);
@@ -146,7 +157,7 @@ export default function SystemsCounter({ start, onDone }: SystemsCounterProps) {
         </span>{" "}
         <span className="relative inline-block">
           <span style={{ opacity: labelVisible ? 1 : 0 }}>
-            {LABEL}
+            {labelFor(count)}
           </span>
           {showBar && (
             <span

@@ -19,7 +19,14 @@ interface ContactPhonePanelProps {
   onClose: () => void;
 }
 
-/** Bottom bar that slides up on demand with the phone number — never rendered into markup until opened. */
+/**
+ * Bottom bar that slides up on demand with the phone number. The bar itself
+ * stays in the DOM at all times (so the slide-up transition has something to
+ * animate) and is only pushed off-screen + `aria-hidden` + `pointer-events:
+ * none` while closed — so its one always-rendered control (the close button)
+ * gets `tabIndex={-1}` when closed too, or a keyboard user tabbing through
+ * the page would land focus on an invisible, unclickable button.
+ */
 export default function ContactPhonePanel({ open, onClose }: ContactPhonePanelProps) {
   const reducedMotion = useReducedMotion();
   const [copied, setCopied] = useState(false);
@@ -91,6 +98,7 @@ export default function ContactPhonePanel({ open, onClose }: ContactPhonePanelPr
             data-cursor="interactive"
             onClick={onClose}
             aria-label="Закрыть"
+            tabIndex={open ? 0 : -1}
             className="text-fg-muted hover:text-accent"
           >
             ×

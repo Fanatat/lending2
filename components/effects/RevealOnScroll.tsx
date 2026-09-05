@@ -54,9 +54,14 @@ export default function RevealOnScroll({
           : reducedMotion
             ? "none"
             : "translateY(12px)",
-        transition: reducedMotion
-          ? "opacity 0.2s linear"
-          : "opacity 0.5s ease, transform 0.5s ease",
+        // All-longhand transition properties (rather than the `transition`
+        // shorthand alongside `transitionDelay`) — React warns when a
+        // shorthand and one of its longhands are both set on the same
+        // element across rerenders ("conflicting property"), since the
+        // shorthand implicitly resets the longhand it doesn't mention.
+        transitionProperty: reducedMotion ? "opacity" : "opacity, transform",
+        transitionDuration: reducedMotion ? "0.2s" : "0.5s",
+        transitionTimingFunction: reducedMotion ? "linear" : "ease",
         transitionDelay: reducedMotion ? "0ms" : `${index * 100}ms`,
       }}
     >
