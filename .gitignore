@@ -24,3 +24,13 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# local-only design reference material, not for the public repo
+/reference/
+
+# working/draft docs — internal, not for the public repo
+/TZ_sait_portfolio.md
+/ПРОМПТ_ОПИСАНИЕ_САЙТА_2026-09-03.md
+/список доработок1.txt
+/Визуальная концепция и интерактив с.txt
+/\# Текст сайта-портфолио. Версия v7.md
