@@ -1,4 +1,5 @@
 import SectionShell from "@/components/sections/SectionShell";
+import SystemStatusLine from "@/components/sections/SystemStatusLine";
 import StaffGrid from "./StaffGrid";
 
 export default function StaffSection() {
@@ -7,7 +8,12 @@ export default function StaffSection() {
       id="staff"
       number="СИСТЕМА 07"
       title="Операционный штаб из восьми автономных агентов"
-      line="Каждый проект требует фокуса. Чтобы фокус не размывался при переключении между задачами, был поднят отдел, который фактически становится вашими заместителями."
+      line={
+        <>
+          <SystemStatusLine systemId="staff" className="mb-3" />
+          Каждый проект требует фокуса. Чтобы фокус не размывался при переключении между задачами, был поднят отдел, который фактически становится вашими заместителями.
+        </>
+      }
       details={
         <>
           Общий чат, в котором живут восемь разных характеров: имя, манера

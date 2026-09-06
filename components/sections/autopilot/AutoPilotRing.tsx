@@ -1,34 +1,60 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "@/lib/motion";
 
 const SIZE = 84;
 const STROKE = 6;
 const RADIUS = (SIZE - STROKE) / 2;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
+const FILL_MS = 2000;
 
-/** Circular fill animating 0 → pct once mounted — the "posts published with zero manual edits" share. */
+function easeOutCubic(t: number) {
+  return 1 - Math.pow(1 - t, 3);
+}
+
+/**
+ * Circular fill animating 0 → pct over 2s, starting the first time the ring
+ * actually scrolls into view (not on mount, which could fire off-screen
+ * below the fold) — the "posts published with zero manual edits" share.
+ */
 export default function AutoPilotRing({ pct, label }: { pct: number; label: string }) {
   const reducedMotion = useReducedMotion();
   const [animatedPct, setAnimatedPct] = useState(reducedMotion ? pct : 0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const startedRef = useRef(reducedMotion);
 
   useEffect(() => {
     if (reducedMotion) return;
-    // Double rAF: one to let the 0% state actually paint, then set the real
-    // value so the stroke-dashoffset transition has something to animate
-    // from instead of jumping straight to the target on mount.
-    const raf1 = requestAnimationFrame(() => {
-      const raf2 = requestAnimationFrame(() => setAnimatedPct(pct));
-      return () => cancelAnimationFrame(raf2);
-    });
-    return () => cancelAnimationFrame(raf1);
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting || startedRef.current) return;
+        startedRef.current = true;
+        observer.disconnect();
+
+        const startTime = performance.now();
+        let rafId = 0;
+        function frame(now: number) {
+          const t = Math.min(1, (now - startTime) / FILL_MS);
+          setAnimatedPct(easeOutCubic(t) * pct);
+          if (t < 1) rafId = requestAnimationFrame(frame);
+        }
+        rafId = requestAnimationFrame(frame);
+        return () => cancelAnimationFrame(rafId);
+      },
+      { threshold: 0.5 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
   }, [pct, reducedMotion]);
 
   const offset = CIRCUMFERENCE * (1 - animatedPct / 100);
 
   return (
-    <div className="flex flex-col items-center gap-2">
+    <div ref={containerRef} className="flex flex-col items-center gap-2">
       <div className="relative" style={{ width: SIZE, height: SIZE }}>
         <svg width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} className="-rotate-90">
           <circle
@@ -49,11 +75,6 @@ export default function AutoPilotRing({ pct, label }: { pct: number; label: stri
             strokeLinecap="round"
             strokeDasharray={CIRCUMFERENCE}
             strokeDashoffset={offset}
-            style={{
-              transition: reducedMotion
-                ? undefined
-                : "stroke-dashoffset 1.1s cubic-bezier(.16,1,.3,1)",
-            }}
           />
         </svg>
         <div className="absolute inset-0 flex items-center justify-center text-lg font-bold text-fg-primary">

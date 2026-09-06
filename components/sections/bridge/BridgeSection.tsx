@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import SectionShell from "@/components/sections/SectionShell";
+import SystemStatusLine from "@/components/sections/SystemStatusLine";
 import ProjectCardLink from "@/components/transitions/ProjectCardLink";
 import BridgeDiagram from "./BridgeDiagram";
 import { useLabStore } from "@/lib/store";
@@ -57,6 +58,7 @@ export default function BridgeSection() {
           title="Фикс для приближающегося рунета."
           line={
             <>
+              <SystemStatusLine systemId="bridge" className="mb-3" />
               Мост соединяет SOCKS5 с HTTP и возвращает{" "}
               <span className="text-fg-muted/50 line-through">Telegram</span>{" "}
               Desktop в рабочее состояние за пару минут.

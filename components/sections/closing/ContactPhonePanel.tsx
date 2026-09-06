@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useReducedMotion } from "@/lib/motion";
+import { useLabStore, ALL_EASTER_EGGS } from "@/lib/store";
 
 // The number never sits in source or the shipped bundle as a literal,
 // phone-shaped string — only as this char-code array, decoded in-browser
@@ -26,10 +27,18 @@ interface ContactPhonePanelProps {
  * none` while closed — so its one always-rendered control (the close button)
  * gets `tabIndex={-1}` when closed too, or a keyboard user tabbing through
  * the page would land focus on an invisible, unclickable button.
+ *
+ * The number itself only decodes into markup once ALL_EASTER_EGGS have all
+ * been found — until then the panel shows how many are left instead, so the
+ * digits are never present in the DOM for a scanner or a casual visitor to
+ * pick up, gated or not.
  */
 export default function ContactPhonePanel({ open, onClose }: ContactPhonePanelProps) {
   const reducedMotion = useReducedMotion();
   const [copied, setCopied] = useState(false);
+  const foundCount = useLabStore((s) => s.foundEasterEggs.length);
+  const total = ALL_EASTER_EGGS.length;
+  const unlocked = foundCount >= total;
 
   useEffect(() => {
     if (!open) setCopied(false);
@@ -45,6 +54,7 @@ export default function ContactPhonePanel({ open, onClose }: ContactPhonePanelPr
   }, [open, onClose]);
 
   async function handleCopy() {
+    if (!unlocked) return;
     const phone = decodePhone();
     try {
       await navigator.clipboard.writeText(phone);
@@ -73,7 +83,7 @@ export default function ContactPhonePanel({ open, onClose }: ContactPhonePanelPr
           <div className="text-[10px] tracking-widest text-fg-muted">
             ДОБАВИТЬ ПО НОМЕРУ
           </div>
-          {open && (
+          {open && unlocked && (
             <button
               type="button"
               data-cursor="interactive"
@@ -84,6 +94,12 @@ export default function ContactPhonePanel({ open, onClose }: ContactPhonePanelPr
             >
               {decodePhone()}
             </button>
+          )}
+          {open && !unlocked && (
+            <p className="mt-1 max-w-[220px] text-left text-[11px] leading-snug text-fg-muted">
+              Номер скрыт. Разблокируется после {foundCount}/{total} найденных
+              пасхалок на странице.
+            </p>
           )}
         </div>
         <div className="flex shrink-0 items-center gap-3">

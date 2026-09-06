@@ -1,3 +1,5 @@
+import type { SystemId } from "@/lib/systemStatus";
+
 // TODO(автор): реальные имена, характеры и связи агентов — сейчас
 // заглушка, привязанная к уже описанным системам. См. ТЗ раздел 12, п.4.
 export interface Agent {
@@ -5,17 +7,20 @@ export interface Agent {
   initials: string;
   name: string;
   status: string;
+  /** Drives this agent's status dot — see lib/systemStatus.ts. Coordinator
+   * has no dedicated system section, so it mirrors the Staff system itself. */
+  systemId: SystemId;
 }
 
 export const AGENTS: Agent[] = [
-  { id: "coordinator", initials: "ШТ", name: "Координатор", status: "Штаб" },
-  { id: "friday", initials: "ПТ", name: "Менеджер", status: "game4 / Пятница" },
-  { id: "hp100", initials: "HP", name: "Дежурный", status: "датчики HP100" },
-  { id: "autopilot", initials: "АП", name: "Смотритель", status: "каналы" },
-  { id: "bridge", initials: "МТ", name: "Инженер связи", status: "Мост" },
-  { id: "allin", initials: "OI", name: "Аналитик рисков", status: "All in" },
-  { id: "factory", initials: "КЗ", name: "Продюсер сцен", status: "Контент-завод" },
-  { id: "perimeter", initials: "ПР", name: "Служба безопасности", status: "Периметр" },
+  { id: "coordinator", initials: "ШТ", name: "Координатор", status: "Штаб", systemId: "staff" },
+  { id: "friday", initials: "ПТ", name: "Менеджер", status: "game4 / Пятница", systemId: "friday" },
+  { id: "hp100", initials: "HP", name: "Дежурный", status: "датчики HP100", systemId: "hp100" },
+  { id: "autopilot", initials: "АП", name: "Смотритель", status: "каналы", systemId: "autopilot" },
+  { id: "bridge", initials: "МТ", name: "Инженер связи", status: "Мост", systemId: "bridge" },
+  { id: "allin", initials: "OI", name: "Аналитик рисков", status: "All in", systemId: "allin" },
+  { id: "factory", initials: "КЗ", name: "Продюсер сцен", status: "Контент-завод", systemId: "factory" },
+  { id: "perimeter", initials: "ПР", name: "Служба безопасности", status: "Периметр", systemId: "perimeter" },
 ];
 
 export const HUB_ID = "coordinator";

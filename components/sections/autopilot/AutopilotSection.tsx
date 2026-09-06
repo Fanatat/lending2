@@ -1,6 +1,7 @@
 "use client";
 
 import SectionShell from "@/components/sections/SectionShell";
+import SystemStatusLine from "@/components/sections/SystemStatusLine";
 import ProjectCardLink from "@/components/transitions/ProjectCardLink";
 import Sensor from "./Sensor";
 import Odometer from "./Odometer";
@@ -24,7 +25,12 @@ export default function AutopilotSection() {
       id="channel-autopilot"
       number="СИСТЕМА 03"
       title="Каналы, которые публикуют и живут без меня"
-      line="Наполнил папку со 169 000+ фото, дальше канал через скрипт ведёт себя сам, в непредсказуемое время днём публикует посты, чтобы лента не выглядела роботом."
+      line={
+        <>
+          <SystemStatusLine systemId="autopilot" className="mb-3" />
+          Наполнил папку со 169 000+ фото, дальше канал через скрипт ведёт себя сам, в непредсказуемое время днём публикует посты, чтобы лента не выглядела роботом.
+        </>
+      }
       details="Два бота. Первый раз в день выкладывает подборку из девяти фотографий с подписью и уводит использованное в архив, чтобы ничего не повторялось. Второй встаёт по расписанию: текст в 5:50, видео в 6:30, материалы собирает заранее сам из каналов-источников и раздаёт по одному в день. У обоих админ-панель прямо в чате: статус, ручной запуск, аналитика по подписчикам, автоматический бэкап базы. Первый работает системной службой месяцами без падений. Второй поднят вручную и всё равно не пропустил ни одной рассылки."
     >
       <ProjectCardLink

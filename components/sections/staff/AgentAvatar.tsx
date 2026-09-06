@@ -3,9 +3,12 @@
 import { forwardRef, useEffect, useRef, useState } from "react";
 import { useHasFinePointer, useMousePosition, useReducedMotion } from "@/lib/motion";
 import { useTypewriter } from "@/lib/useTypewriter";
+import { useSystemStatusStore } from "@/lib/systemStatus";
 import { CANNED_REPLIES, type Agent } from "./agents";
 
 const MAX_OFFSET = 3;
+const ONLINE_COLOR = "#3ddc6a";
+const OFFLINE_COLOR = "#ff5d5d";
 
 const AgentAvatar = forwardRef<
   HTMLDivElement,
@@ -22,6 +25,7 @@ const AgentAvatar = forwardRef<
   const pointer = useMousePosition();
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [innerRef, setInnerRef] = useState<HTMLDivElement | null>(null);
+  const online = useSystemStatusStore((s) => s.status[agent.systemId].online);
 
   // Cycles through the agent's canned replies on each new hover instead of
   // always showing the first one, without reaching for Math.random() (see
@@ -64,7 +68,7 @@ const AgentAvatar = forwardRef<
       {hovered && replies.length > 0 && (
         <div
           role="status"
-          className="pointer-events-none absolute -top-2 left-1/2 z-20 w-40 -translate-x-1/2 -translate-y-full border border-accent bg-void px-2 py-1.5 text-center text-[9px] leading-snug text-accent"
+          className="pointer-events-none absolute -top-2 left-1/2 z-50 w-40 -translate-x-1/2 -translate-y-full break-words border border-accent bg-void px-2 py-1.5 text-center text-[9px] leading-snug text-accent"
         >
           {output}
           <span className="typing-cursor" aria-hidden="true">
@@ -89,8 +93,11 @@ const AgentAvatar = forwardRef<
           </div>
           <span
             aria-hidden="true"
-            className="decorative-loop h-2 w-2 shrink-0 rounded-full bg-[#3ddc6a]"
-            style={{ animation: "status-blink 1.6s ease-in-out infinite" }}
+            className={online ? "decorative-loop h-2 w-2 shrink-0 rounded-full" : "h-2 w-2 shrink-0 rounded-full"}
+            style={{
+              background: online ? ONLINE_COLOR : OFFLINE_COLOR,
+              animation: online ? "status-blink 1.6s ease-in-out infinite" : undefined,
+            }}
           />
         </div>
         <div>
