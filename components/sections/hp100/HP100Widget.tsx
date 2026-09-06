@@ -5,6 +5,7 @@ import { HP100_METRICS, type Hp100MetricKey, type SeriesPoint } from "@/lib/mock
 import { hp100LiveSource } from "@/lib/hp100-live";
 import ProjectCardLink from "@/components/transitions/ProjectCardLink";
 import { useReducedMotion } from "@/lib/motion";
+import { useSystemStatusStore } from "@/lib/systemStatus";
 
 type Level = "normal" | "warn" | "critical";
 
@@ -148,6 +149,19 @@ export default function HP100Widget() {
   const co2 = snapshot.co2;
   const co2Def = HP100_METRICS[0]!;
   const co2Critical = co2 && co2.latest > co2Def.warnMax;
+
+  // Feeds the shared "Норма" indicator (SystemStatusLine, also read by the
+  // Staff agent grid) with the plate's actual reading instead of a
+  // permanently-green decoration — any metric outside its normal range
+  // flips the whole site's HP100 status to offline/red, not just this
+  // widget's own bars.
+  const setOnline = useSystemStatusStore((s) => s.setOnline);
+  useEffect(() => {
+    const allNormal = HP100_METRICS.every(
+      (def) => levelFor(snapshot[def.key].latest, def.normalMax, def.warnMax) === "normal"
+    );
+    setOnline("hp100", allNormal);
+  }, [snapshot, setOnline]);
 
   const selectedDef = selected ? HP100_METRICS.find((d) => d.key === selected) : null;
   const selectedLevel =

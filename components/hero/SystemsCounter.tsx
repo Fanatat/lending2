@@ -12,7 +12,17 @@ const TOTAL = 9;
 const TALLY_STEP_MS = 90;
 const TALLY_PAUSE_AT = 4;
 const TALLY_PAUSE_MS = 320;
-const LABEL = "систем работают прямо сейчас";
+/**
+ * Russian noun/verb agreement for the tally count. The count only ever
+ * ticks through 0-9 here (TOTAL above), so the 11-14 genitive-plural
+ * exception (which would otherwise apply to e.g. 11) never comes up — this
+ * covers exactly the range the animation passes through.
+ */
+function labelFor(n: number) {
+  if (n === 1) return "система работает прямо сейчас";
+  if (n >= 2 && n <= 4) return "системы работают прямо сейчас";
+  return "систем работают прямо сейчас";
+}
 
 function easeOutCubic(t: number) {
   return 1 - Math.pow(1 - t, 3);
@@ -21,6 +31,10 @@ function easeOutCubic(t: number) {
 interface SystemsCounterProps {
   start: boolean;
   onDone?: () => void;
+  /** Fires with the live tally value (0..TOTAL) every time it changes, once
+   * the number is actually on screen — lets Hero drive AnimatedLeadCount's
+   * numeral in lockstep with this counter instead of on its own clock. */
+  onTick?: (n: number) => void;
 }
 
 /**
@@ -30,7 +44,7 @@ interface SystemsCounterProps {
  * number itself appear, and only once the number is on screen does the
  * tally from 0 begin.
  */
-export default function SystemsCounter({ start, onDone }: SystemsCounterProps) {
+export default function SystemsCounter({ start, onDone, onTick }: SystemsCounterProps) {
   const reducedMotion = useReducedMotion();
   const [phase, setPhase] = useState<Phase>(reducedMotion ? "done" : "pre");
   const [numberVisible, setNumberVisible] = useState(reducedMotion);
@@ -118,6 +132,12 @@ export default function SystemsCounter({ start, onDone }: SystemsCounterProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [numberVisible, reducedMotion]);
 
+  useEffect(() => {
+    if (!numberVisible) return;
+    onTick?.(count);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [count, numberVisible]);
+
   if (!start && !reducedMotion) return <div className="h-6" aria-hidden="true" />;
 
   const showBar = !reducedMotion && phase !== "pre" && phase !== "done";
@@ -146,7 +166,7 @@ export default function SystemsCounter({ start, onDone }: SystemsCounterProps) {
         </span>{" "}
         <span className="relative inline-block">
           <span style={{ opacity: labelVisible ? 1 : 0 }}>
-            {LABEL}
+            {labelFor(count)}
           </span>
           {showBar && (
             <span

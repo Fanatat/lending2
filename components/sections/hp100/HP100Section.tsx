@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import SectionShell from "@/components/sections/SectionShell";
+import SystemStatusLine from "@/components/sections/SystemStatusLine";
 
 const HP100Widget = dynamic(() => import("./HP100Widget"), {
   ssr: false,
@@ -16,14 +17,7 @@ export default function HP100Section() {
       title="Пока ты в потоке и теряешь счет времени, плата следит за тем, чем ты дышишь"
       line={
         <>
-          <span className="mb-3 flex items-center gap-1.5 text-[10px] uppercase tracking-widest text-[#3ddc6a]">
-            <span
-              className="decorative-loop inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[#3ddc6a]"
-              style={{ animation: "status-blink 1.6s ease-in-out infinite" }}
-              aria-hidden="true"
-            />
-            Норма
-          </span>
+          <SystemStatusLine systemId="hp100" offlineLabel="Отклонение" className="mb-3" />
           CO2 и пыль невидимы, но они забирают твои HP. Нос не чувствует. Плата — чувствует. (На самом деле плате всё равно, но мы умеем программировать).
         </>
       }
