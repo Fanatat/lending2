@@ -8,6 +8,7 @@ import FactorySection from "@/components/sections/factory/FactorySection";
 import StaffSection from "@/components/sections/staff/StaffSection";
 import PerimeterSection from "@/components/sections/perimeter/PerimeterSection";
 import ClosingSection from "@/components/sections/closing/ClosingSection";
+import SiteFooter from "@/components/sections/closing/SiteFooter";
 import BranchTeaser from "@/components/easter-eggs/BranchTeaser";
 import SudoHint from "@/components/easter-eggs/SudoHint";
 
@@ -26,6 +27,7 @@ export default function HomePage() {
       <ClosingSection />
       <BranchTeaser />
       <SudoHint />
+      <SiteFooter />
     </main>
   );
 }

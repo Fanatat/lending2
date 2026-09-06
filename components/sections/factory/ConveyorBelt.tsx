@@ -88,10 +88,10 @@ export default function ConveyorBelt() {
                 setHoveredStage((s) => (s === i ? null : s))
               }
               data-cursor="interactive"
-              className="relative z-10 flex flex-col items-center gap-2 bg-panel px-2"
+              className="relative z-10 flex min-w-0 flex-col items-center gap-2 bg-panel px-2 lg:min-w-0 lg:px-1"
             >
-              <div className="h-2 w-2 rounded-full border border-line bg-void" />
-              <span className="text-[10px] text-fg-muted">{stage}</span>
+              <div className="h-2 w-2 shrink-0 rounded-full border border-line bg-void" />
+              <span className="break-words text-center text-[10px] text-fg-muted">{stage}</span>
               {stage === "Изображения" && burstKey > 0 && (
                 <div
                   key={burstKey}

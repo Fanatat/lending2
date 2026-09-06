@@ -13,11 +13,12 @@ export interface NetNode {
   labelSide?: "right";
 }
 
-// A real external attacker hits the router first, not the server — the
-// server is just one of four equal-footing devices sitting behind it,
-// same as the two PCs and the laptop. The one genuine internal finding
-// (the leaking shared folder) still specifically implicates the server,
-// so it keeps its own `vulnerable` marker independent of the attack path.
+// A real external attacker hits the router first, then pivots straight to
+// the server — the one genuine internal finding (the leaking shared
+// folder) specifically implicates the server, so the attack path is drawn
+// all the way to it instead of stopping at the router. The other three
+// devices behind the router (the two PCs and the laptop) sit on equal
+// footing but aren't part of this particular finding.
 export const NODES: NetNode[] = [
   { id: "perimeter", label: "Внешний периметр", x: 50, y: 8, labelSide: "right" },
   { id: "router", label: "Роутер", x: 50, y: 32, labelSide: "right" },
@@ -35,5 +36,11 @@ export const EDGES: [string, string][] = [
   ["router", "laptop"],
 ];
 
-/** Edge carrying the attack: external perimeter hits the router first. */
-export const COMPROMISED_EDGE: [string, string] = ["perimeter", "router"];
+/**
+ * Edges carrying the attack, in order: external perimeter hits the router
+ * first, then pivots on to the server.
+ */
+export const COMPROMISED_EDGES: [string, string][] = [
+  ["perimeter", "router"],
+  ["router", "server"],
+];

@@ -2,21 +2,21 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "@/lib/motion";
+import { useSystemStatusStore } from "@/lib/systemStatus";
 
 type Phase = "pre" | "grow" | "hold" | "shrink" | "done";
 
 const GROW_MS = 500;
 const HOLD_MS = 200;
 const SHRINK_MS = 500;
-const TOTAL = 9;
 const TALLY_STEP_MS = 90;
 const TALLY_PAUSE_AT = 4;
 const TALLY_PAUSE_MS = 320;
 /**
- * Russian noun/verb agreement for the tally count. The count only ever
- * ticks through 0-9 here (TOTAL above), so the 11-14 genitive-plural
- * exception (which would otherwise apply to e.g. 11) never comes up — this
- * covers exactly the range the animation passes through.
+ * Russian noun/verb agreement for the tally count. The live system count
+ * (see useSystemStatusStore) stays well under 11 for the foreseeable
+ * future, so the 11-14 genitive-plural exception never comes up — this
+ * covers exactly the range the animation is expected to pass through.
  */
 function labelFor(n: number) {
   if (n === 1) return "система работает прямо сейчас";
@@ -38,7 +38,8 @@ interface SystemsCounterProps {
 }
 
 /**
- * "9 систем работают прямо сейчас". The label wipes in with the exact same
+ * "N систем работают прямо сейчас", N being the live count of online
+ * systems in lib/systemStatus.ts. The label wipes in with the exact same
  * bar-reveal animation as the headline, starting on the same tick (`start`
  * is shared with HeroTitleReveal). Only once that wipe finishes does the
  * number itself appear, and only once the number is on screen does the
@@ -46,9 +47,14 @@ interface SystemsCounterProps {
  */
 export default function SystemsCounter({ start, onDone, onTick }: SystemsCounterProps) {
   const reducedMotion = useReducedMotion();
+  // Real count of active systems, from the same source of truth as every
+  // other status indicator on the page — not a hardcoded number.
+  const total = useSystemStatusStore(
+    (s) => Object.values(s.status).filter((entry) => entry.online).length
+  );
   const [phase, setPhase] = useState<Phase>(reducedMotion ? "done" : "pre");
   const [numberVisible, setNumberVisible] = useState(reducedMotion);
-  const [count, setCount] = useState(reducedMotion ? TOTAL : 0);
+  const [count, setCount] = useState(reducedMotion ? total : 0);
   const barRef = useRef<HTMLSpanElement>(null);
   const rafRef = useRef(0);
   const startedRef = useRef(false);
@@ -119,7 +125,7 @@ export default function SystemsCounter({ start, onDone, onTick }: SystemsCounter
     function tick() {
       n += 1;
       setCount(n);
-      if (n >= TOTAL) {
+      if (n >= total) {
         onDone?.();
         return;
       }
@@ -130,7 +136,7 @@ export default function SystemsCounter({ start, onDone, onTick }: SystemsCounter
     timer = window.setTimeout(tick, TALLY_STEP_MS);
     return () => window.clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [numberVisible, reducedMotion]);
+  }, [numberVisible, reducedMotion, total]);
 
   useEffect(() => {
     if (!numberVisible) return;

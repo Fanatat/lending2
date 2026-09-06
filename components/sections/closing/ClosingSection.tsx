@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import RevealOnScroll from "@/components/effects/RevealOnScroll";
-import { useReducedMotion } from "@/lib/motion";
+import { useHasFinePointer, useReducedMotion } from "@/lib/motion";
 import ContactPhonePanel from "./ContactPhonePanel";
 
 const COST_LINES = [
@@ -12,36 +12,103 @@ const COST_LINES = [
 ];
 const TOTAL = COST_LINES.reduce((sum, l) => sum + l.amount, 0);
 
+const IDLE_PERIOD_MS = 4200;
+const IDLE_SHAKE_MS = 400;
+const IDLE_AMPLITUDE = 3;
+const MAGNET_RADIUS = 70;
+const MAGNET_MAX_OFFSET = 10;
+
+/** Decaying wiggle concentrated at the start of each period — a short
+ * attention-grabbing shake repeating on a slow interval, not a constant
+ * tremor. */
+function idleShakeOffset(elapsedInPeriod: number) {
+  if (elapsedInPeriod > IDLE_SHAKE_MS) return 0;
+  const t = elapsedInPeriod / IDLE_SHAKE_MS;
+  return Math.sin(t * Math.PI * 6) * IDLE_AMPLITUDE * (1 - t);
+}
+
 /**
- * Shakes the CTA in proportion to scroll speed, settling the instant
- * scrolling stops — the closest analogue, without an actual camera, to
- * "text reacts to camera movement". Deliberately the only place on the site
- * that does this; everywhere else uses the four deterministic reveal
- * animations.
+ * Combines three transform sources into one imperative write per frame so
+ * they never fight over the element's own inline `transform` (a CSS
+ * `animation` and a JS-driven inline transform on the same property would
+ * otherwise silently override each other):
+ *  - idle shake: a small periodic wiggle that draws the eye while at rest
+ *  - magnetic pull: the button leans toward the cursor within a small radius
+ *  - (TG button only) scroll jitter: shakes in proportion to scroll speed,
+ *    the closest analogue, without an actual camera, to "text reacts to
+ *    camera movement" — kept from the original CTA-only effect.
+ * Idle shake pauses while the magnet is actively engaged so the two never
+ * visually compete.
  */
-function useScrollJitter<T extends HTMLElement>(reducedMotion: boolean) {
+function useCtaAttention<T extends HTMLElement>(
+  reducedMotion: boolean,
+  hasFinePointer: boolean,
+  withScrollJitter: boolean
+) {
   const ref = useRef<T>(null);
 
   useEffect(() => {
     if (reducedMotion) return;
+    const el = ref.current;
+    if (!el) return;
 
     let rafId = 0;
-    let lastY = window.scrollY;
-    let velocity = 0;
+    let lastScrollY = window.scrollY;
+    let scrollVelocity = 0;
+    let pointerX = -9999;
+    let pointerY = -9999;
+    const startTime = performance.now();
 
-    function frame() {
-      const y = window.scrollY;
-      velocity = velocity * 0.85 + (y - lastY) * 0.15;
-      lastY = y;
+    function onPointerMove(e: PointerEvent) {
+      pointerX = e.clientX;
+      pointerY = e.clientY;
+    }
+    if (hasFinePointer) {
+      window.addEventListener("pointermove", onPointerMove, { passive: true });
+    }
 
-      const el = ref.current;
-      if (el) {
-        const amount = Math.min(6, Math.abs(velocity) * 0.6);
+    function frame(now: number) {
+      let jx = 0;
+      let jy = 0;
+      let jrot = 0;
+      if (withScrollJitter) {
+        const y = window.scrollY;
+        scrollVelocity = scrollVelocity * 0.85 + (y - lastScrollY) * 0.15;
+        lastScrollY = y;
+        const amount = Math.min(6, Math.abs(scrollVelocity) * 0.6);
         if (amount > 0.05) {
-          const dx = (Math.random() - 0.5) * amount;
-          const dy = (Math.random() - 0.5) * amount;
-          const rot = (Math.random() - 0.5) * amount * 0.4;
-          el.style.transform = `translate(${dx.toFixed(2)}px, ${dy.toFixed(2)}px) rotate(${rot.toFixed(2)}deg)`;
+          jx = (Math.random() - 0.5) * amount;
+          jy = (Math.random() - 0.5) * amount;
+          jrot = (Math.random() - 0.5) * amount * 0.4;
+        }
+      }
+
+      let mx = 0;
+      let my = 0;
+      if (hasFinePointer && el) {
+        const rect = el.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = pointerX - cx;
+        const dy = pointerY - cy;
+        const dist = Math.hypot(dx, dy);
+        if (dist > 0 && dist < MAGNET_RADIUS) {
+          const pull = (1 - dist / MAGNET_RADIUS) * MAGNET_MAX_OFFSET;
+          mx = (dx / dist) * pull;
+          my = (dy / dist) * pull;
+        }
+      }
+
+      let sx = 0;
+      if (mx === 0 && my === 0) {
+        sx = idleShakeOffset((now - startTime) % IDLE_PERIOD_MS);
+      }
+
+      const x = jx + mx + sx;
+      const y = jy + my;
+      if (el) {
+        if (Math.abs(x) > 0.05 || Math.abs(y) > 0.05 || Math.abs(jrot) > 0.05) {
+          el.style.transform = `translate(${x.toFixed(2)}px, ${y.toFixed(2)}px) rotate(${jrot.toFixed(2)}deg)`;
         } else {
           el.style.transform = "";
         }
@@ -51,15 +118,20 @@ function useScrollJitter<T extends HTMLElement>(reducedMotion: boolean) {
     }
 
     rafId = requestAnimationFrame(frame);
-    return () => cancelAnimationFrame(rafId);
-  }, [reducedMotion]);
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("pointermove", onPointerMove);
+    };
+  }, [reducedMotion, hasFinePointer, withScrollJitter]);
 
   return ref;
 }
 
 export default function ClosingSection() {
   const reducedMotion = useReducedMotion();
-  const ctaRef = useScrollJitter<HTMLButtonElement>(reducedMotion);
+  const hasFinePointer = useHasFinePointer();
+  const ctaRef = useCtaAttention<HTMLButtonElement>(reducedMotion, hasFinePointer, true);
+  const maxRef = useCtaAttention<HTMLAnchorElement>(reducedMotion, hasFinePointer, false);
   const [phoneOpen, setPhoneOpen] = useState(false);
   return (
     <section
@@ -140,6 +212,7 @@ export default function ClosingSection() {
               Написать в ТГ
             </button>
             <a
+              ref={maxRef}
               href="https://max.ru/se14158141_bot"
               target="_blank"
               rel="noopener noreferrer"

@@ -7,16 +7,19 @@ const SIZE = 84;
 const STROKE = 6;
 const RADIUS = (SIZE - STROKE) / 2;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
-const FILL_MS = 2000;
+const START_DELAY_MS = 500;
+const FILL_MS = 3000;
 
 function easeOutCubic(t: number) {
   return 1 - Math.pow(1 - t, 3);
 }
 
 /**
- * Circular fill animating 0 → pct over 2s, starting the first time the ring
+ * Circular fill animating 0 → pct over 3s, starting the first time the ring
  * actually scrolls into view (not on mount, which could fire off-screen
- * below the fold) — the "posts published with zero manual edits" share.
+ * below the fold), after a short pause so the fill reads as a deliberate
+ * beat rather than firing the instant the ring appears — the "posts
+ * published with zero manual edits" share.
  */
 export default function AutoPilotRing({ pct, label }: { pct: number; label: string }) {
   const reducedMotion = useReducedMotion();
@@ -29,26 +32,33 @@ export default function AutoPilotRing({ pct, label }: { pct: number; label: stri
     const el = containerRef.current;
     if (!el) return;
 
+    let rafId = 0;
+    let delayTimer = 0;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry?.isIntersecting || startedRef.current) return;
         startedRef.current = true;
         observer.disconnect();
 
-        const startTime = performance.now();
-        let rafId = 0;
-        function frame(now: number) {
-          const t = Math.min(1, (now - startTime) / FILL_MS);
-          setAnimatedPct(easeOutCubic(t) * pct);
-          if (t < 1) rafId = requestAnimationFrame(frame);
-        }
-        rafId = requestAnimationFrame(frame);
-        return () => cancelAnimationFrame(rafId);
+        delayTimer = window.setTimeout(() => {
+          const startTime = performance.now();
+          function frame(now: number) {
+            const t = Math.min(1, (now - startTime) / FILL_MS);
+            setAnimatedPct(easeOutCubic(t) * pct);
+            if (t < 1) rafId = requestAnimationFrame(frame);
+          }
+          rafId = requestAnimationFrame(frame);
+        }, START_DELAY_MS);
       },
       { threshold: 0.5 }
     );
     observer.observe(el);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(delayTimer);
+      cancelAnimationFrame(rafId);
+    };
   }, [pct, reducedMotion]);
 
   const offset = CIRCUMFERENCE * (1 - animatedPct / 100);

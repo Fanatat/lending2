@@ -100,9 +100,9 @@ const AgentAvatar = forwardRef<
             }}
           />
         </div>
-        <div>
-          <div className="text-xs font-bold text-fg-primary">{agent.name}</div>
-          <div className="text-[10px] text-fg-muted">{agent.status}</div>
+        <div className="min-w-0">
+          <div className="break-words text-xs font-bold text-fg-primary">{agent.name}</div>
+          <div className="break-words text-[10px] text-fg-muted">{agent.status}</div>
         </div>
       </div>
     </div>

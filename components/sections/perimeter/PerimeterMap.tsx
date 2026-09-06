@@ -3,15 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "@/lib/motion";
 import ProjectCardLink from "@/components/transitions/ProjectCardLink";
-import { NODES, EDGES, COMPROMISED_EDGE } from "./nodes";
+import { NODES, EDGES, COMPROMISED_EDGES } from "./nodes";
 
 const DWELL_MS = 15000;
 const TOAST_MS = 3000;
 
 function isCompromised(a: string, b: string) {
-  return (
-    (a === COMPROMISED_EDGE[0] && b === COMPROMISED_EDGE[1]) ||
-    (a === COMPROMISED_EDGE[1] && b === COMPROMISED_EDGE[0])
+  return COMPROMISED_EDGES.some(
+    ([ca, cb]) => (a === ca && b === cb) || (a === cb && b === ca)
   );
 }
 
