@@ -15,7 +15,7 @@ export const PROJECTS: ProjectMeta[] = [
   {
     slug: "friday-studio",
     title: "Студия «Пятница»",
-    todo: "Живое демо / видео геймплея каждой из четырёх игр.",
+    todo: "Живое демо / видео геймплея каждой из пяти игр.",
   },
   {
     slug: "hp100",

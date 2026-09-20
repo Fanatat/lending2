@@ -7,7 +7,7 @@ export default function FridaySection() {
     <SectionShell
       id="friday-studio"
       number="СИСТЕМА 01"
-      title="Четыре игры студии «Пятница» и промо-материалы"
+      title="Пять игр студии «Пятница» и промо-материалы"
       line={
         <>
           <SystemStatusLine systemId="friday" className="mb-3" />

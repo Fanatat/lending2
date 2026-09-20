@@ -7,6 +7,7 @@ import SmokeField from "@/components/effects/SmokeField";
 import CustomCursor from "@/components/effects/CustomCursor";
 import ScrollProgress from "@/components/effects/ScrollProgress";
 import TrunkNav from "@/components/effects/TrunkNav";
+import LocaleSwitch from "@/components/effects/LocaleSwitch";
 import MatrixModeController from "@/components/effects/MatrixModeController";
 import MatrixRain from "@/components/effects/MatrixRain";
 import SoundToggle from "@/components/effects/SoundToggle";
@@ -24,12 +25,36 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const TITLE = "Привет от Валеры";
+const DESCRIPTION =
+  "Девять автономных систем. Ноль сотрудников, ноль облачных подписок, ноль обещаний.";
+
 export const metadata: Metadata = {
-  title: "Привет от Валеры",
-  description:
-    "Девять автономных систем. Ноль сотрудников, ноль облачных подписок, ноль обещаний.",
+  metadataBase: new URL("https://vanatat.vercel.app"),
+  title: TITLE,
+  description: DESCRIPTION,
   icons: {
     icon: "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ctext%20y='.9em'%20font-size='90'%3E%E2%9D%A4%EF%B8%8F%3C/text%3E%3C/svg%3E",
+  },
+  alternates: {
+    canonical: "/",
+    languages: {
+      ru: "/",
+      en: "/en",
+    },
+  },
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    url: "/",
+    siteName: TITLE,
+    locale: "ru_RU",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
   },
 };
 
@@ -63,6 +88,7 @@ export default function RootLayout({
         <SmokeField />
         <ScrollProgress />
         <TrunkNav />
+        <LocaleSwitch />
         <CustomCursor />
         <SoundToggle />
         <EasterEggCounter />
