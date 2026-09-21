@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 const SECTION_IDS = [
   "hero",
+  "operator",
   "friday-studio",
   "hp100",
   "channel-autopilot",

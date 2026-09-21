@@ -32,4 +32,10 @@ export const FRIDAY_GAMES: FridayGame[] = [
     microFact: "375 отзывов → патч",
     inDevelopment: true,
   },
+  {
+    slug: "royal-solitaire",
+    title: "Royal Solitaire",
+    line: "Мультяшная 2.5D косынка на Three.js, прошедшая модерацию Яндекс Игр — не макет, а собранная и выпущенная игра.",
+    microFact: "Three.js, прошла модерацию",
+  },
 ];
