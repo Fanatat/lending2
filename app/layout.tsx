@@ -17,6 +17,7 @@ import PacketPile from "@/components/effects/PacketPile";
 import AccessDeniedOverlay from "@/components/sections/allin/AccessDeniedOverlay";
 import BranchOverlay from "@/components/easter-eggs/BranchOverlay";
 import SudoEasterEgg from "@/components/easter-eggs/SudoEasterEgg";
+import IntroGate from "@/components/intro/IntroGate";
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin", "cyrillic"],
@@ -76,7 +77,7 @@ export default function RootLayout({
             SUDO_LOCK_HTML_CLASS in components/easter-eggs/SudoEasterEgg.tsx. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{if(localStorage.getItem('lab-terminal:sudo-locked')==='1'){document.documentElement.classList.add('sudo-locked-boot');}}catch(e){}`,
+            __html: `try{if(localStorage.getItem('lab-terminal:sudo-locked')==='1'){document.documentElement.classList.add('sudo-locked-boot');}if(localStorage.getItem('lab-terminal:intro-seen')==='1'){document.documentElement.classList.add('intro-seen-boot');}}catch(e){}`,
           }}
         />
       </head>
@@ -92,7 +93,9 @@ export default function RootLayout({
         <CustomCursor />
         <SoundToggle />
         <EasterEggCounter />
-        <div className="relative z-10">{children}</div>
+        <IntroGate>
+          <div className="relative z-10">{children}</div>
+        </IntroGate>
         <ProjectTransitionOverlay />
         <PacketPile />
         <AccessDeniedOverlay />
