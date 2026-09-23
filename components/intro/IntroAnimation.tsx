@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { usePathname } from "next/navigation";
 import IntroCosmos from "./IntroCosmos";
 import IntroMark, { type MarkStage } from "./IntroMark";
 import IntroWelcome, { type WelcomeStage } from "./IntroWelcome";
 import {
+  INTRO_COPY,
   INTRO_EXIT_MS,
   INTRO_SHOW_MARK,
   INTRO_SKIP_DELAY_MS,
@@ -42,6 +44,7 @@ export default function IntroAnimation({
   onReveal: () => void;
   onComplete: () => void;
 }) {
+  const copy = INTRO_COPY[usePathname()?.startsWith("/en") ? "en" : "ru"];
   const [origin, setOrigin] = useState<number | null>(null);
   const [mobile, setMobile] = useState(false);
   const [stages, setStages] = useState<Stages>(INITIAL);
@@ -136,6 +139,7 @@ export default function IntroAnimation({
           origin={origin}
           mobile={mobile}
           stage={stages.welcome}
+          copy={copy}
           exitStart={exit?.kind === "start" ? exit.at : null}
           onStart={() => leave("start")}
         />
@@ -148,7 +152,7 @@ export default function IntroAnimation({
           className="intro-skip"
           onClick={() => leave("skip")}
         >
-          Пропустить <span className="intro-skip-key" aria-hidden="true">esc</span>
+          {copy.skip} <span className="intro-skip-key" aria-hidden="true">esc</span>
         </button>
       )}
     </div>

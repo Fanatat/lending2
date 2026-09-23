@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Literata } from "next/font/google";
-import { INTRO_CTA, INTRO_T, INTRO_TITLE } from "@/lib/introConfig";
+import { INTRO_T, type IntroCopy } from "@/lib/introConfig";
 
 const serif = Literata({
   subsets: ["latin", "cyrillic"],
@@ -163,12 +163,14 @@ export default function IntroWelcome({
   origin,
   mobile,
   stage,
+  copy,
   exitStart,
   onStart,
 }: {
   origin: number;
   mobile: boolean;
   stage: WelcomeStage;
+  copy: IntroCopy;
   /** performance.now() when "Начать" was pressed, or null. */
   exitStart: number | null;
   onStart: () => void;
@@ -291,7 +293,7 @@ export default function IntroWelcome({
       <canvas ref={canvasRef} className="intro-welcome-canvas" aria-hidden="true" />
       {fallback && <div className="intro-welcome-fallback-sphere" aria-hidden="true" />}
 
-      <h1 className={`intro-title ${serif.className}${at("title") ? " intro-title--on" : ""}`}>{INTRO_TITLE}</h1>
+      <h1 className={`intro-title ${serif.className}${at("title") ? " intro-title--on" : ""}`}>{copy.title}</h1>
 
       <button
         type="button"
@@ -312,11 +314,11 @@ export default function IntroWelcome({
             />
           </svg>
         </span>
-        <span className="intro-start-label">{INTRO_CTA}</span>
+        <span className="intro-start-label">{copy.cta}</span>
       </button>
 
       <p className={at("chrome") ? "intro-legal intro-legal--on" : "intro-legal"}>
-        Продолжая, вы увидите нечто.
+        {copy.legal}
       </p>
     </div>
   );

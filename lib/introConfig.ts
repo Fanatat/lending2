@@ -1,8 +1,8 @@
 /**
  * Shared timeline/copy for the boot intro (components/intro/*). The timeline
- * follows the reference recording (reference.mp4 in the project root) beat
- * for beat, so every number here is "ms since the intro started" and can be
- * checked against the video:
+ * follows the reference recording (reference/intro_reference.mp4, local-only
+ * like the rest of /reference/) beat for beat, so every number here is
+ * "ms since the intro started" and can be checked against the video:
  *
  *   0.0 s  the eight planets spin in a ring right around the camera
  *   2.7 s  the ring recedes, spiralling, into a starfield
@@ -66,5 +66,20 @@ export const MOBILE_BREAKPOINT_PX = 768;
 /** Sparkle dust density around the planet ring (desktop / mobile). */
 export const INTRO_DUST = { desktop: 900, mobile: 420 };
 
-export const INTRO_TITLE = "Добро пожаловать к Валере!";
-export const INTRO_CTA = "Начать";
+/** Intro text per locale — the intro sits in the root layout, so /en gets it too. */
+export const INTRO_COPY = {
+  ru: {
+    title: "Добро пожаловать к Валере!",
+    cta: "Начать",
+    legal: "Продолжая, вы увидите нечто.",
+    skip: "Пропустить",
+  },
+  en: {
+    title: "Welcome — Valery here!",
+    cta: "Start",
+    legal: "Carry on and you'll see something.",
+    skip: "Skip",
+  },
+};
+
+export type IntroCopy = (typeof INTRO_COPY)["ru"];
