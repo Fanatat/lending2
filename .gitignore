@@ -34,3 +34,7 @@ yarn-error.log*
 /список доработок1.txt
 /Визуальная концепция и интерактив с.txt
 /\# Текст сайта-портфолио. Версия v7.md
+/ТЗ lending3 .md
+
+# Claude Code worktrees created while working in this repo
+/.claude/
