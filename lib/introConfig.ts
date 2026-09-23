@@ -1,69 +1,58 @@
 /**
  * Shared timings/copy/colors for the boot intro (components/intro/*). Kept
- * in one place because the desktop/mobile/reduced-motion variants need to
- * stay comparable at a glance, and the terminal-boot copy here is the one
- * spot it's written out (reused by IntroLogo).
+ * in one place so the whole ~10 s timeline can be read (and retuned) at a
+ * glance.
  */
 
-export const INTRO_STORAGE_KEY = "lab-terminal:intro-seen";
+// Bumped from "lab-terminal:intro-seen" when the intro was rebuilt to the
+// full ~10 s cut — the old key would otherwise hide the new version from
+// everyone who already sat through the short one.
+export const INTRO_STORAGE_KEY = "lab-terminal:intro-seen-v2";
 export const INTRO_BOOT_HTML_CLASS = "intro-seen-boot";
+/** `?intro` in the URL replays the intro even after it has been seen. */
+export const INTRO_REPLAY_PARAM = "intro";
 
 export const INTRO_COLOR = {
-  glowStrong: "rgba(255, 197, 61, 0.85)",
-  glowSoft: "rgba(255, 197, 61, 0.35)",
-  particleBright: "rgba(255, 197, 61, 0.8)",
-  particleMid: "rgba(255, 197, 61, 0.45)",
-  particleDim: "rgba(255, 197, 61, 0.18)",
+  core: "255, 243, 208",
+  accent: "255, 197, 61",
+  deep: "255, 150, 40",
 };
 
 export interface IntroTiming {
-  /** Core dot fade/scale-in. */
+  /** Black → glowing core dot, pulsing (ТЗ phases 0-1). */
   core: number;
-  /** Orbital particles (0 = phase skipped, e.g. mobile). */
+  /** Orbital particles spiral out from the core and circle it (phase 2). */
   particles: number;
-  /** Particles rushing to center + flash (0 = phase skipped). */
+  /** Particles rush into the center, flash + shockwave (phase 3). */
   collapse: number;
-  /** Terminal boot lines + name reveal. */
+  /** Name emerges, underline + status lines type out (phase 4). */
   logo: number;
-  /** Pause on the fully-revealed logo before auto-exit. */
+  /** Everything revealed, floating shapes drift, parallax (phases 5-6). */
   hold: number;
-  /** Overlay exit / curtain-up. */
+  /** Logo shrinks away, overlay lifts like a curtain (phase 7). */
   exit: number;
 }
 
-export const INTRO_TIMING_DESKTOP: IntroTiming = {
-  core: 800,
-  particles: 1300,
-  collapse: 650,
-  logo: 1500,
-  hold: 1550,
-  exit: 850,
+// ≈10.5 s end to end. Mobile and reduced-motion run the same timeline —
+// they get lighter visuals (fewer particles / no flash, slower orbits),
+// not a shorter cut.
+export const INTRO_TIMING: IntroTiming = {
+  core: 1300,
+  particles: 2900,
+  collapse: 1100,
+  logo: 2900,
+  hold: 1300,
+  exit: 1100,
 };
 
-// Mobile skips the canvas particle phases entirely (perf + ТЗ recommendation).
-export const INTRO_TIMING_MOBILE: IntroTiming = {
-  core: 450,
-  particles: 0,
-  collapse: 0,
-  logo: 1300,
-  hold: 950,
-  exit: 600,
-};
-
-export const INTRO_TIMING_REDUCED: IntroTiming = {
-  core: 0,
-  particles: 0,
-  collapse: 0,
-  logo: 0,
-  hold: 900,
-  exit: 350,
-};
-
-export const INTRO_PARTICLE_COUNT = 11;
+export const INTRO_PARTICLES_DESKTOP = { orbit: 12, sparks: 46 };
+export const INTRO_PARTICLES_MOBILE = { orbit: 8, sparks: 20 };
 export const MOBILE_BREAKPOINT_PX = 768;
 
-export const INTRO_BOOT_LINE = "root@valera:~$ whoami";
-export const INTRO_NAME = "ВАЛЕРА";
+/** Skip button fades in after this long (ТЗ "Skip button"). */
+export const INTRO_SKIP_DELAY_MS = 1200;
+
+export const INTRO_NAME = "ВАЛЕРИЙ";
 export const INTRO_STATUS_LINE = "root@valera:~$ status --brief";
 // Wording matches the <meta name="description"> in app/layout.tsx —
 // deliberately not a new tagline, just the site's own line typed out.

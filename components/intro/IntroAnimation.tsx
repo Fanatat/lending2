@@ -1,182 +1,204 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { useReducedMotion } from "@/lib/motion";
 import IntroCore from "./IntroCore";
 import IntroParticles from "./IntroParticles";
 import IntroFloatingShapes from "./IntroFloatingShapes";
 import IntroLogo from "./IntroLogo";
 import {
-  INTRO_TIMING_DESKTOP,
-  INTRO_TIMING_MOBILE,
-  INTRO_TIMING_REDUCED,
+  INTRO_PARTICLES_DESKTOP,
+  INTRO_PARTICLES_MOBILE,
+  INTRO_SKIP_DELAY_MS,
+  INTRO_TIMING,
   MOBILE_BREAKPOINT_PX,
-  type IntroTiming,
 } from "@/lib/introConfig";
 
-type Phase = "core" | "particles" | "collapse" | "logo" | "exit";
+type Phase = "core" | "particles" | "collapse" | "logo" | "hold";
 
-interface Config {
-  timing: IntroTiming;
-  mobile: boolean;
+const PHASE_ORDER: Phase[] = ["core", "particles", "collapse", "logo", "hold"];
+
+function phaseStarts() {
+  const t = INTRO_TIMING;
+  const starts: Record<Phase, number> = {
+    core: 0,
+    particles: t.core,
+    collapse: t.core + t.particles,
+    logo: t.core + t.particles + t.collapse,
+    hold: t.core + t.particles + t.collapse + t.logo,
+  };
+  const exitAt = starts.hold + t.hold;
+  return { starts, exitAt, completeAt: exitAt + t.exit };
 }
 
-function buildSchedule(t: IntroTiming) {
-  let elapsed = 0;
-  const schedule: { phase: Phase; at: number }[] = [{ phase: "core", at: 0 }];
-  elapsed += t.core;
-  if (t.particles > 0) {
-    schedule.push({ phase: "particles", at: elapsed });
-    elapsed += t.particles;
-  }
-  if (t.collapse > 0) {
-    schedule.push({ phase: "collapse", at: elapsed });
-    elapsed += t.collapse;
-  }
-  schedule.push({ phase: "logo", at: elapsed });
-  elapsed += t.logo + t.hold;
-  schedule.push({ phase: "exit", at: elapsed });
-  const completeAt = elapsed + t.exit;
-  return { schedule, completeAt };
-}
-
-const SKIP_HINT_DELAY_MS = 1400;
+// Where in the collapse the particles hit the core — flash + shockwave fire
+// here, and the name bursts out of it when the logo phase starts.
+const FLASH_AT = 0.78;
 
 /**
- * Orchestrates the boot intro (ТЗ phases 0-7): a state machine over `Phase`
- * driven by a single setTimeout schedule (not per-component timers) so
- * skip/reduced-motion only ever have one place to short-circuit. Rendered
- * by IntroGate, which owns the "have we shown this before" decision.
+ * Orchestrates the ~10 s boot intro (ТЗ phases 0-7): one setTimeout
+ * schedule drives `phase`; everything else (canvas, CSS animations) keys
+ * off it. `exiting` is separate from `phase` so a skip mid-way just fades
+ * out whatever is on screen instead of jumping ahead to the flash/logo.
+ *
+ * `onReveal` fires when the exit starts so the site can fade in underneath
+ * the lifting curtain; `onComplete` fires once the overlay is fully gone.
  */
 export default function IntroAnimation({
+  onReveal,
   onComplete,
 }: {
+  onReveal: () => void;
   onComplete: () => void;
 }) {
   const reducedMotion = useReducedMotion();
-  const [config, setConfig] = useState<Config | null>(null);
+  const [mobile, setMobile] = useState<boolean | null>(null);
   const [phase, setPhase] = useState<Phase>("core");
-  const [flash, setFlash] = useState(0);
-  const [showSkipHint, setShowSkipHint] = useState(false);
+  const [exiting, setExiting] = useState(false);
+  const [showSkip, setShowSkip] = useState(false);
+  const [exitMs, setExitMs] = useState(INTRO_TIMING.exit);
 
+  const overlayRef = useRef<HTMLDivElement>(null);
   const timersRef = useRef<number[]>([]);
-  const skippingRef = useRef(false);
-  const onCompleteRef = useRef(onComplete);
-  onCompleteRef.current = onComplete;
+  const exitingRef = useRef(false);
+  const callbacksRef = useRef({ onReveal, onComplete });
+  callbacksRef.current = { onReveal, onComplete };
 
-  useEffect(() => {
-    // useReducedMotion() starts at `false` and corrects itself in its own
-    // mount effect (no matchMedia access during the very first render) — so
-    // this must depend on `reducedMotion`, not run once with `[]`, or a
-    // reduced-motion visitor's very first render (before that correction
-    // lands) permanently locks in the full animation instead.
-    const mobile = window.innerWidth < MOBILE_BREAKPOINT_PX;
-    setConfig({
-      mobile,
-      timing: reducedMotion
-        ? INTRO_TIMING_REDUCED
-        : mobile
-        ? INTRO_TIMING_MOBILE
-        : INTRO_TIMING_DESKTOP,
-    });
-  }, [reducedMotion]);
-
-  useEffect(() => {
-    if (!config) return;
-    const { schedule, completeAt } = buildSchedule(config.timing);
-    setPhase("core");
-    const timers = schedule
-      .slice(1)
-      .map(({ phase: p, at }) => window.setTimeout(() => setPhase(p), at));
-    timers.push(
-      window.setTimeout(() => onCompleteRef.current(), completeAt)
-    );
-    timersRef.current = timers;
-    return () => timers.forEach((id) => window.clearTimeout(id));
-  }, [config]);
-
-  useEffect(() => {
-    const t = window.setTimeout(
-      () => setShowSkipHint(true),
-      SKIP_HINT_DELAY_MS
-    );
-    return () => window.clearTimeout(t);
-  }, []);
-
-  function handleSkip() {
-    if (skippingRef.current || phase === "exit" || !config) return;
-    skippingRef.current = true;
+  function startExit(exitMs: number) {
+    if (exitingRef.current) return;
+    exitingRef.current = true;
     timersRef.current.forEach((id) => window.clearTimeout(id));
-    setPhase("exit");
-    const t = window.setTimeout(
-      () => onCompleteRef.current(),
-      config.timing.exit
-    );
-    timersRef.current = [t];
+    setExitMs(exitMs);
+    setExiting(true);
+    callbacksRef.current.onReveal();
+    timersRef.current = [
+      window.setTimeout(() => callbacksRef.current.onComplete(), exitMs),
+    ];
   }
 
+  // The timeline starts on the client (hydration), not at SSR paint — until
+  // then the overlay is plain black, which is exactly ТЗ phase 0.
   useEffect(() => {
-    // IntroParticles unmounts once collapse ends (phase -> "logo") and its
-    // rAF loop's very last onFlash call can land mid-fade (rAF and the
-    // schedule's setTimeout aren't ticked together), leaving `flash` stuck
-    // above 0 with nothing left to animate it back down — wash the whole
-    // background out. Belt-and-suspenders reset the moment collapse ends.
-    if (phase !== "collapse") setFlash(0);
-  }, [phase]);
+    setMobile(window.innerWidth < MOBILE_BREAKPOINT_PX);
+    const { starts, exitAt, completeAt } = phaseStarts();
+    const timers = PHASE_ORDER.slice(1).map((p) =>
+      window.setTimeout(() => setPhase(p), starts[p])
+    );
+    timers.push(
+      window.setTimeout(() => startExit(completeAt - exitAt), exitAt),
+      window.setTimeout(() => setShowSkip(true), INTRO_SKIP_DELAY_MS)
+    );
+    timersRef.current = timers;
+    return () => timersRef.current.forEach((id) => window.clearTimeout(id));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
+  function skip() {
+    // A shorter exit than the scheduled one — the visitor asked to leave.
+    startExit(650);
+  }
+
+  // Only Escape skips — a stray click to focus the window or an arbitrary
+  // key press shouldn't throw away the whole intro.
   useEffect(() => {
-    function onKeydown() {
-      handleSkip();
+    function onKeydown(e: KeyboardEvent) {
+      if (e.key === "Escape") skip();
     }
     window.addEventListener("keydown", onKeydown);
     return () => window.removeEventListener("keydown", onKeydown);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [phase, config]);
+  }, []);
 
-  const showParticles =
-    !!config &&
-    config.timing.particles > 0 &&
-    (phase === "particles" || phase === "collapse");
-  const showLogo = phase === "logo" || phase === "exit";
+  // Mouse parallax for the floating shapes / name (ТЗ phase 5). Written
+  // straight into CSS vars so pointer moves never re-render React.
+  useEffect(() => {
+    const el = overlayRef.current;
+    if (!el || reducedMotion) return;
+    let raf = 0;
+    function onMove(e: PointerEvent) {
+      if (raf) return;
+      const { clientX, clientY } = e;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        el!.style.setProperty("--mx", ((clientX / window.innerWidth) * 2 - 1).toFixed(3));
+        el!.style.setProperty("--my", ((clientY / window.innerHeight) * 2 - 1).toFixed(3));
+      });
+    }
+    window.addEventListener("pointermove", onMove, { passive: true });
+    return () => {
+      window.removeEventListener("pointermove", onMove);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [reducedMotion]);
+
+  const started = mobile !== null;
+  const at = (p: Phase) => PHASE_ORDER.indexOf(phase) >= PHASE_ORDER.indexOf(p);
+  const showParticles = started && (phase === "particles" || phase === "collapse");
+  const showLogo = at("logo");
+  const { exitAt } = phaseStarts();
+
+  const overlayClass = [
+    "intro-overlay",
+    reducedMotion && "intro-overlay--gentle",
+    exiting && "intro-overlay--exit",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const style = {
+    "--intro-particles-ms": `${INTRO_TIMING.particles}ms`,
+    "--intro-collapse-ms": `${INTRO_TIMING.collapse}ms`,
+    "--intro-flash-delay": `${Math.round(INTRO_TIMING.collapse * FLASH_AT) - 60}ms`,
+    "--intro-progress-ms": `${exitAt}ms`,
+    "--intro-exit-ms": `${exitMs}ms`,
+  } as CSSProperties;
 
   return (
     <div
       id="intro-overlay"
-      className={phase === "exit" ? "intro-overlay intro-overlay--exit" : "intro-overlay"}
-      role="presentation"
-      aria-hidden="true"
-      onClick={handleSkip}
+      ref={overlayRef}
+      className={overlayClass}
+      style={style}
     >
-      <div
-        className="intro-bg-warm"
-        style={{ opacity: phase === "collapse" || showLogo ? 1 : 0 }}
-      />
-      {flash > 0 && (
-        <div className="intro-flash" style={{ opacity: flash }} />
-      )}
+      <div aria-hidden="true" className={at("collapse") ? "intro-bg-warm intro-bg-warm--on" : "intro-bg-warm"} />
+      <IntroFloatingShapes visible={showLogo} />
+
       {showParticles && (
         <IntroParticles
-          phase={phase === "collapse" ? "collapse" : "particles"}
-          collapseDurationMs={config?.timing.collapse || 1}
-          onFlash={setFlash}
+          orbitMs={INTRO_TIMING.particles}
+          collapseMs={INTRO_TIMING.collapse}
+          counts={mobile ? INTRO_PARTICLES_MOBILE : INTRO_PARTICLES_DESKTOP}
+          gentle={reducedMotion}
         />
       )}
-      {!reducedMotion && (
-        <IntroCore visible={phase === "core" || phase === "particles"} />
+
+      {started && !showLogo && (
+        <IntroCore stage={phase === "collapse" ? "collapse" : phase === "particles" ? "charged" : "born"} />
       )}
-      <IntroFloatingShapes visible={showLogo} />
-      {config && <IntroLogo active={showLogo} instant={reducedMotion} />}
-      {showSkipHint && phase !== "exit" && (
+
+      {/* Stays mounted from the collapse on, so its CSS animation runs to the
+          end even though the collapse phase itself is over by then. */}
+      {!reducedMotion && at("collapse") && (
+        <>
+          <div className="intro-flash" aria-hidden="true" />
+          <div className="intro-shockwave" aria-hidden="true" />
+        </>
+      )}
+
+      <div className="intro-logo-stage">
+        <IntroLogo active={showLogo} gentle={reducedMotion} />
+      </div>
+
+      {started && <div className="intro-progress" aria-hidden="true" />}
+
+      {showSkip && !exiting && (
         <button
           type="button"
           data-cursor="interactive"
           className="intro-skip"
-          onClick={(e) => {
-            e.stopPropagation();
-            handleSkip();
-          }}
+          onClick={skip}
         >
-          ПРОПУСТИТЬ
+          ПРОПУСТИТЬ <span className="intro-skip-key" aria-hidden="true">[esc]</span>
         </button>
       )}
     </div>

@@ -422,74 +422,141 @@ html.intro-seen-boot #intro-overlay {
 
 .intro-main-wrap {
   opacity: 0;
-  transform: translateY(14px);
 }
 
+/* An animation rather than a transition so it can end on `transform: none`
+   — any other transform value would turn this wrapper into the containing
+   block for position:fixed descendants (e.g. ContactPhonePanel). */
 .intro-main-wrap--visible {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 650ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 650ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: intro-main-in 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes intro-main-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 html.intro-seen-boot .intro-main-wrap {
   opacity: 1;
-  transform: none;
+  animation: none;
 }
 
+/* z-index sits just under the custom cursor (9998/9999) so it stays
+   visible over the intro. --mx/--my: mouse parallax, set from JS. */
 .intro-overlay {
+  --mx: 0;
+  --my: 0;
   position: fixed;
   inset: 0;
-  z-index: 9999;
+  z-index: 9990;
   overflow: hidden;
   background: #000000;
-  opacity: 1;
-  transition: opacity 850ms cubic-bezier(0.7, 0, 0.3, 1);
+  color: var(--fg-primary);
 }
 
+/* Phase 7: the overlay lifts like a curtain, its bottom edge (the full
+   progress bar) glowing as it goes. */
 .intro-overlay--exit {
+  transform: translateY(-100%);
+  transition: transform calc(var(--intro-exit-ms) * 0.75)
+    cubic-bezier(0.7, 0, 0.3, 1) calc(var(--intro-exit-ms) * 0.25);
+}
+
+.intro-overlay--gentle.intro-overlay--exit {
+  transform: none;
   opacity: 0;
+  transition: opacity var(--intro-exit-ms) ease;
 }
 
 .intro-bg-warm {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, #241a08 0%, #0a0a0a 65%);
+  background: radial-gradient(
+    ellipse at center,
+    #2c1f07 0%,
+    #140e04 35%,
+    #000000 75%
+  );
   opacity: 0;
-  transition: opacity 900ms ease;
+  transition: opacity 1600ms ease;
 }
 
-.intro-flash {
-  position: absolute;
-  inset: 0;
-  background: #fff3d0;
-  pointer-events: none;
+.intro-bg-warm--on {
+  opacity: 1;
 }
 
-.intro-core-dot {
+/* Phase 1: core dot + halo. */
+.intro-core {
   position: absolute;
   top: 50%;
   left: 50%;
+  width: 0;
+  height: 0;
+}
+
+.intro-core-dot,
+.intro-core-halo {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.intro-core-dot {
+  top: -6px;
+  left: -6px;
   width: 12px;
   height: 12px;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(circle, #fff3d0 0%, #ffc53d 45%, transparent 75%);
-  box-shadow: 0 0 20px rgba(255, 197, 61, 0.85),
-    0 0 44px rgba(255, 197, 61, 0.4);
-  opacity: 1;
-  transition: opacity 300ms ease;
-  animation: intro-core-in 700ms cubic-bezier(0.16, 1, 0.3, 1) both,
-    intro-core-pulse 2s ease-in-out 700ms infinite;
+  background: radial-gradient(
+    circle,
+    #fffaf0 0%,
+    #ffe3a0 35%,
+    #ffc53d 60%,
+    rgba(255, 197, 61, 0) 75%
+  );
+  box-shadow: 0 0 20px rgba(255, 197, 61, 0.8),
+    0 0 40px rgba(255, 150, 40, 0.4);
+  animation: intro-core-in 800ms cubic-bezier(0.16, 1, 0.3, 1) 200ms both,
+    intro-core-pulse 2s ease-in-out 1000ms infinite;
+}
+
+.intro-core-halo {
+  top: -110px;
+  left: -110px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 197, 61, 0.4) 0%,
+    rgba(255, 150, 40, 0.14) 35%,
+    transparent 70%
+  );
+  animation: intro-halo-born 1200ms ease 300ms both;
+}
+
+.intro-core--charged .intro-core-halo {
+  animation: intro-halo-charged var(--intro-particles-ms) ease-in-out both;
+}
+
+.intro-core--collapse .intro-core-dot {
+  animation: intro-dot-collapse var(--intro-collapse-ms) ease-in both;
+}
+
+.intro-core--collapse .intro-core-halo {
+  animation: intro-halo-collapse var(--intro-collapse-ms) ease-in both;
 }
 
 @keyframes intro-core-in {
   from {
-    transform: translate(-50%, -50%) scale(0);
+    transform: scale(0);
     opacity: 0;
   }
   to {
-    transform: translate(-50%, -50%) scale(1);
+    transform: scale(1);
     opacity: 1;
   }
 }
@@ -497,34 +564,169 @@ html.intro-seen-boot .intro-main-wrap {
 @keyframes intro-core-pulse {
   0%,
   100% {
-    transform: translate(-50%, -50%) scale(1);
+    transform: scale(1);
   }
   50% {
-    transform: translate(-50%, -50%) scale(1.12);
+    transform: scale(1.15);
   }
 }
 
+@keyframes intro-halo-born {
+  from {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  to {
+    opacity: 0.6;
+    transform: scale(0.6);
+  }
+}
+
+@keyframes intro-halo-charged {
+  from {
+    opacity: 0.6;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes intro-dot-collapse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(2.4);
+    opacity: 1;
+  }
+  78% {
+    transform: scale(3.4);
+    opacity: 1;
+  }
+  84%,
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes intro-halo-collapse {
+  0% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  60% {
+    transform: scale(0.7);
+    opacity: 1;
+  }
+  76% {
+    transform: scale(1.8);
+    opacity: 1;
+  }
+  84%,
+  100% {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+}
+
+/* Phase 3: flash + shockwave where the particles hit the core. */
+.intro-flash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 250, 235, 0.95) 0%,
+    rgba(255, 210, 120, 0.5) 16%,
+    rgba(255, 197, 61, 0.12) 42%,
+    transparent 70%
+  );
+  opacity: 0;
+  animation: intro-flash 1000ms ease-out var(--intro-flash-delay) both;
+}
+
+@keyframes intro-flash {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.intro-shockwave {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border: 1px solid rgba(255, 210, 120, 0.6);
+  border-radius: 50%;
+  box-shadow: 0 0 18px rgba(255, 197, 61, 0.6),
+    inset 0 0 14px rgba(255, 197, 61, 0.4);
+  pointer-events: none;
+  opacity: 0;
+  animation: intro-shockwave 1300ms cubic-bezier(0.16, 1, 0.3, 1)
+    var(--intro-flash-delay) both;
+}
+
+@keyframes intro-shockwave {
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  8% {
+    opacity: 0.8;
+  }
+  45% {
+    opacity: 0.25;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(36);
+  }
+}
+
+/* Phase 5: drifting blurred shapes, parallaxed by --mx/--my. */
 .intro-shapes {
   position: absolute;
   inset: 0;
   overflow: hidden;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 900ms ease;
+  transition: opacity 1800ms ease;
 }
 
 .intro-shapes--visible {
   opacity: 1;
 }
 
-.intro-shape {
+.intro-shape-parallax {
   position: absolute;
+  transform: translate3d(
+    calc(var(--mx) * var(--depth) * 70px),
+    calc(var(--my) * var(--depth) * 50px),
+    0
+  );
+  transition: transform 1000ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.intro-shape {
   border-radius: 50%;
-  filter: blur(70px);
-  opacity: 0.16;
+  filter: blur(60px);
+  opacity: 0.3;
   background: radial-gradient(
     circle,
     rgba(255, 197, 61, 0.9) 0%,
+    rgba(255, 140, 30, 0.35) 45%,
     transparent 70%
   );
   animation-name: intro-shape-float;
@@ -538,101 +740,305 @@ html.intro-seen-boot .intro-main-wrap {
     transform: translate(0, 0) scale(1);
   }
   25% {
-    transform: translate(60px, -40px) scale(1.08);
+    transform: translate(100px, -50px) scale(1.1);
   }
   50% {
-    transform: translate(-40px, 50px) scale(0.94);
+    transform: translate(-50px, 100px) scale(0.9);
   }
   75% {
-    transform: translate(-60px, -30px) scale(1.03);
+    transform: translate(-100px, -50px) scale(1.05);
   }
 }
 
-.intro-logo {
-  position: relative;
-  z-index: 1;
+/* Phase 4: name, underline, status lines. */
+.intro-logo-stage {
+  position: absolute;
+  inset: 0;
   display: flex;
-  min-height: 100%;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
+  perspective: 900px;
+  pointer-events: none;
+  transform: translate3d(calc(var(--mx) * -12px), calc(var(--my) * -8px), 0);
+  transition: transform 1000ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.intro-overlay--exit .intro-logo-stage {
+  opacity: 0;
+  transform: scale(0.5);
+  transition: transform 600ms cubic-bezier(0.7, 0, 0.3, 1),
+    opacity 500ms ease;
+}
+
+.intro-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
   padding: 0 1.5rem;
   text-align: center;
 }
 
+.intro-name {
+  position: relative;
+  margin: 0;
+  font-size: clamp(3rem, 13vw, 7.5rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+  opacity: 0;
+  transform: scale(0) rotateY(90deg);
+  filter: blur(10px);
+}
+
+.intro-name--visible {
+  opacity: 1;
+  transform: scale(1) rotateY(0deg);
+  filter: blur(0);
+  text-shadow: 0 0 30px rgba(255, 197, 61, 0.55),
+    0 0 80px rgba(255, 150, 40, 0.25);
+  transition: transform 1200ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 500ms ease, filter 1000ms ease;
+}
+
+/* Short glitch burst once the name has landed (ТЗ: letters offset 1-2px,
+   opacity 0.3). */
+.intro-name::before,
+.intro-name::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.intro-name::before {
+  color: #ffc53d;
+}
+
+.intro-name::after {
+  color: #ff5d5d;
+}
+
+.intro-name--visible::before {
+  animation: intro-glitch-a 900ms steps(1) 1250ms both;
+}
+
+.intro-name--visible::after {
+  animation: intro-glitch-b 900ms steps(1) 1250ms both;
+}
+
+@keyframes intro-glitch-a {
+  0% {
+    opacity: 0.35;
+    transform: translate(-2px, 0);
+    clip-path: inset(10% 0 55% 0);
+  }
+  15% {
+    transform: translate(2px, -1px);
+    clip-path: inset(60% 0 10% 0);
+  }
+  30% {
+    opacity: 0;
+  }
+  55% {
+    opacity: 0.35;
+    transform: translate(-1px, 1px);
+    clip-path: inset(35% 0 35% 0);
+  }
+  70%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes intro-glitch-b {
+  0% {
+    opacity: 0.3;
+    transform: translate(2px, 1px);
+    clip-path: inset(55% 0 15% 0);
+  }
+  15% {
+    transform: translate(-2px, 0);
+    clip-path: inset(15% 0 60% 0);
+  }
+  30% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 0.3;
+    transform: translate(1px, -1px);
+    clip-path: inset(45% 0 25% 0);
+  }
+  75%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.intro-underline {
+  width: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #ffc53d 30%,
+    #fff3d0 50%,
+    #ffc53d 70%,
+    transparent
+  );
+  box-shadow: 0 0 12px rgba(255, 197, 61, 0.6);
+}
+
+.intro-underline--visible {
+  width: 220px;
+  transition: width 900ms cubic-bezier(0.16, 1, 0.3, 1) 550ms;
+}
+
 .intro-logo-line {
-  font-size: 0.8rem;
+  margin: 0;
+  min-height: 1.5em;
+  font-size: 0.85rem;
   letter-spacing: 0.04em;
   color: var(--fg-muted);
 }
 
 .intro-logo-line--muted {
-  margin-top: 0.5rem;
+  margin-top: 0.6rem;
 }
 
 .intro-logo-line--output {
-  max-width: 32rem;
+  max-width: 34rem;
   color: var(--fg-primary);
 }
 
-.intro-name {
-  margin: 0;
-  font-size: clamp(2.75rem, 10vw, 7.5rem);
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  color: var(--fg-primary);
+@media (max-width: 640px) {
+  /* The tagline wraps to two lines on phones — reserve both up front so
+     the name doesn't jump when it does. */
+  .intro-logo-line--output {
+    min-height: 3em;
+  }
+}
+
+/* Reduced motion: same timeline, but plain fades instead of the zoom /
+   rotate / blur / glitch / flash. */
+.intro-overlay--gentle .intro-core-dot {
+  animation: intro-fade-in 800ms ease 200ms both;
+}
+
+.intro-overlay--gentle .intro-core-halo {
+  animation: intro-fade-in 1200ms ease 300ms both;
+}
+
+.intro-overlay--gentle .intro-core--collapse .intro-core-dot,
+.intro-overlay--gentle .intro-core--collapse .intro-core-halo {
+  animation: intro-fade-out var(--intro-collapse-ms) ease both;
+}
+
+.intro-name--gentle {
+  transform: none;
+  filter: none;
+}
+
+.intro-name--gentle.intro-name--visible {
+  transition: opacity 900ms ease;
+}
+
+.intro-name--gentle::before,
+.intro-name--gentle::after {
+  display: none;
+}
+
+.intro-underline--gentle {
+  width: 220px;
   opacity: 0;
-  transform: scale(0.85);
-  filter: blur(10px);
-  transition: opacity 700ms cubic-bezier(0.34, 1.56, 0.64, 1),
-    transform 700ms cubic-bezier(0.34, 1.56, 0.64, 1),
-    filter 700ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.intro-name--visible {
+.intro-underline--gentle.intro-underline--visible {
   opacity: 1;
-  transform: scale(1);
-  filter: blur(0);
-  text-shadow: 0 0 30px rgba(255, 197, 61, 0.5);
+  transition: opacity 900ms ease 400ms;
+}
+
+/* Progress bar along the bottom — doubles as the curtain's glowing edge. */
+.intro-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--accent);
+  box-shadow: 0 0 10px rgba(255, 197, 61, 0.8),
+    0 0 24px rgba(255, 197, 61, 0.35);
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: intro-progress var(--intro-progress-ms) linear forwards;
+}
+
+.intro-overlay--exit .intro-progress {
+  animation: none;
+  transform: scaleX(1);
+}
+
+@keyframes intro-progress {
+  to {
+    transform: scaleX(1);
+  }
 }
 
 .intro-skip {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  z-index: 2;
-  border: none;
-  background: transparent;
-  padding: 0.4rem 0.6rem;
+  top: 1.25rem;
+  right: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.35);
+  padding: 0.45rem 0.75rem;
+  font: inherit;
   font-size: 0.7rem;
-  letter-spacing: 0.12em;
-  color: rgba(232, 232, 232, 0.5);
+  letter-spacing: 0.14em;
+  color: rgba(232, 232, 232, 0.6);
   opacity: 0;
-  animation: intro-skip-in 400ms ease forwards;
+  animation: intro-fade-in 500ms ease forwards;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
-.intro-skip:hover {
+.intro-skip:hover,
+.intro-skip:focus-visible {
   color: var(--accent);
+  border-color: var(--accent);
 }
 
-@keyframes intro-skip-in {
+.intro-skip-key {
+  margin-left: 0.4rem;
+  color: var(--fg-muted);
+}
+
+@media (pointer: coarse) {
+  .intro-skip-key {
+    display: none;
+  }
+}
+
+@keyframes intro-fade-in {
+  from {
+    opacity: 0;
+  }
   to {
     opacity: 1;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .intro-core-dot,
-  .intro-shape {
-    animation: none;
-  }
-  .intro-skip {
-    animation: none;
+@keyframes intro-fade-out {
+  from {
     opacity: 1;
   }
-  .intro-main-wrap,
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
   .intro-main-wrap--visible {
-    transform: none;
+    animation: intro-fade-in 700ms ease both;
   }
 }
