@@ -18,6 +18,16 @@ body {
 }
 
 body {
+  /* Per spec, whenever one axis is non-visible and the other computes to
+     visible, the browser silently promotes the visible axis to `auto` too
+     — so body (overflow-x: hidden above, overflow-y left at its default
+     `visible`) was quietly becoming its own scroll container nested inside
+     html's, producing two independent scrollbars whenever body's auto-sized
+     box came out even a pixel taller than its content. Body's height is
+     always auto here (nothing constrains it), so nothing gets clipped by
+     also making overflow-y non-visible — it just stops the promotion and
+     leaves html as the sole scroller. */
+  overflow-y: hidden;
   font-family: var(--font-jetbrains-mono), "Fira Code", ui-monospace, monospace;
   line-height: 1.5;
 }
@@ -408,4 +418,369 @@ a {
 html.sudo-locked-boot .sudo-lock-overlay,
 .sudo-lock-overlay--active {
   display: flex;
+}
+
+/* --- Boot intro (components/intro/*) ----------------------------------- */
+
+.intro-main-wrap {
+  opacity: 0;
+}
+
+/* An animation rather than a transition so it can end on `transform: none`
+   — any other transform value would turn this wrapper into the containing
+   block for position:fixed descendants (e.g. ContactPhonePanel). */
+.intro-main-wrap--visible {
+  animation: intro-main-in 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes intro-main-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Hero's own entrance animation (hero-fly-in, above) — and everything it
+   kicks off once it ends (see Hero.tsx's `animationend` listener: headline
+   reveal → counter → typewriter body → footnote) — must not play out while
+   still hidden behind the boot intro, or by the time the curtain lifts it's
+   long since finished and the visitor never sees any of it. Paused until
+   intro-main-wrap is actually visible. */
+.intro-main-wrap .hero-fly-in {
+  animation-play-state: paused;
+}
+
+.intro-main-wrap--visible .hero-fly-in {
+  animation-play-state: running;
+}
+
+/* z-index sits just under the custom cursor (9998/9999) so it stays
+   visible over the intro. */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  overflow: hidden;
+  background: #000000;
+  color: #f2f2f2;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+.intro-overlay--fade {
+  opacity: 0;
+  transition: opacity var(--intro-fade-ms) ease;
+}
+
+.intro-cosmos,
+.intro-welcome-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Mark: a point swells into a glowing ball, the ball unwinds into the mark
+   (components/intro/IntroMark.tsx). One <circle> plays ball and head: the
+   ball is the head scaled ×3.5 and moved into the middle of the box. */
+.intro-mark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(17vh, 30vw);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  pointer-events: none;
+  transition: opacity 800ms ease;
+}
+
+.intro-mark-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  transition: filter 600ms ease;
+}
+
+.intro-mark-head {
+  transform-box: view-box;
+  transform-origin: 68px 32px;
+  opacity: 0;
+  transform: translate(-18px, 18px) scale(0.12);
+  transition: transform 600ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 250ms ease;
+}
+
+.intro-mark-arc {
+  opacity: 0;
+  stroke-dasharray: 1 2;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 620ms cubic-bezier(0.3, 0.7, 0.2, 1),
+    opacity 120ms ease;
+}
+
+.intro-mark--ball .intro-mark-svg {
+  filter: drop-shadow(0 0 0.5vh rgba(255, 255, 255, 0.9))
+    drop-shadow(0 0 2.5vh rgba(190, 215, 255, 0.45));
+}
+
+.intro-mark--ball .intro-mark-head {
+  opacity: 1;
+  transform: translate(-18px, 18px) scale(3.5);
+}
+
+.intro-mark--mark .intro-mark-svg,
+.intro-mark--out .intro-mark-svg {
+  filter: drop-shadow(0 0 0.6vh rgba(255, 255, 255, 0.22));
+}
+
+.intro-mark--mark .intro-mark-head,
+.intro-mark--out .intro-mark-head {
+  opacity: 1;
+  transform: none;
+  transition: transform 560ms cubic-bezier(0.6, 0, 0.25, 1), opacity 250ms ease;
+}
+
+.intro-mark--mark .intro-mark-arc,
+.intro-mark--out .intro-mark-arc {
+  opacity: 1;
+  stroke-dashoffset: 0;
+}
+
+.intro-mark--out {
+  opacity: 0;
+}
+
+/* Last scene (components/intro/IntroWelcome.tsx). --sphere-cx/cy/d come
+   from the same JS layout the shader uses. */
+.intro-welcome {
+  position: absolute;
+  inset: 0;
+  --sphere-cx: 50vw;
+  --sphere-cy: 56.5vh;
+  --sphere-d: min(57vh, 84vw);
+}
+
+.intro-title,
+.intro-start,
+.intro-legal {
+  position: absolute;
+  opacity: 0;
+}
+
+.intro-title {
+  left: 50%;
+  top: calc(var(--sphere-cy) - var(--sphere-d) / 2);
+  width: max-content;
+  max-width: 92vw;
+  margin: 0;
+  font-size: min(9.2vh, 7vw);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  text-align: center;
+  color: #f1f1ee;
+  transform: translate(-50%, calc(-100% - 4vh + 1.2vh));
+  filter: blur(10px);
+  transition: opacity 1400ms ease, filter 1400ms ease,
+    transform 1400ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.intro-title--on {
+  opacity: 1;
+  filter: blur(0);
+  transform: translate(-50%, calc(-100% - 4vh));
+}
+
+.intro-start {
+  left: var(--sphere-cx);
+  top: var(--sphere-cy);
+  --pill-h: clamp(48px, 8.6vh, 62px);
+  display: flex;
+  align-items: center;
+  height: var(--pill-h);
+  width: calc(var(--pill-h) * 3.4);
+  padding: var(--start-pad);
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(58, 60, 66, 0.96), rgba(20, 21, 24, 0.96));
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09);
+  color: #ffffff;
+  font: inherit;
+  cursor: pointer;
+  transform: translate(-50%, -50%) scale(0.96);
+  pointer-events: none;
+  transition: opacity 900ms ease, transform 900ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    background 250ms ease;
+}
+
+.intro-start--on {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+}
+
+.intro-start:hover,
+.intro-start:focus-visible {
+  background: linear-gradient(180deg, rgba(72, 74, 80, 0.97), rgba(28, 29, 33, 0.97));
+  outline: none;
+}
+
+/* Hover: the white dot rolls across to the far end of the pill and wipes
+   the label out as it passes — the label is clipped at the dot's centre,
+   and both run on the same duration/easing so the edge stays glued to the
+   dot. Un-hovering plays the same transitions back. */
+.intro-start {
+  --start-pad: 7px;
+  --start-dot: calc(var(--pill-h) - var(--start-pad) * 2);
+  --start-travel: calc(var(--pill-h) * 2.4);
+  --start-wipe: 650ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.intro-start-icon {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  flex: none;
+  height: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #f5f4ef;
+  color: #111111;
+  transition: transform var(--start-wipe);
+}
+
+.intro-start:hover .intro-start-icon,
+.intro-start:focus-visible .intro-start-icon {
+  transform: translateX(var(--start-travel));
+}
+
+.intro-start-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: calc(var(--start-pad) + var(--start-dot));
+  padding-right: calc(var(--start-pad) + var(--pill-h) * 0.3);
+  font-size: clamp(14px, 2.3vh, 17px);
+  font-weight: 500;
+  clip-path: inset(0 0 0 calc(var(--start-pad) + var(--start-dot) / 2));
+  transition: clip-path var(--start-wipe);
+}
+
+.intro-start:hover .intro-start-label,
+.intro-start:focus-visible .intro-start-label {
+  clip-path: inset(
+    0 0 0 calc(var(--start-pad) + var(--start-dot) / 2 + var(--start-travel))
+  );
+}
+
+.intro-legal {
+  left: 50%;
+  bottom: clamp(14px, 3.6vh, 34px);
+  width: max-content;
+  max-width: 92vw;
+  margin: 0;
+  transform: translateX(-50%);
+  font-size: clamp(11px, 1.8vh, 13px);
+  line-height: 1.65;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  transition: opacity 1200ms ease 300ms;
+}
+
+.intro-legal b {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.intro-legal--on {
+  opacity: 1;
+}
+
+/* "Начать": UI steps aside while the planet swells over the screen. */
+.intro-welcome--leaving .intro-title,
+.intro-welcome--leaving .intro-start,
+.intro-welcome--leaving .intro-legal {
+  opacity: 0;
+  transition: opacity 350ms ease;
+}
+
+/* No WebGL: the same composition in static gradients. */
+.intro-welcome--fallback {
+  background: radial-gradient(60% 45% at 75% 90%, rgba(80, 80, 66, 0.55), transparent 70%),
+    linear-gradient(160deg, #06100f 10%, #1d4a4b 45%, #0b1716 70%, #000 90%);
+}
+
+.intro-welcome--fallback .intro-welcome-canvas {
+  display: none;
+}
+
+.intro-welcome-fallback-sphere {
+  position: absolute;
+  left: var(--sphere-cx);
+  top: var(--sphere-cy);
+  width: var(--sphere-d);
+  height: var(--sphere-d);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 50% 35%, #1f5a52, #081a18 55%, #030605 70%, #2b4d49 100%);
+  box-shadow: 0 0 40px rgba(90, 130, 125, 0.25);
+}
+
+.intro-skip {
+  position: absolute;
+  right: clamp(16px, 2.4vw, 36px);
+  bottom: clamp(14px, 3.6vh, 34px);
+  border: 0;
+  background: none;
+  padding: 0.4rem 0.2rem;
+  font: inherit;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.34);
+  opacity: 0;
+  animation: intro-fade-in 700ms ease forwards;
+  transition: color 0.2s ease;
+}
+
+.intro-skip:hover,
+.intro-skip:focus-visible {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.intro-skip-key {
+  margin-left: 0.45rem;
+  padding: 0.05rem 0.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+  font-size: 0.62rem;
+}
+
+@media (pointer: coarse) {
+  .intro-skip-key {
+    display: none;
+  }
+}
+
+@keyframes intro-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-main-wrap--visible {
+    animation: intro-fade-in 700ms ease both;
+  }
 }
