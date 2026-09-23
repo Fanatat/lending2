@@ -4,16 +4,6 @@
  * glance.
  */
 
-// Bumped from "...v3" when the voyage phase was reworked: fewer, more
-// distinctly-colored "planets", a Milky Way band + constellations, and a
-// fast dash into one particular star that the core/name sequence then
-// grows out of — the old key would otherwise hide this cut from everyone
-// who already sat through the previous version.
-export const INTRO_STORAGE_KEY = "lab-terminal:intro-seen-v4";
-export const INTRO_BOOT_HTML_CLASS = "intro-seen-boot";
-/** `?intro` in the URL replays the intro even after it has been seen. */
-export const INTRO_REPLAY_PARAM = "intro";
-
 export const INTRO_COLOR = {
   core: "255, 243, 208",
   accent: "255, 197, 61",

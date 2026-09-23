@@ -422,14 +422,6 @@ html.sudo-locked-boot .sudo-lock-overlay,
 
 /* --- Boot intro (components/intro/*) ----------------------------------- */
 
-/* Same pre-hydration boot-script trick as the sudo lock above (see
-   app/layout.tsx's inline <script>): on a repeat visit the overlay never
-   paints at all, and intro-main-wrap starts fully visible instead of
-   waiting on React to notice localStorage. */
-html.intro-seen-boot #intro-overlay {
-  display: none;
-}
-
 .intro-main-wrap {
   opacity: 0;
 }
@@ -452,24 +444,17 @@ html.intro-seen-boot #intro-overlay {
   }
 }
 
-html.intro-seen-boot .intro-main-wrap {
-  opacity: 1;
-  animation: none;
-}
-
 /* Hero's own entrance animation (hero-fly-in, above) — and everything it
    kicks off once it ends (see Hero.tsx's `animationend` listener: headline
    reveal → counter → typewriter body → footnote) — must not play out while
    still hidden behind the boot intro, or by the time the curtain lifts it's
    long since finished and the visitor never sees any of it. Paused until
-   intro-main-wrap is actually visible; instant on a repeat visit via the
-   same boot-script class intro-main-wrap's own fade-in uses above. */
+   intro-main-wrap is actually visible. */
 .intro-main-wrap .hero-fly-in {
   animation-play-state: paused;
 }
 
-.intro-main-wrap--visible .hero-fly-in,
-html.intro-seen-boot .hero-fly-in {
+.intro-main-wrap--visible .hero-fly-in {
   animation-play-state: running;
 }
 

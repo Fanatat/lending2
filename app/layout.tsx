@@ -18,11 +18,6 @@ import AccessDeniedOverlay from "@/components/sections/allin/AccessDeniedOverlay
 import BranchOverlay from "@/components/easter-eggs/BranchOverlay";
 import SudoEasterEgg from "@/components/easter-eggs/SudoEasterEgg";
 import IntroGate from "@/components/intro/IntroGate";
-import {
-  INTRO_BOOT_HTML_CLASS,
-  INTRO_REPLAY_PARAM,
-  INTRO_STORAGE_KEY,
-} from "@/lib/introConfig";
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin", "cyrillic"],
@@ -79,11 +74,10 @@ export default function RootLayout({
         {/* Runs before hydration so a reload while SudoEasterEgg's lock is
             engaged shows the lock immediately instead of flashing the
             normal page first. Keys here must match SUDO_LOCK_KEY /
-            SUDO_LOCK_HTML_CLASS in components/easter-eggs/SudoEasterEgg.tsx.
-            Same trick hides the boot intro on a repeat visit (IntroGate). */}
+            SUDO_LOCK_HTML_CLASS in components/easter-eggs/SudoEasterEgg.tsx. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{if(localStorage.getItem('lab-terminal:sudo-locked')==='1'){document.documentElement.classList.add('sudo-locked-boot');}if(localStorage.getItem('${INTRO_STORAGE_KEY}')==='1'&&!new URLSearchParams(location.search).has('${INTRO_REPLAY_PARAM}')){document.documentElement.classList.add('${INTRO_BOOT_HTML_CLASS}');}}catch(e){}`,
+            __html: `try{if(localStorage.getItem('lab-terminal:sudo-locked')==='1'){document.documentElement.classList.add('sudo-locked-boot');}}catch(e){}`,
           }}
         />
       </head>
