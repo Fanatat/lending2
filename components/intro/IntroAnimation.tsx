@@ -6,6 +6,7 @@ import IntroMark, { type MarkStage } from "./IntroMark";
 import IntroWelcome, { type WelcomeStage } from "./IntroWelcome";
 import {
   INTRO_EXIT_MS,
+  INTRO_SHOW_MARK,
   INTRO_SKIP_DELAY_MS,
   INTRO_SKIP_EXIT_MS,
   INTRO_T,
@@ -13,8 +14,8 @@ import {
 } from "@/lib/introConfig";
 
 /**
- * The boot intro, staged after reference.mp4: marble ring → starfield →
- * mark → nebula + planet → "Добро пожаловать" + "Начать". One clock
+ * The boot intro, staged after reference.mp4: planet ring → starfield →
+ * mark (off for now, see INTRO_SHOW_MARK) → nebula + planet → "Добро пожаловать" + "Начать". One clock
  * (`origin`, a performance.now() value) drives everything: the canvases
  * read it every frame, the DOM stages below are flipped by timers set
  * against it.
@@ -72,9 +73,11 @@ export default function IntroAnimation({
     if (reduced) {
       setStages({ cosmos: false, mark: "hidden", welcome: null });
     } else {
-      at(INTRO_T.dot, () => patch({ mark: "ball" }));
-      at(INTRO_T.mark, () => patch({ mark: "mark" }));
-      at(INTRO_T.cosmosOut, () => patch({ mark: "out" }));
+      if (INTRO_SHOW_MARK) {
+        at(INTRO_T.dot, () => patch({ mark: "ball" }));
+        at(INTRO_T.mark, () => patch({ mark: "mark" }));
+        at(INTRO_T.cosmosOut, () => patch({ mark: "out" }));
+      }
       at(INTRO_T.cosmosGone + 200, () => patch({ cosmos: false }));
     }
     at(INTRO_T.nebula - 300, () => patch({ welcome: "nebula" }));
@@ -127,7 +130,7 @@ export default function IntroAnimation({
       style={{ "--intro-fade-ms": `${fadeMs}ms` } as CSSProperties}
     >
       {origin !== null && stages.cosmos && <IntroCosmos origin={origin} mobile={mobile} />}
-      {origin !== null && stages.cosmos && <IntroMark stage={stages.mark} />}
+      {INTRO_SHOW_MARK && origin !== null && stages.cosmos && <IntroMark stage={stages.mark} />}
       {origin !== null && stages.welcome && (
         <IntroWelcome
           origin={origin}

@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { INTRO_DUST, INTRO_MARBLES, INTRO_T } from "@/lib/introConfig";
+import { INTRO_DUST, INTRO_T } from "@/lib/introConfig";
 
 /**
- * Canvas half of the intro's cinematic (0 → ~10 s): a ring of painted
- * marbles spinning right around the camera, sparkle dust between them, the
+ * Canvas half of the intro's cinematic: the eight planets of the Solar
+ * System paraded in a ring spinning right around the camera, sparkle dust
+ * between them, the
  * camera pulling away until the ring is a speck, and the starfield it leaves
  * behind (which slowly pushes in under the mark, then fades out).
  *
@@ -13,39 +14,53 @@ import { INTRO_DUST, INTRO_MARBLES, INTRO_T } from "@/lib/introConfig";
  * can't drift from the DOM half (IntroMark) that runs on the same clock.
  */
 
-interface MarbleStyle {
-  base: string;
-  bands: { color: string; from: number; to: number }[];
-}
+type PlanetName =
+  | "mercury"
+  | "venus"
+  | "earth"
+  | "mars"
+  | "jupiter"
+  | "saturn"
+  | "uranus"
+  | "neptune";
 
-// Two-tone "painted" marbles from the reference: orange with a teal cap,
-// teal/red halves, cream, slate, ochre with a teal belt, red/orange...
-const MARBLE_STYLES: MarbleStyle[] = [
-  { base: "#c86a2e", bands: [{ color: "#2f97a3", from: -1, to: -0.45 }] },
-  { base: "#2a8893", bands: [{ color: "#b84e36", from: 0.1, to: 1 }] },
-  { base: "#d9d3c1", bands: [{ color: "#c2b595", from: 0.55, to: 1 }] },
-  { base: "#707275", bands: [{ color: "#8f9195", from: -1, to: -0.5 }] },
-  { base: "#a98b36", bands: [{ color: "#3a8387", from: -0.35, to: 0.05 }] },
-  { base: "#a3372d", bands: [{ color: "#cf7a38", from: -0.1, to: 0.5 }] },
-  {
-    base: "#cf7432",
-    bands: [
-      { color: "#2a8793", from: -0.25, to: 0.15 },
-      { color: "#ad3c2e", from: 0.6, to: 1 },
-    ],
-  },
-  { base: "#245a60", bands: [{ color: "#cfc8b3", from: -1, to: -0.55 }] },
+// The eight planets in order from the Sun. `size` is the disk radius in
+// ring units — not to scale, just enough that Jupiter reads as the giant
+// and Mercury as the pebble. `tilt` rotates the painted bands/axis.
+const PLANETS: { name: PlanetName; size: number; tilt: number }[] = [
+  { name: "mercury", size: 0.25, tilt: 0.1 },
+  { name: "venus", size: 0.35, tilt: -0.05 },
+  { name: "earth", size: 0.37, tilt: 0.4 },
+  { name: "mars", size: 0.3, tilt: 0.45 },
+  { name: "jupiter", size: 0.6, tilt: 0.05 },
+  { name: "saturn", size: 0.48, tilt: 0.45 },
+  { name: "uranus", size: 0.4, tilt: 1.45 },
+  { name: "neptune", size: 0.39, tilt: 0.5 },
 ];
 
-const SPRITE_PX = 192;
+/**
+ * The planets' diameters add up to more than the ring's circumference by
+ * this factor, so neighbours always overlap each other.
+ */
+const PLANET_CROWDING = 1.18;
 
-interface Marble {
+/** Sprite size for a plain disk; Saturn's is wider to fit the rings. */
+const SPRITE_PX = 288;
+const DISK_EXTENT = 1.1;
+const SATURN_EXTENT = 2.3;
+
+interface Planet {
   angle: number;
   radius: number;
   z: number;
   size: number;
+  /** Sprite width / disk diameter. */
+  extent: number;
   soft: HTMLCanvasElement;
   sharp: HTMLCanvasElement;
+  /** Black silhouettes of the sprites — dims a planet without seeing through it. */
+  softShade: HTMLCanvasElement;
+  sharpShade: HTMLCanvasElement;
   /** This frame's projection. */
   px: number;
   py: number;
@@ -57,7 +72,7 @@ interface Dust {
   angle: number;
   radius: number;
   z: number;
-  /** Angular speed relative to the ring — dust shears past the marbles. */
+  /** Angular speed relative to the ring — dust shears past the planets. */
   drift: number;
   size: number;
   alpha: number;
@@ -89,66 +104,272 @@ const smooth = (v: number) => {
 };
 const ramp = (t: number, from: number, to: number) => smooth((t - from) / (to - from));
 
-/**
- * Paints one marble at a tiny resolution and upscales it: the upscale blur
- * is the reference's shallow depth of field for free (no ctx.filter, which
- * Safari lacks). `lowRes` picks how blurry.
- */
-function paintMarble(style: MarbleStyle, bandTilt: number, lowRes: number) {
-  const low = document.createElement("canvas");
-  low.width = low.height = lowRes;
-  const c = low.getContext("2d")!;
-  const r = lowRes / 2;
+/** Latitude band between sin-latitudes s0 < s1 (−1 south … 1 north). */
+function band(c: CanvasRenderingContext2D, r: number, s0: number, s1: number, color: string) {
+  c.fillStyle = color;
+  c.fillRect(-r * 1.5, -s1 * r, r * 3, (s1 - s0) * r);
+}
 
-  c.save();
+function blob(
+  c: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  rx: number,
+  ry: number,
+  color: string,
+  rot = 0
+) {
+  c.fillStyle = color;
   c.beginPath();
-  c.arc(r, r, r * 0.94, 0, Math.PI * 2);
-  c.clip();
-  c.fillStyle = style.base;
-  c.fillRect(0, 0, lowRes, lowRes);
+  c.ellipse(x, y, rx, ry, rot, 0, Math.PI * 2);
+  c.fill();
+}
 
-  // Bands are latitude slabs, bowed so they wrap around the ball, rotated
-  // per marble so no two look alike.
+/** Stack of belts from pole to pole, cycling through `colors`. */
+function belts(c: CanvasRenderingContext2D, r: number, colors: string[], min: number, max: number, rnd: () => number) {
+  let s = -1.05;
+  let i = 0;
+  while (s < 1.05) {
+    const h = min + rnd() * (max - min);
+    band(c, r, s, s + h, colors[i++ % colors.length]!);
+    s += h;
+  }
+}
+
+/**
+ * Surface texture in a disk of radius r around the origin (already clipped).
+ * Soft edges come from ctx.filter where the browser has it; without it
+ * (older Safari) the bands are just crisper.
+ */
+function paintSurface(c: CanvasRenderingContext2D, name: PlanetName, r: number, rnd: () => number) {
+  const blur = (k: number) => (c.filter = `blur(${(r * k).toFixed(1)}px)`);
+  const fill = (color: string) => {
+    c.fillStyle = color;
+    c.fillRect(-r * 1.5, -r * 1.5, r * 3, r * 3);
+  };
+  switch (name) {
+    case "mercury": {
+      fill("#8e8780");
+      // Broad darker plains, then a scatter of small craters.
+      blur(0.08);
+      for (let i = 0; i < 8; i++) {
+        blob(c, (rnd() * 2 - 1) * r, (rnd() * 2 - 1) * r, r * (0.2 + rnd() * 0.3), r * (0.15 + rnd() * 0.25), "rgba(80,74,68,0.3)", rnd() * 3);
+      }
+      blur(0.008);
+      for (let i = 0; i < 160; i++) {
+        const cr = r * (0.012 + Math.pow(rnd(), 4) * 0.08);
+        const x = (rnd() * 2 - 1) * r;
+        const y = (rnd() * 2 - 1) * r;
+        blob(c, x, y, cr, cr, rnd() < 0.6 ? "rgba(58,54,50,0.28)" : "rgba(205,199,190,0.25)");
+      }
+      break;
+    }
+    case "venus": {
+      fill("#d9ba84");
+      blur(0.07);
+      for (let i = 0; i < 12; i++) {
+        const s = rnd() * 2 - 1;
+        band(c, r, s, s + 0.08 + rnd() * 0.18, rnd() < 0.5 ? "rgba(240,220,170,0.55)" : "rgba(170,126,72,0.35)");
+      }
+      break;
+    }
+    case "earth": {
+      fill("#17427f");
+      blur(0.015);
+      // Continents: clusters of overlapping blobs, green fading to desert.
+      for (let k = 0; k < 4; k++) {
+        const cx = (rnd() * 1.5 - 0.75) * r;
+        const cy = (rnd() * 1.1 - 0.55) * r;
+        for (let i = 0; i < 10; i++) {
+          blob(
+            c,
+            cx + (rnd() - 0.5) * r * 0.6,
+            cy + (rnd() - 0.5) * r * 0.55,
+            r * (0.07 + rnd() * 0.15),
+            r * (0.05 + rnd() * 0.12),
+            ["#355f2c", "#46733a", "#3b6a33", "#2f5a2a", "#4f7a3c", "#7d6a3a"][Math.floor(rnd() * 6)]!,
+            rnd() * 3
+          );
+        }
+      }
+      blur(0.03);
+      band(c, r, 0.9, 1.1, "#eef2f5");
+      band(c, r, -1.1, -0.92, "#eef2f5");
+      // Cloud streaks.
+      for (let i = 0; i < 14; i++) {
+        blob(
+          c,
+          (rnd() * 2 - 1) * r,
+          (rnd() * 2 - 1) * r * 0.85,
+          r * (0.14 + rnd() * 0.3),
+          r * (0.02 + rnd() * 0.045),
+          "rgba(255,255,255,0.55)",
+          (rnd() - 0.5) * 0.5
+        );
+      }
+      break;
+    }
+    case "mars": {
+      fill("#b5552f");
+      blur(0.05);
+      for (let i = 0; i < 16; i++) {
+        blob(
+          c,
+          (rnd() * 2 - 1) * r,
+          (rnd() * 2 - 1) * r,
+          r * (0.1 + rnd() * 0.3),
+          r * (0.05 + rnd() * 0.14),
+          rnd() < 0.55 ? "rgba(105,45,24,0.55)" : "rgba(218,138,90,0.45)",
+          rnd() * 3
+        );
+      }
+      blur(0.02);
+      band(c, r, 0.9, 1.1, "rgba(242,238,232,0.92)");
+      break;
+    }
+    case "jupiter": {
+      fill("#d6bf98");
+      blur(0.02);
+      belts(c, r, ["#e8dac1", "#b8834f", "#dbc39c", "#9f633a", "#eee2cc", "#c48f63", "#8c5836", "#d4b58e"], 0.06, 0.16, rnd);
+      // Great Red Spot, in the southern belt.
+      blob(c, r * 0.3, r * 0.34, r * 0.2, r * 0.1, "#b0503a");
+      blob(c, r * 0.3, r * 0.34, r * 0.12, r * 0.055, "#c9704f");
+      break;
+    }
+    case "saturn": {
+      fill("#d8c28e");
+      blur(0.03);
+      belts(c, r, ["#e5d4a6", "#cdb07b", "#dec893", "#bb9d68", "#eadcb4"], 0.1, 0.22, rnd);
+      break;
+    }
+    case "uranus": {
+      fill("#a2d5da");
+      blur(0.09);
+      band(c, r, 0.5, 1.1, "rgba(205,238,240,0.5)");
+      band(c, r, -0.15, 0.12, "rgba(128,188,196,0.35)");
+      break;
+    }
+    case "neptune": {
+      fill("#3659c6");
+      blur(0.05);
+      band(c, r, 0.25, 0.5, "rgba(72,112,218,0.6)");
+      band(c, r, -0.65, -0.4, "rgba(34,60,150,0.6)");
+      blob(c, -r * 0.25, r * 0.3, r * 0.16, r * 0.08, "#213a8c");
+      blob(c, -r * 0.05, r * 0.17, r * 0.2, r * 0.025, "rgba(235,240,255,0.7)");
+      blob(c, r * 0.3, -r * 0.35, r * 0.18, r * 0.02, "rgba(235,240,255,0.6)");
+      break;
+    }
+  }
+  c.filter = "none";
+}
+
+/** Saturn's rings, far half (behind the disk) or near half (in front). */
+function paintRings(c: CanvasRenderingContext2D, r: number, half: "far" | "near") {
+  const rings: [number, number, string][] = [
+    [1.24, 1.5, "rgba(186,166,128,0.55)"],
+    [1.53, 1.95, "rgba(226,208,168,0.88)"],
+    [2.0, 2.2, "rgba(200,182,142,0.6)"],
+  ];
   c.save();
-  c.translate(r, r);
-  c.rotate(bandTilt);
-  for (const band of style.bands) {
-    const y0 = band.from * r;
-    const y1 = band.to * r;
-    c.fillStyle = band.color;
+  c.scale(1, 0.28);
+  c.beginPath();
+  if (half === "far") c.rect(-r * 3, -r * 3, r * 6, r * 3);
+  else c.rect(-r * 3, 0, r * 6, r * 3);
+  c.clip();
+  for (const [inner, outer, color] of rings) {
+    c.fillStyle = color;
     c.beginPath();
-    c.moveTo(-r * 1.5, y0);
-    c.quadraticCurveTo(0, y0 + r * 0.35, r * 1.5, y0);
-    c.lineTo(r * 1.5, y1);
-    c.quadraticCurveTo(0, y1 + r * 0.35, -r * 1.5, y1);
-    c.closePath();
+    c.arc(0, 0, r * outer, 0, Math.PI * 2);
+    c.arc(0, 0, r * inner, 0, Math.PI * 2, true);
     c.fill();
   }
   c.restore();
+}
 
-  // Studio light from the upper left, deep shadow on the far side.
-  const light = c.createRadialGradient(r * 0.62, r * 0.55, r * 0.05, r, r, r * 1.02);
-  light.addColorStop(0, "rgba(255,255,255,0.3)");
-  light.addColorStop(0.3, "rgba(255,255,255,0.04)");
-  light.addColorStop(0.6, "rgba(0,0,0,0.18)");
-  light.addColorStop(1, "rgba(0,0,0,0.72)");
+function silhouette(src: HTMLCanvasElement) {
+  const cv = document.createElement("canvas");
+  cv.width = src.width;
+  cv.height = src.height;
+  const c = cv.getContext("2d")!;
+  c.drawImage(src, 0, 0);
+  c.globalCompositeOperation = "source-in";
+  c.fillStyle = "#000";
+  c.fillRect(0, 0, cv.width, cv.height);
+  return cv;
+}
+
+/**
+ * Paints one planet: textured disk turned to its axial tilt, sunlight from
+ * the upper left with a soft terminator, an atmosphere rim for Earth and
+ * rings for Saturn. Also returns a lens-blurred copy (down to a thumbnail
+ * and back up in ×3 steps — the reference's shallow depth of field) for the
+ * planets passing right in front of the camera.
+ */
+function paintPlanet(name: PlanetName, tilt: number, seed: number) {
+  const extent = name === "saturn" ? SATURN_EXTENT : DISK_EXTENT;
+  const S = Math.round((SPRITE_PX * extent) / DISK_EXTENT);
+  const r = S / 2 / extent;
+  const rnd = rand(seed);
+  const sharp = document.createElement("canvas");
+  sharp.width = sharp.height = S;
+  const c = sharp.getContext("2d")!;
+
+  c.translate(S / 2, S / 2);
+  c.rotate(tilt);
+  if (name === "saturn") paintRings(c, r, "far");
+
+  c.save();
+  c.beginPath();
+  c.arc(0, 0, r, 0, Math.PI * 2);
+  c.clip();
+  c.save();
+  paintSurface(c, name, r, rnd);
+  c.restore();
+  // Lighting is fixed to the screen, not to the planet's axis.
+  c.rotate(-tilt);
+  const light = c.createRadialGradient(-r * 0.45, -r * 0.45, r * 0.05, -r * 0.2, -r * 0.2, r * 1.45);
+  light.addColorStop(0, "rgba(255,255,255,0.16)");
+  light.addColorStop(0.28, "rgba(0,0,0,0)");
+  light.addColorStop(0.55, "rgba(0,0,0,0.45)");
+  light.addColorStop(0.78, "rgba(0,0,0,0.88)");
+  light.addColorStop(1, "rgba(0,0,0,0.96)");
   c.fillStyle = light;
-  c.fillRect(0, 0, lowRes, lowRes);
+  c.fillRect(-r, -r, r * 2, r * 2);
+  const limb = c.createRadialGradient(0, 0, r * 0.75, 0, 0, r);
+  limb.addColorStop(0, "rgba(0,0,0,0)");
+  limb.addColorStop(1, "rgba(0,0,0,0.3)");
+  c.fillStyle = limb;
+  c.fillRect(-r, -r, r * 2, r * 2);
   c.restore();
 
-  // Upscale in ×3 steps: one big bilinear jump shows blocky seams, a few
-  // small ones blur like a lens.
-  let src: HTMLCanvasElement = low;
-  for (let size = lowRes * 3; ; size *= 3) {
+  if (name === "earth") {
+    c.save();
+    c.rotate(-tilt);
+    const atm = c.createRadialGradient(-r * 0.1, -r * 0.1, r * 0.92, 0, 0, r * 1.09);
+    atm.addColorStop(0, "rgba(120,175,255,0.4)");
+    atm.addColorStop(1, "rgba(120,175,255,0)");
+    c.fillStyle = atm;
+    c.beginPath();
+    c.arc(0, 0, r * 1.09, 0, Math.PI * 2);
+    c.fill();
+    c.restore();
+  }
+  if (name === "saturn") paintRings(c, r, "near");
+
+  const tiny = document.createElement("canvas");
+  tiny.width = tiny.height = Math.round(S / 9);
+  tiny.getContext("2d")!.drawImage(sharp, 0, 0, tiny.width, tiny.height);
+  let soft: HTMLCanvasElement = tiny;
+  for (let size = tiny.width * 3; soft.width < S; size *= 3) {
     const next = document.createElement("canvas");
-    next.width = next.height = Math.min(size, SPRITE_PX);
+    next.width = next.height = Math.min(size, S);
     const o = next.getContext("2d")!;
     o.imageSmoothingEnabled = true;
     o.imageSmoothingQuality = "high";
-    o.drawImage(src, 0, 0, next.width, next.height);
-    src = next;
-    if (next.width === SPRITE_PX) return next;
+    o.drawImage(soft, 0, 0, next.width, next.height);
+    soft = next;
   }
+  return { sharp, soft, extent, sharpShade: silhouette(sharp), softShade: silhouette(soft) };
 }
 
 function glowSprite(size: number, core: string, halo: string) {
@@ -250,17 +471,22 @@ export default function IntroCosmos({
     window.addEventListener("resize", resize);
 
     const rnd = rand(42);
-    const marbleCount = mobile ? INTRO_MARBLES.mobile : INTRO_MARBLES.desktop;
-    const marbles: Marble[] = Array.from({ length: marbleCount }, (_, i) => {
-      const style = MARBLE_STYLES[i % MARBLE_STYLES.length]!;
-      const tilt = rnd() * Math.PI * 2;
+    // Planets sit shoulder to shoulder along the ring (each gap sized by the
+    // two neighbours' radii) and alternate above/below the ring plane, so
+    // as the ring turns they slide over and behind one another.
+    const span = PLANETS.reduce((sum, p) => sum + p.size * 2, 0);
+    const scale = (Math.PI * 2 * PLANET_CROWDING) / span;
+    let along = 0;
+    const planets: Planet[] = PLANETS.map((def, i) => {
+      const next = PLANETS[(i + 1) % PLANETS.length]!;
+      const angle = (along / span) * Math.PI * 2;
+      along += def.size + next.size;
       return {
-        angle: (i / marbleCount) * Math.PI * 2 + (rnd() - 0.5) * 0.2,
-        radius: 1 + (rnd() - 0.5) * 0.2,
-        z: (rnd() - 0.5) * 0.35,
-        size: 0.21 + rnd() * 0.06,
-        soft: paintMarble(style, tilt, 14),
-        sharp: paintMarble(style, tilt, 30),
+        angle,
+        radius: 1 + (i % 2 ? 0.07 : -0.05),
+        z: (i % 2 ? 0.16 : -0.12) + (rnd() - 0.5) * 0.06,
+        size: def.size * scale,
+        ...paintPlanet(def.name, def.tilt, 100 + i),
         px: 0,
         py: 0,
         pr: 0,
@@ -269,7 +495,7 @@ export default function IntroCosmos({
     });
 
     // Dust: a glittering spiral sheet inside the ring plus a thin halo
-    // around it — the "galaxy" strands the marbles swim through.
+    // around it — the "galaxy" strands the planets swim through.
     const dustCount = mobile ? INTRO_DUST.mobile : INTRO_DUST.desktop;
     const dust: Dust[] = Array.from({ length: dustCount }, (_, i) => {
       const kind = i % 10;
@@ -315,7 +541,7 @@ export default function IntroCosmos({
     const starGlow = glowSprite(64, "rgba(255,255,255,1)", "rgba(140,180,255,0.18)");
 
     // Painter's order, re-sorted every frame (far → near).
-    const drawList = marbles.slice();
+    const drawList = planets.slice();
 
     let raf = 0;
     function frame(now: number) {
@@ -420,9 +646,9 @@ export default function IntroCosmos({
         ctx!.globalAlpha = 1;
       }
 
-      // --- marbles --------------------------------------------------------
+      // --- planets --------------------------------------------------------
       if (master > 0) {
-        for (const m of marbles) {
+        for (const m of planets) {
           const a = m.angle + spin;
           const x = Math.cos(a) * m.radius;
           const y = Math.sin(a) * m.radius;
@@ -437,14 +663,20 @@ export default function IntroCosmos({
         }
         drawList.sort((a, b) => b.depth - a.depth);
         for (const m of drawList) {
-          const r = m.pr;
           if (m.depth <= 0.12) continue;
+          const r = m.pr * m.extent;
           if (m.px + r < 0 || m.py + r < 0 || m.px - r > W || m.py - r > H) continue;
-          // Near = big = out of focus; far ones are darker (less light).
-          const near = clamp01((r / H - 0.1) / 0.2);
+          // Only a planet looming right at the lens goes out of focus; the
+          // far side of the ring gets less light. Dimming paints the black
+          // silhouette over the planet, so overlaps stay solid.
+          const soft = m.pr / H > 0.42;
           const shade = clamp01(1.25 - (m.depth - dist + 0.3) * 0.9);
-          ctx!.globalAlpha = master * (0.3 + 0.45 * shade);
-          ctx!.drawImage(near > 0.5 ? m.soft : m.sharp, m.px - r, m.py - r, r * 2, r * 2);
+          const x = m.px - r;
+          const y = m.py - r;
+          ctx!.globalAlpha = master;
+          ctx!.drawImage(soft ? m.soft : m.sharp, x, y, r * 2, r * 2);
+          ctx!.globalAlpha = master * (0.5 - 0.4 * shade);
+          ctx!.drawImage(soft ? m.softShade : m.sharpShade, x, y, r * 2, r * 2);
         }
         ctx!.globalAlpha = 1;
       }

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Literata } from "next/font/google";
-import { INTRO_BRAND, INTRO_CTA, INTRO_T, INTRO_TITLE } from "@/lib/introConfig";
+import { INTRO_BRAND, INTRO_CTA, INTRO_SHOW_MARK, INTRO_T, INTRO_TITLE } from "@/lib/introConfig";
 import { MarkGlyph } from "./IntroMark";
 
 const serif = Literata({
@@ -121,7 +121,7 @@ void main() {
       c *= 0.88 + 0.2 * n.y;
 
       // Fuzzy, grain-dithered limb rather than a hard vector edge.
-      float edge = 1.0 - smoothstep(0.975, 1.0, r + grain * 0.02);
+      float edge = 1.0 - smoothstep(0.975, 1.0, r + grain * 0.006);
       col = mix(col, c, edge * uSphere);
     } else {
       col += vec3(0.3, 0.38, 0.37) * exp(-(r - 1.0) * 26.0) * 0.45 * uSphere;
@@ -129,7 +129,8 @@ void main() {
   }
 
   float luma = dot(col, vec3(0.3, 0.55, 0.15));
-  col += grain * (0.018 + luma * 0.45);
+  // Just a whisper of film grain: enough to break up gradient banding.
+  col += grain * (0.008 + luma * 0.09);
   gl_FragColor = vec4(max(col, 0.0), 1.0);
 }
 `;
@@ -292,7 +293,7 @@ export default function IntroWelcome({
       {fallback && <div className="intro-welcome-fallback-sphere" aria-hidden="true" />}
 
       <div className={at("chrome") ? "intro-brand intro-brand--on" : "intro-brand"}>
-        <MarkGlyph className="intro-brand-mark" />
+        {INTRO_SHOW_MARK && <MarkGlyph className="intro-brand-mark" />}
         <span>{INTRO_BRAND}</span>
       </div>
 
@@ -321,10 +322,7 @@ export default function IntroWelcome({
       </button>
 
       <p className={at("chrome") ? "intro-legal intro-legal--on" : "intro-legal"}>
-        Продолжая, вы увидите <b>9 автономных систем</b>, <b>0 сотрудников</b> и{" "}
-        <b>0 облачных подписок</b>
-        <br />
-        Подробнее — в <b>#НЕРЕЗЮМЕ</b> сразу после кнопки «{INTRO_CTA}»
+        Продолжая, вы увидите нечто.
       </p>
     </div>
   );
