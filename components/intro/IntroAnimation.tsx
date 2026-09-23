@@ -2,30 +2,37 @@
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { useReducedMotion } from "@/lib/motion";
+import IntroStarfield from "./IntroStarfield";
+import IntroOrbs from "./IntroOrbs";
 import IntroCore from "./IntroCore";
 import IntroParticles from "./IntroParticles";
 import IntroFloatingShapes from "./IntroFloatingShapes";
 import IntroLogo from "./IntroLogo";
 import {
+  INTRO_ORBS_DESKTOP,
+  INTRO_ORBS_MOBILE,
   INTRO_PARTICLES_DESKTOP,
   INTRO_PARTICLES_MOBILE,
   INTRO_SKIP_DELAY_MS,
+  INTRO_STARS_DESKTOP,
+  INTRO_STARS_MOBILE,
   INTRO_TIMING,
   MOBILE_BREAKPOINT_PX,
 } from "@/lib/introConfig";
 
-type Phase = "core" | "particles" | "collapse" | "logo" | "hold";
+type Phase = "voyage" | "core" | "particles" | "collapse" | "logo" | "hold";
 
-const PHASE_ORDER: Phase[] = ["core", "particles", "collapse", "logo", "hold"];
+const PHASE_ORDER: Phase[] = ["voyage", "core", "particles", "collapse", "logo", "hold"];
 
 function phaseStarts() {
   const t = INTRO_TIMING;
   const starts: Record<Phase, number> = {
-    core: 0,
-    particles: t.core,
-    collapse: t.core + t.particles,
-    logo: t.core + t.particles + t.collapse,
-    hold: t.core + t.particles + t.collapse + t.logo,
+    voyage: 0,
+    core: t.voyage,
+    particles: t.voyage + t.core,
+    collapse: t.voyage + t.core + t.particles,
+    logo: t.voyage + t.core + t.particles + t.collapse,
+    hold: t.voyage + t.core + t.particles + t.collapse + t.logo,
   };
   const exitAt = starts.hold + t.hold;
   return { starts, exitAt, completeAt: exitAt + t.exit };
@@ -36,10 +43,11 @@ function phaseStarts() {
 const FLASH_AT = 0.78;
 
 /**
- * Orchestrates the ~10 s boot intro (ТЗ phases 0-7): one setTimeout
- * schedule drives `phase`; everything else (canvas, CSS animations) keys
- * off it. `exiting` is separate from `phase` so a skip mid-way just fades
- * out whatever is on screen instead of jumping ahead to the flash/logo.
+ * Orchestrates the ~15 s boot intro (ТЗ phases 0-7, prefixed by a deep-space
+ * orb flythrough/voyage phase): one setTimeout schedule drives `phase`;
+ * everything else (canvas, CSS animations) keys off it. `exiting` is
+ * separate from `phase` so a skip mid-way just fades out whatever is on
+ * screen instead of jumping ahead to the flash/logo.
  *
  * `onReveal` fires when the exit starts so the site can fade in underneath
  * the lifting curtain; `onComplete` fires once the overlay is fully gone.
@@ -53,7 +61,7 @@ export default function IntroAnimation({
 }) {
   const reducedMotion = useReducedMotion();
   const [mobile, setMobile] = useState<boolean | null>(null);
-  const [phase, setPhase] = useState<Phase>("core");
+  const [phase, setPhase] = useState<Phase>("voyage");
   const [exiting, setExiting] = useState(false);
   const [showSkip, setShowSkip] = useState(false);
   const [exitMs, setExitMs] = useState(INTRO_TIMING.exit);
@@ -133,6 +141,8 @@ export default function IntroAnimation({
 
   const started = mobile !== null;
   const at = (p: Phase) => PHASE_ORDER.indexOf(phase) >= PHASE_ORDER.indexOf(p);
+  const showVoyage = started && phase === "voyage";
+  const showCore = started && (phase === "core" || phase === "particles" || phase === "collapse");
   const showParticles = started && (phase === "particles" || phase === "collapse");
   const showLogo = at("logo");
   const { exitAt } = phaseStarts();
@@ -161,6 +171,19 @@ export default function IntroAnimation({
       style={style}
     >
       <div aria-hidden="true" className={at("collapse") ? "intro-bg-warm intro-bg-warm--on" : "intro-bg-warm"} />
+      {started && (
+        <IntroStarfield
+          count={mobile ? INTRO_STARS_MOBILE : INTRO_STARS_DESKTOP}
+          gentle={reducedMotion}
+        />
+      )}
+      {showVoyage && (
+        <IntroOrbs
+          count={mobile ? INTRO_ORBS_MOBILE : INTRO_ORBS_DESKTOP}
+          durationMs={INTRO_TIMING.voyage}
+          gentle={reducedMotion}
+        />
+      )}
       <IntroFloatingShapes visible={showLogo} />
 
       {showParticles && (
@@ -172,7 +195,7 @@ export default function IntroAnimation({
         />
       )}
 
-      {started && !showLogo && (
+      {showCore && (
         <IntroCore stage={phase === "collapse" ? "collapse" : phase === "particles" ? "charged" : "born"} />
       )}
 
