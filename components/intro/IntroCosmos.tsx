@@ -44,6 +44,16 @@ const PLANETS: { name: PlanetName; size: number; tilt: number }[] = [
  */
 const PLANET_CROWDING = 1.18;
 
+/**
+ * Camera distance from the ring's center, in ring radii: it drifts from
+ * CAMERA_START to CAMERA_HOLD while the parade spins, then the pull-back
+ * multiplies CAMERA_HOLD by exp(CAMERA_PULL · s^2.2). CAMERA_PULL is set so
+ * the ring still ends up about as far away (a speck) by INTRO_T.ringGone.
+ */
+const CAMERA_START = 2.0;
+const CAMERA_HOLD = 2.2;
+const CAMERA_PULL = 1.72;
+
 /** Sprite size for a plain disk; Saturn's is wider to fit the rings. */
 const SPRITE_PX = 288;
 const DISK_EXTENT = 1.1;
@@ -611,14 +621,15 @@ export default function IntroCosmos({
       const H = canvas!.height;
 
       // --- camera ---------------------------------------------------------
-      // Close and slow at first, then the pull-back accelerates hard: the
-      // ring goes from filling the frame (2.5 s) to a speck (3.6 s).
+      // Slow drift at first, far enough back that the whole parade stays in
+      // frame, then the pull-back accelerates hard: the ring goes from
+      // filling the frame (2.5 s) to a speck (3.6 s).
       let dist: number;
       if (t < INTRO_T.ringPullback) {
-        dist = 0.9 + 0.1 * smooth(t / INTRO_T.ringPullback);
+        dist = CAMERA_START + (CAMERA_HOLD - CAMERA_START) * smooth(t / INTRO_T.ringPullback);
       } else {
         const s = (t - INTRO_T.ringPullback) / 1000;
-        dist = Math.exp(2.1 * Math.pow(s, 2.2));
+        dist = CAMERA_HOLD * Math.exp(CAMERA_PULL * Math.pow(s, 2.2));
       }
       const pull = ramp(t, INTRO_T.ringPullback, INTRO_T.ringGone);
       // Oblique at first (the near side of the ring looms at the bottom of
