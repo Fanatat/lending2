@@ -565,30 +565,11 @@ html.sudo-locked-boot .sudo-lock-overlay,
   --sphere-d: min(57vh, 84vw);
 }
 
-.intro-brand,
 .intro-title,
 .intro-start,
 .intro-legal {
   position: absolute;
   opacity: 0;
-}
-
-.intro-brand {
-  top: clamp(18px, 4.6vh, 40px);
-  left: clamp(18px, 2.4vw, 40px);
-  display: flex;
-  align-items: center;
-  gap: 0.35em;
-  font-size: clamp(17px, 2.4vh, 22px);
-  font-weight: 300;
-  letter-spacing: -0.02em;
-  color: rgba(255, 255, 255, 0.72);
-  transition: opacity 1200ms ease;
-}
-
-.intro-brand-mark {
-  width: 1.2em;
-  height: 1.2em;
 }
 
 .intro-title {
@@ -623,7 +604,7 @@ html.sudo-locked-boot .sudo-lock-overlay,
   align-items: center;
   height: var(--pill-h);
   width: calc(var(--pill-h) * 3.4);
-  padding: 7px;
+  padding: var(--start-pad);
   border: 0;
   border-radius: 999px;
   background: linear-gradient(180deg, rgba(58, 60, 66, 0.96), rgba(20, 21, 24, 0.96));
@@ -650,7 +631,20 @@ html.sudo-locked-boot .sudo-lock-overlay,
   outline: none;
 }
 
+/* Hover: the white dot rolls across to the far end of the pill and wipes
+   the label out as it passes — the label is clipped at the dot's centre,
+   and both run on the same duration/easing so the edge stays glued to the
+   dot. Un-hovering plays the same transitions back. */
+.intro-start {
+  --start-pad: 7px;
+  --start-dot: calc(var(--pill-h) - var(--start-pad) * 2);
+  --start-travel: calc(var(--pill-h) * 2.4);
+  --start-wipe: 650ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
 .intro-start-icon {
+  position: relative;
+  z-index: 1;
   display: grid;
   place-items: center;
   flex: none;
@@ -659,20 +653,33 @@ html.sudo-locked-boot .sudo-lock-overlay,
   border-radius: 50%;
   background: #f5f4ef;
   color: #111111;
-  transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: transform var(--start-wipe);
 }
 
 .intro-start:hover .intro-start-icon,
 .intro-start:focus-visible .intro-start-icon {
-  transform: translateX(3px);
+  transform: translateX(var(--start-travel));
 }
 
 .intro-start-label {
-  flex: 1;
-  padding-right: calc(var(--pill-h) * 0.3);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: calc(var(--start-pad) + var(--start-dot));
+  padding-right: calc(var(--start-pad) + var(--pill-h) * 0.3);
   font-size: clamp(14px, 2.3vh, 17px);
   font-weight: 500;
-  text-align: center;
+  clip-path: inset(0 0 0 calc(var(--start-pad) + var(--start-dot) / 2));
+  transition: clip-path var(--start-wipe);
+}
+
+.intro-start:hover .intro-start-label,
+.intro-start:focus-visible .intro-start-label {
+  clip-path: inset(
+    0 0 0 calc(var(--start-pad) + var(--start-dot) / 2 + var(--start-travel))
+  );
 }
 
 .intro-legal {
@@ -694,13 +701,11 @@ html.sudo-locked-boot .sudo-lock-overlay,
   color: rgba(255, 255, 255, 0.8);
 }
 
-.intro-brand--on,
 .intro-legal--on {
   opacity: 1;
 }
 
 /* "Начать": UI steps aside while the planet swells over the screen. */
-.intro-welcome--leaving .intro-brand,
 .intro-welcome--leaving .intro-title,
 .intro-welcome--leaving .intro-start,
 .intro-welcome--leaving .intro-legal {

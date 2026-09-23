@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import IntroAnimation from "./IntroAnimation";
+import { useIntroStore } from "@/lib/introStore";
 
 type GatePhase = "intro" | "revealing" | "done";
 
@@ -12,6 +13,7 @@ type GatePhase = "intro" | "revealing" | "done";
  */
 export default function IntroGate({ children }: { children: ReactNode }) {
   const [phase, setPhase] = useState<GatePhase>("intro");
+  const reveal = useIntroStore((s) => s.reveal);
 
   useEffect(() => {
     document.body.style.overflow = phase === "intro" ? "hidden" : "";
@@ -23,6 +25,7 @@ export default function IntroGate({ children }: { children: ReactNode }) {
   function handleReveal() {
     window.scrollTo(0, 0);
     setPhase("revealing");
+    reveal();
   }
 
   function handleComplete() {

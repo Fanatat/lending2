@@ -8,6 +8,7 @@ import TypewriterLine from "./TypewriterLine";
 import AnomalyBanner from "./AnomalyBanner";
 import { useReducedMotion } from "@/lib/motion";
 import { useTypewriter } from "@/lib/useTypewriter";
+import { useIntroStore } from "@/lib/introStore";
 
 const TITLE = "#НЕРЕЗЮМЕ, а список реализованных задач";
 // The leading "Девять автономных систем." is rendered live by
@@ -28,6 +29,9 @@ const FOOTNOTE =
 // actually landed. FLY_IN_FALLBACK_MS only covers the rare case where the
 // event never fires. REVEAL_PAUSE_MS is an extra beat after landing so the
 // fill-in reads as a deliberate step, not something that happens instantly.
+// Nothing starts until the boot intro hands over (`introRevealed`): the
+// fly-in is CSS-paused behind it, but the fallback timer isn't, and it used
+// to run the whole chain out of sight while the intro was still up.
 const FLY_IN_FALLBACK_MS = 650;
 const REVEAL_PAUSE_MS = 450;
 const FOOTNOTE_DELAY_MS = 2000;
@@ -35,6 +39,7 @@ const FOOTNOTE_DELAY_MS = 2000;
 /** Hero section — flies in on load, then headline + counter reveal together → typed body → delayed footnote. */
 export default function Hero() {
   const reducedMotion = useReducedMotion();
+  const introRevealed = useIntroStore((s) => s.revealed);
   const sectionRef = useRef<HTMLElement>(null);
   const [revealStart, setRevealStart] = useState(false);
   const [counterDone, setCounterDone] = useState(false);
@@ -49,6 +54,7 @@ export default function Hero() {
   });
 
   useEffect(() => {
+    if (!introRevealed) return;
     if (reducedMotion) {
       setRevealStart(true);
       return;
@@ -75,7 +81,7 @@ export default function Hero() {
       window.clearTimeout(pauseTimer);
       section?.removeEventListener("animationend", handleAnimationEnd);
     };
-  }, [reducedMotion]);
+  }, [reducedMotion, introRevealed]);
 
   useEffect(() => {
     if (!paragraphDone) return;

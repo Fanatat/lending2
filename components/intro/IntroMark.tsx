@@ -26,24 +26,6 @@ function arcPath(r: number) {
   return `M ${x0.toFixed(2)} ${y0.toFixed(2)} A ${r} ${r} 0 0 1 ${x1.toFixed(2)} ${y1.toFixed(2)}`;
 }
 
-export function MarkGlyph({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 100 100" className={className} aria-hidden="true">
-      {ARC_RADII.map((r) => (
-        <path
-          key={r}
-          d={arcPath(r)}
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={8.5}
-          strokeLinecap="round"
-        />
-      ))}
-      <circle cx={HEAD.x} cy={HEAD.y} r={HEAD.r} fill="currentColor" />
-    </svg>
-  );
-}
-
 export default function IntroMark({ stage }: { stage: MarkStage }) {
   return (
     <div className={`intro-mark intro-mark--${stage}`} aria-hidden="true">

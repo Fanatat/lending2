@@ -2,8 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Literata } from "next/font/google";
-import { INTRO_BRAND, INTRO_CTA, INTRO_SHOW_MARK, INTRO_T, INTRO_TITLE } from "@/lib/introConfig";
-import { MarkGlyph } from "./IntroMark";
+import { INTRO_CTA, INTRO_T, INTRO_TITLE } from "@/lib/introConfig";
 
 const serif = Literata({
   subsets: ["latin", "cyrillic"],
@@ -291,11 +290,6 @@ export default function IntroWelcome({
     <div ref={rootRef} className={rootClass}>
       <canvas ref={canvasRef} className="intro-welcome-canvas" aria-hidden="true" />
       {fallback && <div className="intro-welcome-fallback-sphere" aria-hidden="true" />}
-
-      <div className={at("chrome") ? "intro-brand intro-brand--on" : "intro-brand"}>
-        {INTRO_SHOW_MARK && <MarkGlyph className="intro-brand-mark" />}
-        <span>{INTRO_BRAND}</span>
-      </div>
 
       <h1 className={`intro-title ${serif.className}${at("title") ? " intro-title--on" : ""}`}>{INTRO_TITLE}</h1>
 

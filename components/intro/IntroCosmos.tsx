@@ -540,8 +540,68 @@ export default function IntroCosmos({
     ];
     const starGlow = glowSprite(64, "rgba(255,255,255,1)", "rgba(140,180,255,0.18)");
 
-    // Painter's order, re-sorted every frame (far → near).
-    const drawList = planets.slice();
+    // Painter's order. Neighbours overlap (PLANET_CROWDING) and keep passing
+    // through equal depth as the ring turns, so a plain depth sort flips
+    // which one is on top several times while they overlap. Instead, a pair
+    // that overlaps on screen keeps the stacking it had when it first
+    // touched; only pairs that are apart (where order is invisible) follow
+    // depth. above[i][j]: 1 = i over j, -1 = j over i, 0 = not overlapping.
+    const above = planets.map(() => planets.map(() => 0));
+    const drawList: Planet[] = [];
+
+    /** Is `from` already stacked over `to` through a chain of kept pairs? */
+    function over(from: number, to: number, seen = new Set<number>()): boolean {
+      seen.add(from);
+      const row = above[from]!;
+      for (let k = 0; k < row.length; k++) {
+        if (row[k] !== 1 || seen.has(k)) continue;
+        if (k === to || over(k, to, seen)) return true;
+      }
+      return false;
+    }
+
+    /** Fills drawList (bottom → top) with this frame's on-screen planets (pr > 0). */
+    function sortPlanets() {
+      const n = planets.length;
+      for (let i = 0; i < n; i++) {
+        for (let j = i + 1; j < n; j++) {
+          const a = planets[i]!;
+          const b = planets[j]!;
+          const touching =
+            a.pr > 0 &&
+            b.pr > 0 &&
+            Math.hypot(a.px - b.px, a.py - b.py) < a.pr * a.extent + b.pr * b.extent;
+          if (!touching) above[i]![j] = above[j]![i] = 0;
+          else if (above[i]![j] === 0) {
+            // A new contact follows depth unless the pairs already kept
+            // stack one over the other — then it agrees with them, so the
+            // kept pairs never form a loop no painter's order can draw
+            // (it happens once the receding ring shrinks into one clump).
+            const iOver = over(i, j) || (!over(j, i) && a.depth < b.depth);
+            above[i]![j] = iOver ? 1 : -1;
+            above[j]![i] = -above[i]![j]!;
+          }
+        }
+      }
+      // Topological order over the kept pairs, farthest first among the
+      // planets nothing still has to go under. The pairs can't loop (see
+      // above); the farthest-remaining fallback is only a safety net.
+      drawList.length = 0;
+      const left = planets.map((_, i) => i).filter((i) => planets[i]!.pr > 0);
+      while (left.length) {
+        let pick = -1;
+        let fallback = -1;
+        for (const i of left) {
+          const deeper = fallback < 0 || planets[i]!.depth > planets[fallback]!.depth;
+          if (deeper) fallback = i;
+          const free = left.every((j) => above[j]![i] !== -1);
+          if (free && (pick < 0 || planets[i]!.depth > planets[pick]!.depth)) pick = i;
+        }
+        const next = pick < 0 ? fallback : pick;
+        drawList.push(planets[next]!);
+        left.splice(left.indexOf(next), 1);
+      }
+    }
 
     let raf = 0;
     function frame(now: number) {
@@ -655,17 +715,18 @@ export default function IntroCosmos({
           const y2 = y * cosT - m.z * sinT;
           const z2 = y * sinT + m.z * cosT;
           m.depth = dist - z2;
+          m.pr = 0;
           if (m.depth <= 0.12) continue;
           const k = focal / m.depth;
           m.px = cx + (x * cosR - y2 * sinR) * k;
           m.py = cy + (x * sinR + y2 * cosR) * k;
           m.pr = m.size * k;
-        }
-        drawList.sort((a, b) => b.depth - a.depth);
-        for (const m of drawList) {
-          if (m.depth <= 0.12) continue;
           const r = m.pr * m.extent;
-          if (m.px + r < 0 || m.py + r < 0 || m.px - r > W || m.py - r > H) continue;
+          if (m.px + r < 0 || m.py + r < 0 || m.px - r > W || m.py - r > H) m.pr = 0;
+        }
+        sortPlanets();
+        for (const m of drawList) {
+          const r = m.pr * m.extent;
           // Only a planet looming right at the lens goes out of focus; the
           // far side of the ring gets less light. Dimming paints the black
           // silhouette over the planet, so overlaps stay solid.

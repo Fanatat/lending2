@@ -10,7 +10,7 @@
  *   5.0 s  the ball unwinds into the mark (dot + wake arcs)
  *   9.4 s  mark and stars fade to black
  *  10.9 s  teal nebula light, then the planet sphere
- *  13.4 s  brand + footer, 14.6 s heading, 15.8 s the "Начать" button
+ *  13.4 s  footer, 14.6 s heading, 15.8 s the "Начать" button
  *
  * After that the intro waits for the visitor (like the reference): the
  * sphere keeps turning until "Начать" is pressed.
@@ -20,8 +20,8 @@
  */
 
 /**
- * The logo reveal (point → ball → mark, and the glyph next to the brand
- * name) stays in the code but is off until the logo is approved.
+ * The logo reveal (point → ball → mark) stays in the code but is off
+ * until the logo is approved.
  */
 export const INTRO_SHOW_MARK = false;
 const MARK_BEAT_MS = 4000;
@@ -48,7 +48,7 @@ export const INTRO_T = {
   /** Planet sphere fades in. */
   sphere: 11900 - cut,
   sphereFull: 13600 - cut,
-  /** Brand (top-left) + footer, then heading, then button. */
+  /** Footer, then heading, then button. */
   chrome: 13400 - cut,
   title: 14600 - cut,
   button: 15800 - cut,
@@ -66,6 +66,5 @@ export const MOBILE_BREAKPOINT_PX = 768;
 /** Sparkle dust density around the planet ring (desktop / mobile). */
 export const INTRO_DUST = { desktop: 900, mobile: 420 };
 
-export const INTRO_BRAND = "valera";
 export const INTRO_TITLE = "Добро пожаловать к Валере!";
 export const INTRO_CTA = "Начать";
