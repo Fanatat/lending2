@@ -4,11 +4,12 @@
  * glance.
  */
 
-// Bumped from "lab-terminal:intro-seen-v2" when the intro grew the deep-space
-// orb flythrough (IntroOrbs/IntroStarfield) and stretched to ~15 s — the old
-// key would otherwise hide the new cut from everyone who already sat through
-// the previous version.
-export const INTRO_STORAGE_KEY = "lab-terminal:intro-seen-v3";
+// Bumped from "...v3" when the voyage phase was reworked: fewer, more
+// distinctly-colored "planets", a Milky Way band + constellations, and a
+// fast dash into one particular star that the core/name sequence then
+// grows out of — the old key would otherwise hide this cut from everyone
+// who already sat through the previous version.
+export const INTRO_STORAGE_KEY = "lab-terminal:intro-seen-v4";
 export const INTRO_BOOT_HTML_CLASS = "intro-seen-boot";
 /** `?intro` in the URL replays the intro even after it has been seen. */
 export const INTRO_REPLAY_PARAM = "intro";
@@ -40,7 +41,7 @@ export interface IntroTiming {
 // they get lighter visuals (fewer orbs/particles, no flash, slower drift),
 // not a shorter cut.
 export const INTRO_TIMING: IntroTiming = {
-  voyage: 5200,
+  voyage: 5400,
   core: 800,
   particles: 2600,
   collapse: 1100,
@@ -51,8 +52,12 @@ export const INTRO_TIMING: IntroTiming = {
 
 export const INTRO_PARTICLES_DESKTOP = { orbit: 12, sparks: 46 };
 export const INTRO_PARTICLES_MOBILE = { orbit: 8, sparks: 20 };
-export const INTRO_ORBS_DESKTOP = 7;
-export const INTRO_ORBS_MOBILE = 4;
+// Voyage: a handful of planets drift past and recede (~first 60% of
+// `voyage`), a Milky Way band + a few constellations build up behind them,
+// then the camera dashes into one particular (always-centered) star — see
+// IntroStarfield's internal timing fractions.
+export const INTRO_ORBS_DESKTOP = 5;
+export const INTRO_ORBS_MOBILE = 3;
 export const INTRO_STARS_DESKTOP = 160;
 export const INTRO_STARS_MOBILE = 80;
 export const MOBILE_BREAKPOINT_PX = 768;

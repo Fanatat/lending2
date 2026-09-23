@@ -6,7 +6,7 @@ interface OrbSpec {
   top: string;
   left: string;
   size: number;
-  tone: "amber" | "copper" | "cream" | "slate";
+  tone: "amber" | "copper" | "cream" | "slate" | "azure";
   /** Fraction of the voyage duration this orb's entrance/recede spans. */
   durationFrac: number;
   /** Fraction of the voyage duration before this orb starts (stagger). */
@@ -16,17 +16,17 @@ interface OrbSpec {
   driftY: number;
 }
 
-// Varied sizes/depths/tones so the field reads as objects at different
-// distances (ТЗ: reference's marbles drifting past camera before the pull
-// back) — kept inside the site's warm terminal palette, no blues/teals.
+// A small, deliberately varied set — five planets, five distinct colors
+// (amber/copper/cream/slate/azure), no two alike — reads as our own solar
+// system rather than a generic asteroid field. All finish receding by
+// ~60% of the voyage, leaving the back stretch clear for the Milky Way,
+// constellations and the dash into a star (see IntroStarfield).
 const ORB_PRESETS: OrbSpec[] = [
-  { top: "22%", left: "18%", size: 320, tone: "amber", durationFrac: 0.98, delayFrac: 0, driftX: 26, driftY: -18 },
-  { top: "68%", left: "78%", size: 260, tone: "copper", durationFrac: 0.9, delayFrac: 0.04, driftX: -20, driftY: 22 },
-  { top: "14%", left: "72%", size: 190, tone: "cream", durationFrac: 0.82, delayFrac: 0.1, driftX: 16, driftY: 14 },
-  { top: "78%", left: "24%", size: 240, tone: "slate", durationFrac: 0.94, delayFrac: 0.02, driftX: -14, driftY: -20 },
-  { top: "46%", left: "6%", size: 150, tone: "copper", durationFrac: 0.78, delayFrac: 0.14, driftX: 22, driftY: 10 },
-  { top: "40%", left: "92%", size: 170, tone: "amber", durationFrac: 0.86, delayFrac: 0.08, driftX: -18, driftY: -12 },
-  { top: "6%", left: "40%", size: 130, tone: "cream", durationFrac: 0.74, delayFrac: 0.18, driftX: 12, driftY: 16 },
+  { top: "22%", left: "18%", size: 320, tone: "amber", durationFrac: 0.52, delayFrac: 0, driftX: 26, driftY: -18 },
+  { top: "68%", left: "78%", size: 230, tone: "copper", durationFrac: 0.48, delayFrac: 0.05, driftX: -20, driftY: 22 },
+  { top: "16%", left: "74%", size: 180, tone: "cream", durationFrac: 0.44, delayFrac: 0.1, driftX: 16, driftY: 14 },
+  { top: "76%", left: "22%", size: 210, tone: "slate", durationFrac: 0.5, delayFrac: 0.04, driftX: -14, driftY: -20 },
+  { top: "44%", left: "90%", size: 160, tone: "azure", durationFrac: 0.42, delayFrac: 0.14, driftX: -18, driftY: -10 },
 ];
 
 interface IntroOrbsProps {

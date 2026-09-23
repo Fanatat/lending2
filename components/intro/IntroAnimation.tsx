@@ -175,6 +175,8 @@ export default function IntroAnimation({
         <IntroStarfield
           count={mobile ? INTRO_STARS_MOBILE : INTRO_STARS_DESKTOP}
           gentle={reducedMotion}
+          mobile={!!mobile}
+          voyageMs={INTRO_TIMING.voyage}
         />
       )}
       {showVoyage && (

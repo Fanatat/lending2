@@ -18,6 +18,16 @@ body {
 }
 
 body {
+  /* Per spec, whenever one axis is non-visible and the other computes to
+     visible, the browser silently promotes the visible axis to `auto` too
+     — so body (overflow-x: hidden above, overflow-y left at its default
+     `visible`) was quietly becoming its own scroll container nested inside
+     html's, producing two independent scrollbars whenever body's auto-sized
+     box came out even a pixel taller than its content. Body's height is
+     always auto here (nothing constrains it), so nothing gets clipped by
+     also making overflow-y non-visible — it just stops the promotion and
+     leaves html as the sole scroller. */
+  overflow-y: hidden;
   font-family: var(--font-jetbrains-mono), "Fira Code", ui-monospace, monospace;
   line-height: 1.5;
 }
@@ -447,6 +457,22 @@ html.intro-seen-boot .intro-main-wrap {
   animation: none;
 }
 
+/* Hero's own entrance animation (hero-fly-in, above) — and everything it
+   kicks off once it ends (see Hero.tsx's `animationend` listener: headline
+   reveal → counter → typewriter body → footnote) — must not play out while
+   still hidden behind the boot intro, or by the time the curtain lifts it's
+   long since finished and the visitor never sees any of it. Paused until
+   intro-main-wrap is actually visible; instant on a repeat visit via the
+   same boot-script class intro-main-wrap's own fade-in uses above. */
+.intro-main-wrap .hero-fly-in {
+  animation-play-state: paused;
+}
+
+.intro-main-wrap--visible .hero-fly-in,
+html.intro-seen-boot .hero-fly-in {
+  animation-play-state: running;
+}
+
 /* z-index sits just under the custom cursor (9998/9999) so it stays
    visible over the intro. --mx/--my: mouse parallax, set from JS. */
 .intro-overlay {
@@ -621,6 +647,22 @@ html.intro-seen-boot .intro-main-wrap {
     #000000 100%
   );
   box-shadow: 0 0 40px rgba(180, 170, 150, 0.2), inset -14px -18px 40px rgba(0, 0, 0, 0.55);
+}
+
+/* The one cool-toned planet in the set (Earth/Neptune-ish) — a deliberate
+   break from the site's warm palette so the flythrough reads as an actual
+   solar system rather than five shades of the same amber. */
+.intro-orb--azure {
+  background: radial-gradient(
+    circle at 32% 26%,
+    #eaf6ff 0%,
+    #a9d8ef 12%,
+    #4f93b8 36%,
+    #245a76 64%,
+    #0a1f2b 92%,
+    #000000 100%
+  );
+  box-shadow: 0 0 50px rgba(79, 147, 184, 0.3), inset -14px -18px 40px rgba(0, 0, 0, 0.55);
 }
 
 .intro-orb--gentle {
