@@ -1,765 +1,584 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import type * as THREE_NS from "three";
 import { INTRO_DUST, INTRO_T } from "@/lib/introConfig";
+import { cosmosImage, type CosmosTexture } from "@/lib/cosmosAssets";
 
 /**
- * Canvas half of the intro's cinematic: the eight planets of the Solar
- * System paraded in a ring spinning right around the camera, sparkle dust
- * between them, the
- * camera pulling away until the ring is a speck, and the starfield it leaves
- * behind (which slowly pushes in under the mark, then fades out).
+ * First half of the intro: a planet parade, rendered for real in WebGL
+ * (three.js). The Sun and the eight planets stand in one gently curving
+ * line — textured spheres (Solar System Scope, CC BY 4.0) lit by a single
+ * light at the Sun, turning on their own tilted axes, with atmospheric rims
+ * and Saturn's ring. The camera glides outward along the line past Earth
+ * and the Moon, Mars, Jupiter and Saturn, cranes up to show the whole
+ * parade from the Sun's glare to Neptune, then pulls away until it is
+ * lost among the stars of the Milky Way.
  *
  * Everything is a pure function of `t` (ms since `origin`), so the picture
- * can't drift from the DOM half (IntroMark) that runs on the same clock.
+ * stays on the same clock as the DOM stages and the sound cues. In
+ * development `?introT=<ms>` freezes the shot at that moment (screenshots).
  */
 
-type PlanetName =
-  | "mercury"
-  | "venus"
-  | "earth"
-  | "mars"
-  | "jupiter"
-  | "saturn"
-  | "uranus"
-  | "neptune";
+type Vec3 = [number, number, number];
 
-// The eight planets in order from the Sun. `size` is the disk radius in
-// ring units — not to scale, just enough that Jupiter reads as the giant
-// and Mercury as the pebble. `tilt` rotates the painted bands/axis.
-const PLANETS: { name: PlanetName; size: number; tilt: number }[] = [
-  { name: "mercury", size: 0.25, tilt: 0.1 },
-  { name: "venus", size: 0.35, tilt: -0.05 },
-  { name: "earth", size: 0.37, tilt: 0.4 },
-  { name: "mars", size: 0.3, tilt: 0.45 },
-  { name: "jupiter", size: 0.6, tilt: 0.05 },
-  { name: "saturn", size: 0.48, tilt: 0.45 },
-  { name: "uranus", size: 0.4, tilt: 1.45 },
-  { name: "neptune", size: 0.39, tilt: 0.5 },
+interface BodySpec {
+  tex: CosmosTexture;
+  radius: number;
+  pos: Vec3;
+  /** Axial tilt, rad. */
+  tilt: number;
+  /** Own rotation, rad/s — exaggerated so the turning reads on screen. */
+  spin: number;
+  /** Flat colour shown if the texture failed to load. */
+  color: string;
+  /** Atmosphere tint + strength; none for airless bodies. */
+  atmo?: [string, number];
+  /** Thin glow past the limb — only where the air is thick enough to see. */
+  halo?: boolean;
+  ring?: boolean;
+  clouds?: boolean;
+}
+
+// Not to scale — sizes are picked so Jupiter reads as the giant and Mercury
+// as the pebble, distances so the line fits one shot. The line bends a
+// little up and sideways, like the real ecliptic seen from off-plane.
+const BODIES: BodySpec[] = [
+  { tex: "mercury", radius: 0.45, pos: [10, 0.1, -0.4], tilt: 0.03, spin: 0.2, color: "#8c8680" },
+  { tex: "venus_atmosphere", radius: 0.85, pos: [14.5, 0.2, -0.2], tilt: 0.05, spin: 0.12, color: "#e3c48f", atmo: ["#ffd9a0", 0.9], halo: true },
+  { tex: "earth_daymap", radius: 1, pos: [21, 0.1, 0], tilt: 0.41, spin: 0.3, color: "#3a64a8", atmo: ["#6aa8ff", 1.4], halo: true, clouds: true },
+  { tex: "mars", radius: 0.62, pos: [27, 0.3, 0.4], tilt: 0.44, spin: 0.3, color: "#b5552f", atmo: ["#ff9a6a", 0.4] },
+  { tex: "jupiter", radius: 3.3, pos: [37, 0.5, 0.8], tilt: 0.05, spin: 0.22, color: "#c9a27a", atmo: ["#ffe2bd", 0.5] },
+  { tex: "saturn", radius: 2.7, pos: [50, 0.8, 1.2], tilt: 0.47, spin: 0.2, color: "#d8c08f", atmo: ["#ffe8b8", 0.45], ring: true },
+  { tex: "uranus", radius: 1.7, pos: [62, 1.1, 1.5], tilt: 1.71, spin: 0.25, color: "#9fd8e0", atmo: ["#a8f0ff", 0.8] },
+  { tex: "neptune", radius: 1.6, pos: [72, 1.4, 1.7], tilt: 0.49, spin: 0.25, color: "#3f66d8", atmo: ["#6f90ff", 0.9] },
+];
+const SUN_RADIUS = 4.2;
+/**
+ * The Sun sits off the line, behind and to the left of the flight path:
+ * lit straight from behind the camera the planets would read as flat
+ * discs, from here every one shows a terminator.
+ */
+const SUN_POS: Vec3 = [-30, 10, -32];
+const EARTH = BODIES[2]!;
+const MOON_OFFSET: Vec3 = [1.9, 0.35, -2.1];
+
+// Camera keyframes: [t ms, x, y, z] for the eye and for the point it looks
+// at. Interpolated with a time-aware Catmull-Rom, so speed stays continuous
+// through every key.
+type Key = [number, number, number, number];
+// After Saturn the camera climbs over the line to the Sun's side, so the
+// wide shot sees the planets lit, and the Sun drifts into frame as it recedes.
+const EYE: Key[] = [
+  [0, 12.5, 0.9, 4.2],
+  [1500, 20.5, 1.3, 3.9],
+  [2700, 33.5, 2.1, 8.6],
+  [3700, 46.5, 3.6, 10.8],
+  [INTRO_T.reveal + 1000, 46, 30, -50],
+  [INTRO_T.pullback, 44, 36, -60],
+  [INTRO_T.pullback + 1200, 40, 60, -100],
+  [INTRO_T.cosmosGone, 30, 120, -220],
+];
+const LOOK: Key[] = [
+  [0, 24, 0.3, 0.4],
+  [1500, 34, 0.5, 0],
+  [2700, 48, 0.8, 0],
+  [3700, 60, 1, 0],
+  [INTRO_T.reveal + 1000, 34, 2, -4],
+  [INTRO_T.pullback, 30, 2, -6],
+  [INTRO_T.pullback + 1200, 24, 0, -10],
+  [INTRO_T.cosmosGone, 20, 0, -12],
 ];
 
-/**
- * The planets' diameters add up to more than the ring's circumference by
- * this factor, so neighbours always overlap each other.
- */
-const PLANET_CROWDING = 1.18;
-
-/**
- * Camera distance from the ring's center, in ring radii: it drifts from
- * CAMERA_START to CAMERA_HOLD while the parade spins, then the pull-back
- * multiplies CAMERA_HOLD by exp(CAMERA_PULL · s^2.2). CAMERA_PULL is set so
- * the ring still ends up about as far away (a speck) by INTRO_T.ringGone.
- */
-const CAMERA_START = 2.0;
-const CAMERA_HOLD = 2.2;
-const CAMERA_PULL = 1.72;
-
-/** Sprite size for a plain disk; Saturn's is wider to fit the rings. */
-const SPRITE_PX = 288;
-const DISK_EXTENT = 1.1;
-const SATURN_EXTENT = 2.3;
-
-interface Planet {
-  angle: number;
-  radius: number;
-  z: number;
-  size: number;
-  /** Sprite width / disk diameter. */
-  extent: number;
-  soft: HTMLCanvasElement;
-  sharp: HTMLCanvasElement;
-  /** Black silhouettes of the sprites — dims a planet without seeing through it. */
-  softShade: HTMLCanvasElement;
-  sharpShade: HTMLCanvasElement;
-  /** This frame's projection. */
-  px: number;
-  py: number;
-  pr: number;
-  depth: number;
+function hermite(keys: Key[], t: number, out: Vec3): Vec3 {
+  const n = keys.length;
+  if (t <= keys[0]![0]) return copyKey(keys[0]!, out);
+  if (t >= keys[n - 1]![0]) return copyKey(keys[n - 1]!, out);
+  let i = 0;
+  while (keys[i + 1]![0] < t) i++;
+  const k0 = keys[i]!;
+  const k1 = keys[i + 1]!;
+  const h = k1[0] - k0[0];
+  const s = (t - k0[0]) / h;
+  const s2 = s * s;
+  const s3 = s2 * s;
+  const h00 = 2 * s3 - 3 * s2 + 1;
+  const h10 = s3 - 2 * s2 + s;
+  const h01 = -2 * s3 + 3 * s2;
+  const h11 = s3 - s2;
+  for (let c = 1; c <= 3; c++) {
+    const m0 = tangent(keys, i, c);
+    const m1 = tangent(keys, i + 1, c);
+    out[c - 1] = h00 * k0[c]! + h10 * h * m0 + h01 * k1[c]! + h11 * h * m1;
+  }
+  return out;
 }
 
-interface Dust {
-  angle: number;
-  radius: number;
-  z: number;
-  /** Angular speed relative to the ring — dust shears past the planets. */
-  drift: number;
-  size: number;
-  alpha: number;
+function tangent(keys: Key[], i: number, c: number) {
+  const a = keys[Math.max(0, i - 1)]!;
+  const b = keys[Math.min(keys.length - 1, i + 1)]!;
+  return (b[c]! - a[c]!) / (b[0] - a[0]);
 }
 
-interface Star {
-  x: number;
-  y: number;
-  size: number;
-  phase: number;
+function copyKey(k: Key, out: Vec3): Vec3 {
+  out[0] = k[1];
+  out[1] = k[2];
+  out[2] = k[3];
+  return out;
 }
 
-function rand(seed: number) {
-  // mulberry32 — deterministic, so every visit gets the same composition.
-  let a = seed >>> 0;
-  return () => {
-    a = (a + 0x6d2b79f5) >>> 0;
-    let t = a;
-    t = Math.imul(t ^ (t >>> 15), t | 1);
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-
-const clamp01 = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v);
+const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 const smooth = (v: number) => {
   const x = clamp01(v);
   return x * x * (3 - 2 * x);
 };
-const ramp = (t: number, from: number, to: number) => smooth((t - from) / (to - from));
 
-/** Latitude band between sin-latitudes s0 < s1 (−1 south … 1 north). */
-function band(c: CanvasRenderingContext2D, r: number, s0: number, s1: number, color: string) {
-  c.fillStyle = color;
-  c.fillRect(-r * 1.5, -s1 * r, r * 3, (s1 - s0) * r);
+/** Radial glow sprite, drawn once on a 2D canvas. */
+function glowCanvas(stops: [number, string][], w = 256, h = 256) {
+  const c = document.createElement("canvas");
+  c.width = w;
+  c.height = h;
+  const g = c.getContext("2d")!;
+  const grad = g.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, w / 2);
+  for (const [o, col] of stops) grad.addColorStop(o, col);
+  g.fillStyle = grad;
+  g.fillRect(0, 0, w, h);
+  return c;
 }
 
-function blob(
-  c: CanvasRenderingContext2D,
-  x: number,
-  y: number,
-  rx: number,
-  ry: number,
-  color: string,
-  rot = 0
-) {
-  c.fillStyle = color;
-  c.beginPath();
-  c.ellipse(x, y, rx, ry, rot, 0, Math.PI * 2);
-  c.fill();
+const ATMO_VERT = /* glsl */ `
+varying vec3 vN;
+varying vec3 vP;
+void main() {
+  vN = normalize(mat3(modelMatrix) * normal);
+  vec4 wp = modelMatrix * vec4(position, 1.0);
+  vP = wp.xyz;
+  gl_Position = projectionMatrix * viewMatrix * wp;
 }
+`;
 
-/** Stack of belts from pole to pole, cycling through `colors`. */
-function belts(c: CanvasRenderingContext2D, r: number, colors: string[], min: number, max: number, rnd: () => number) {
-  let s = -1.05;
-  let i = 0;
-  while (s < 1.05) {
-    const h = min + rnd() * (max - min);
-    band(c, r, s, s + h, colors[i++ % colors.length]!);
-    s += h;
+// Two layers per planet: a haze on the disc that thickens toward the limb,
+// and a halo just outside it. Both only on the day side.
+const ATMO_FRAG = /* glsl */ `
+uniform vec3 uColor;
+uniform vec3 uSun;
+uniform float uStrength;
+uniform float uHalo;
+uniform float uLimb;
+varying vec3 vN;
+varying vec3 vP;
+void main() {
+  vec3 n = normalize(vN);
+  vec3 v = normalize(cameraPosition - vP);
+  vec3 l = normalize(uSun - vP);
+  float d = dot(n, v);
+  float a;
+  if (uHalo > 0.5) {
+    a = pow(clamp(-d / uLimb, 0.0, 1.0), 3.0);
+  } else {
+    a = pow(1.0 - max(d, 0.0), 3.0) * 0.9;
   }
+  float lit = smoothstep(-0.3, 0.45, dot(n, l));
+  gl_FragColor = vec4(uColor * a * lit * uStrength, 1.0);
 }
+`;
 
-/**
- * Surface texture in a disk of radius r around the origin (already clipped).
- * Soft edges come from ctx.filter where the browser has it; without it
- * (older Safari) the bands are just crisper.
- */
-function paintSurface(c: CanvasRenderingContext2D, name: PlanetName, r: number, rnd: () => number) {
-  const blur = (k: number) => (c.filter = `blur(${(r * k).toFixed(1)}px)`);
-  const fill = (color: string) => {
-    c.fillStyle = color;
-    c.fillRect(-r * 1.5, -r * 1.5, r * 3, r * 3);
-  };
-  switch (name) {
-    case "mercury": {
-      fill("#8e8780");
-      // Broad darker plains, then a scatter of small craters.
-      blur(0.08);
-      for (let i = 0; i < 8; i++) {
-        blob(c, (rnd() * 2 - 1) * r, (rnd() * 2 - 1) * r, r * (0.2 + rnd() * 0.3), r * (0.15 + rnd() * 0.25), "rgba(80,74,68,0.3)", rnd() * 3);
-      }
-      blur(0.008);
-      for (let i = 0; i < 160; i++) {
-        const cr = r * (0.012 + Math.pow(rnd(), 4) * 0.08);
-        const x = (rnd() * 2 - 1) * r;
-        const y = (rnd() * 2 - 1) * r;
-        blob(c, x, y, cr, cr, rnd() < 0.6 ? "rgba(58,54,50,0.28)" : "rgba(205,199,190,0.25)");
-      }
-      break;
-    }
-    case "venus": {
-      fill("#d9ba84");
-      blur(0.07);
-      for (let i = 0; i < 12; i++) {
-        const s = rnd() * 2 - 1;
-        band(c, r, s, s + 0.08 + rnd() * 0.18, rnd() < 0.5 ? "rgba(240,220,170,0.55)" : "rgba(170,126,72,0.35)");
-      }
-      break;
-    }
-    case "earth": {
-      fill("#17427f");
-      blur(0.015);
-      // Continents: clusters of overlapping blobs, green fading to desert.
-      for (let k = 0; k < 4; k++) {
-        const cx = (rnd() * 1.5 - 0.75) * r;
-        const cy = (rnd() * 1.1 - 0.55) * r;
-        for (let i = 0; i < 10; i++) {
-          blob(
-            c,
-            cx + (rnd() - 0.5) * r * 0.6,
-            cy + (rnd() - 0.5) * r * 0.55,
-            r * (0.07 + rnd() * 0.15),
-            r * (0.05 + rnd() * 0.12),
-            ["#355f2c", "#46733a", "#3b6a33", "#2f5a2a", "#4f7a3c", "#7d6a3a"][Math.floor(rnd() * 6)]!,
-            rnd() * 3
-          );
-        }
-      }
-      blur(0.03);
-      band(c, r, 0.9, 1.1, "#eef2f5");
-      band(c, r, -1.1, -0.92, "#eef2f5");
-      // Cloud streaks.
-      for (let i = 0; i < 14; i++) {
-        blob(
-          c,
-          (rnd() * 2 - 1) * r,
-          (rnd() * 2 - 1) * r * 0.85,
-          r * (0.14 + rnd() * 0.3),
-          r * (0.02 + rnd() * 0.045),
-          "rgba(255,255,255,0.55)",
-          (rnd() - 0.5) * 0.5
-        );
-      }
-      break;
-    }
-    case "mars": {
-      fill("#b5552f");
-      blur(0.05);
-      for (let i = 0; i < 16; i++) {
-        blob(
-          c,
-          (rnd() * 2 - 1) * r,
-          (rnd() * 2 - 1) * r,
-          r * (0.1 + rnd() * 0.3),
-          r * (0.05 + rnd() * 0.14),
-          rnd() < 0.55 ? "rgba(105,45,24,0.55)" : "rgba(218,138,90,0.45)",
-          rnd() * 3
-        );
-      }
-      blur(0.02);
-      band(c, r, 0.9, 1.1, "rgba(242,238,232,0.92)");
-      break;
-    }
-    case "jupiter": {
-      fill("#d6bf98");
-      blur(0.02);
-      belts(c, r, ["#e8dac1", "#b8834f", "#dbc39c", "#9f633a", "#eee2cc", "#c48f63", "#8c5836", "#d4b58e"], 0.06, 0.16, rnd);
-      // Great Red Spot, in the southern belt.
-      blob(c, r * 0.3, r * 0.34, r * 0.2, r * 0.1, "#b0503a");
-      blob(c, r * 0.3, r * 0.34, r * 0.12, r * 0.055, "#c9704f");
-      break;
-    }
-    case "saturn": {
-      fill("#d8c28e");
-      blur(0.03);
-      belts(c, r, ["#e5d4a6", "#cdb07b", "#dec893", "#bb9d68", "#eadcb4"], 0.1, 0.22, rnd);
-      break;
-    }
-    case "uranus": {
-      fill("#a2d5da");
-      blur(0.09);
-      band(c, r, 0.5, 1.1, "rgba(205,238,240,0.5)");
-      band(c, r, -0.15, 0.12, "rgba(128,188,196,0.35)");
-      break;
-    }
-    case "neptune": {
-      fill("#3659c6");
-      blur(0.05);
-      band(c, r, 0.25, 0.5, "rgba(72,112,218,0.6)");
-      band(c, r, -0.65, -0.4, "rgba(34,60,150,0.6)");
-      blob(c, -r * 0.25, r * 0.3, r * 0.16, r * 0.08, "#213a8c");
-      blob(c, -r * 0.05, r * 0.17, r * 0.2, r * 0.025, "rgba(235,240,255,0.7)");
-      blob(c, r * 0.3, -r * 0.35, r * 0.18, r * 0.02, "rgba(235,240,255,0.6)");
-      break;
-    }
-  }
-  c.filter = "none";
-}
-
-/** Saturn's rings, far half (behind the disk) or near half (in front). */
-function paintRings(c: CanvasRenderingContext2D, r: number, half: "far" | "near") {
-  const rings: [number, number, string][] = [
-    [1.24, 1.5, "rgba(186,166,128,0.55)"],
-    [1.53, 1.95, "rgba(226,208,168,0.88)"],
-    [2.0, 2.2, "rgba(200,182,142,0.6)"],
-  ];
-  c.save();
-  c.scale(1, 0.28);
-  c.beginPath();
-  if (half === "far") c.rect(-r * 3, -r * 3, r * 6, r * 3);
-  else c.rect(-r * 3, 0, r * 6, r * 3);
-  c.clip();
-  for (const [inner, outer, color] of rings) {
-    c.fillStyle = color;
-    c.beginPath();
-    c.arc(0, 0, r * outer, 0, Math.PI * 2);
-    c.arc(0, 0, r * inner, 0, Math.PI * 2, true);
-    c.fill();
-  }
-  c.restore();
-}
-
-function silhouette(src: HTMLCanvasElement) {
-  const cv = document.createElement("canvas");
-  cv.width = src.width;
-  cv.height = src.height;
-  const c = cv.getContext("2d")!;
-  c.drawImage(src, 0, 0);
-  c.globalCompositeOperation = "source-in";
-  c.fillStyle = "#000";
-  c.fillRect(0, 0, cv.width, cv.height);
-  return cv;
-}
-
-/**
- * Paints one planet: textured disk turned to its axial tilt, sunlight from
- * the upper left with a soft terminator, an atmosphere rim for Earth and
- * rings for Saturn. Also returns a lens-blurred copy (down to a thumbnail
- * and back up in ×3 steps — the reference's shallow depth of field) for the
- * planets passing right in front of the camera.
- */
-function paintPlanet(name: PlanetName, tilt: number, seed: number) {
-  const extent = name === "saturn" ? SATURN_EXTENT : DISK_EXTENT;
-  const S = Math.round((SPRITE_PX * extent) / DISK_EXTENT);
-  const r = S / 2 / extent;
-  const rnd = rand(seed);
-  const sharp = document.createElement("canvas");
-  sharp.width = sharp.height = S;
-  const c = sharp.getContext("2d")!;
-
-  c.translate(S / 2, S / 2);
-  c.rotate(tilt);
-  if (name === "saturn") paintRings(c, r, "far");
-
-  c.save();
-  c.beginPath();
-  c.arc(0, 0, r, 0, Math.PI * 2);
-  c.clip();
-  c.save();
-  paintSurface(c, name, r, rnd);
-  c.restore();
-  // Lighting is fixed to the screen, not to the planet's axis.
-  c.rotate(-tilt);
-  const light = c.createRadialGradient(-r * 0.45, -r * 0.45, r * 0.05, -r * 0.2, -r * 0.2, r * 1.45);
-  light.addColorStop(0, "rgba(255,255,255,0.16)");
-  light.addColorStop(0.28, "rgba(0,0,0,0)");
-  light.addColorStop(0.55, "rgba(0,0,0,0.45)");
-  light.addColorStop(0.78, "rgba(0,0,0,0.88)");
-  light.addColorStop(1, "rgba(0,0,0,0.96)");
-  c.fillStyle = light;
-  c.fillRect(-r, -r, r * 2, r * 2);
-  const limb = c.createRadialGradient(0, 0, r * 0.75, 0, 0, r);
-  limb.addColorStop(0, "rgba(0,0,0,0)");
-  limb.addColorStop(1, "rgba(0,0,0,0.3)");
-  c.fillStyle = limb;
-  c.fillRect(-r, -r, r * 2, r * 2);
-  c.restore();
-
-  if (name === "earth") {
-    c.save();
-    c.rotate(-tilt);
-    const atm = c.createRadialGradient(-r * 0.1, -r * 0.1, r * 0.92, 0, 0, r * 1.09);
-    atm.addColorStop(0, "rgba(120,175,255,0.4)");
-    atm.addColorStop(1, "rgba(120,175,255,0)");
-    c.fillStyle = atm;
-    c.beginPath();
-    c.arc(0, 0, r * 1.09, 0, Math.PI * 2);
-    c.fill();
-    c.restore();
-  }
-  if (name === "saturn") paintRings(c, r, "near");
-
-  const tiny = document.createElement("canvas");
-  tiny.width = tiny.height = Math.round(S / 9);
-  tiny.getContext("2d")!.drawImage(sharp, 0, 0, tiny.width, tiny.height);
-  let soft: HTMLCanvasElement = tiny;
-  for (let size = tiny.width * 3; soft.width < S; size *= 3) {
-    const next = document.createElement("canvas");
-    next.width = next.height = Math.min(size, S);
-    const o = next.getContext("2d")!;
-    o.imageSmoothingEnabled = true;
-    o.imageSmoothingQuality = "high";
-    o.drawImage(soft, 0, 0, next.width, next.height);
-    soft = next;
-  }
-  return { sharp, soft, extent, sharpShade: silhouette(sharp), softShade: silhouette(soft) };
-}
-
-function glowSprite(size: number, core: string, halo: string) {
-  const cv = document.createElement("canvas");
-  cv.width = cv.height = size;
-  const c = cv.getContext("2d")!;
-  const g = c.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
-  g.addColorStop(0, core);
-  g.addColorStop(0.18, core);
-  g.addColorStop(0.35, halo);
-  g.addColorStop(1, "rgba(0,0,0,0)");
-  c.fillStyle = g;
-  c.fillRect(0, 0, size, size);
-  return cv;
-}
-
-/** Dense faint star layer + Milky Way haze, painted once. */
-function paintStarLayer(w: number, h: number, mobile: boolean) {
-  const cv = document.createElement("canvas");
-  cv.width = Math.ceil(w);
-  cv.height = Math.ceil(h);
-  const c = cv.getContext("2d")!;
-  const rnd = rand(7);
-
-  // Milky Way: a faint bluish band from the lower left to the upper right,
-  // passing right of center (where the reference has its haze).
-  const bandFrom = { x: w * 0.05, y: h * 1.05 };
-  const bandTo = { x: w * 1.05, y: h * 0.05 };
-  c.globalCompositeOperation = "lighter";
-  for (let i = 0; i < 26; i++) {
-    const k = rnd();
-    const x = bandFrom.x + (bandTo.x - bandFrom.x) * k + (rnd() - 0.5) * w * 0.12 + w * 0.12;
-    const y = bandFrom.y + (bandTo.y - bandFrom.y) * k + (rnd() - 0.5) * h * 0.12;
-    const rr = (0.12 + rnd() * 0.18) * Math.max(w, h);
-    const g = c.createRadialGradient(x, y, 0, x, y, rr);
-    g.addColorStop(0, "rgba(70, 95, 150, 0.016)");
-    g.addColorStop(1, "rgba(0,0,0,0)");
-    c.fillStyle = g;
-    c.fillRect(x - rr, y - rr, rr * 2, rr * 2);
-  }
-
-  const count = Math.round((w * h) / (mobile ? 700 : 520));
-  for (let i = 0; i < count; i++) {
-    let x = rnd() * w;
-    let y = rnd() * h;
-    // A third of the stars crowd into the band.
-    if (i % 3 === 0) {
-      const k = rnd();
-      x = bandFrom.x + (bandTo.x - bandFrom.x) * k + w * 0.12 + (rnd() - 0.5) * w * 0.22;
-      y = bandFrom.y + (bandTo.y - bandFrom.y) * k + (rnd() - 0.5) * h * 0.22;
-    }
-    const b = Math.pow(rnd(), 2.4);
-    const a = 0.12 + b * 0.75;
-    const tint = rnd();
-    c.fillStyle =
-      tint < 0.2
-        ? `rgba(170, 195, 255, ${a})`
-        : tint < 0.3
-          ? `rgba(255, 225, 200, ${a})`
-          : `rgba(235, 240, 255, ${a})`;
-    const s = b > 0.6 ? 1.6 : b > 0.25 ? 1.15 : 0.8;
-    c.fillRect(x, y, s, s);
-  }
-  return cv;
-}
-
-export default function IntroCosmos({
-  origin,
-  mobile,
-}: {
-  /** performance.now() at which the intro's t = 0. */
-  origin: number;
-  mobile: boolean;
-}) {
+export default function IntroCosmos({ origin, mobile }: { origin: number; mobile: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1.25 : 1.5);
-    let w = 0;
-    let h = 0;
-    let starLayer: HTMLCanvasElement | null = null;
-
-    function resize() {
-      w = window.innerWidth;
-      h = window.innerHeight;
-      canvas!.width = Math.round(w * dpr);
-      canvas!.height = Math.round(h * dpr);
-      // Oversized so the slow push-in never shows an edge.
-      starLayer = paintStarLayer(w * 1.2, h * 1.2, mobile);
-      ctx!.fillStyle = "#000";
-      ctx!.fillRect(0, 0, canvas!.width, canvas!.height);
-    }
-    resize();
-    window.addEventListener("resize", resize);
-
-    const rnd = rand(42);
-    // Planets sit shoulder to shoulder along the ring (each gap sized by the
-    // two neighbours' radii) and alternate above/below the ring plane, so
-    // as the ring turns they slide over and behind one another.
-    const span = PLANETS.reduce((sum, p) => sum + p.size * 2, 0);
-    const scale = (Math.PI * 2 * PLANET_CROWDING) / span;
-    let along = 0;
-    const planets: Planet[] = PLANETS.map((def, i) => {
-      const next = PLANETS[(i + 1) % PLANETS.length]!;
-      const angle = (along / span) * Math.PI * 2;
-      along += def.size + next.size;
-      return {
-        angle,
-        radius: 1 + (i % 2 ? 0.07 : -0.05),
-        z: (i % 2 ? 0.16 : -0.12) + (rnd() - 0.5) * 0.06,
-        size: def.size * scale,
-        ...paintPlanet(def.name, def.tilt, 100 + i),
-        px: 0,
-        py: 0,
-        pr: 0,
-        depth: 0,
-      };
-    });
-
-    // Dust: a glittering spiral sheet inside the ring plus a thin halo
-    // around it — the "galaxy" strands the planets swim through.
-    const dustCount = mobile ? INTRO_DUST.mobile : INTRO_DUST.desktop;
-    const dust: Dust[] = Array.from({ length: dustCount }, (_, i) => {
-      const kind = i % 10;
-      const base = {
-        drift: 0.2 + rnd() * 0.3,
-        size: 0.8 + Math.pow(rnd(), 3) * 2.6,
-        alpha: 0.35 + rnd() * 0.65,
-      };
-      if (kind < 5) {
-        // The glittering strand that runs diagonally through the ring.
-        const along = (rnd() * 2 - 1) * 0.95;
-        const across = (rnd() + rnd() + rnd() - 1.5) * 0.09 + along * along * 0.12;
-        return {
-          ...base,
-          drift: 0.12,
-          angle: Math.atan2(across, along) + 0.7,
-          radius: Math.hypot(along, across),
-          z: (rnd() - 0.5) * 0.08,
-        };
-      }
-      if (kind < 8) {
-        const u = Math.pow(rnd(), 0.7);
-        return {
-          ...base,
-          angle: (kind % 3) * ((Math.PI * 2) / 3) + u * 3.4 + (rnd() - 0.5) * 0.5,
-          radius: 0.3 + u * 0.75,
-          z: (rnd() - 0.5) * 0.12,
-        };
-      }
-      return { ...base, angle: rnd() * Math.PI * 2, radius: 1.05 + rnd() * 0.3, z: (rnd() - 0.5) * 0.35 };
-    });
-
-    const stars: Star[] = [
-      // The one bright blue star top-right that anchors the reference frame.
-      { x: 0.33, y: -0.44, size: 1.6, phase: 0 },
-      { x: 0.24, y: -0.12, size: 1.0, phase: 1.3 },
-      { x: 0.31, y: -0.2, size: 0.7, phase: 2.1 },
-      { x: -0.12, y: -0.36, size: 0.6, phase: 0.7 },
-      { x: -0.35, y: 0.02, size: 0.55, phase: 2.6 },
-      { x: 0.08, y: 0.38, size: 0.6, phase: 1.9 },
-      { x: -0.26, y: 0.3, size: 0.5, phase: 3.3 },
-    ];
-    const starGlow = glowSprite(64, "rgba(255,255,255,1)", "rgba(140,180,255,0.18)");
-
-    // Painter's order. Neighbours overlap (PLANET_CROWDING) and keep passing
-    // through equal depth as the ring turns, so a plain depth sort flips
-    // which one is on top several times while they overlap. Instead, a pair
-    // that overlaps on screen keeps the stacking it had when it first
-    // touched; only pairs that are apart (where order is invisible) follow
-    // depth. above[i][j]: 1 = i over j, -1 = j over i, 0 = not overlapping.
-    const above = planets.map(() => planets.map(() => 0));
-    const drawList: Planet[] = [];
-
-    /** Is `from` already stacked over `to` through a chain of kept pairs? */
-    function over(from: number, to: number, seen = new Set<number>()): boolean {
-      seen.add(from);
-      const row = above[from]!;
-      for (let k = 0; k < row.length; k++) {
-        if (row[k] !== 1 || seen.has(k)) continue;
-        if (k === to || over(k, to, seen)) return true;
-      }
-      return false;
-    }
-
-    /** Fills drawList (bottom → top) with this frame's on-screen planets (pr > 0). */
-    function sortPlanets() {
-      const n = planets.length;
-      for (let i = 0; i < n; i++) {
-        for (let j = i + 1; j < n; j++) {
-          const a = planets[i]!;
-          const b = planets[j]!;
-          const touching =
-            a.pr > 0 &&
-            b.pr > 0 &&
-            Math.hypot(a.px - b.px, a.py - b.py) < a.pr * a.extent + b.pr * b.extent;
-          if (!touching) above[i]![j] = above[j]![i] = 0;
-          else if (above[i]![j] === 0) {
-            // A new contact follows depth unless the pairs already kept
-            // stack one over the other — then it agrees with them, so the
-            // kept pairs never form a loop no painter's order can draw
-            // (it happens once the receding ring shrinks into one clump).
-            const iOver = over(i, j) || (!over(j, i) && a.depth < b.depth);
-            above[i]![j] = iOver ? 1 : -1;
-            above[j]![i] = -above[i]![j]!;
-          }
-        }
-      }
-      // Topological order over the kept pairs, farthest first among the
-      // planets nothing still has to go under. The pairs can't loop (see
-      // above); the farthest-remaining fallback is only a safety net.
-      drawList.length = 0;
-      const left = planets.map((_, i) => i).filter((i) => planets[i]!.pr > 0);
-      while (left.length) {
-        let pick = -1;
-        let fallback = -1;
-        for (const i of left) {
-          const deeper = fallback < 0 || planets[i]!.depth > planets[fallback]!.depth;
-          if (deeper) fallback = i;
-          const free = left.every((j) => above[j]![i] !== -1);
-          if (free && (pick < 0 || planets[i]!.depth > planets[pick]!.depth)) pick = i;
-        }
-        const next = pick < 0 ? fallback : pick;
-        drawList.push(planets[next]!);
-        left.splice(left.indexOf(next), 1);
-      }
-    }
-
+    let disposed = false;
     let raf = 0;
-    function frame(now: number) {
-      raf = requestAnimationFrame(frame);
-      const t = now - origin;
-      const W = canvas!.width;
-      const H = canvas!.height;
+    let cleanup = () => {};
 
-      // --- camera ---------------------------------------------------------
-      // Slow drift at first, far enough back that the whole parade stays in
-      // frame, then the pull-back accelerates hard: the ring goes from
-      // filling the frame (2.5 s) to a speck (3.6 s).
-      let dist: number;
-      if (t < INTRO_T.ringPullback) {
-        dist = CAMERA_START + (CAMERA_HOLD - CAMERA_START) * smooth(t / INTRO_T.ringPullback);
-      } else {
-        const s = (t - INTRO_T.ringPullback) / 1000;
-        dist = CAMERA_HOLD * Math.exp(CAMERA_PULL * Math.pow(s, 2.2));
-      }
-      const pull = ramp(t, INTRO_T.ringPullback, INTRO_T.ringGone);
-      // Oblique at first (the near side of the ring looms at the bottom of
-      // the frame), turning face-on as the camera backs away.
-      const tilt = 0.62 - 0.4 * smooth(t / 3200);
-      const roll = -0.55 + 0.25 * Math.sin(t * 0.0006);
-      // Spin speeds up as it recedes: a spiral drain rather than a zoom.
-      const spin = t * 0.00085 + Math.pow(pull, 1.5) * 2.4;
-      // The ring's vanishing point drifts a little left and down.
-      const cx = W * (0.5 - 0.06 * pull);
-      const cy = H * (0.5 + 0.07 * pull);
-      // Portrait screens: size the ring by width so it still frames the shot.
-      const focal = Math.min(H * 0.55, W * 0.85);
+    // Dev-only: ?introT=<ms> freezes the shot, ?introDbg=a,b toggles layers.
+    const params =
+      process.env.NODE_ENV !== "production" ? new URLSearchParams(window.location.search) : null;
+    const frozenParam = params?.get("introT") ?? null;
+    const frozen = frozenParam !== null ? Number(frozenParam) : null;
+    const debug = (params?.get("introDbg") ?? "").split(",");
 
-      const cosT = Math.cos(tilt);
-      const sinT = Math.sin(tilt);
-      const cosR = Math.cos(roll);
-      const sinR = Math.sin(roll);
-
-      // Fade in from black over the first beat; ring gone by ringGone.
-      const master = ramp(t, 0, 500) * (1 - ramp(t, INTRO_T.ringGone - 700, INTRO_T.ringGone));
-      const dustMaster = ramp(t, 0, 500) * (1 - ramp(t, INTRO_T.ringGone - 200, INTRO_T.dot - 100));
-
-      // --- motion-blur trails ---------------------------------------------
-      // Instead of clearing, paint black over the last frame: a little smear
-      // while close, long streaks while the ring spirals away.
-      const trail = t < INTRO_T.ringPullback ? 0.55 : 0.55 - 0.35 * Math.sin(Math.PI * pull);
-      ctx!.globalCompositeOperation = "source-over";
-      ctx!.globalAlpha = t > INTRO_T.dot ? 1 : trail;
-      ctx!.fillStyle = "#000";
-      ctx!.fillRect(0, 0, W, H);
-      ctx!.globalAlpha = 1;
-
-      // --- starfield ------------------------------------------------------
-      const starsA =
-        ramp(t, INTRO_T.starsIn, INTRO_T.starsFull) *
-        (1 - ramp(t, INTRO_T.cosmosOut, INTRO_T.cosmosGone));
-      if (starsA > 0 && starLayer) {
-        const push = 1 + 0.07 * clamp01((t - INTRO_T.starsIn) / 7000);
-        const lw = starLayer.width * dpr * push;
-        const lh = starLayer.height * dpr * push;
-        ctx!.globalAlpha = starsA;
-        ctx!.drawImage(starLayer, (W - lw) / 2, (H - lh) / 2, lw, lh);
-        ctx!.globalCompositeOperation = "lighter";
-        for (const st of stars) {
-          const tw = 0.75 + 0.25 * Math.sin(t * 0.002 + st.phase * 3);
-          const size = st.size * 26 * dpr * tw;
-          const x = W / 2 + st.x * H * push;
-          const y = H / 2 + st.y * H * push;
-          ctx!.globalAlpha = starsA * tw;
-          ctx!.drawImage(starGlow, x - size / 2, y - size / 2, size, size);
-        }
-        ctx!.globalCompositeOperation = "source-over";
-        ctx!.globalAlpha = 1;
-      }
-
-      if (master <= 0 && dustMaster <= 0) return;
-
-      // --- dust -----------------------------------------------------------
-      if (dustMaster > 0) {
-        ctx!.globalCompositeOperation = "lighter";
-        ctx!.fillStyle = "#e9f1ff";
-        for (const d of dust) {
-          const a = d.angle + spin * (1 + d.drift);
-          let x = Math.cos(a) * d.radius;
-          let y = Math.sin(a) * d.radius;
-          // tilt about X, then roll about the view axis
-          const y2 = y * cosT - d.z * sinT;
-          const z2 = y * sinT + d.z * cosT;
-          y = y2;
-          const xr = x * cosR - y * sinR;
-          const yr = x * sinR + y * cosR;
-          x = xr;
-          const depth = dist - z2;
-          if (depth < 0.08) continue;
-          const k = focal / depth;
-          const sx = cx + x * k;
-          const sy = cy + yr * k;
-          if (sx < -4 || sy < -4 || sx > W + 4 || sy > H + 4) continue;
-          const size = Math.max(0.7, d.size * dpr * Math.min(2, 1 / depth));
-          ctx!.globalAlpha = d.alpha * dustMaster;
-          ctx!.fillRect(sx, sy, size, size);
-        }
-        ctx!.globalCompositeOperation = "source-over";
-        ctx!.globalAlpha = 1;
-      }
-
-      // --- planets --------------------------------------------------------
-      if (master > 0) {
-        for (const m of planets) {
-          const a = m.angle + spin;
-          const x = Math.cos(a) * m.radius;
-          const y = Math.sin(a) * m.radius;
-          const y2 = y * cosT - m.z * sinT;
-          const z2 = y * sinT + m.z * cosT;
-          m.depth = dist - z2;
-          m.pr = 0;
-          if (m.depth <= 0.12) continue;
-          const k = focal / m.depth;
-          m.px = cx + (x * cosR - y2 * sinR) * k;
-          m.py = cy + (x * sinR + y2 * cosR) * k;
-          m.pr = m.size * k;
-          const r = m.pr * m.extent;
-          if (m.px + r < 0 || m.py + r < 0 || m.px - r > W || m.py - r > H) m.pr = 0;
-        }
-        sortPlanets();
-        for (const m of drawList) {
-          const r = m.pr * m.extent;
-          // Only a planet looming right at the lens goes out of focus; the
-          // far side of the ring gets less light. Dimming paints the black
-          // silhouette over the planet, so overlaps stay solid.
-          const soft = m.pr / H > 0.42;
-          const shade = clamp01(1.25 - (m.depth - dist + 0.3) * 0.9);
-          const x = m.px - r;
-          const y = m.py - r;
-          ctx!.globalAlpha = master;
-          ctx!.drawImage(soft ? m.soft : m.sharp, x, y, r * 2, r * 2);
-          ctx!.globalAlpha = master * (0.5 - 0.4 * shade);
-          ctx!.drawImage(soft ? m.softShade : m.sharpShade, x, y, r * 2, r * 2);
-        }
-        ctx!.globalAlpha = 1;
-      }
-    }
-    raf = requestAnimationFrame(frame);
+    void import("three").then((THREE) => {
+      if (disposed) return;
+      cleanup = build(THREE, canvas, origin, mobile, frozen, debug, (id) => (raf = id));
+    });
 
     return () => {
+      disposed = true;
       cancelAnimationFrame(raf);
-      window.removeEventListener("resize", resize);
+      cleanup();
     };
   }, [origin, mobile]);
 
-  return <canvas ref={canvasRef} className="intro-cosmos" aria-hidden="true" />;
+  return (
+    <>
+      <canvas ref={canvasRef} className="intro-cosmos" aria-hidden="true" style={{ opacity: 0 }} />
+      <div className="intro-cosmos-vignette" aria-hidden="true" />
+    </>
+  );
+}
+
+function build(
+  THREE: typeof THREE_NS,
+  canvas: HTMLCanvasElement,
+  origin: number,
+  mobile: boolean,
+  frozen: number | null,
+  debug: string[],
+  setRaf: (id: number) => void
+) {
+  const renderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias: !mobile,
+    powerPreference: "high-performance",
+  });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, mobile ? 1.5 : 2));
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.15;
+  renderer.setClearColor(0x000000, 1);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, 1, 0.05, 4000);
+  const disposables: { dispose: () => void }[] = [];
+  const keep = <T extends { dispose: () => void }>(o: T) => (disposables.push(o), o);
+  const maxAniso = renderer.capabilities.getMaxAnisotropy();
+
+  function texture(name: CosmosTexture, color = true) {
+    const img = cosmosImage(name);
+    if (!img) return null;
+    const t = keep(new THREE.Texture(img));
+    t.colorSpace = color ? THREE.SRGBColorSpace : THREE.NoColorSpace;
+    t.anisotropy = maxAniso;
+    t.needsUpdate = true;
+    return t;
+  }
+
+  // --- light: one sun, a whisper of fill so night sides aren't a hole ----
+  const sunLight = new THREE.PointLight(0xfff4e6, 2.6, 0, 0);
+  sunLight.position.set(...SUN_POS);
+  scene.add(sunLight);
+  scene.add(new THREE.AmbientLight(0x8899bb, 0.035));
+
+  // --- sky -----------------------------------------------------------------
+  const skyTex = texture("stars_milky_way");
+  const sky = new THREE.Mesh(
+    keep(new THREE.SphereGeometry(1500, 48, 24)),
+    keep(
+      new THREE.MeshBasicMaterial({
+        map: skyTex,
+        color: skyTex ? new THREE.Color(0.32, 0.32, 0.36) : new THREE.Color(0, 0, 0),
+        side: THREE.BackSide,
+        depthWrite: false,
+        toneMapped: false,
+      })
+    )
+  );
+  sky.rotation.set(0.5, 0.3, 0.9);
+  // Backdrop first, always: nothing may depth-test against it.
+  sky.renderOrder = -2;
+  scene.add(sky);
+
+  const dotTex = keep(
+    new THREE.CanvasTexture(
+      glowCanvas([[0, "rgba(255,255,255,1)"], [0.35, "rgba(255,255,255,0.6)"], [1, "rgba(255,255,255,0)"]], 32, 32)
+    )
+  );
+  const STAR_COUNT = mobile ? 1600 : 3200;
+  const starPos = new Float32Array(STAR_COUNT * 3);
+  const starCol = new Float32Array(STAR_COUNT * 3);
+  for (let i = 0; i < STAR_COUNT; i++) {
+    const u = Math.random() * 2 - 1;
+    const a = Math.random() * Math.PI * 2;
+    const r = Math.sqrt(1 - u * u);
+    starPos.set([Math.cos(a) * r * 1200, u * 1200, Math.sin(a) * r * 1200], i * 3);
+    const warm = Math.random();
+    const b = 0.35 + Math.pow(Math.random(), 3) * 0.9;
+    starCol.set([b * (0.85 + 0.15 * warm), b * 0.92, b * (1.05 - 0.2 * warm)], i * 3);
+  }
+  const starGeo = keep(new THREE.BufferGeometry());
+  starGeo.setAttribute("position", new THREE.BufferAttribute(starPos, 3));
+  starGeo.setAttribute("color", new THREE.BufferAttribute(starCol, 3));
+  const stars = new THREE.Points(
+    starGeo,
+    keep(
+      new THREE.PointsMaterial({
+        size: mobile ? 2.2 : 2.6,
+        sizeAttenuation: false,
+        map: dotTex,
+        vertexColors: true,
+        transparent: true,
+        depthWrite: false,
+        toneMapped: false,
+      })
+    )
+  );
+  stars.renderOrder = -1;
+  scene.add(stars);
+
+  // Dust motes along the camera path: tiny, but they whip past and sell the speed.
+  const dustCount = mobile ? INTRO_DUST.mobile : INTRO_DUST.desktop;
+  const dustPos = new Float32Array(dustCount * 3);
+  for (let i = 0; i < dustCount; i++) {
+    dustPos.set([5 + Math.random() * 70, -5 + Math.random() * 16, -8 + Math.random() * 26], i * 3);
+  }
+  const dustGeo = keep(new THREE.BufferGeometry());
+  dustGeo.setAttribute("position", new THREE.BufferAttribute(dustPos, 3));
+  const dustMat = keep(
+    new THREE.PointsMaterial({
+      size: 0.05,
+      map: dotTex,
+      color: 0xc8d4ff,
+      transparent: true,
+      opacity: 0.55,
+      depthWrite: false,
+    })
+  );
+  scene.add(new THREE.Points(dustGeo, dustMat));
+
+  // --- sun -----------------------------------------------------------------
+  const sun = new THREE.Mesh(
+    keep(new THREE.SphereGeometry(SUN_RADIUS, 64, 32)),
+    keep(
+      new THREE.MeshBasicMaterial({
+        map: texture("sun"),
+        color: new THREE.Color(2.2, 1.6, 1.0),
+      })
+    )
+  );
+  sun.position.set(...SUN_POS);
+  scene.add(sun);
+  const glowTex = keep(
+    new THREE.CanvasTexture(
+      glowCanvas([
+        [0, "rgba(255,245,225,1)"],
+        [0.12, "rgba(255,220,160,0.85)"],
+        [0.35, "rgba(255,170,80,0.25)"],
+        [1, "rgba(255,120,40,0)"],
+      ])
+    )
+  );
+  const streakTex = keep(
+    new THREE.CanvasTexture(
+      glowCanvas([[0, "rgba(255,235,210,0.9)"], [0.3, "rgba(255,200,150,0.25)"], [1, "rgba(255,160,90,0)"]])
+    )
+  );
+  const sunGlows: THREE_NS.Sprite[] = [];
+  for (const [tex, sx, sy, opacity] of [
+    [glowTex, 34, 34, 1],
+    [glowTex, 110, 110, 0.35],
+    [streakTex, 260, 5, 0.55],
+  ] as const) {
+    const sprite = new THREE.Sprite(
+      keep(
+        new THREE.SpriteMaterial({
+          map: tex,
+          color: 0xffffff,
+          blending: THREE.AdditiveBlending,
+          transparent: true,
+          opacity,
+          depthWrite: false,
+        })
+      )
+    );
+    sprite.scale.set(sx, sy, 1);
+    sprite.position.set(...SUN_POS);
+    sunGlows.push(sprite);
+    scene.add(sprite);
+  }
+
+  // --- planets -------------------------------------------------------------
+  const sunPos = new THREE.Vector3(...SUN_POS);
+  const spinners: { mesh: THREE_NS.Object3D; rate: number }[] = [];
+
+  function atmosphere(radius: number, color: string, strength: number, halo: boolean) {
+    const scale = halo ? 1.035 : 1.004;
+    const mat = keep(
+      new THREE.ShaderMaterial({
+        vertexShader: ATMO_VERT,
+        fragmentShader: ATMO_FRAG,
+        uniforms: {
+          uColor: { value: new THREE.Color(color) },
+          uSun: { value: sunPos },
+          uStrength: { value: strength * (halo ? 0.7 : 1) },
+          uHalo: { value: halo ? 1 : 0 },
+          uLimb: { value: Math.sqrt(1 - 1 / (scale * scale)) },
+        },
+        side: halo ? THREE.BackSide : THREE.FrontSide,
+        blending: THREE.AdditiveBlending,
+        transparent: true,
+        depthWrite: false,
+      })
+    );
+    const mesh = new THREE.Mesh(keep(new THREE.SphereGeometry(radius * scale, 64, 32)), mat);
+    mesh.renderOrder = 2;
+    return mesh;
+  }
+
+  for (const b of BODIES) {
+    const group = new THREE.Group();
+    group.position.set(...b.pos);
+    group.rotation.z = b.tilt;
+    scene.add(group);
+
+    const map = texture(b.tex);
+    const body = new THREE.Mesh(
+      keep(new THREE.SphereGeometry(b.radius, 96, 48)),
+      keep(
+        new THREE.MeshStandardMaterial({
+          map,
+          color: map ? 0xffffff : b.color,
+          roughness: 1,
+          metalness: 0,
+        })
+      )
+    );
+    body.rotation.y = Math.random() * Math.PI * 2;
+    group.add(body);
+    spinners.push({ mesh: body, rate: b.spin });
+
+    if (b.clouds) {
+      const alpha = texture("earth_clouds", false);
+      if (alpha) {
+        const clouds = new THREE.Mesh(
+          keep(new THREE.SphereGeometry(b.radius * 1.012, 96, 48)),
+          keep(
+            new THREE.MeshStandardMaterial({
+              color: 0xffffff,
+              alphaMap: alpha,
+              transparent: true,
+              depthWrite: false,
+              roughness: 1,
+            })
+          )
+        );
+        group.add(clouds);
+        spinners.push({ mesh: clouds, rate: b.spin * 1.25 });
+      }
+    }
+
+    if (b.atmo && !debug.includes("noatmo")) {
+      if (!debug.includes("nohaze")) group.add(atmosphere(b.radius, b.atmo[0], b.atmo[1], false));
+      if (b.halo && !debug.includes("nohalo")) group.add(atmosphere(b.radius, b.atmo[0], b.atmo[1], true));
+    }
+
+    if (b.ring) {
+      const inner = b.radius * 1.24;
+      const outer = b.radius * 2.3;
+      const geo = keep(new THREE.RingGeometry(inner, outer, 192, 1));
+      const p = geo.attributes.position!;
+      const uv = geo.attributes.uv!;
+      for (let i = 0; i < p.count; i++) {
+        const len = Math.hypot(p.getX(i), p.getY(i));
+        uv.setXY(i, (len - inner) / (outer - inner), 0.5);
+      }
+      const ringTex = texture("saturn_ring");
+      const ring = new THREE.Mesh(
+        geo,
+        keep(
+          new THREE.MeshStandardMaterial({
+            map: ringTex,
+            color: ringTex ? 0xffffff : 0xcbb58c,
+            emissive: 0xffffff,
+            emissiveMap: ringTex,
+            emissiveIntensity: 0.18,
+            side: THREE.DoubleSide,
+            transparent: true,
+            opacity: ringTex ? 1 : 0.5,
+            depthWrite: false,
+            roughness: 1,
+          })
+        )
+      );
+      ring.rotation.x = -Math.PI / 2;
+      group.add(ring);
+    }
+  }
+
+  const moonMap = texture("moon");
+  const moon = new THREE.Mesh(
+    keep(new THREE.SphereGeometry(0.27, 64, 32)),
+    keep(new THREE.MeshStandardMaterial({ map: moonMap, color: moonMap ? 0xffffff : 0x999999, roughness: 1 }))
+  );
+  moon.position.set(EARTH.pos[0] + MOON_OFFSET[0], EARTH.pos[1] + MOON_OFFSET[1], EARTH.pos[2] + MOON_OFFSET[2]);
+  scene.add(moon);
+  spinners.push({ mesh: moon, rate: 0.05 });
+
+  // --- sizing --------------------------------------------------------------
+  function resize() {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    // Keep roughly the landscape horizontal field on portrait screens, so
+    // the parade still fits across — but don't go fish-eye.
+    const hfov = 2 * Math.atan(Math.tan((45 * Math.PI) / 360) * (16 / 9));
+    const vfov = camera.aspect < 1.2 ? 2 * Math.atan(Math.tan(hfov / 2) / camera.aspect) : (45 * Math.PI) / 180;
+    camera.fov = Math.min(80, (vfov * 180) / Math.PI);
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener("resize", resize);
+
+  // --- frame ---------------------------------------------------------------
+  const eye: Vec3 = [0, 0, 0];
+  const look: Vec3 = [0, 0, 0];
+  const lookV = new THREE.Vector3();
+  const toSun = new THREE.Vector3();
+  const forward = new THREE.Vector3();
+  const end = INTRO_T.cosmosGone + 300;
+  let lastOpacity = -1;
+
+  function frame(now: number) {
+    const t = frozen ?? now - origin;
+    const sec = t / 1000;
+
+    hermite(EYE, t, eye);
+    hermite(LOOK, t, look);
+    // A little hand-held float, fading out as the camera settles into the reveal.
+    const shake = 0.06 * (1 - smooth((t - INTRO_T.reveal) / 1200));
+    camera.position.set(eye[0], eye[1], eye[2]);
+    lookV.set(
+      look[0] + Math.sin(sec * 1.7) * shake,
+      look[1] + Math.sin(sec * 2.3 + 1) * shake,
+      look[2] + Math.sin(sec * 1.3 + 2) * shake
+    );
+    // Slight bank into the crane, levelling out for the wide shot.
+    const bank = 0.06 * smooth((t - 3000) / 2000) * (1 - smooth((t - INTRO_T.pullback) / 1500));
+    camera.up.set(Math.sin(sec * 0.6) * 0.02 - bank, 1, 0);
+    camera.lookAt(lookV);
+
+    for (let i = 0; i < spinners.length; i++) {
+      const s = spinners[i]!;
+      s.mesh.rotation.y = i * 1.7 + sec * s.rate;
+    }
+    sky.rotation.y = 0.3 + sec * 0.004;
+
+    // The anamorphic streak and glare swell as the Sun comes into view.
+    toSun.copy(sunPos).sub(camera.position).normalize();
+    camera.getWorldDirection(forward);
+    const facing = clamp01((forward.dot(toSun) - 0.6) / 0.4);
+    sunGlows[1]!.material.opacity = 0.2 + 0.3 * facing;
+    sunGlows[2]!.material.opacity = 0.15 + 0.5 * facing;
+
+    dustMat.opacity = 0.55 * (1 - smooth((t - INTRO_T.reveal) / 1500));
+
+    const opacity = smooth(t / 700) * (1 - smooth((t - INTRO_T.cosmosOut) / (INTRO_T.cosmosGone - INTRO_T.cosmosOut)));
+    if (Math.abs(opacity - lastOpacity) > 0.002) {
+      canvas.style.opacity = opacity.toFixed(3);
+      lastOpacity = opacity;
+    }
+
+    renderer.render(scene, camera);
+    if (frozen !== null || t < end) setRaf(requestAnimationFrame(frame));
+  }
+  setRaf(requestAnimationFrame(frame));
+
+  return () => {
+    window.removeEventListener("resize", resize);
+    disposables.forEach((d) => d.dispose());
+    renderer.dispose();
+  };
 }

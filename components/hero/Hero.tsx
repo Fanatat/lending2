@@ -11,16 +11,16 @@ import { useTypewriter } from "@/lib/useTypewriter";
 import { useIntroStore } from "@/lib/introStore";
 
 const TITLE = "#НЕРЕЗЮМЕ, а список реализованных задач";
-// The leading "Девять автономных систем." is rendered live by
+// The leading "Восемь автономных систем." is rendered live by
 // AnimatedLeadCount (synced to SystemsCounter's tally) instead of being
 // typed out as plain text — BODY_GHOST keeps the full original sentence
 // around only to reserve layout space (see the invisible ghost below).
 const BODY_GHOST =
-  "Девять автономных систем. Ноль сотрудников, ноль облачных подписок, ноль обещаний. Часть из них исполняет свои функции прямо сейчас, пока вы читаете эту строку.";
+  "Восемь автономных систем. Ноль сотрудников, одна подписка на нейросеть, ноль обещаний. Пока вы читаете эту строку, они продолжают работать.";
 const BODY_REST =
-  " Ноль сотрудников, ноль облачных подписок, ноль обещаний. Часть из них исполняет свои функции прямо сейчас, пока вы читаете эту строку.";
+  " Ноль сотрудников, одна подписка на нейросеть, ноль обещаний. Пока вы читаете эту строку, они продолжают работать.";
 const FOOTNOTE =
-  "Все задачи решаются за 2000 рублей в месяц. Доказательства ниже.";
+  "Всё это обходится в 2 000 ₽ в месяц. Доказательства — ниже.";
 
 // The headline reveal waits for the `hero-fly-in` CSS animation's real
 // `animationend` rather than a fixed timer racing it from mount — on a cold

@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import RevealOnScroll from "@/components/effects/RevealOnScroll";
 import { useHasFinePointer, useReducedMotion } from "@/lib/motion";
+import { useLabStore } from "@/lib/store";
+import { playSfx } from "@/lib/sfx";
 import ContactPhonePanel from "./ContactPhonePanel";
 
 const COST_LINES = [
@@ -127,12 +129,74 @@ function useCtaAttention<T extends HTMLElement>(
   return ref;
 }
 
+const RECEIPT_CLICKS = 3;
+
+/** Easter egg: the total can be "rung up" — three clicks print a receipt. */
+function Receipt({ onClose }: { onClose: () => void }) {
+  const [stamp] = useState(() =>
+    new Date().toLocaleString("ru-RU", { dateStyle: "short", timeStyle: "short" })
+  );
+  return (
+    <div className="receipt-paper mt-4 px-4 pb-6 pt-4 text-[11px] leading-relaxed" role="status">
+      <div className="text-center font-bold tracking-widest">КАССОВЫЙ ЧЕК</div>
+      <div className="text-center">ООО «Ноль сотрудников»</div>
+      <div className="text-center opacity-70">{stamp} · смена №1 · касса 0</div>
+      <div className="my-2 border-t border-dashed border-black/40" />
+      {COST_LINES.map((l) => (
+        <div key={l.label} className="flex justify-between gap-2">
+          <span>{l.label}</span>
+          <span className="tabular-nums">{l.amount},00</span>
+        </div>
+      ))}
+      <div className="flex justify-between gap-2 opacity-70">
+        <span>Восемь агентов × 0 ₽</span>
+        <span className="tabular-nums">0,00</span>
+      </div>
+      <div className="flex justify-between gap-2 opacity-70">
+        <span>Сон автора</span>
+        <span className="tabular-nums">не учтён</span>
+      </div>
+      <div className="my-2 border-t border-dashed border-black/40" />
+      <div className="flex justify-between text-sm font-bold">
+        <span>ИТОГО</span>
+        <span className="tabular-nums">={TOTAL},00</span>
+      </div>
+      <div className="mt-2 text-center opacity-70">СПАСИБО, ЧТО ДОЧИТАЛИ</div>
+      <div className="mt-1 text-center tracking-[0.3em] opacity-60">|||| | ||| || |||| | ||</div>
+      <button
+        type="button"
+        data-cursor="interactive"
+        onClick={onClose}
+        className="mt-3 block w-full text-center underline underline-offset-2 opacity-70 hover:opacity-100"
+      >
+        оторвать
+      </button>
+    </div>
+  );
+}
+
 export default function ClosingSection() {
   const reducedMotion = useReducedMotion();
   const hasFinePointer = useHasFinePointer();
   const ctaRef = useCtaAttention<HTMLButtonElement>(reducedMotion, hasFinePointer, true);
   const maxRef = useCtaAttention<HTMLAnchorElement>(reducedMotion, hasFinePointer, false);
   const [phoneOpen, setPhoneOpen] = useState(false);
+  const [receipt, setReceipt] = useState(false);
+  const clicks = useRef<number[]>([]);
+  const markFound = useLabStore((s) => s.markFound);
+
+  function ringUp() {
+    const now = performance.now();
+    clicks.current = [...clicks.current.filter((t) => now - t < 1200), now];
+    playSfx("ui_click", { rate: 0.8 + clicks.current.length * 0.2 });
+    if (clicks.current.length >= RECEIPT_CLICKS && !receipt) {
+      clicks.current = [];
+      setReceipt(true);
+      markFound("receipt");
+      for (let i = 0; i < 6; i++) playSfx("keys", { delay: i * 0.12, rate: 1.5, volume: 0.6 });
+    }
+  }
+
   return (
     <section
       id="closing"
@@ -157,11 +221,19 @@ export default function ClosingSection() {
                 <tr>
                   <td className="pt-3 text-fg-primary">Итого в месяц</td>
                   <td className="pt-3 text-right text-xl font-bold tabular-nums text-accent">
-                    {TOTAL} ₽
+                    <button
+                      type="button"
+                      onClick={ringUp}
+                      aria-label={`Итого ${TOTAL} рублей`}
+                      className="cursor-default tabular-nums active:scale-95"
+                    >
+                      {TOTAL} ₽
+                    </button>
                   </td>
                 </tr>
               </tbody>
             </table>
+            {receipt && <Receipt onClose={() => setReceipt(false)} />}
           </div>
         </RevealOnScroll>
 

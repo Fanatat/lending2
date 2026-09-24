@@ -13,10 +13,12 @@ import MatrixRain from "@/components/effects/MatrixRain";
 import SoundToggle from "@/components/effects/SoundToggle";
 import EasterEggCounter from "@/components/effects/EasterEggCounter";
 import ProjectTransitionOverlay from "@/components/transitions/ProjectTransitionOverlay";
-import PacketPile from "@/components/effects/PacketPile";
+import CrowdFall from "@/components/effects/CrowdFall";
 import AccessDeniedOverlay from "@/components/sections/allin/AccessDeniedOverlay";
 import BranchOverlay from "@/components/easter-eggs/BranchOverlay";
 import SudoEasterEgg from "@/components/easter-eggs/SudoEasterEgg";
+import AgentVision from "@/components/easter-eggs/AgentVision";
+import IdleScreensaver from "@/components/easter-eggs/IdleScreensaver";
 import IntroGate from "@/components/intro/IntroGate";
 
 const jetbrainsMono = JetBrains_Mono({
@@ -28,7 +30,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 const TITLE = "Привет от Валеры";
 const DESCRIPTION =
-  "Девять автономных систем. Ноль сотрудников, ноль облачных подписок, ноль обещаний.";
+  "Восемь автономных систем. Ноль сотрудников, одна подписка на нейросеть, ноль обещаний.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vanatat.vercel.app"),
@@ -97,10 +99,12 @@ export default function RootLayout({
           <div className="relative z-10">{children}</div>
         </IntroGate>
         <ProjectTransitionOverlay />
-        <PacketPile />
+        <CrowdFall />
         <AccessDeniedOverlay />
         <BranchOverlay />
         <SudoEasterEgg />
+        <AgentVision />
+        <IdleScreensaver />
       </body>
     </html>
   );

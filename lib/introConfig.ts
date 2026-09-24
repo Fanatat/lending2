@@ -1,57 +1,51 @@
 /**
- * Shared timeline/copy for the boot intro (components/intro/*). The timeline
- * follows the reference recording (reference/intro_reference.mp4, local-only
- * like the rest of /reference/) beat for beat, so every number here is
- * "ms since the intro started" and can be checked against the video:
+ * Shared timeline/copy for the boot intro (components/intro/*). Every number
+ * is "ms since the intro started" (the clock starts when the visitor picks
+ * sound on/off on the gate screen, see IntroSoundGate):
  *
- *   0.0 s  the eight planets spin in a ring right around the camera
- *   2.7 s  the ring recedes, spiralling, into a starfield
- *   4.4 s  a white point flies in and swells into a glowing ball
- *   5.0 s  the ball unwinds into the mark (dot + wake arcs)
- *   9.4 s  mark and stars fade to black
- *  10.9 s  teal nebula light, then the planet sphere
- *  13.4 s  footer, 14.6 s heading, 15.8 s the "Начать" button
+ *   0.0 s  planet parade: the camera glides outward along the aligned
+ *          planets — Earth and the Moon, Mars, Jupiter, Saturn pass close by
+ *   4.2 s  the camera cranes up and back: the whole parade in one line,
+ *          from the Sun's glare to Neptune
+ *   5.8 s  it pulls away until the parade is lost among the stars
+ *   7.8 s  fade to black
+ *   8.5 s  teal nebula light, then the planet sphere
+ *  11.0 s  footer, 12.2 s heading, 13.4 s the "Начать" button
  *
- * After that the intro waits for the visitor (like the reference): the
- * sphere keeps turning until "Начать" is pressed.
+ * After that the intro waits for the visitor: the sphere keeps turning
+ * until "Начать" is pressed.
  *
- * While the mark is switched off (INTRO_SHOW_MARK) its beat is cut out:
- * everything from "stars fade to black" on comes MARK_BEAT_MS earlier.
+ * The old logo reveal (point → ball → mark) is still in the code but off
+ * (INTRO_SHOW_MARK); switched on, it plays after the pull-back and pushes
+ * everything from "fade to black" MARK_BEAT_MS later.
  */
 
-/**
- * The logo reveal (point → ball → mark) stays in the code but is off
- * until the logo is approved.
- */
 export const INTRO_SHOW_MARK = false;
 const MARK_BEAT_MS = 4000;
-const cut = INTRO_SHOW_MARK ? 0 : MARK_BEAT_MS;
+const mk = INTRO_SHOW_MARK ? MARK_BEAT_MS : 0;
 
 export const INTRO_T = {
-  /** Camera starts pulling away from the planet ring. */
-  ringPullback: 2500,
-  /** Ring has shrunk to a sparkle cloud; spheres are gone. */
-  ringGone: 3900,
-  /** Starfield fade-in window. */
-  starsIn: 2900,
-  starsFull: 3900,
-  /** White point appears, swells to a ball. */
-  dot: 4400,
-  /** Ball unwinds into the mark. */
-  mark: 5000,
-  /** Mark + stars fade to black. */
-  cosmosOut: 9400 - cut,
-  cosmosGone: 10200 - cut,
+  /** Camera cranes up: the aligned parade in one shot. */
+  reveal: 4200,
+  /** Camera pulls away into the starfield. */
+  pullback: 5800,
+  /** White point appears, swells to a ball (mark on only). */
+  dot: 7200,
+  /** Ball unwinds into the mark (mark on only). */
+  mark: 7800,
+  /** Parade (+ mark) fade to black. */
+  cosmosOut: 7800 + mk,
+  cosmosGone: 8500 + mk,
   /** Nebula light fades in over black. */
-  nebula: 10900 - cut,
-  nebulaFull: 12300 - cut,
+  nebula: 8500 + mk,
+  nebulaFull: 9900 + mk,
   /** Planet sphere fades in. */
-  sphere: 11900 - cut,
-  sphereFull: 13600 - cut,
+  sphere: 9500 + mk,
+  sphereFull: 11200 + mk,
   /** Footer, then heading, then button. */
-  chrome: 13400 - cut,
-  title: 14600 - cut,
-  button: 15800 - cut,
+  chrome: 11000 + mk,
+  title: 12200 + mk,
+  button: 13400 + mk,
 };
 
 /** "Начать" → screen blooms into the planet, then the site shows through. */
@@ -63,8 +57,8 @@ export const INTRO_SKIP_DELAY_MS = 1200;
 
 export const MOBILE_BREAKPOINT_PX = 768;
 
-/** Sparkle dust density around the planet ring (desktop / mobile). */
-export const INTRO_DUST = { desktop: 900, mobile: 420 };
+/** Space-dust motes around the camera path (desktop / mobile) — they sell the speed. */
+export const INTRO_DUST = { desktop: 700, mobile: 300 };
 
 /** Intro text per locale — the intro sits in the root layout, so /en gets it too. */
 export const INTRO_COPY = {
@@ -73,12 +67,20 @@ export const INTRO_COPY = {
     cta: "Начать",
     legal: "Продолжая, вы увидите нечто.",
     skip: "Пропустить",
+    soundOn: "Войти со звуком",
+    soundOff: "без звука",
+    soundNote: "Лучше в наушниках",
+    loading: "загрузка",
   },
   en: {
     title: "Welcome — Valery here!",
     cta: "Start",
     legal: "Carry on and you'll see something.",
     skip: "Skip",
+    soundOn: "Enter with sound",
+    soundOff: "without sound",
+    soundNote: "Headphones recommended",
+    loading: "loading",
   },
 };
 

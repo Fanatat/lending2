@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLabStore } from "@/lib/store";
 import { useReducedMotion } from "@/lib/motion";
+import { playSfx } from "@/lib/sfx";
 
 const TARGET = "sudo";
 const CLOSE_BUTTON_DELAY_MS = 5000;
@@ -91,6 +92,7 @@ export default function SudoEasterEgg() {
       if (bufferRef.current === TARGET) {
         bufferRef.current = "";
         engageLock();
+        playSfx("alarm");
         markFound("sudo");
       }
     }

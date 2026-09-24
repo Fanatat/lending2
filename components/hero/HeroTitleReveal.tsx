@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "@/lib/motion";
 import { useLabStore } from "@/lib/store";
+import { playSfx } from "@/lib/sfx";
 
 type Phase = "pre" | "grow" | "hold" | "shrink" | "done";
 
@@ -119,6 +120,7 @@ export default function HeroTitleReveal({
       clickCountRef.current = 0;
       const next = !matrixMode;
       setMatrixMode(next);
+      playSfx("matrix", { rate: next ? 1 : 0.8 });
       if (next) {
         // One gesture, two eggs: the matrix theme itself, and the hidden
         // СИСТЕМА 04 block that unfolds alongside it (see BridgeSection).

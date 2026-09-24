@@ -21,7 +21,7 @@ export interface Hp100MetricDef {
 }
 
 export const HP100_METRICS: Hp100MetricDef[] = [
-  { key: "co2", label: "CO2", unit: "ppm", min: 400, max: 2200, normalMax: 800, warnMax: 1000 },
+  { key: "co2", label: "CO₂", unit: "ppm", min: 400, max: 2200, normalMax: 800, warnMax: 1000 },
   { key: "temperature", label: "Темп.", unit: "°C", min: 18, max: 30, normalMax: 25, warnMax: 27 },
   { key: "humidity", label: "Влажн.", unit: "%", min: 25, max: 70, normalMax: 55, warnMax: 62 },
   { key: "dust", label: "Пыль", unit: "µg/m³", min: 5, max: 90, normalMax: 35, warnMax: 55 },

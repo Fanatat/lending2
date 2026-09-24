@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useReducedMotion } from "@/lib/motion";
-import { useLabStore, ALL_EASTER_EGGS } from "@/lib/store";
+import { useLabStore, PHONE_UNLOCK_EGGS } from "@/lib/store";
 
 // The number never sits in source or the shipped bundle as a literal,
 // phone-shaped string — only as this char-code array, decoded in-browser
@@ -28,7 +28,7 @@ interface ContactPhonePanelProps {
  * gets `tabIndex={-1}` when closed too, or a keyboard user tabbing through
  * the page would land focus on an invisible, unclickable button.
  *
- * The number itself only decodes into markup once ALL_EASTER_EGGS have all
+ * The number itself only decodes into markup once PHONE_UNLOCK_EGGS eggs have
  * been found — until then the panel shows how many are left instead, so the
  * digits are never present in the DOM for a scanner or a casual visitor to
  * pick up, gated or not.
@@ -37,7 +37,7 @@ export default function ContactPhonePanel({ open, onClose }: ContactPhonePanelPr
   const reducedMotion = useReducedMotion();
   const [copied, setCopied] = useState(false);
   const foundCount = useLabStore((s) => s.foundEasterEggs.length);
-  const total = ALL_EASTER_EGGS.length;
+  const total = PHONE_UNLOCK_EGGS;
   const unlocked = foundCount >= total;
 
   useEffect(() => {
@@ -97,8 +97,8 @@ export default function ContactPhonePanel({ open, onClose }: ContactPhonePanelPr
           )}
           {open && !unlocked && (
             <p className="mt-1 max-w-[220px] text-left text-[11px] leading-snug text-fg-muted">
-              Номер скрыт. Разблокируется после {foundCount}/{total} найденных
-              пасхалок на странице.
+              Номер скрыт: он откроется, когда вы найдёте {total} пасхалок
+              на странице. Сейчас найдено {Math.min(foundCount, total)}/{total}.
             </p>
           )}
         </div>

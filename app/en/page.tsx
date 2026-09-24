@@ -4,7 +4,7 @@ import SiteFooter from "@/components/sections/closing/SiteFooter";
 
 const TITLE = "Hi, I'm Valery";
 const DESCRIPTION =
-  "Nine autonomous systems. Zero employees, zero cloud subscriptions, zero promises.";
+  "Eight autonomous systems. Zero employees, one AI subscription, zero promises.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -94,8 +94,8 @@ export default function EnglishHomePage() {
           {TITLE}
         </h1>
         <p className="max-w-2xl text-base text-fg-primary/90 sm:text-lg">
-          {DESCRIPTION} Part of them are doing their job right now, while
-          you&apos;re reading this line.
+          {DESCRIPTION} They keep working while you&apos;re reading this
+          line.
         </p>
       </section>
 
