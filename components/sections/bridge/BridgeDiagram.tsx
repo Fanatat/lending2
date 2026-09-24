@@ -87,11 +87,22 @@ export default function BridgeDiagram() {
   const unicornMode = useLabStore((s) => s.unicornMode);
   const setUnicornMode = useLabStore((s) => s.setUnicornMode);
   const markFound = useLabStore((s) => s.markFound);
+  const matrixMode = useLabStore((s) => s.matrixMode);
   const toggleTimestamps = useRef<number[]>([]);
   const rightPipeRef = useRef<HTMLDivElement>(null);
 
+  // The bridge only exists in Matrix mode: when the theme switches back and
+  // the block folds away, mend the pipe too — otherwise the runners keep
+  // falling (and yelling) out of an invisible section.
   useEffect(() => {
-    if (!ipv6Broken || reducedMotion) return;
+    if (!matrixMode) {
+      setIpv6Broken(false);
+      toggleTimestamps.current = [];
+    }
+  }, [matrixMode]);
+
+  useEffect(() => {
+    if (!ipv6Broken || reducedMotion || !matrixMode) return;
     const packetCount = unicornMode ? 7 : 3;
     const fullDuration = unicornMode ? TRAVEL_MS_UNICORN : TRAVEL_MS;
     const brokenDuration = (fullDuration / 2) * 1000;
@@ -107,7 +118,7 @@ export default function BridgeDiagram() {
       requestFall({ x, y, unicorn: unicornMode });
     }, spawnEveryMs);
     return () => window.clearInterval(id);
-  }, [ipv6Broken, unicornMode, reducedMotion]);
+  }, [ipv6Broken, unicornMode, reducedMotion, matrixMode]);
 
   function handleToggle() {
     const next = !ipv6Broken;

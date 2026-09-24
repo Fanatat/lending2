@@ -5,7 +5,7 @@ import RevealOnScroll from "@/components/effects/RevealOnScroll";
 import { useHasFinePointer, useReducedMotion } from "@/lib/motion";
 import { useLabStore } from "@/lib/store";
 import { playSfx } from "@/lib/sfx";
-import ContactPhonePanel from "./ContactPhonePanel";
+import { MAX_URL, TELEGRAM_URL } from "@/lib/site";
 
 const COST_LINES = [
   { label: "Арендованный сервер", amount: 300 },
@@ -30,22 +30,19 @@ function idleShakeOffset(elapsedInPeriod: number) {
 }
 
 /**
- * Combines three transform sources into one imperative write per frame so
+ * Combines two transform sources into one imperative write per frame so
  * they never fight over the element's own inline `transform` (a CSS
  * `animation` and a JS-driven inline transform on the same property would
  * otherwise silently override each other):
  *  - idle shake: a small periodic wiggle that draws the eye while at rest
  *  - magnetic pull: the button leans toward the cursor within a small radius
- *  - (TG button only) scroll jitter: shakes in proportion to scroll speed,
- *    the closest analogue, without an actual camera, to "text reacts to
- *    camera movement" — kept from the original CTA-only effect.
  * Idle shake pauses while the magnet is actively engaged so the two never
- * visually compete.
+ * visually compete. Both CTA buttons read the same clock (performance.now()
+ * modulo the period), so they wiggle in unison instead of out of step.
  */
 function useCtaAttention<T extends HTMLElement>(
   reducedMotion: boolean,
-  hasFinePointer: boolean,
-  withScrollJitter: boolean
+  hasFinePointer: boolean
 ) {
   const ref = useRef<T>(null);
 
@@ -55,11 +52,8 @@ function useCtaAttention<T extends HTMLElement>(
     if (!el) return;
 
     let rafId = 0;
-    let lastScrollY = window.scrollY;
-    let scrollVelocity = 0;
     let pointerX = -9999;
     let pointerY = -9999;
-    const startTime = performance.now();
 
     function onPointerMove(e: PointerEvent) {
       pointerX = e.clientX;
@@ -70,21 +64,6 @@ function useCtaAttention<T extends HTMLElement>(
     }
 
     function frame(now: number) {
-      let jx = 0;
-      let jy = 0;
-      let jrot = 0;
-      if (withScrollJitter) {
-        const y = window.scrollY;
-        scrollVelocity = scrollVelocity * 0.85 + (y - lastScrollY) * 0.15;
-        lastScrollY = y;
-        const amount = Math.min(6, Math.abs(scrollVelocity) * 0.6);
-        if (amount > 0.05) {
-          jx = (Math.random() - 0.5) * amount;
-          jy = (Math.random() - 0.5) * amount;
-          jrot = (Math.random() - 0.5) * amount * 0.4;
-        }
-      }
-
       let mx = 0;
       let my = 0;
       if (hasFinePointer && el) {
@@ -103,14 +82,13 @@ function useCtaAttention<T extends HTMLElement>(
 
       let sx = 0;
       if (mx === 0 && my === 0) {
-        sx = idleShakeOffset((now - startTime) % IDLE_PERIOD_MS);
+        sx = idleShakeOffset(now % IDLE_PERIOD_MS);
       }
 
-      const x = jx + mx + sx;
-      const y = jy + my;
+      const x = mx + sx;
       if (el) {
-        if (Math.abs(x) > 0.05 || Math.abs(y) > 0.05 || Math.abs(jrot) > 0.05) {
-          el.style.transform = `translate(${x.toFixed(2)}px, ${y.toFixed(2)}px) rotate(${jrot.toFixed(2)}deg)`;
+        if (Math.abs(x) > 0.05 || Math.abs(my) > 0.05) {
+          el.style.transform = `translate(${x.toFixed(2)}px, ${my.toFixed(2)}px)`;
         } else {
           el.style.transform = "";
         }
@@ -124,7 +102,7 @@ function useCtaAttention<T extends HTMLElement>(
       cancelAnimationFrame(rafId);
       window.removeEventListener("pointermove", onPointerMove);
     };
-  }, [reducedMotion, hasFinePointer, withScrollJitter]);
+  }, [reducedMotion, hasFinePointer]);
 
   return ref;
 }
@@ -178,9 +156,8 @@ function Receipt({ onClose }: { onClose: () => void }) {
 export default function ClosingSection() {
   const reducedMotion = useReducedMotion();
   const hasFinePointer = useHasFinePointer();
-  const ctaRef = useCtaAttention<HTMLButtonElement>(reducedMotion, hasFinePointer, true);
-  const maxRef = useCtaAttention<HTMLAnchorElement>(reducedMotion, hasFinePointer, false);
-  const [phoneOpen, setPhoneOpen] = useState(false);
+  const tgRef = useCtaAttention<HTMLAnchorElement>(reducedMotion, hasFinePointer);
+  const maxRef = useCtaAttention<HTMLAnchorElement>(reducedMotion, hasFinePointer);
   const [receipt, setReceipt] = useState(false);
   const clicks = useRef<number[]>([]);
   const markFound = useLabStore((s) => s.markFound);
@@ -273,19 +250,19 @@ export default function ClosingSection() {
             index={4}
             className="flex flex-col items-center gap-3 lg:items-start"
           >
-            <button
-              ref={ctaRef}
-              type="button"
-              onClick={() => setPhoneOpen(true)}
-              aria-expanded={phoneOpen}
+            <a
+              ref={tgRef}
+              href={TELEGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               data-cursor="interactive"
               className="mt-8 inline-block border border-accent px-6 py-3 text-sm text-accent transition-[filter] duration-200 hover:[filter:drop-shadow(0_0_6px_var(--accent))]"
             >
               Написать в ТГ
-            </button>
+            </a>
             <a
               ref={maxRef}
-              href="https://max.ru/se14158141_bot"
+              href={MAX_URL}
               target="_blank"
               rel="noopener noreferrer"
               data-cursor="interactive"
@@ -296,8 +273,6 @@ export default function ClosingSection() {
           </RevealOnScroll>
         </div>
       </div>
-
-      <ContactPhonePanel open={phoneOpen} onClose={() => setPhoneOpen(false)} />
     </section>
   );
 }

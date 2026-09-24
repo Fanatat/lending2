@@ -6,6 +6,8 @@ import { useReducedMotion } from "@/lib/motion";
 
 interface DetailsDisclosureProps {
   text: ReactNode;
+  /** Toggle caption; the English page passes its own. */
+  label?: string;
 }
 
 /**
@@ -16,7 +18,7 @@ interface DetailsDisclosureProps {
  * line-height) and silently clip the last line; grid-template-rows always
  * tracks the content's real height.
  */
-export default function DetailsDisclosure({ text }: DetailsDisclosureProps) {
+export default function DetailsDisclosure({ text, label = "Подробнее" }: DetailsDisclosureProps) {
   const [open, setOpen] = useState(false);
   const reducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export default function DetailsDisclosure({ text }: DetailsDisclosureProps) {
         onClick={() => setOpen((o) => !o)}
         className="cursor-pointer text-sm text-accent"
       >
-        {open ? "▾" : "▸"} Подробнее
+        {open ? "▾" : "▸"} {label}
       </button>
       <div
         style={{

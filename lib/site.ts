@@ -6,6 +6,10 @@
 export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://vanatat.vercel.app";
 
+export const GITHUB_URL = "https://github.com/Fanatat";
+export const TELEGRAM_URL = "https://t.me/fanatat";
+export const MAX_URL = "https://max.ru/se14158141_bot";
+
 /** Prefix a file from /public for code paths Next doesn't rewrite itself (fetch, three.js loaders). */
 export function asset(path: string) {
   return `${BASE_PATH}${path}`;

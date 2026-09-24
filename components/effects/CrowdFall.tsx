@@ -424,7 +424,21 @@ export default function CrowdFall() {
     }
     raf = requestAnimationFrame(frame);
 
+    // Leaving Matrix mode folds the bridge away and mends its pipe (see
+    // BridgeDiagram); runners still in mid-air fade out rather than keep
+    // falling and yelling from a section that's no longer there. The heap
+    // already on the floor stays — it has its own sweep button.
+    const unsubMatrix = useLabStore.subscribe((s, prev) => {
+      if (s.matrixMode || !prev.matrixMode) return;
+      for (const b of bodies) {
+        if (b.landed || b.fade !== null) continue;
+        b.fade = 0.6;
+        b.yell = null;
+      }
+    });
+
     return () => {
+      unsubMatrix();
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
       window.removeEventListener("pointermove", onPointerMove);
