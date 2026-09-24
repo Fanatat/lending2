@@ -1,5 +1,7 @@
 "use client";
 
+import { asset } from "@/lib/site";
+
 /**
  * Planet textures for the intro's parade (components/intro/IntroCosmos).
  * Source: Solar System Scope, https://www.solarsystemscope.com/textures/
@@ -33,7 +35,7 @@ let loaded = 0;
 const listeners = new Set<(progress: number) => void>();
 
 function src(name: CosmosTexture) {
-  return `/textures/planets/${name}.${name === "saturn_ring" ? "png" : "jpg"}`;
+  return asset(`/textures/planets/${name}.${name === "saturn_ring" ? "png" : "jpg"}`);
 }
 
 /** Starts (or joins) the download; resolves once every image has settled. */

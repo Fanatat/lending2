@@ -1,6 +1,7 @@
 "use client";
 
 import { useLabStore } from "@/lib/store";
+import { asset } from "@/lib/site";
 
 /**
  * Sample-based sound for the whole site: real recordings from
@@ -101,7 +102,7 @@ function load(file: string): Promise<AudioBuffer | null> {
   if (!c) return Promise.resolve(null);
   const cached = loading.get(file);
   if (cached) return cached;
-  const p = fetch(`/sounds/${file}.mp3`)
+  const p = fetch(asset(`/sounds/${file}.mp3`))
     .then((r) => (r.ok ? r.arrayBuffer() : Promise.reject(new Error(String(r.status)))))
     .then(
       (data) =>

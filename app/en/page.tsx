@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import SetHtmlLang from "@/components/effects/SetHtmlLang";
 import SiteFooter from "@/components/sections/closing/SiteFooter";
+import { OG_IMAGE, asset } from "@/lib/site";
 
 const TITLE = "Hi, I'm Valery";
 const DESCRIPTION =
@@ -10,24 +11,26 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: {
-    canonical: "/en",
+    canonical: asset("/en"),
     languages: {
-      ru: "/",
-      en: "/en",
+      ru: asset("/"),
+      en: asset("/en"),
     },
   },
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
-    url: "/en",
+    url: asset("/en"),
     siteName: TITLE,
     locale: "en_US",
     type: "website",
+    images: [OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: TITLE,
     description: DESCRIPTION,
+    images: [OG_IMAGE],
   },
 };
 
