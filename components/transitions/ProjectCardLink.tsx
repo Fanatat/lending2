@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useRef, type KeyboardEvent, type ReactNode } from "react";
 import { useTransitionStore } from "@/lib/transitionStore";
 import { useReducedMotion } from "@/lib/motion";
@@ -10,6 +10,11 @@ interface ProjectCardLinkProps {
   children: ReactNode;
   className?: string;
   ariaLabel: string;
+  /**
+   * Pure "read more" links pass this: on the project page itself they'd
+   * point at the page you're already on, so they disappear instead.
+   */
+  hideWhenCurrent?: boolean;
 }
 
 const OVERLAY_MS = 550;
@@ -24,11 +29,13 @@ export default function ProjectCardLink({
   children,
   className,
   ariaLabel,
+  hideWhenCurrent = false,
 }: ProjectCardLinkProps) {
   const ref = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const start = useTransitionStore((s) => s.start);
   const reducedMotion = useReducedMotion();
+  const current = usePathname() === href;
 
   function activate() {
     const el = ref.current;
@@ -46,6 +53,12 @@ export default function ProjectCardLink({
       e.preventDefault();
       activate();
     }
+  }
+
+  // Widgets are reused on their own project page, where the card must stay
+  // a plain block rather than a button that zooms into itself.
+  if (current) {
+    return hideWhenCurrent ? null : <div className={className}>{children}</div>;
   }
 
   return (

@@ -293,10 +293,11 @@ export default function HP100Widget() {
 
       <ProjectCardLink
         href="/projects/hp100"
+        hideWhenCurrent
         ariaLabel="Открыть проект HP100 целиком"
         className="mt-3 inline-block text-[10px] text-accent"
       >
-        Архитектура и лог платы →
+        Как устроена плата →
       </ProjectCardLink>
     </div>
   );

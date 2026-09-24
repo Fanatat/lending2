@@ -41,6 +41,11 @@ const INITIAL_STATUS: Record<SystemId, SystemStatusEntry> = {
   perimeter: { online: true, since: Date.parse("2026-08-28T00:00:00Z") },
 };
 
+/** The confirmed start dates alone, for counters outside the status line. */
+export const INITIAL_SINCE = Object.fromEntries(
+  Object.entries(INITIAL_STATUS).map(([id, s]) => [id, s.since])
+) as Record<SystemId, number | null>;
+
 interface SystemStatusStore {
   status: Record<SystemId, SystemStatusEntry>;
   setOnline: (id: SystemId, online: boolean) => void;

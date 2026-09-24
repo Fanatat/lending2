@@ -1,20 +1,21 @@
 import SectionShell from "@/components/sections/SectionShell";
 import SystemStatusLine from "@/components/sections/SystemStatusLine";
 import CartridgeGrid from "./CartridgeGrid";
+import { SYSTEM_COPY } from "@/lib/systemCopy";
 
 export default function FridaySection() {
   return (
     <SectionShell
       id="friday-studio"
-      number="СИСТЕМА 01"
-      title="Пять игр студии «Пятница» и промо-материалы"
+      number={SYSTEM_COPY.friday.number}
+      title={SYSTEM_COPY.friday.title}
       line={
         <>
           <SystemStatusLine systemId="friday" className="mb-3" />
           Полный цикл — от чистого и быстрого кода до промо-роликов. Пока конкурент грузит мегабайты фреймворка, наша игра уже приняла первый ход игрока.
         </>
       }
-      details="Отдельная система сначала разрабатывает игру, а потом ставит её в очередь на обслуживание. Готовит промо-материалы и тексты карточек для площадок. Скрипты сами поднимают игру в браузере без окна, записывают геймплей вертикально и горизонтально, проверяют, что в английскую сборку не просочилась кириллица, и монтируют ролик."
+      details={SYSTEM_COPY.friday.details}
     >
       <CartridgeGrid />
     </SectionShell>
