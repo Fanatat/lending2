@@ -842,9 +842,15 @@ html.sudo-locked-boot .sudo-lock-overlay,
   from { opacity: 0; transform: translateY(-8px) scale(0.96); }
   to { opacity: 1; transform: none; }
 }
+/* The log is sized to fit a normal screen without scrolling; on a short
+   one it still scrolls, just without the native bar poking through the
+   panel's border. */
 .egg-log {
   animation: egg-toast-in 0.2s ease-out both;
-  scrollbar-width: thin;
+  scrollbar-width: none;
+}
+.egg-log::-webkit-scrollbar {
+  display: none;
 }
 
 /* ---- Perimeter intruder mini-game ----------------------------------- */
@@ -1038,4 +1044,59 @@ html.agent-vision canvas {
 }
 @media (prefers-reduced-motion: reduce) {
   .intro-gate-eq i { animation: none; transform: scaleY(0.6); }
+}
+
+/* Entrance: the gate's pieces surface one after another out of a soft
+   blur instead of popping in together — the main button first, then the
+   quiet option, the note, and the loading line drawing itself out. Once
+   settled, a slow ripple off the main button invites the click. */
+.intro-gate-inner > * {
+  animation: intro-gate-rise 1100ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.intro-gate-inner > :nth-child(1) { animation-delay: 300ms; }
+.intro-gate-inner > :nth-child(2) { animation-delay: 620ms; }
+.intro-gate-inner > :nth-child(3) { animation-delay: 820ms; }
+.intro-gate-inner > .intro-gate-progress {
+  animation: intro-gate-draw 1200ms cubic-bezier(0.65, 0, 0.35, 1) 950ms both;
+}
+@keyframes intro-gate-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+@keyframes intro-gate-draw {
+  from { opacity: 0; clip-path: inset(0 50% 0 50%); }
+  to { opacity: 1; clip-path: inset(0 0 0 0); }
+}
+.intro-gate-primary {
+  position: relative;
+}
+.intro-gate-primary::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px solid rgba(160, 225, 225, 0.45);
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  animation: intro-gate-ripple 3.4s cubic-bezier(0.2, 0.7, 0.3, 1) 1.6s infinite;
+}
+@keyframes intro-gate-ripple {
+  0% { opacity: 0; transform: scale(1); }
+  12% { opacity: 0.9; }
+  60%, 100% { opacity: 0; transform: scale(1.18, 1.5); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .intro-gate-inner > *,
+  .intro-gate-inner > .intro-gate-progress {
+    animation: intro-fade-in 500ms ease both;
+  }
+  .intro-gate-primary::after { animation: none; }
 }

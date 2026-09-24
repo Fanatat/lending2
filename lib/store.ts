@@ -45,9 +45,6 @@ export const EASTER_EGGS: EasterEggMeta[] = [
 
 export const ALL_EASTER_EGGS: EasterEggId[] = EASTER_EGGS.map((e) => e.id);
 
-/** Eggs needed to reveal the phone number in ContactPhonePanel. */
-export const PHONE_UNLOCK_EGGS = 5;
-
 const STORAGE_KEY = "lab-terminal:found-easter-eggs";
 
 function loadFound(): EasterEggId[] {

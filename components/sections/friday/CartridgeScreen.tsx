@@ -54,9 +54,9 @@ const wordSearch: Scene = (g, w, h, t, p) => {
   const tt = t % cycle;
   const rows = WS_GRID.length;
   const cols = WS_GRID[0]!.length;
-  const cell = Math.min((w * 0.8) / cols, (h * 0.66) / rows);
+  const cell = Math.min((w * 0.8) / cols, (h * 0.84) / rows);
   const ox = (w - cell * cols) / 2;
-  const oy = h * 0.08;
+  const oy = (h - cell * rows) / 2;
   const center = (r: number, c: number) => [ox + (c + 0.5) * cell, oy + (r + 0.5) * cell] as const;
 
   // found words: soft capsules behind the letters
@@ -115,9 +115,9 @@ const nonogram: Scene = (g, w, h, t, p) => {
   const cycle = NG_ORDER.length * step + 1.8;
   const tt = t % cycle;
   const n = NG.length;
-  const cell = Math.min((w * 0.58) / (n + 1.6), (h * 0.7) / (n + 1.6));
+  const cell = Math.min((w * 0.6) / (n + 1.6), (h * 0.86) / (n + 1.6));
   const ox = (w - cell * (n + 1.6)) / 2 + cell * 1.6;
-  const oy = h * 0.06 + cell * 1.6;
+  const oy = (h - cell * (n + 1.6)) / 2 + cell * 1.6;
   g.font = `${Math.round(cell * 0.42)}px ui-monospace, monospace`;
   g.textBaseline = "middle";
   g.fillStyle = p.muted;
@@ -228,10 +228,10 @@ const colorSort: Scene = (g, w, h, t, p) => {
     state[b]!.push(state[a]!.pop()!);
   }
   const tubes = state.length;
-  const tw = Math.min(w * 0.13, h * 0.2);
+  const tw = Math.min(w * 0.13, (h * 0.88) / 3.9);
   const th = tw * 3.3;
   const gap = (w - tubes * tw) / (tubes + 1);
-  const baseY = h * 0.06 + th + tw * 0.9;
+  const baseY = (h + tw * 3.9) / 2;
   const r = tw * 0.36;
   const tubeX = (i: number) => gap + i * (tw + gap);
   const slotY = (k: number) => baseY - tw * 0.55 - k * tw * 0.95;
@@ -275,7 +275,7 @@ const colorSort: Scene = (g, w, h, t, p) => {
 const laneBattler: Scene = (g, w, h, t, p) => {
   const lanes = 3;
   const top = h * 0.1;
-  const laneH = (h * 0.62) / lanes;
+  const laneH = (h * 0.8) / lanes;
   const left = w * 0.1;
   const right = w * 0.9;
   g.fillStyle = p.accent;
@@ -348,11 +348,12 @@ const SUITS = ["♠", "♥", "♦", "♣"];
 const RANKS = ["A", "2", "3", "4", "5"];
 const solitaire: Scene = (g, w, h, t, p) => {
   const cols = 5;
-  const cw = Math.min(w * 0.13, h * 0.2);
+  const rowGap = h * 0.06;
+  const cw = Math.min(w * 0.13, (h * 0.86 - rowGap) / (2.36 * 1.4));
   const ch = cw * 1.4;
   const gap = (w - cols * cw) / (cols + 1);
-  const topY = h * 0.07;
-  const tableY = topY + ch + h * 0.06;
+  const topY = (h - (ch * 2.36 + rowGap)) / 2;
+  const tableY = topY + ch + rowGap;
   const per = 0.9;
   const cycle = cols * per + 1.4;
   const tt = t % cycle;

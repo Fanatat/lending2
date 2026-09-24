@@ -2,19 +2,33 @@ import HeapSweep from "@/components/effects/HeapSweep";
 
 const START_YEAR = 2026;
 
+const COPY = {
+  ru: {
+    rights: "Валера. Все права защищены.",
+    notice: "Копирование и использование материалов сайта без письменного согласия автора запрещено.",
+    textures: "Текстуры планет:",
+    sounds: "Звуки:",
+  },
+  en: {
+    rights: "Valery. All rights reserved.",
+    notice: "Copying or using the site's materials without the author's written consent is prohibited.",
+    textures: "Planet textures:",
+    sounds: "Sounds:",
+  },
+};
+
 /** Minimal legal footer — copyright, protection notice. Very bottom of the page. */
-export default function SiteFooter() {
+export default function SiteFooter({ lang = "ru" }: { lang?: "ru" | "en" }) {
   const year = new Date().getFullYear();
   const yearLabel = year > START_YEAR ? `${START_YEAR}–${year}` : `${START_YEAR}`;
+  const t = COPY[lang];
 
   return (
     <footer className="border-t border-line px-4 py-6 text-center text-[10px] text-fg-muted/60 sm:px-6 md:px-10 lg:px-16">
-      <p>© {yearLabel} Валера. Все права защищены.</p>
+      <p>© {yearLabel} {t.rights}</p>
+      <p className="mt-1">{t.notice}</p>
       <p className="mt-1">
-        Копирование и использование материалов сайта без письменного согласия автора запрещено.
-      </p>
-      <p className="mt-1">
-        Текстуры планет:{" "}
+        {t.textures}{" "}
         <a
           href="https://www.solarsystemscope.com/textures/"
           target="_blank"
@@ -23,7 +37,7 @@ export default function SiteFooter() {
         >
           Solar System Scope
         </a>{" "}
-        (CC BY 4.0). Звуки:{" "}
+        (CC BY 4.0). {t.sounds}{" "}
         <a
           href="https://freesound.org/"
           target="_blank"
@@ -34,7 +48,7 @@ export default function SiteFooter() {
         </a>{" "}
         (CC0).
       </p>
-      <HeapSweep />
+      {lang === "ru" && <HeapSweep />}
     </footer>
   );
 }

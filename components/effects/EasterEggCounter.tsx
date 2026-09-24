@@ -99,7 +99,8 @@ export default function EasterEggCounter() {
         <div
           role="dialog"
           aria-label="Журнал пасхалок"
-          className="egg-log mt-2 max-h-[70vh] w-[min(340px,calc(100vw-2rem))] overflow-y-auto border border-line bg-panel p-3 text-[11px] leading-snug shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
+          data-lenis-prevent
+          className="egg-log mt-2 max-h-[calc(100svh-4.5rem)] w-[min(420px,calc(100vw-2rem))] overflow-y-auto overscroll-contain border border-line bg-panel p-3 text-[11px] leading-snug shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
         >
           <div className="mb-2 flex items-center justify-between text-[10px] tracking-widest text-fg-muted">
             <span>ЖУРНАЛ ОХОТНИКА</span>
@@ -107,11 +108,11 @@ export default function EasterEggCounter() {
               {found}/{total}
             </span>
           </div>
-          <ul className="space-y-2">
+          <ul className="space-y-1.5">
             {EASTER_EGGS.map((egg) => {
               const isFound = foundIds.includes(egg.id);
               return (
-                <li key={egg.id} className="border-t border-line/60 pt-2">
+                <li key={egg.id} className="border-t border-line/60 pt-1.5">
                   <div className={isFound ? "text-accent" : "text-fg-muted"}>
                     {isFound ? "✓ " : "○ "}
                     {isFound ? egg.title : "???"}
