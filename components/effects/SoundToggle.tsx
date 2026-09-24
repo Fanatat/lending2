@@ -1,7 +1,7 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import { useLabStore } from "@/lib/store";
+import { useLocale } from "@/lib/locale";
 
 /**
  * Site-wide mute (lib/sfx.ts follows it): typing, egg finds, the bridge
@@ -11,7 +11,7 @@ import { useLabStore } from "@/lib/store";
 export default function SoundToggle() {
   const soundEnabled = useLabStore((s) => s.soundEnabled);
   const toggleSound = useLabStore((s) => s.toggleSound);
-  const isEn = usePathname()?.startsWith("/en");
+  const isEn = useLocale() === "en";
 
   return (
     <button

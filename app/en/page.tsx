@@ -157,7 +157,7 @@ export default function EnglishHomePage() {
     <main>
       <SetHtmlLang lang="en" />
 
-      <section className="flex min-h-[100svh] flex-col justify-center gap-6 px-4 py-20 sm:px-6 sm:py-24 md:px-10 lg:px-16">
+      <section id="hero" className="flex min-h-[100svh] flex-col justify-center gap-6 px-4 py-20 sm:px-6 sm:py-24 md:px-10 lg:px-16">
         <h1 className="max-w-3xl text-3xl text-fg-primary sm:text-4xl">
           #NOTARESUME — a list of shipped tasks
         </h1>
@@ -170,7 +170,7 @@ export default function EnglishHomePage() {
         </p>
       </section>
 
-      <section className="border-t border-line px-4 py-14 sm:px-6 sm:py-20 md:px-10 lg:px-16">
+      <section id="operator" className="border-t border-line px-4 py-14 sm:px-6 sm:py-20 md:px-10 lg:px-16">
         <div className="mx-auto max-w-4xl">
           <div className="text-xs tracking-widest text-fg-muted">
             WHO&apos;S AT THE CONSOLE
@@ -197,6 +197,7 @@ export default function EnglishHomePage() {
       {SYSTEMS.map((s) => (
         <section
           key={s.number}
+          id={s.number.toLowerCase().replace(" ", "-")}
           className="border-t border-line px-4 py-14 sm:px-6 sm:py-20 md:px-10 lg:px-16"
         >
           <div className="grid min-w-0 items-start gap-8 lg:grid-cols-2 lg:gap-16">
@@ -257,7 +258,7 @@ export default function EnglishHomePage() {
         </p>
       </section>
 
-      <section className="border-t border-line px-4 py-16 sm:px-6 sm:py-24 md:px-10 lg:px-16">
+      <section id="closing" className="border-t border-line px-4 py-16 sm:px-6 sm:py-24 md:px-10 lg:px-16">
         <div className="mx-auto grid max-w-4xl gap-10 lg:grid-cols-2 lg:gap-16">
           <div className="order-2 flex items-start justify-center lg:order-1 lg:justify-start">
             <div className="w-full max-w-sm border border-line bg-panel p-5">

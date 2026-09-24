@@ -3,6 +3,7 @@
 import { create } from "zustand";
 import { useLabStore } from "@/lib/store";
 import { playSfx } from "@/lib/sfx";
+import { currentLocale } from "@/lib/locale";
 
 interface GuardStore {
   breach: boolean;
@@ -33,7 +34,9 @@ export function registerPortfolioGuard() {
   };
   // A note for whoever opens DevTools — the entry point to this egg.
   console.log(
-    "%cЛюбопытство — хорошее качество.%c\nПортфель на этой странице только для чтения: portfolio.readOnly === true.\nИнтересно, что будет, если это поменять?",
+    currentLocale() === "en"
+      ? "%cCuriosity is a good quality.%c\nThe portfolio on this page is read-only: portfolio.readOnly === true.\nI wonder what happens if you change that?"
+      : "%cЛюбопытство — хорошее качество.%c\nПортфель на этой странице только для чтения: portfolio.readOnly === true.\nИнтересно, что будет, если это поменять?",
     "color:#ffc53d;font:600 14px monospace",
     "color:#9a9a9a;font:12px monospace"
   );

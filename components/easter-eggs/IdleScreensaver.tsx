@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useLabStore } from "@/lib/store";
 import { useReducedMotion } from "@/lib/motion";
 import { playSfx } from "@/lib/sfx";
+import { useLocale } from "@/lib/locale";
 
 const IDLE_MS = 50_000;
 const SPEED = 150; // px/s
@@ -24,6 +25,7 @@ export default function IdleScreensaver() {
   const [cornerHit, setCornerHit] = useState(false);
   const logoRef = useRef<HTMLDivElement>(null);
   const markFound = useLabStore((s) => s.markFound);
+  const en = useLocale() === "en";
 
   useEffect(() => {
     if (reducedMotion) return;
@@ -128,10 +130,12 @@ export default function IdleScreensaver() {
   return (
     <div className="pointer-events-none fixed inset-0 z-[70] bg-black/90" aria-hidden="true">
       <div ref={logoRef} className="screensaver-logo text-sm text-accent">
-        0 СОТРУДНИКОВ
+        {en ? "0 EMPLOYEES" : "0 СОТРУДНИКОВ"}
       </div>
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center text-[10px] tracking-widest text-fg-muted">
-        {cornerHit ? "ПОПАЛ В УГОЛ. ТЕПЕРЬ МОЖНО И ПРОСНУТЬСЯ." : "СИСТЕМЫ РАБОТАЮТ, ДАЖЕ КОГДА ВЫ НЕ СМОТРИТЕ"}
+        {en
+          ? cornerHit ? "HIT THE CORNER. NOW YOU CAN WAKE UP." : "THE SYSTEMS KEEP WORKING EVEN WHEN YOU'RE NOT LOOKING"
+          : cornerHit ? "ПОПАЛ В УГОЛ. ТЕПЕРЬ МОЖНО И ПРОСНУТЬСЯ." : "СИСТЕМЫ РАБОТАЮТ, ДАЖЕ КОГДА ВЫ НЕ СМОТРИТЕ"}
       </div>
     </div>
   );
