@@ -2,16 +2,51 @@
 
 import { create } from "zustand";
 
-export type EasterEggId = "matrix" | "system4" | "unicorn" | "branch" | "sudo";
+export type EasterEggId =
+  | "matrix"
+  | "system4"
+  | "unicorn"
+  | "branch"
+  | "sudo"
+  | "heap"
+  | "hacker"
+  | "breath"
+  | "console"
+  | "konami"
+  | "corner"
+  | "receipt"
+  | "party";
 
-/** Canonical roster of every discoverable easter egg — drives the top-of-page counter's total. */
-export const ALL_EASTER_EGGS: EasterEggId[] = [
-  "matrix",
-  "system4",
-  "unicorn",
-  "branch",
-  "sudo",
+export interface EasterEggMeta {
+  id: EasterEggId;
+  title: string;
+  /** Shown while still hidden — a nudge, not the answer. */
+  hint: string;
+  /** Shown once found. */
+  found: string;
+}
+
+/** Canonical roster of every discoverable easter egg — drives the counter, its hint list and the toast. */
+export const EASTER_EGGS: EasterEggMeta[] = [
+  { id: "matrix", title: "Красная таблетка", hint: "Заголовок не любит, когда его торопят. Раз, два, три, четыре, пять.", found: "Пять быстрых кликов по заголовку включают Матрицу." },
+  { id: "system4", title: "Скрытая система", hint: "Систем восемь, а на странице видно семь.", found: "СИСТЕМА 04 показывается только в Матрице." },
+  { id: "unicorn", title: "Единорог", hint: "Мост очень не любит, когда IPv6 дёргают без остановки.", found: "Десять переключений IPv6 за пять секунд." },
+  { id: "heap", title: "Завал", hint: "Если мост сломать и не чинить, внизу станет тесно.", found: "Шестьдесят бегунов упали с моста на дно страницы." },
+  { id: "branch", title: "Ветка", hint: "В самом низу есть точка. Посветите вокруг.", found: "Фонарик нашёл все пять будущих проектов." },
+  { id: "sudo", title: "sudo", hint: "Оператору внизу страницы разрешили набрать одно слово.", found: "Набрали «sudo» — и получили то, что заслужили." },
+  { id: "hacker", title: "Периметр", hint: "Посмотрите на карту сети подольше. Кто-то тоже на неё смотрит.", found: "Нарушитель пойман до того, как добрался до сервера." },
+  { id: "breath", title: "Подышать на датчик", hint: "Плата HP100 чувствует, если долго держать курсор на CO₂.", found: "CO₂ улетел за порог — плата подняла тревогу." },
+  { id: "console", title: "Консоль", hint: "F12. Портфель только для чтения… пока.", found: "portfolio.readOnly = false — числа всё равно считает Python." },
+  { id: "konami", title: "Код разработчика", hint: "↑ ↑ ↓ ↓ … дальше вы знаете.", found: "Konami-код показывает страницу глазами агента." },
+  { id: "corner", title: "Угол", hint: "Оставьте страницу в покое на минуту. И дождитесь угла.", found: "Заставка попала точно в угол." },
+  { id: "receipt", title: "Чек", hint: "Итог в 2 000 ₽ можно пробить. Трижды.", found: "Касса пробила чек за всю инфраструктуру." },
+  { id: "party", title: "Корпоратив", hint: "С агентами штаба можно переписываться на странице проекта. Есть команда, после которой они не работают.", found: "/party в чате штаба." },
 ];
+
+export const ALL_EASTER_EGGS: EasterEggId[] = EASTER_EGGS.map((e) => e.id);
+
+/** Eggs needed to reveal the phone number in ContactPhonePanel. */
+export const PHONE_UNLOCK_EGGS = 5;
 
 const STORAGE_KEY = "lab-terminal:found-easter-eggs";
 
@@ -62,6 +97,7 @@ interface LabStore {
   markFound: (id: EasterEggId) => void;
   hydrateFromStorage: () => void;
   toggleSound: () => void;
+  setSound: (on: boolean) => void;
   setMatrixClickCount: (n: number) => void;
 }
 
@@ -93,11 +129,11 @@ export const useLabStore = create<LabStore>((set, get) => ({
       soundEnabled: loadSoundEnabled(),
     });
   },
-  toggleSound: () => {
-    const next = !get().soundEnabled;
-    set({ soundEnabled: next });
+  toggleSound: () => get().setSound(!get().soundEnabled),
+  setSound: (on) => {
+    set({ soundEnabled: on });
     try {
-      window.localStorage.setItem(SOUND_KEY, next ? "1" : "0");
+      window.localStorage.setItem(SOUND_KEY, on ? "1" : "0");
     } catch {
       // ignore
     }

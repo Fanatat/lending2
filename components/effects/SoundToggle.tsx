@@ -3,8 +3,9 @@
 import { useLabStore } from "@/lib/store";
 
 /**
- * Small, unobtrusive mute control for the Hero typing-click sound. Fixed
- * bottom-left, out of the way of the content grid.
+ * Site-wide mute (lib/sfx.ts follows it): typing, egg finds, the bridge
+ * crowd, the intro. Its initial state is whatever the visitor picked on the
+ * intro's sound gate. Fixed bottom-left, out of the way of the content grid.
  */
 export default function SoundToggle() {
   const soundEnabled = useLabStore((s) => s.soundEnabled);

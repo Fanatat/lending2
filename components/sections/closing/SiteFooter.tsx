@@ -1,3 +1,5 @@
+import HeapSweep from "@/components/effects/HeapSweep";
+
 const START_YEAR = 2026;
 
 /** Minimal legal footer — copyright, protection notice. Very bottom of the page. */
@@ -11,6 +13,28 @@ export default function SiteFooter() {
       <p className="mt-1">
         Копирование и использование материалов сайта без письменного согласия автора запрещено.
       </p>
+      <p className="mt-1">
+        Текстуры планет:{" "}
+        <a
+          href="https://www.solarsystemscope.com/textures/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline-offset-2 hover:underline"
+        >
+          Solar System Scope
+        </a>{" "}
+        (CC BY 4.0). Звуки:{" "}
+        <a
+          href="https://freesound.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline-offset-2 hover:underline"
+        >
+          Freesound
+        </a>{" "}
+        (CC0).
+      </p>
+      <HeapSweep />
     </footer>
   );
 }

@@ -7,6 +7,7 @@ import ProjectCardLink from "@/components/transitions/ProjectCardLink";
 import BridgeDiagram from "./BridgeDiagram";
 import { useLabStore } from "@/lib/store";
 import { useReducedMotion } from "@/lib/motion";
+import { SYSTEM_COPY } from "@/lib/systemCopy";
 
 const REVEAL_MS = 700;
 
@@ -54,8 +55,8 @@ export default function BridgeSection() {
       <div className="min-h-0 overflow-hidden">
         <SectionShell
           id="bridge"
-          number="СИСТЕМА 04"
-          title="Фикс для приближающегося рунета."
+          number={SYSTEM_COPY.bridge.number}
+          title={SYSTEM_COPY.bridge.title}
           line={
             <>
               <SystemStatusLine systemId="bridge" className="mb-3" />
@@ -64,7 +65,7 @@ export default function BridgeSection() {
               Desktop в рабочее состояние за пару минут.
             </>
           }
-          details="Локальный сервер поднимается на компьютере и берёт на себя всю грязную работу: авторизацию, туннелирование, разбор соединений, с логом каждого из них. Инструкция построена как нормальная диагностика, от дешёвого к дорогому: сначала две галочки в настройках самого приложения, и только если это не помогло, запускается мост. Работает системной службой, самотест зелёный. Задача типовая: так же лечится любое приложение, которое понимает один протокол, а у вас оплачен и доступен другой."
+          details={SYSTEM_COPY.bridge.details}
         >
           <div className="flex w-full flex-col items-center gap-3">
             <BridgeDiagram />
@@ -73,7 +74,7 @@ export default function BridgeSection() {
               ariaLabel="Открыть проект Мост"
               className="text-[10px] text-accent"
             >
-              Лог соединений и архитектура →
+              Как устроен мост →
             </ProjectCardLink>
           </div>
         </SectionShell>

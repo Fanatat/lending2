@@ -123,7 +123,7 @@ export default function ConveyorBelt() {
         </div>
       </div>
       <p className="mt-3 text-center text-xs text-fg-muted">
-        Пока ты листал, серия уже готова.
+        Пока вы листали, серия уже готова.
       </p>
       {canScroll && (
         <p className="mt-1 text-center text-[10px] text-fg-muted/60">

@@ -13,10 +13,12 @@
  * fetches that repo's raw.githubusercontent.com URL, which is always
  * reachable from any browser with no CORS or mixed-content concerns.
  *
- * Falls back to the deterministic demo source (`lib/mock/hp100.ts`)
- * whenever the feed is unreachable OR stale (the bot stopped running),
- * so the widget never goes blank or silently claims "live" on stale data
- * — it shows a "демо" badge instead (wired up in HP100Widget).
+ * When the feed is reachable but stale (the bot stopped pushing), the
+ * widget keeps showing the board's last REAL reading, labelled with its
+ * timestamp — never passed off as live, never replaced by made-up numbers.
+ * Only if the feed can't be fetched at all (and nothing real has been seen
+ * this visit) does it fall back to the simulated source in
+ * `lib/mock/hp100.ts`, labelled as "нет связи" in HP100Widget.
  *
  * Feed shape (see update_feed.py's `build_payload`):
  *   { co2?, temperature?, humidity?, dust?, updated: <ISO 8601 string> }
@@ -39,7 +41,10 @@ interface MetricState {
 export type Hp100Snapshot = Record<Hp100MetricKey, MetricState>;
 
 export interface Hp100Status {
+  /** Fresh reading from the board (younger than STALE_AFTER_MS). */
   live: boolean;
+  /** Real reading, but older than STALE_AFTER_MS — the feed bot is down. */
+  stale: boolean;
   lastUpdated: number | null;
 }
 
@@ -70,13 +75,13 @@ class Hp100LiveSource {
   private mockUnsub: (() => void) | null = null;
   private inFlight = false;
   private snapshot: Hp100Snapshot = hp100Source.getSnapshot();
-  private status: Hp100Status = { live: false, lastUpdated: null };
+  private status: Hp100Status = { live: false, stale: false, lastUpdated: null };
 
   start() {
     if (this.timer !== undefined) return;
     hp100Source.start();
     this.mockUnsub = hp100Source.subscribe((mockSnapshot) => {
-      if (!this.status.live) {
+      if (!this.status.live && !this.status.stale) {
         this.snapshot = mockSnapshot;
         this.emit();
       }
@@ -104,9 +109,8 @@ class Hp100LiveSource {
       const payload = (await res.json()) as FeedPayload;
 
       const updatedMs = payload.updated ? Date.parse(payload.updated) : NaN;
-      if (Number.isNaN(updatedMs) || Date.now() - updatedMs > STALE_AFTER_MS) {
-        throw new Error("hp100 feed: stale");
-      }
+      if (Number.isNaN(updatedMs)) throw new Error("hp100 feed: no timestamp");
+      const stale = Date.now() - updatedMs > STALE_AFTER_MS;
 
       const nextSnapshot = {} as Hp100Snapshot;
       for (const def of HP100_METRICS) {
@@ -116,12 +120,13 @@ class Hp100LiveSource {
       }
 
       this.snapshot = nextSnapshot;
-      this.status = { live: true, lastUpdated: updatedMs };
+      this.status = { live: !stale, stale, lastUpdated: updatedMs };
       this.emit();
     } catch {
+      // A failed poll after real data keeps the last real reading on screen
+      // (now marked stale) instead of swapping in simulated numbers.
       if (this.status.live) {
-        this.status = { live: false, lastUpdated: this.status.lastUpdated };
-        this.snapshot = hp100Source.getSnapshot();
+        this.status = { live: false, stale: true, lastUpdated: this.status.lastUpdated };
         this.emit();
       }
     } finally {

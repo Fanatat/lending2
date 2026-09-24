@@ -4,6 +4,7 @@ import { useEffect, useRef, type CSSProperties } from "react";
 import { useBranchStore } from "@/lib/branchStore";
 import { useLabStore } from "@/lib/store";
 import { SILHOUETTES } from "./silhouettes";
+import { playSfx } from "@/lib/sfx";
 
 const BEAM_RADIUS_PX = 90;
 const FOUND_RADIUS_PX = 70;
@@ -40,7 +41,10 @@ export default function BranchOverlay() {
         const cx = (s.x / 100) * w;
         const cy = (s.y / 100) * h;
         const dist = Math.hypot(clientX - cx, clientY - cy);
-        if (dist < FOUND_RADIUS_PX) markFoundSilhouette(s.id);
+        if (dist < FOUND_RADIUS_PX) {
+          markFoundSilhouette(s.id);
+          playSfx("shimmer", { volume: 0.5, rate: 1.2 });
+        }
       }
     }
 

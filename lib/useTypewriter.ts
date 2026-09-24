@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "@/lib/motion";
 import { useLabStore } from "@/lib/store";
-import { playTypingClick } from "@/lib/sound";
+import { playSfx } from "@/lib/sfx";
 
 interface UseTypewriterOptions {
   /** Begin typing once this flips to true. */
@@ -51,7 +51,7 @@ export function useTypewriter(text: string, opts: UseTypewriterOptions) {
     const id = window.setInterval(() => {
       i += 1;
       setOutput(text.slice(0, i));
-      if (soundRef.current && soundEnabledRef.current) playTypingClick();
+      if (soundRef.current && soundEnabledRef.current) playSfx("keys", { jitter: 0.05 });
       if (i >= text.length) {
         window.clearInterval(id);
         setDone(true);

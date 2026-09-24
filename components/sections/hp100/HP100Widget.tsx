@@ -6,8 +6,26 @@ import { hp100LiveSource } from "@/lib/hp100-live";
 import ProjectCardLink from "@/components/transitions/ProjectCardLink";
 import { useReducedMotion } from "@/lib/motion";
 import { useSystemStatusStore } from "@/lib/systemStatus";
+import { useLabStore } from "@/lib/store";
+import { playSfx } from "@/lib/sfx";
+
+// "Подышать на датчик" easter egg: keeping the pointer on the CO₂ row makes
+// the reading climb as if someone breathed right into the sensor.
+const BREATH_TICK_MS = 110;
+const BREATH_STEP_PPM = 42;
+const BREATH_EGG_PPM = 1600;
 
 type Level = "normal" | "warn" | "critical";
+
+function formatStamp(ms: number | null) {
+  if (ms === null) return "—";
+  return new Date(ms).toLocaleString("ru-RU", {
+    day: "2-digit",
+    month: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
 
 function levelFor(value: number, normalMax: number, warnMax: number): Level {
   if (value <= normalMax) return "normal";
@@ -146,6 +164,26 @@ export default function HP100Widget() {
     };
   }, []);
 
+  const markFound = useLabStore((s) => s.markFound);
+  const breathRef = useRef<number | undefined>(undefined);
+  function startBreath() {
+    if (breathRef.current !== undefined) return;
+    breathRef.current = window.setInterval(() => {
+      const current = hp100LiveSource.getSnapshot().co2.latest;
+      const next = current + BREATH_STEP_PPM;
+      hp100LiveSource.simulate("co2", next);
+      if (next >= BREATH_EGG_PPM && current < BREATH_EGG_PPM) {
+        markFound("breath");
+        playSfx("alarm", { volume: 0.6 });
+      }
+    }, BREATH_TICK_MS);
+  }
+  function stopBreath() {
+    window.clearInterval(breathRef.current);
+    breathRef.current = undefined;
+  }
+  useEffect(() => stopBreath, []);
+
   const co2 = snapshot.co2;
   const co2Def = HP100_METRICS[0]!;
   const co2Critical = co2 && co2.latest > co2Def.warnMax;
@@ -172,7 +210,7 @@ export default function HP100Widget() {
   return (
     <div
       className="w-full max-w-sm border border-line bg-panel p-4"
-      aria-label={`Показатели воздуха HP100 (${status.live ? "живые данные" : "демо-данные"})`}
+      aria-label={`Показатели воздуха HP100 (${status.live ? "живые данные" : status.stale ? "последнее показание" : "нет связи с платой"})`}
     >
       <div className="mb-2 flex items-center justify-between">
         <span className="text-[10px] uppercase tracking-wide text-fg-muted">
@@ -185,7 +223,7 @@ export default function HP100Widget() {
               : "border border-line/60 px-1.5 py-0.5 text-[9px] uppercase tracking-wide text-fg-muted"
           }
         >
-          {status.live ? "live" : "демо"}
+          {status.live ? "live" : status.stale ? "архив" : "нет связи"}
         </span>
       </div>
 
@@ -203,9 +241,13 @@ export default function HP100Widget() {
               key={def.key}
               type="button"
               data-cursor="interactive"
-              onClick={() =>
-                setSelected((s) => (s === def.key ? null : def.key))
-              }
+              onClick={() => {
+                setSelected((s) => (s === def.key ? null : def.key));
+                playSfx("ui_click");
+              }}
+              onPointerEnter={def.key === "co2" ? startBreath : undefined}
+              onPointerLeave={def.key === "co2" ? stopBreath : undefined}
+              onPointerCancel={def.key === "co2" ? stopBreath : undefined}
               aria-pressed={selected === def.key}
               className="block w-full text-left"
             >
@@ -223,7 +265,7 @@ export default function HP100Widget() {
 
       {co2Critical && (
         <p className="mt-3 text-[10px] uppercase tracking-wide text-[#ff5d5d]">
-          Вентиляция: требуется приток // CO2 выше порога
+          Вентиляция: требуется приток // CO₂ выше порога
         </p>
       )}
 
@@ -243,16 +285,19 @@ export default function HP100Widget() {
 
       <p className="mt-3 text-[10px] leading-relaxed text-fg-muted">
         {status.live
-          ? "Живые данные с платы HP100."
-          : "Демо-данные: сервер платы HP100 сейчас недоступен, показан резервный сценарий."}
+          ? `Живые данные с платы HP100 · обновлено ${formatStamp(status.lastUpdated)}.`
+          : status.stale
+            ? `Последнее показание платы — ${formatStamp(status.lastUpdated)}. Свежие данные подтянутся, как только плата снова выйдет на связь.`
+            : "Нет связи с лентой данных платы — показана симуляция на её формулах, пока связь не вернётся."}
       </p>
 
       <ProjectCardLink
         href="/projects/hp100"
+        hideWhenCurrent
         ariaLabel="Открыть проект HP100 целиком"
         className="mt-3 inline-block text-[10px] text-accent"
       >
-        Архитектура и лог платы →
+        Как устроена плата →
       </ProjectCardLink>
     </div>
   );

@@ -32,7 +32,7 @@ interface AnimatedLeadCountProps {
 }
 
 /**
- * "Девять автономных систем." as a live phrase whose numeral and noun
+ * "Восемь автономных систем." as a live phrase whose numeral and noun
  * agreement swap in step with SystemsCounter's tally above, with a small
  * swap animation on each change, instead of sitting there as a fixed word
  * for TypewriterLine to type out once — see Hero.
@@ -40,7 +40,7 @@ interface AnimatedLeadCountProps {
 export default function AnimatedLeadCount({ count, visible }: AnimatedLeadCountProps) {
   const reducedMotion = useReducedMotion();
 
-  if (!visible) return <span className="invisible">Девять автономных систем.</span>;
+  if (!visible) return <span className="invisible">Восемь автономных систем.</span>;
 
   const word = NUMERAL_WORDS[count] ?? NUMERAL_WORDS[NUMERAL_WORDS.length - 1];
   const text = `${word} ${nounPhrase(count)}.`;

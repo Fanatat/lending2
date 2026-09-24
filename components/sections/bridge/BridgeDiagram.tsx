@@ -2,17 +2,41 @@
 
 import { useEffect, useRef, useState, type RefObject } from "react";
 import { useLabStore } from "@/lib/store";
-import { useBridgeStore } from "@/lib/bridgeStore";
+import { requestFall } from "@/lib/bridgeStore";
+import { playSfx } from "@/lib/sfx";
 import { useReducedMotion } from "@/lib/motion";
 
 const TOGGLE_WINDOW_MS = 5000;
 const TOGGLES_FOR_UNICORN = 10;
 
-// Packets travel the full pipe in 2.4s (0.9s in unicorn mode). When the pipe
-// is broken they only travel the first half before tripping into the gap, so
-// that leg takes half as long.
+// Runners cross the full pipe in 2.4s (0.9s in unicorn mode). When the pipe
+// is broken they only make it to the gap in the middle before dropping
+// through it (and down the whole page — see CrowdFall), so that leg takes
+// half as long.
 const TRAVEL_MS = 2.4;
 const TRAVEL_MS_UNICORN = 0.9;
+
+/** A tiny pixel runner — legs and arms swing via CSS (see .runner-* in globals.css). */
+function Runner({ phase }: { phase: number }) {
+  return (
+    <svg viewBox="0 0 10 14" className="bridge-runner" style={{ animationDelay: `${-phase * 0.13}s` }}>
+      <circle cx="5.4" cy="2" r="1.7" fill="currentColor" />
+      <path d="M5.2 4 L4.6 8.4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <g className="runner-limb runner-arm-a">
+        <path d="M5.1 4.9 L6.9 7" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+      </g>
+      <g className="runner-limb runner-arm-b">
+        <path d="M5.1 4.9 L3.2 6.6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+      </g>
+      <g className="runner-limb runner-leg-a">
+        <path d="M4.6 8.4 L6.4 10.8 L6 13.2" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      </g>
+      <g className="runner-limb runner-leg-b">
+        <path d="M4.6 8.4 L3.4 11 L2.2 12.8" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      </g>
+    </svg>
+  );
+}
 
 function Pipe({
   broken,
@@ -49,7 +73,9 @@ function Pipe({
                 }
               : {}),
           }}
-        />
+        >
+          <Runner phase={i} />
+        </span>
       ))}
     </div>
   );
@@ -61,13 +87,12 @@ export default function BridgeDiagram() {
   const unicornMode = useLabStore((s) => s.unicornMode);
   const setUnicornMode = useLabStore((s) => s.setUnicornMode);
   const markFound = useLabStore((s) => s.markFound);
-  const spawnFalling = useBridgeStore((s) => s.spawnFalling);
   const toggleTimestamps = useRef<number[]>([]);
   const rightPipeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!ipv6Broken || reducedMotion) return;
-    const packetCount = unicornMode ? 6 : 2;
+    const packetCount = unicornMode ? 7 : 3;
     const fullDuration = unicornMode ? TRAVEL_MS_UNICORN : TRAVEL_MS;
     const brokenDuration = (fullDuration / 2) * 1000;
     const spawnEveryMs = brokenDuration / packetCount;
@@ -79,14 +104,15 @@ export default function BridgeDiagram() {
       // packet-approach-gap in globals.css, which vanishes them there too.
       const x = r.left + r.width / 2;
       const y = r.top + r.height / 2;
-      spawnFalling(x, y, unicornMode);
+      requestFall({ x, y, unicorn: unicornMode });
     }, spawnEveryMs);
     return () => window.clearInterval(id);
-  }, [ipv6Broken, unicornMode, reducedMotion, spawnFalling]);
+  }, [ipv6Broken, unicornMode, reducedMotion]);
 
   function handleToggle() {
     const next = !ipv6Broken;
     setIpv6Broken(next);
+    playSfx("ui_click");
 
     const now = Date.now();
     const recent = [...toggleTimestamps.current, now].filter(
@@ -97,7 +123,10 @@ export default function BridgeDiagram() {
       toggleTimestamps.current = [];
       const turnOn = !unicornMode;
       setUnicornMode(turnOn);
-      if (turnOn) markFound("unicorn");
+      if (turnOn) {
+        markFound("unicorn");
+        playSfx("unicorn");
+      }
     }
   }
 
@@ -109,14 +138,14 @@ export default function BridgeDiagram() {
           <br />
           Desktop
         </div>
-        <Pipe broken={false} unicorn={unicornMode} packetCount={unicornMode ? 6 : 2} />
+        <Pipe broken={false} unicorn={unicornMode} packetCount={unicornMode ? 7 : 3} />
         <div className="flex-1 border border-line px-1 py-3 text-fg-primary sm:px-2">
           Мост
         </div>
         <Pipe
           broken={ipv6Broken}
           unicorn={unicornMode}
-          packetCount={unicornMode ? 6 : 2}
+          packetCount={unicornMode ? 7 : 3}
           pipeRef={rightPipeRef}
         />
         <div className="flex-1 border border-line px-1 py-3 text-fg-primary sm:px-2">

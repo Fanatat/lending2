@@ -76,15 +76,16 @@ export default function PortfolioWidget() {
       </table>
 
       <p className="mt-3 text-[10px] leading-relaxed text-fg-muted">
-        Демо-данные: биржевой API у модуля подключён и считает реальный портфель на сервере — здесь показан представительный срез той же структуры вместо настоящих сумм, чтобы не публиковать реальные активы.
+        Замаскированный срез: биржевой API подключён, и модуль считает настоящий портфель на сервере. Здесь та же структура данных, но без реальных сумм, чтобы не выставлять реальные активы напоказ.
       </p>
 
       <ProjectCardLink
         href="/projects/all-in"
+        hideWhenCurrent
         ariaLabel="Открыть проект All in"
         className="mt-3 inline-block text-[10px] text-accent"
       >
-        Разбор логики Python-модуля →
+        Как устроен модуль →
       </ProjectCardLink>
     </div>
   );

@@ -1,3 +1,5 @@
+import { SITE_URL } from "./site";
+
 export const OG_IMAGE_SIZE = { width: 1200, height: 630 };
 
 /** Shared 1200×630 card used by both app/opengraph-image.tsx and app/twitter-image.tsx. */
@@ -35,7 +37,7 @@ export function OgImageCard() {
             background: "#3ddc6a",
           }}
         />
-        vanatat.vercel.app
+        {SITE_URL.replace(/^https?:\/\//, "")}
       </div>
       <div style={{ display: "flex", fontSize: 88, marginTop: 28, lineHeight: 1.05 }}>
         Привет от Валеры
@@ -48,7 +50,7 @@ export function OgImageCard() {
           color: "#ffc53d",
         }}
       >
-        9 систем · 2 000 ₽/мес
+        8 систем · 2 000 руб./мес
       </div>
       <div
         style={{
@@ -59,7 +61,7 @@ export function OgImageCard() {
           maxWidth: 900,
         }}
       >
-        Ноль сотрудников. Ноль облачных подписок. Ноль обещаний.
+        Ноль сотрудников. Одна подписка на нейросеть. Ноль обещаний.
       </div>
     </div>
   );

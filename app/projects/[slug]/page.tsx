@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PROJECTS, getProjectMeta } from "@/lib/projects";
+import { PROJECTS, getProjectMeta, getProjectNeighbours } from "@/lib/projects";
+import { SYSTEM_COPY } from "@/lib/systemCopy";
 import ProjectShell from "@/components/projects/ProjectShell";
-import StaffChatSim from "@/components/projects/StaffChatSim";
+import ProjectWidget from "@/components/projects/ProjectWidget";
+import ProjectFlow from "@/components/projects/ProjectFlow";
+import StaffDetails from "@/components/sections/staff/StaffDetails";
 
 export function generateStaticParams() {
   return PROJECTS.map((p) => ({ slug: p.slug }));
@@ -14,24 +17,33 @@ export function generateMetadata({
   params: { slug: string };
 }): Metadata {
   const meta = getProjectMeta(params.slug);
-  return { title: meta ? meta.title : "Проект" };
+  if (!meta) return { title: "Проект" };
+  const copy = SYSTEM_COPY[meta.system];
+  return {
+    title: meta.title,
+    description: "details" in copy ? copy.details : copy.title,
+    // The bridge is an easter egg on the dashboard; keep its page out of search.
+    robots: meta.hidden ? { index: false } : undefined,
+  };
 }
 
 export default function ProjectPage({ params }: { params: { slug: string } }) {
   const meta = getProjectMeta(params.slug);
   if (!meta) notFound();
 
+  const copy = SYSTEM_COPY[meta.system];
+  const { prev, next } = getProjectNeighbours(meta.slug);
+
   return (
-    <ProjectShell title={meta.title} todo={meta.todo}>
-      {meta.slug === "staff" ? (
-        <StaffChatSim />
-      ) : (
-        <p className="text-sm leading-relaxed text-fg-muted">
-          Здесь появится полное погружение в проект — материалы, которые
-          автор ещё готовит. Пока эта страница подтверждает: маршрут и
-          переход-приближение с дашборда работают.
-        </p>
-      )}
-    </ProjectShell>
+    <ProjectShell
+      meta={meta}
+      number={copy.number}
+      lead={copy.title}
+      details={"details" in copy ? copy.details : <StaffDetails />}
+      prev={prev}
+      next={next}
+      widget={<ProjectWidget system={meta.system} />}
+      flow={<ProjectFlow lanes={meta.flow} rules={meta.rules} />}
+    />
   );
 }

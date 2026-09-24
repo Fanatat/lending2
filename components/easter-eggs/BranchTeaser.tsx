@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { useBranchStore } from "@/lib/branchStore";
+import { playSfx } from "@/lib/sfx";
 
 const HOLD_MS = 3000;
 
@@ -40,7 +41,10 @@ export default function BranchTeaser() {
           startHold();
         }}
         onTouchEnd={cancelHold}
-        onClick={() => setOpen(true)}
+        onClick={() => {
+          playSfx("flashlight");
+          setOpen(true);
+        }}
         className="flex items-center gap-2"
       >
         <span

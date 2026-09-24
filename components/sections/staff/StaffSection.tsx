@@ -1,31 +1,22 @@
 import SectionShell from "@/components/sections/SectionShell";
 import SystemStatusLine from "@/components/sections/SystemStatusLine";
 import StaffGrid from "./StaffGrid";
+import StaffDetails from "./StaffDetails";
+import { SYSTEM_COPY } from "@/lib/systemCopy";
 
 export default function StaffSection() {
   return (
     <SectionShell
       id="staff"
-      number="СИСТЕМА 07"
-      title="Операционный штаб из восьми автономных агентов"
+      number={SYSTEM_COPY.staff.number}
+      title={SYSTEM_COPY.staff.title}
       line={
         <>
           <SystemStatusLine systemId="staff" className="mb-3" />
-          Каждый проект требует фокуса. Чтобы фокус не размывался при переключении между задачами, был поднят отдел, который фактически становится вашими заместителями.
+          Каждый проект требует фокуса. Чтобы он не размывался при переключении между задачами, я поднял отдел, который фактически стал моими заместителями.
         </>
       }
-      details={
-        <>
-          Общий чат, в котором живут восемь разных характеров: имя, манера
-          речи, своя зона памяти. Шума нет, только прагматичный расчет.
-          Иногда они любят прикалываться, но эта опция, без которой я не
-          смог обойтись. Ни один проект здесь не заморожен: все восемь
-          продолжают развиваться, и агенты отвечают именно за развитие.
-          Сегодня штаб живёт в{" "}
-          <span className="text-fg-muted/50 line-through">Telegram</span>,
-          скоро параллельно заработает в MAX.
-        </>
-      }
+      details={<StaffDetails />}
     >
       <StaffGrid />
     </SectionShell>

@@ -1,6 +1,6 @@
 "use client";
 
-/** Demo data for the "Ол Ин" widget — see ТЗ раздел 7, реального API биржи пока нет. */
+/** Masked data for the "All in" widget: the real module runs on the author's server; real amounts are deliberately not published. */
 
 export interface PortfolioAsset {
   symbol: string;
