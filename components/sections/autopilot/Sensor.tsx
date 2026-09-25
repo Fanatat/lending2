@@ -24,7 +24,7 @@ export default function Sensor({ blinkDelayMs }: { blinkDelayMs: number }) {
     const dist = Math.hypot(dx, dy) || 1;
     const r = Math.min(MAX_PUPIL_OFFSET, dist / 12);
     setOffset({ x: (dx / dist) * r, y: (dy / dist) * r });
-  }, [pointer, hasFinePointer]);
+  }, [pointer, hasFinePointer, reducedMotion]);
 
   return (
     <div

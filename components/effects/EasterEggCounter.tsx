@@ -1,10 +1,38 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useLabStore, EASTER_EGGS, type EasterEggMeta } from "@/lib/store";
+import { useLabStore, EASTER_EGGS, eggCopy, type EasterEggMeta } from "@/lib/store";
+import { useLocale } from "@/lib/locale";
 import { playSfx } from "@/lib/sfx";
 
 const TOAST_MS = 4200;
+
+const UI = {
+  ru: {
+    button: "Пасхалки",
+    aria: (found: number, total: number) => `Найдено пасхалок: ${found} из ${total}. Открыть список`,
+    matrixOn: "МАТРИЦА ВКЛ",
+    matrixOff: "МАТРИЦА: ВЫКЛ",
+    dialog: "Журнал пасхалок",
+    log: "ЖУРНАЛ ОХОТНИКА",
+    ruOnly: "",
+    ruOnlyNote: "",
+    allFoundNote: "Найдёте все — в этом углу появится переключатель Матрицы.",
+    toast: "ПАСХАЛКА НАЙДЕНА",
+  },
+  en: {
+    button: "Easter eggs",
+    aria: (found: number, total: number) => `Easter eggs found: ${found} of ${total}. Open the list`,
+    matrixOn: "MATRIX ON",
+    matrixOff: "MATRIX: OFF",
+    dialog: "Easter egg log",
+    log: "HUNTER'S LOG",
+    ruOnly: "RU page",
+    ruOnlyNote: "Eggs marked “RU page” hide in the interactive widgets of the Russian version; the rest work right here.",
+    allFoundNote: "Find them all and a Matrix switch appears in this corner.",
+    toast: "EASTER EGG FOUND",
+  },
+};
 
 /**
  * Fixed top-right tally of discovered easter eggs ("found/total"). Clicking
@@ -18,6 +46,8 @@ export default function EasterEggCounter() {
   const foundIds = useLabStore((s) => s.foundEasterEggs);
   const matrixMode = useLabStore((s) => s.matrixMode);
   const setMatrixMode = useLabStore((s) => s.setMatrixMode);
+  const locale = useLocale();
+  const t = UI[locale];
   const [open, setOpen] = useState(false);
   const [toast, setToast] = useState<EasterEggMeta | null>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -71,14 +101,14 @@ export default function EasterEggCounter() {
           type="button"
           data-cursor="interactive"
           aria-expanded={open}
-          aria-label={`Найдено пасхалок: ${found} из ${total}. Открыть список`}
+          aria-label={t.aria(found, total)}
           onClick={() => {
             setOpen((o) => !o);
             playSfx("ui_click");
           }}
           className="transition-colors hover:text-accent"
         >
-          Пасхалки: {found}/{total} {open ? "▴" : "▾"}
+          {t.button}: {found}/{total} {open ? "▴" : "▾"}
         </button>
         {allFound && (
           <button
@@ -90,7 +120,7 @@ export default function EasterEggCounter() {
             }}
             className="border-l border-line pl-2 text-accent"
           >
-            {matrixMode ? "МАТРИЦА: ВЫКЛ" : "МАТРИЦА ВКЛ"}
+            {matrixMode ? t.matrixOff : t.matrixOn}
           </button>
         )}
       </div>
@@ -98,12 +128,12 @@ export default function EasterEggCounter() {
       {open && (
         <div
           role="dialog"
-          aria-label="Журнал пасхалок"
+          aria-label={t.dialog}
           data-lenis-prevent
           className="egg-log mt-2 max-h-[calc(100svh-4.5rem)] w-[min(420px,calc(100vw-2rem))] overflow-y-auto overscroll-contain border border-line bg-panel p-3 text-[11px] leading-snug shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
         >
           <div className="mb-2 flex items-center justify-between text-[10px] tracking-widest text-fg-muted">
-            <span>ЖУРНАЛ ОХОТНИКА</span>
+            <span>{t.log}</span>
             <span>
               {found}/{total}
             </span>
@@ -111,22 +141,33 @@ export default function EasterEggCounter() {
           <ul className="space-y-1.5">
             {EASTER_EGGS.map((egg) => {
               const isFound = foundIds.includes(egg.id);
+              const copy = eggCopy(egg, locale);
               return (
                 <li key={egg.id} className="border-t border-line/60 pt-1.5">
-                  <div className={isFound ? "text-accent" : "text-fg-muted"}>
-                    {isFound ? "✓ " : "○ "}
-                    {isFound ? egg.title : "???"}
+                  <div className={`flex items-baseline justify-between gap-2 ${isFound ? "text-accent" : "text-fg-muted"}`}>
+                    <span>
+                      {isFound ? "✓ " : "○ "}
+                      {isFound ? copy.title : "???"}
+                    </span>
+                    {locale === "en" && egg.ruOnly && !isFound && (
+                      <span className="shrink-0 text-[9px] tracking-widest text-fg-muted/70">{t.ruOnly}</span>
+                    )}
                   </div>
                   <div className={isFound ? "text-fg-primary/80" : "text-fg-muted/80"}>
-                    {isFound ? egg.found : egg.hint}
+                    {isFound ? copy.found : copy.hint}
                   </div>
                 </li>
               );
             })}
           </ul>
+          {!allFound && t.ruOnlyNote && (
+            <p className="mt-3 border-t border-line/60 pt-2 text-[10px] text-fg-muted">
+              {t.ruOnlyNote}
+            </p>
+          )}
           {!allFound && (
             <p className="mt-3 border-t border-line/60 pt-2 text-[10px] text-fg-muted">
-              Найдёте все — в этом углу появится переключатель Матрицы.
+              {t.allFoundNote}
             </p>
           )}
         </div>
@@ -134,8 +175,8 @@ export default function EasterEggCounter() {
 
       {toast && !open && (
         <div role="status" className="egg-toast mt-2 max-w-[280px] border border-accent bg-void px-3 py-2 text-[11px]">
-          <div className="text-[9px] tracking-widest text-fg-muted">ПАСХАЛКА НАЙДЕНА · {found}/{total}</div>
-          <div className="mt-0.5 text-accent">{toast.title}</div>
+          <div className="text-[9px] tracking-widest text-fg-muted">{t.toast} · {found}/{total}</div>
+          <div className="mt-0.5 text-accent">{eggCopy(toast, locale).title}</div>
         </div>
       )}
     </div>

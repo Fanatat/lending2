@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLabStore } from "@/lib/store";
 import { playSfx } from "@/lib/sfx";
+import { useLocale } from "@/lib/locale";
 
 const KONAMI = [
   "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown",
@@ -12,7 +13,7 @@ const KONAMI = [
 const HTML_CLASS = "agent-vision";
 
 /** What an agent would call the element under the cursor. */
-function describe(el: Element | null): string {
+function describe(el: Element | null, quote: [string, string]): string {
   if (!el) return "—";
   const sec = el.closest("section[id]");
   const tag = el.tagName.toLowerCase();
@@ -20,7 +21,7 @@ function describe(el: Element | null): string {
     el.getAttribute("aria-label") ||
     (el as HTMLElement).innerText?.trim().split("\n")[0]?.slice(0, 38) ||
     "";
-  return `${sec ? `#${sec.id} › ` : ""}<${tag}>${label ? ` «${label}»` : ""}`;
+  return `${sec ? `#${sec.id} › ` : ""}<${tag}>${label ? ` ${quote[0]}${label}${quote[1]}` : ""}`;
 }
 
 /**
@@ -35,6 +36,7 @@ export default function AgentVision() {
   const [pos, setPos] = useState({ x: -100, y: -100 });
   const progress = useRef(0);
   const markFound = useLabStore((s) => s.markFound);
+  const en = useLocale() === "en";
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -67,7 +69,7 @@ export default function AgentVision() {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
         setPos({ x: e.clientX, y: e.clientY });
-        setTarget(describe(document.elementFromPoint(e.clientX, e.clientY)));
+        setTarget(describe(document.elementFromPoint(e.clientX, e.clientY), en ? ["“", "”"] : ["«", "»"]));
       });
     }
     window.addEventListener("pointermove", onMove, { passive: true });
@@ -76,17 +78,17 @@ export default function AgentVision() {
       window.removeEventListener("pointermove", onMove);
       cancelAnimationFrame(raf);
     };
-  }, [on]);
+  }, [on, en]);
 
   if (!on) return null;
 
   return (
     <div className="agent-vision-hud pointer-events-none fixed inset-0 z-[60] text-[10px] tracking-widest text-accent">
       <div className="absolute left-4 top-4 border border-accent/60 bg-void/80 px-2 py-1">
-        AGENT VIEW · ↑↑↓↓←→←→BA · ESC — выход
+        AGENT VIEW · ↑↑↓↓←→←→BA · ESC — {en ? "exit" : "выход"}
       </div>
       <div className="absolute bottom-4 left-4 max-w-[80vw] truncate border border-accent/60 bg-void/80 px-2 py-1">
-        ЦЕЛЬ: {target}
+        {en ? "TARGET" : "ЦЕЛЬ"}: {target}
       </div>
       <div
         className="absolute h-10 w-10 -translate-x-1/2 -translate-y-1/2 border border-accent/70"

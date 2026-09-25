@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useLabStore } from "@/lib/store";
 import { useReducedMotion } from "@/lib/motion";
 import { playSfx } from "@/lib/sfx";
+import { useLocale } from "@/lib/locale";
 
 const TARGET = "sudo";
 const CLOSE_BUTTON_DELAY_MS = 5000;
@@ -40,6 +41,7 @@ export default function SudoEasterEgg() {
   const [showClose, setShowClose] = useState(false);
   const bufferRef = useRef("");
   const markFound = useLabStore((s) => s.markFound);
+  const en = useLocale() === "en";
 
   function engageLock() {
     setLocked(true);
@@ -122,14 +124,14 @@ export default function SudoEasterEgg() {
           type="button"
           data-cursor="interactive"
           onClick={releaseLock}
-          aria-label="Закрыть"
+          aria-label={en ? "Close" : "Закрыть"}
           className="absolute right-4 top-4 h-8 w-8 border border-[#0a0a0a] text-lg text-[#0a0a0a]"
         >
           ×
         </button>
       )}
       <p className="max-w-lg px-6 text-center text-2xl font-bold uppercase tracking-widest text-[#0a0a0a] sm:text-4xl">
-        Доступ запрещён
+        {en ? "Access denied" : "Доступ запрещён"}
       </p>
     </div>
   );
