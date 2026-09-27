@@ -1,0 +1,155 @@
+{
+  "browser": [
+    {
+      "target": "https://vanatat.vercel.app/",
+      "status": 200,
+      "final_url": "https://vanatat.vercel.app/",
+      "title": "Привет от Валеры",
+      "is_secure_context": true,
+      "screenshot": "screenshots/hosts/https_vanatat_vercel_app.png"
+    },
+    {
+      "target": "http://vanatat.ru/",
+      "status": 200,
+      "final_url": "http://vanatat.ru/",
+      "title": "Привет от Валеры",
+      "is_secure_context": false,
+      "screenshot": "screenshots/hosts/http_vanatat_ru.png"
+    },
+    {
+      "target": "https://vanatat.ru/",
+      "error": "Page.goto: net::ERR_CERT_COMMON_NAME_INVALID at https://vanatat.ru/\nCall log:\n  - navigating to \"https://vanatat.ru/\", waiting until \"domcontentloaded\"\n",
+      "screenshot": "screenshots/hosts/https_vanatat_ru.png"
+    },
+    {
+      "target": "https://fanatat.github.io/lending2/",
+      "status": 200,
+      "final_url": "http://vanatat.ru/",
+      "title": "Привет от Валеры",
+      "is_secure_context": false,
+      "screenshot": "screenshots/hosts/https_fanatat_github_io_lending2.png"
+    }
+  ],
+  "canonical": [
+    {
+      "url": "https://vanatat.vercel.app/",
+      "status": 200,
+      "canonical": "https://vanatat.vercel.app",
+      "og_url": "https://vanatat.vercel.app",
+      "description": "Восемь автономных систем. Ноль сотрудников, одна подписка на нейросеть, ноль обещаний.",
+      "headers": {
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "content-security-policy": null,
+        "x-frame-options": null,
+        "x-content-type-options": null,
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "url": "https://vanatat.vercel.app/en",
+      "status": 200,
+      "canonical": "https://vanatat.vercel.app/en",
+      "og_url": "https://vanatat.vercel.app/en",
+      "description": "Eight autonomous systems. Zero employees, one AI subscription, zero promises.",
+      "headers": {
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "content-security-policy": null,
+        "x-frame-options": null,
+        "x-content-type-options": null,
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "url": "https://vanatat.vercel.app/projects/hp100",
+      "status": 200,
+      "canonical": "https://vanatat.vercel.app",
+      "og_url": "https://vanatat.vercel.app",
+      "description": "Плата с семью датчиками раз в минуту отправляет на сервер температуру, влажность, давление, освещённость, летучие соединения, пыль трёх фракций и углекислый газ",
+      "headers": {
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "content-security-policy": null,
+        "x-frame-options": null,
+        "x-content-type-options": null,
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "url": "https://vanatat.vercel.app/projects/friday-studio",
+      "status": 200,
+      "canonical": "https://vanatat.vercel.app",
+      "og_url": "https://vanatat.vercel.app",
+      "description": "Отдельная система сначала разрабатывает игру, а потом ставит её в очередь на обслуживание. Готовит промо-материалы и тексты карточек для площадок. Скрипты сами ",
+      "headers": {
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "content-security-policy": null,
+        "x-frame-options": null,
+        "x-content-type-options": null,
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "url": "http://vanatat.ru/",
+      "status": 200,
+      "canonical": "http://vanatat.ru/",
+      "og_url": "http://vanatat.ru/",
+      "description": "Восемь автономных систем. Ноль сотрудников, одна подписка на нейросеть, ноль обещаний.",
+      "headers": {
+        "server": "GitHub.com",
+        "strict-transport-security": null,
+        "content-security-policy": null,
+        "x-frame-options": null,
+        "x-content-type-options": null,
+        "cache-control": "max-age=600"
+      }
+    },
+    {
+      "url": "http://vanatat.ru/en/",
+      "status": 200,
+      "canonical": "http://vanatat.ru/en/",
+      "og_url": "http://vanatat.ru/en/",
+      "description": "Eight autonomous systems. Zero employees, one AI subscription, zero promises.",
+      "headers": {
+        "server": "GitHub.com",
+        "strict-transport-security": null,
+        "content-security-policy": null,
+        "x-frame-options": null,
+        "x-content-type-options": null,
+        "cache-control": "max-age=600"
+      }
+    },
+    {
+      "url": "http://vanatat.ru/projects/hp100/",
+      "status": 200,
+      "canonical": "http://vanatat.ru/",
+      "og_url": "http://vanatat.ru/",
+      "description": "Плата с семью датчиками раз в минуту отправляет на сервер температуру, влажность, давление, освещённость, летучие соединения, пыль трёх фракций и углекислый газ",
+      "headers": {
+        "server": "GitHub.com",
+        "strict-transport-security": null,
+        "content-security-policy": null,
+        "x-frame-options": null,
+        "x-content-type-options": null,
+        "cache-control": "max-age=600"
+      }
+    },
+    {
+      "url": "http://vanatat.ru/projects/friday-studio/",
+      "status": 200,
+      "canonical": "http://vanatat.ru/",
+      "og_url": "http://vanatat.ru/",
+      "description": "Отдельная система сначала разрабатывает игру, а потом ставит её в очередь на обслуживание. Готовит промо-материалы и тексты карточек для площадок. Скрипты сами ",
+      "headers": {
+        "server": "GitHub.com",
+        "strict-transport-security": null,
+        "content-security-policy": null,
+        "x-frame-options": null,
+        "x-content-type-options": null,
+        "cache-control": "max-age=600"
+      }
+    }
+  ]
+}

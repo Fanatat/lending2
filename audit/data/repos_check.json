@@ -1,0 +1,187 @@
+[
+  {
+    "repo": "lending2",
+    "description": "Личный сайт-портфолио: тёмная терминальная эстетика, реальные проекты как живые механизмы на странице",
+    "homepage": "https://vanatat.vercel.app",
+    "pushed_at": "2026-09-25T01:02:52Z",
+    "created_at": "2026-09-05T15:41:47Z",
+    "stargazers_count": 0,
+    "default_branch": "main",
+    "license": null,
+    "readme_chars": 828,
+    "readme_links": [
+      "http://localhost:3000"
+    ],
+    "readme_mentions_ai": false,
+    "readme_head": "# lending2 — lab-terminal-portfolio\n\nЛичный сайт-портфолио в тёмной терминальной эстетике — витрина реальных\nпроектов, показанных не текстом, а работающими прямо на странице\nмеханизмами.\n\n## Стек\n\n- Next.js 14 / TypeScript\n- Tailwind CSS\n- Framer Motion, Lenis (плавный скролл)\n\n## Особенности\n\n- Живой виджет HP100: показывает актуальные показания датчика воздуха,\n  подтягивая данные с отдельного с"
+  },
+  {
+    "repo": "slovokhod-vk",
+    "description": "«Словоход» — филворд для VK Mini Apps на vanilla JS",
+    "homepage": "https://slovokhod-vk.vercel.app",
+    "pushed_at": "2026-09-24T16:50:42Z",
+    "created_at": "2026-07-11T17:52:44Z",
+    "stargazers_count": 0,
+    "default_branch": "main",
+    "license": null,
+    "readme_chars": 1413,
+    "readme_links": [
+      "http://localhost:8000`.",
+      "https://slovokhod-vk.vercel.app"
+    ],
+    "readme_mentions_ai": true,
+    "readme_head": "# Словоход (slovokhod-vk)\n\nФилворд со словами-цепочками для VK Mini Apps на vanilla JS.\n*Fillword (word-search) puzzle with chained words for VK Mini Apps, vanilla JS.*\n\n## Что это\n\nПоле из букв, слово проводишь пальцем по соседним клеткам. Слова уровня образуют цепочку: первая буква каждого — последняя предыдущего, следующее слово подсвечивается снизу. 100 уровней в 10 тематических главах по 10 ("
+  },
+  {
+    "repo": "catnonogram-vk",
+    "description": "«Кот и японские кроссворды» — нонограммы для VK Mini Apps на vanilla JS",
+    "homepage": "https://catnonogram-vk.vercel.app",
+    "pushed_at": "2026-09-25T05:21:37Z",
+    "created_at": "2026-07-13T11:16:06Z",
+    "stargazers_count": 0,
+    "default_branch": "main",
+    "license": null,
+    "readme_chars": 1499,
+    "readme_links": [
+      "http://localhost:8000`.",
+      "https://catnonogram-vk.vercel.app",
+      "https://vk.com/app54676906"
+    ],
+    "readme_mentions_ai": true,
+    "readme_head": "# Кот и японские кроссворды (catnonogram-vk)\n\nНонограммы (японские кроссворды) для VK Mini Apps на vanilla JS.\n*Nonogram (picross) puzzle game for VK Mini Apps, vanilla JS.*\n\n## Что это\n\nКлассический японский кроссворд: по числам у строк и столбцов закрашиваешь клетки и получаешь картинку. Кампания — 130 уровней от 5×5 до 15×15, сгруппированных в 13 тематических глав («Альбом»). Отдельно — ежеднев"
+  },
+  {
+    "repo": "Color_Sort-Vk",
+    "description": "Color Sort — головоломка-сортировка цветов для VK Mini Apps на vanilla JS",
+    "homepage": "https://color-sort-vk.vercel.app",
+    "pushed_at": "2026-09-25T02:41:54Z",
+    "created_at": "2026-07-17T11:05:26Z",
+    "stargazers_count": 0,
+    "default_branch": "main",
+    "license": null,
+    "readme_chars": 1592,
+    "readme_links": [
+      "http://localhost:8000`."
+    ],
+    "readme_mentions_ai": true,
+    "readme_head": "# Сортировка: Цвет и Форма (Color_Sort-Vk)\n\nГоловоломка-сортировка колб, где считается и цвет, и форма фигур, для VK Mini Apps на vanilla JS/Canvas.\n*Vial-sorting puzzle where both colour and shape matter, for VK Mini Apps, vanilla JS + Canvas.*\n\n## Что это\n\nСортировка колб с двумя признаками: элементы отличаются цветом (три цвета) и формой (круг/квадрат), в одну колбу собираются только полностью "
+  },
+  {
+    "repo": "lane-battle-vk",
+    "description": "Lane Battler — lane-defense для VK Mini Apps на vanilla JS/Canvas, 11 языков",
+    "homepage": null,
+    "pushed_at": "2026-09-26T13:12:41Z",
+    "created_at": "2026-09-05T05:01:13Z",
+    "stargazers_count": 0,
+    "default_branch": "main",
+    "license": null,
+    "readme_chars": 1662,
+    "readme_links": [
+      "http://localhost:8000`."
+    ],
+    "readme_mentions_ai": true,
+    "readme_head": "# Две крепости (lane-battle-vk)\n\nLane-battle с двумя крепостями на одной линии для VK Mini Apps и Яндекс Игр на vanilla JS/Canvas.\n*Lane-battle game (two fortresses, one lane) for VK Mini Apps and Yandex Games, vanilla JS + Canvas.*\n\n## Что это\n\nИгрок нанимает юнитов четырёх ролей (пехота, копейщик, лучник, тяжёлый), прокачивает доход, ставит башни и лично управляет героем-капитаном, который нанос"
+  },
+  {
+    "repo": "Royal_solitaire",
+    "description": "Royal Solitaire — пасьянс для VK Mini Apps на vanilla JS",
+    "homepage": null,
+    "pushed_at": "2026-09-26T15:38:36Z",
+    "created_at": "2026-09-09T11:50:17Z",
+    "stargazers_count": 0,
+    "default_branch": "main",
+    "license": null,
+    "readme_chars": 1559,
+    "readme_links": [
+      "http://localhost:8000`"
+    ],
+    "readme_mentions_ai": true,
+    "readme_head": "# Королевская Косынка (Royal_solitaire)\n\nПасьянс «Косынка» (Klondike) с аренами, сундуками и коронами для VK Mini Apps и Яндекс Игр, HTML5/Canvas.\n*Klondike solitaire with arenas, chests and crowns for VK Mini Apps and Yandex Games, HTML5 + Canvas.*\n\n## Что это\n\nКлассическая косынка со сдачей по одной или по три карты; раздачи строятся по сиду и проверяются солвером на решаемость. Поверх — мета-пр"
+  },
+  {
+    "repo": "hp100-live-feed",
+    "description": "Live air-quality sensor feed (CO2/temp/humidity/dust) for the HP100 project — auto-updated every 5 min",
+    "homepage": null,
+    "pushed_at": "2026-09-27T04:07:31Z",
+    "created_at": "2026-09-03T15:30:54Z",
+    "stargazers_count": 0,
+    "default_branch": "master",
+    "license": null,
+    "readme_chars": 1541,
+    "readme_links": [
+      "https://raw.githubusercontent.com/Fanatat/hp100-live-feed/master/history.json",
+      "https://raw.githubusercontent.com/Fanatat/hp100-live-feed/master/latest.json"
+    ],
+    "readme_mentions_ai": true,
+    "readme_head": "# hp100-live-feed\n\nПубличный JSON-фид домашнего датчика воздуха HP100: CO₂, температура, влажность, пыль — обновляется каждые 5 минут.\n*Public JSON feed of an HP100 air-quality sensor (CO₂, temperature, humidity, dust), refreshed every 5 minutes.*\n\n## Что это\n\nРепозиторий-фид. Скрипт на VPS опрашивает локальный сервер датчика (`localhost:8080`) и коммитит сюда два файла: `latest.json` — текущее по"
+  },
+  {
+    "repo": "games-dev",
+    "description": "Тестовые сборки игр студии (GitHub Pages), по папке на игру. Прод — в репозиториях игр.",
+    "homepage": null,
+    "pushed_at": "2026-09-27T04:05:40Z",
+    "created_at": "2026-09-24T13:13:45Z",
+    "stargazers_count": 0,
+    "default_branch": "main",
+    "license": null,
+    "readme_chars": 716,
+    "readme_links": [
+      "https://fanatat.github.io/games-dev/catnonogram/",
+      "https://fanatat.github.io/games-dev/color-sort/",
+      "https://fanatat.github.io/games-dev/lane-battle/",
+      "https://fanatat.github.io/games-dev/royal-solitaire/",
+      "https://fanatat.github.io/games-dev/slovokhod/"
+    ],
+    "readme_mentions_ai": true,
+    "readme_head": "# games-dev\n\nТестовые сборки игр студии для проверки перед выкатом. GitHub Pages, по папке на игру:\n\n| Игра | Тестовая ссылка | Прод-репозиторий |\n|---|---|---|\n| Словоход | https://fanatat.github.io/games-dev/slovokhod/ | Fanatat/slovokhod-vk |\n| Кот и японские кроссворды | https://fanatat.github.io/games-dev/catnonogram/ | Fanatat/catnonogram-vk |\n| Color Sort | https://fanatat.github.io/games-d"
+  },
+  {
+    "repo": "Fanatat",
+    "description": "Profile README",
+    "homepage": null,
+    "pushed_at": "2026-09-25T03:17:05Z",
+    "created_at": "2026-09-20T17:32:02Z",
+    "stargazers_count": 0,
+    "default_branch": "main",
+    "license": null,
+    "readme_chars": 2235,
+    "readme_links": [
+      "http://vanatat.ru",
+      "https://github.com/Fanatat/Color_Sort-Vk",
+      "https://github.com/Fanatat/Royal_solitaire",
+      "https://github.com/Fanatat/catnonogram-vk",
+      "https://github.com/Fanatat/hp100-live-feed",
+      "https://github.com/Fanatat/lane-battle-vk",
+      "https://github.com/Fanatat/lending2",
+      "https://github.com/Fanatat/slovokhod-vk",
+      "https://t.me/fanatat"
+    ],
+    "readme_mentions_ai": true,
+    "readme_head": "# Валерий · Valery\n\n**Продюсер систем на ИИ-агентах.** Ставлю задачу ИИ-агентам,\nпринимаю результат живым запуском и тестами, довожу до продакшна и\nобслуживаю. Код руками не пишу — это осознанная позиция: моя работа —\nпостановка, приёмка, эксплуатация.\n\n**Producer / tech lead shipping systems through AI coding agents.** I do\nnot write code myself: I specify, verify by running and testing, deploy\na"
+  },
+  {
+    "repo": "lending1",
+    "description": "СТВОЛ / TRUNK — демо-предпросмотр (ТЗ-DEMO-01)",
+    "homepage": "https://fanatat.github.io/lending1/",
+    "pushed_at": "2026-09-21T07:17:06Z",
+    "created_at": "2026-08-30T05:25:33Z",
+    "stargazers_count": 0,
+    "default_branch": "main",
+    "license": null,
+    "readme": "missing"
+  },
+  {
+    "repo": "garden_clicker_vk",
+    "description": null,
+    "homepage": null,
+    "pushed_at": "2026-09-20T13:27:25Z",
+    "created_at": "2026-07-28T03:56:41Z",
+    "stargazers_count": 0,
+    "default_branch": "main",
+    "license": null,
+    "readme_chars": 15,
+    "readme_links": [],
+    "readme_mentions_ai": false,
+    "readme_head": "coming soon...\n"
+  }
+]

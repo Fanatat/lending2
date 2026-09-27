@@ -1,0 +1,454 @@
+{
+  "base": "https://vanatat.vercel.app",
+  "pages": {
+    "/": {
+      "url": "https://vanatat.vercel.app/",
+      "status": 200,
+      "title": "Привет от Валеры",
+      "h1": [
+        "#НЕРЕЗЮМЕ, а список реализованных задач"
+      ],
+      "type": "главная (дашборд систем, RU)",
+      "found_via": "start",
+      "a_href_count": 7,
+      "role_button_cards": [
+        "Открыть проект: Словоход",
+        "Открыть проект: Картинки по числам",
+        "Открыть проект: Color Sort",
+        "Открыть проект: Lane Battler",
+        "Открыть проект: Royal Solitaire",
+        "Открыть проект HP100 целиком",
+        "Открыть проект Автопилот канала",
+        "Открыть проект Мост",
+        "Открыть проект All in",
+        "Открыть проект Контент-завод",
+        "Открыть чат с агентом: Координатор",
+        "Открыть чат с агентом: Менеджер",
+        "Открыть чат с агентом: Дежурный",
+        "Открыть чат с агентом: Смотритель",
+        "Открыть чат с агентом: Инженер связи",
+        "Открыть чат с агентом: Аналитик рисков",
+        "Открыть чат с агентом: Продюсер сцен",
+        "Открыть чат с агентом: Служба безопасности",
+        "Открыть отчёт по узлу: Внешний периметр",
+        "Открыть отчёт по узлу: Роутер",
+        "Открыть отчёт по узлу: Сервер",
+        "Открыть отчёт по узлу: ПК 1",
+        "Открыть отчёт по узлу: Неттоп",
+        "Открыть отчёт по узлу: Ноутбук"
+      ],
+      "errors": [
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        }
+      ],
+      "in_navigation": true
+    },
+    "/projects/friday-studio": {
+      "url": "https://vanatat.vercel.app/projects/friday-studio",
+      "status": 200,
+      "title": "Студия «Пятница»",
+      "h1": [
+        "Студия «Пятница»"
+      ],
+      "type": "карточка проекта",
+      "found_via": "click (div role=button, no href)",
+      "a_href_count": 2,
+      "role_button_cards": [],
+      "errors": [],
+      "in_navigation": false
+    },
+    "/projects/hp100": {
+      "url": "https://vanatat.vercel.app/projects/hp100",
+      "status": 200,
+      "title": "HP100",
+      "h1": [
+        "HP100"
+      ],
+      "type": "карточка проекта",
+      "found_via": "click (div role=button, no href)",
+      "a_href_count": 2,
+      "role_button_cards": [],
+      "errors": [
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        }
+      ],
+      "in_navigation": false
+    },
+    "/projects/channel-autopilot": {
+      "url": "https://vanatat.vercel.app/projects/channel-autopilot",
+      "status": 200,
+      "title": "Автопилот канала",
+      "h1": [
+        "Автопилот канала"
+      ],
+      "type": "карточка проекта",
+      "found_via": "click (div role=button, no href)",
+      "a_href_count": 2,
+      "role_button_cards": [],
+      "errors": [
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        }
+      ],
+      "in_navigation": false
+    },
+    "/projects/all-in": {
+      "url": "https://vanatat.vercel.app/projects/all-in",
+      "status": 200,
+      "title": "All in",
+      "h1": [
+        "All in"
+      ],
+      "type": "карточка проекта",
+      "found_via": "click (div role=button, no href)",
+      "a_href_count": 2,
+      "role_button_cards": [],
+      "errors": [
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        }
+      ],
+      "in_navigation": false
+    },
+    "/projects/content-factory": {
+      "url": "https://vanatat.vercel.app/projects/content-factory",
+      "status": 200,
+      "title": "Контент-завод",
+      "h1": [
+        "Контент-завод"
+      ],
+      "type": "карточка проекта",
+      "found_via": "click (div role=button, no href)",
+      "a_href_count": 2,
+      "role_button_cards": [],
+      "errors": [],
+      "in_navigation": false
+    },
+    "/projects/staff": {
+      "url": "https://vanatat.vercel.app/projects/staff",
+      "status": 200,
+      "title": "Штаб",
+      "h1": [
+        "Штаб"
+      ],
+      "type": "карточка проекта",
+      "found_via": "click (div role=button, no href)",
+      "a_href_count": 2,
+      "role_button_cards": [],
+      "errors": [
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        }
+      ],
+      "in_navigation": false
+    },
+    "/projects/perimeter": {
+      "url": "https://vanatat.vercel.app/projects/perimeter",
+      "status": 200,
+      "title": "Периметр",
+      "h1": [
+        "Периметр"
+      ],
+      "type": "карточка проекта",
+      "found_via": "click (div role=button, no href)",
+      "a_href_count": 2,
+      "role_button_cards": [],
+      "errors": [
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        },
+        {
+          "kind": "pageerror",
+          "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        }
+      ],
+      "in_navigation": false
+    },
+    "/en": {
+      "url": "https://vanatat.vercel.app/en",
+      "status": 200,
+      "title": "Hi, I'm Valery",
+      "h1": [
+        "#NOTARESUME — a list of shipped tasks"
+      ],
+      "type": "главная EN (текстовая версия)",
+      "found_via": "start",
+      "a_href_count": 8,
+      "role_button_cards": [],
+      "errors": [],
+      "in_navigation": true
+    },
+    "/projects/bridge": {
+      "url": "https://vanatat.vercel.app/projects/bridge",
+      "status": 200,
+      "title": "Мост",
+      "type": "карточка проекта",
+      "found_via": "только из кода (lib/projects.ts), на сайте ссылок нет",
+      "in_navigation": false
+    },
+    "/no-such-page-audit": {
+      "url": "https://vanatat.vercel.app/no-such-page-audit",
+      "status": 404,
+      "title": "404: This page could not be found.",
+      "type": "404",
+      "found_via": "проверка 404",
+      "links_on_404": [
+        "https://vanatat.vercel.app/",
+        "https://vanatat.vercel.app/en"
+      ],
+      "text": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 1/13 ▾\n404\nThis page could not be found.",
+      "in_navigation": false
+    },
+    "/sitemap.xml": {
+      "url": "https://vanatat.vercel.app/sitemap.xml",
+      "status": 404,
+      "type": "служебная",
+      "found_via": "прямой запрос",
+      "in_navigation": false
+    },
+    "/robots.txt": {
+      "url": "https://vanatat.vercel.app/robots.txt",
+      "status": 404,
+      "type": "служебная",
+      "found_via": "прямой запрос",
+      "in_navigation": false
+    },
+    "/og.png": {
+      "url": "https://vanatat.vercel.app/og.png",
+      "status": 200,
+      "type": "служебная",
+      "found_via": "прямой запрос",
+      "in_navigation": false
+    },
+    "/favicon.ico": {
+      "url": "https://vanatat.vercel.app/favicon.ico",
+      "status": 404,
+      "type": "служебная",
+      "found_via": "прямой запрос",
+      "in_navigation": false
+    },
+    "/manifest.json": {
+      "url": "https://vanatat.vercel.app/manifest.json",
+      "status": 404,
+      "type": "служебная",
+      "found_via": "прямой запрос",
+      "in_navigation": false
+    }
+  },
+  "service_files": {
+    "/sitemap.xml": {
+      "url": "https://vanatat.vercel.app/sitemap.xml",
+      "status": 404,
+      "final_url": "https://vanatat.vercel.app/sitemap.xml",
+      "ms": 413
+    },
+    "/robots.txt": {
+      "url": "https://vanatat.vercel.app/robots.txt",
+      "status": 404,
+      "final_url": "https://vanatat.vercel.app/robots.txt",
+      "ms": 362
+    },
+    "/og.png": {
+      "url": "https://vanatat.vercel.app/og.png",
+      "status": 200,
+      "final_url": "https://vanatat.vercel.app/og.png",
+      "ms": 811,
+      "bytes": 35351
+    },
+    "/favicon.ico": {
+      "url": "https://vanatat.vercel.app/favicon.ico",
+      "status": 404,
+      "final_url": "https://vanatat.vercel.app/favicon.ico",
+      "ms": 331
+    },
+    "/manifest.json": {
+      "url": "https://vanatat.vercel.app/manifest.json",
+      "status": 404,
+      "final_url": "https://vanatat.vercel.app/manifest.json",
+      "ms": 378
+    }
+  },
+  "click_only_pages": {
+    "/projects/friday-studio": "click on role=button «Открыть проект: Royal Solitaire»",
+    "/projects/hp100": "click on role=button «Открыть проект HP100 целиком»",
+    "/projects/channel-autopilot": "click on role=button «Открыть проект Автопилот канала»",
+    "/projects/all-in": "click on role=button «Открыть проект All in»",
+    "/projects/content-factory": "click on role=button «Открыть проект Контент-завод»",
+    "/projects/staff": "click on role=button «Открыть чат с агентом: Служба безопасности»",
+    "/projects/perimeter": "click on role=button «Открыть отчёт по узлу: Ноутбук»"
+  },
+  "click_failed": [
+    {
+      "label": "Открыть проект Мост",
+      "error": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"[role=button][aria-label]\").nth(7)\n    - locator resolved to <div tabindex="
+    }
+  ],
+  "nav_link_paths": [
+    "/",
+    "/en"
+  ]
+}

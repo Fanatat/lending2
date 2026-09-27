@@ -1,0 +1,2198 @@
+[
+  {
+    "viewport": "desktop-1920",
+    "seed": 20260927,
+    "summary": {
+      "clicks": 50,
+      "dead_clicks": 2,
+      "navigations": 17,
+      "new_tabs": 1,
+      "left_site_same_tab": 0,
+      "clicks_with_errors": 0,
+      "fullscreen_overlays": 0,
+      "dead_ends": [],
+      "pages_without_contact": [
+        "https://vanatat.vercel.app/projects/friday-studio",
+        "https://vanatat.vercel.app/projects/staff"
+      ]
+    },
+    "log": [
+      {
+        "i": 0,
+        "el": {
+          "id": "3",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Пасхалки: 0/13 ▾"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 47,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 1,
+        "el": {
+          "id": "0",
+          "tag": "a",
+          "href": "/",
+          "target": null,
+          "text": "RU"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": -59,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 2,
+        "el": {
+          "id": "6",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "▸ Подробнее"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": -10,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 3,
+        "el": {
+          "id": "5",
+          "tag": "a",
+          "href": "https://github.com/Fanatat",
+          "target": "_blank",
+          "text": "GitHub"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "opened_new_tab": "https://github.com/Fanatat",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": -1,
+        "aria_state_changed": false,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 4,
+        "el": {
+          "id": "18",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "▸ Подробнее"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": -11,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 5,
+        "el": {
+          "id": "2",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Звук: вкл"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": -1,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 6,
+        "el": {
+          "id": "40",
+          "tag": "div",
+          "href": null,
+          "target": null,
+          "text": "HP Дежурный датчики HP100"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/projects/staff",
+        "scroll_delta": -4210,
+        "visible_elements_delta": -495,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "navigated": true,
+        "page_has_way_home": true,
+        "page_has_contact": false,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 7,
+        "el": {
+          "id": "10",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "OI"
+        },
+        "url_before": "https://vanatat.vercel.app/projects/staff",
+        "url_after": "https://vanatat.vercel.app/projects/staff",
+        "scroll_delta": 0,
+        "visible_elements_delta": 0,
+        "aria_state_changed": false,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 8,
+        "el": {
+          "id": "2",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Звук: выкл"
+        },
+        "url_before": "https://vanatat.vercel.app/projects/staff",
+        "url_after": "https://vanatat.vercel.app/projects/staff",
+        "scroll_delta": 0,
+        "visible_elements_delta": 0,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 9,
+        "el": {
+          "id": "9",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "МТ"
+        },
+        "url_before": "https://vanatat.vercel.app/projects/staff",
+        "url_after": "https://vanatat.vercel.app/projects/staff",
+        "scroll_delta": 0,
+        "visible_elements_delta": 0,
+        "aria_state_changed": false,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": true,
+        "screenshot": "screenshots/lost_visitor/desktop-1920/09.png"
+      },
+      {
+        "i": 10,
+        "el": {
+          "id": "1",
+          "tag": "a",
+          "href": "/en",
+          "target": null,
+          "text": "EN"
+        },
+        "url_before": "https://vanatat.vercel.app/projects/staff",
+        "url_after": "https://vanatat.vercel.app/en",
+        "scroll_delta": -187,
+        "visible_elements_delta": 61,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "navigated": true,
+        "page_has_way_home": true,
+        "page_has_contact": true,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 11,
+        "el": {
+          "id": "0",
+          "tag": "a",
+          "href": "/",
+          "target": null,
+          "text": "RU"
+        },
+        "url_before": "https://vanatat.vercel.app/en",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 399,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "navigated": true,
+        "page_has_way_home": true,
+        "page_has_contact": true,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 12,
+        "el": {
+          "id": "3",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Пасхалки: 0/13 ▾"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 59,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 13,
+        "el": {
+          "id": "4",
+          "tag": "h1",
+          "href": null,
+          "target": null,
+          "text": "#НЕРЕЗЮМЕ, а список реализованных задач"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": -68,
+        "visible_elements_delta": -71,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 14,
+        "el": {
+          "id": "3",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Пасхалки: 0/13 ▾"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 71,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 15,
+        "el": {
+          "id": "1",
+          "tag": "a",
+          "href": "/en",
+          "target": null,
+          "text": "EN"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/en",
+        "scroll_delta": -481,
+        "visible_elements_delta": -465,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "navigated": true,
+        "page_has_way_home": true,
+        "page_has_contact": true,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 16,
+        "el": {
+          "id": "0",
+          "tag": "a",
+          "href": "/",
+          "target": null,
+          "text": "RU"
+        },
+        "url_before": "https://vanatat.vercel.app/en",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 399,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "navigated": true,
+        "page_has_way_home": true,
+        "page_has_contact": true,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 17,
+        "el": {
+          "id": "1",
+          "tag": "a",
+          "href": "/en",
+          "target": null,
+          "text": "EN"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/en",
+        "scroll_delta": -1559,
+        "visible_elements_delta": -406,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "navigated": true,
+        "page_has_way_home": true,
+        "page_has_contact": true,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 18,
+        "el": {
+          "id": "0",
+          "tag": "a",
+          "href": "/",
+          "target": null,
+          "text": "RU"
+        },
+        "url_before": "https://vanatat.vercel.app/en",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": -1255,
+        "visible_elements_delta": 397,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "navigated": true,
+        "page_has_way_home": true,
+        "page_has_contact": true,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 19,
+        "el": {
+          "id": "2",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Звук: вкл"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 14,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 20,
+        "el": {
+          "id": "10",
+          "tag": "div",
+          "href": null,
+          "target": null,
+          "text": "Lane Battler в разработке 375 отзывов → патч"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/projects/friday-studio",
+        "scroll_delta": -1295,
+        "visible_elements_delta": -445,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "navigated": true,
+        "page_has_way_home": true,
+        "page_has_contact": false,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 21,
+        "el": {
+          "id": "0",
+          "tag": "a",
+          "href": "/",
+          "target": null,
+          "text": "RU"
+        },
+        "url_before": "https://vanatat.vercel.app/projects/friday-studio",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 433,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "navigated": true,
+        "page_has_way_home": true,
+        "page_has_contact": true,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 22,
+        "el": {
+          "id": "1",
+          "tag": "a",
+          "href": "/en",
+          "target": null,
+          "text": "EN"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/en",
+        "scroll_delta": -223,
+        "visible_elements_delta": -404,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "navigated": true,
+        "page_has_way_home": true,
+        "page_has_contact": true,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 23,
+        "el": {
+          "id": "2",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Sound: off"
+        },
+        "url_before": "https://vanatat.vercel.app/en",
+        "url_after": "https://vanatat.vercel.app/en",
+        "scroll_delta": 0,
+        "visible_elements_delta": 0,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 24,
+        "el": {
+          "id": "1",
+          "tag": "a",
+          "href": "/en",
+          "target": null,
+          "text": "EN"
+        },
+        "url_before": "https://vanatat.vercel.app/en",
+        "url_after": "https://vanatat.vercel.app/en",
+        "scroll_delta": -1366,
+        "visible_elements_delta": -2,
+        "aria_state_changed": false,
+        "text_changed": false,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 25,
+        "el": {
+          "id": "2",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Sound: on"
+        },
+        "url_before": "https://vanatat.vercel.app/en",
+        "url_after": "https://vanatat.vercel.app/en",
+        "scroll_delta": 0,
+        "visible_elements_delta": 0,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 26,
+        "el": {
+          "id": "0",
+          "tag": "a",
+          "href": "/",
+          "target": null,
+          "text": "RU"
+        },
+        "url_before": "https://vanatat.vercel.app/en",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": -18,
+        "visible_elements_delta": 397,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "navigated": true,
+        "page_has_way_home": true,
+        "page_has_contact": true,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 27,
+        "el": {
+          "id": "2",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Звук: выкл"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 14,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 28,
+        "el": {
+          "id": "8",
+          "tag": "div",
+          "href": null,
+          "target": null,
+          "text": "Картинки по числам 338 тестов зелёных"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/projects/friday-studio",
+        "scroll_delta": -722,
+        "visible_elements_delta": -446,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "navigated": true,
+        "page_has_way_home": true,
+        "page_has_contact": false,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 29,
+        "el": {
+          "id": "0",
+          "tag": "a",
+          "href": "/",
+          "target": null,
+          "text": "RU"
+        },
+        "url_before": "https://vanatat.vercel.app/projects/friday-studio",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 433,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "navigated": true,
+        "page_has_way_home": true,
+        "page_has_contact": true,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 30,
+        "el": {
+          "id": "0",
+          "tag": "a",
+          "href": "/",
+          "target": null,
+          "text": "RU"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 13,
+        "aria_state_changed": false,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": true,
+        "screenshot": "screenshots/lost_visitor/desktop-1920/30.png"
+      },
+      {
+        "i": 31,
+        "el": {
+          "id": "3",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Пасхалки: 0/13 ▾"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 59,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 32,
+        "el": {
+          "id": "3",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Пасхалки: 0/13 ▴"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": -45,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 33,
+        "el": {
+          "id": "7",
+          "tag": "div",
+          "href": null,
+          "target": null,
+          "text": "Словоход звуки — синтез, не файлы"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/projects/friday-studio",
+        "scroll_delta": -964,
+        "visible_elements_delta": -449,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "navigated": true,
+        "page_has_way_home": true,
+        "page_has_contact": false,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 34,
+        "el": {
+          "id": "4",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "← на дашборд"
+        },
+        "url_before": "https://vanatat.vercel.app/projects/friday-studio",
+        "url_after": "https://vanatat.vercel.app/#friday-studio",
+        "scroll_delta": 1389,
+        "visible_elements_delta": 442,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "navigated": true,
+        "page_has_way_home": true,
+        "page_has_contact": true,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 35,
+        "el": {
+          "id": "11",
+          "tag": "div",
+          "href": null,
+          "target": null,
+          "text": "Royal Solitaire Three.js, прошла модерацию"
+        },
+        "url_before": "https://vanatat.vercel.app/#friday-studio",
+        "url_after": "https://vanatat.vercel.app/projects/friday-studio",
+        "scroll_delta": -1389,
+        "visible_elements_delta": -441,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "navigated": true,
+        "page_has_way_home": true,
+        "page_has_contact": false,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 36,
+        "el": {
+          "id": "3",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Пасхалки: 0/13 ▾"
+        },
+        "url_before": "https://vanatat.vercel.app/projects/friday-studio",
+        "url_after": "https://vanatat.vercel.app/projects/friday-studio",
+        "scroll_delta": 0,
+        "visible_elements_delta": 56,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 37,
+        "el": {
+          "id": "3",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Пасхалки: 0/13 ▴"
+        },
+        "url_before": "https://vanatat.vercel.app/projects/friday-studio",
+        "url_after": "https://vanatat.vercel.app/projects/friday-studio",
+        "scroll_delta": 0,
+        "visible_elements_delta": -58,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 38,
+        "el": {
+          "id": "3",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Пасхалки: 0/13 ▾"
+        },
+        "url_before": "https://vanatat.vercel.app/projects/friday-studio",
+        "url_after": "https://vanatat.vercel.app/projects/friday-studio",
+        "scroll_delta": 0,
+        "visible_elements_delta": 58,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 39,
+        "el": {
+          "id": "0",
+          "tag": "a",
+          "href": "/",
+          "target": null,
+          "text": "RU"
+        },
+        "url_before": "https://vanatat.vercel.app/projects/friday-studio",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": -876,
+        "visible_elements_delta": 368,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "navigated": true,
+        "page_has_way_home": true,
+        "page_has_contact": true,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 40,
+        "el": {
+          "id": "3",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Пасхалки: 0/13 ▾"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 72,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 41,
+        "el": {
+          "id": "4",
+          "tag": "h1",
+          "href": null,
+          "target": null,
+          "text": "#НЕРЕЗЮМЕ, а список реализованных задач"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": -65,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 42,
+        "el": {
+          "id": "3",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Пасхалки: 0/13 ▾"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 57,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 43,
+        "el": {
+          "id": "4",
+          "tag": "h1",
+          "href": null,
+          "target": null,
+          "text": "#НЕРЕЗЮМЕ, а список реализованных задач"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": -71,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 44,
+        "el": {
+          "id": "2",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Звук: вкл"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 1,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 45,
+        "el": {
+          "id": "3",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Пасхалки: 0/13 ▾"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 56,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 46,
+        "el": {
+          "id": "12",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "▸ Подробнее"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": -56,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 47,
+        "el": {
+          "id": "2",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Звук: выкл"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": -10,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 48,
+        "el": {
+          "id": "0",
+          "tag": "a",
+          "href": "/",
+          "target": null,
+          "text": "RU"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": -3478,
+        "visible_elements_delta": -13,
+        "aria_state_changed": false,
+        "text_changed": false,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 49,
+        "el": {
+          "id": "3",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Пасхалки: 0/13 ▾"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 52,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      }
+    ],
+    "all_errors": [
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      }
+    ],
+    "final_screenshot": "screenshots/lost_visitor/desktop-1920/final.png"
+  },
+  {
+    "viewport": "phone-390",
+    "seed": 20260927,
+    "summary": {
+      "clicks": 50,
+      "dead_clicks": 6,
+      "navigations": 9,
+      "new_tabs": 5,
+      "left_site_same_tab": 0,
+      "clicks_with_errors": 0,
+      "fullscreen_overlays": 13,
+      "dead_ends": [],
+      "pages_without_contact": []
+    },
+    "log": [
+      {
+        "i": 0,
+        "el": {
+          "id": "3",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Пасхалки: 0/13 ▾"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 47,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": "div.fixed.right-4.top-4 «Пасхалки: 0/13 ▴\nЖУРНАЛ ОХОТНИКА\n0/13\n○ ???\nЗаголовок не люб»",
+        "control_page_static": false,
+        "dead_click": false,
+        "screenshot": "screenshots/lost_visitor/phone-390/00.png"
+      },
+      {
+        "i": 1,
+        "el": {
+          "id": "0",
+          "tag": "a",
+          "href": "/",
+          "target": null,
+          "text": "RU"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 13,
+        "aria_state_changed": false,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": true,
+        "screenshot": "screenshots/lost_visitor/phone-390/01.png"
+      },
+      {
+        "i": 2,
+        "el": {
+          "id": "2",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Звук: вкл"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 1,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 3,
+        "el": {
+          "id": "2",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Звук: выкл"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 11,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 4,
+        "el": {
+          "id": "3",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Пасхалки: 0/13 ▾"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 50,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": "div.fixed.right-4.top-4 «Пасхалки: 0/13 ▴\nЖУРНАЛ ОХОТНИКА\n0/13\n○ ???\nЗаголовок не люб»",
+        "control_page_static": false,
+        "dead_click": false,
+        "screenshot": "screenshots/lost_visitor/phone-390/04.png"
+      },
+      {
+        "i": 5,
+        "el": {
+          "id": "1",
+          "tag": "a",
+          "href": "/en",
+          "target": null,
+          "text": "EN"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/en",
+        "scroll_delta": -868,
+        "visible_elements_delta": -413,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "navigated": true,
+        "page_has_way_home": true,
+        "page_has_contact": true,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 6,
+        "el": {
+          "id": "4",
+          "tag": "a",
+          "href": "https://github.com/Fanatat",
+          "target": "_blank",
+          "text": "GitHub"
+        },
+        "url_before": "https://vanatat.vercel.app/en",
+        "opened_new_tab": "https://github.com/Fanatat",
+        "url_after": "https://vanatat.vercel.app/en",
+        "scroll_delta": 0,
+        "visible_elements_delta": 0,
+        "aria_state_changed": false,
+        "text_changed": false,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 7,
+        "el": {
+          "id": "4",
+          "tag": "a",
+          "href": "https://github.com/Fanatat",
+          "target": "_blank",
+          "text": "GitHub"
+        },
+        "url_before": "https://vanatat.vercel.app/en",
+        "opened_new_tab": "https://github.com/Fanatat",
+        "url_after": "https://vanatat.vercel.app/en",
+        "scroll_delta": 0,
+        "visible_elements_delta": 0,
+        "aria_state_changed": false,
+        "text_changed": false,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 8,
+        "el": {
+          "id": "2",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Sound: on"
+        },
+        "url_before": "https://vanatat.vercel.app/en",
+        "url_after": "https://vanatat.vercel.app/en",
+        "scroll_delta": 0,
+        "visible_elements_delta": 0,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 9,
+        "el": {
+          "id": "0",
+          "tag": "a",
+          "href": "/",
+          "target": null,
+          "text": "RU"
+        },
+        "url_before": "https://vanatat.vercel.app/en",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": -631,
+        "visible_elements_delta": 401,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "navigated": true,
+        "page_has_way_home": true,
+        "page_has_contact": true,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 10,
+        "el": {
+          "id": "4",
+          "tag": "h1",
+          "href": null,
+          "target": null,
+          "text": "#НЕРЕЗЮМЕ, а список реализованных задач"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 15,
+        "aria_state_changed": false,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": true,
+        "screenshot": "screenshots/lost_visitor/phone-390/10.png"
+      },
+      {
+        "i": 11,
+        "el": {
+          "id": "0",
+          "tag": "a",
+          "href": "/",
+          "target": null,
+          "text": "RU"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": -352,
+        "visible_elements_delta": -5,
+        "aria_state_changed": false,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 12,
+        "el": {
+          "id": "4",
+          "tag": "h1",
+          "href": null,
+          "target": null,
+          "text": "#НЕРЕЗЮМЕ, а список реализованных задач"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 13,
+        "aria_state_changed": false,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 13,
+        "el": {
+          "id": "3",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Пасхалки: 0/13 ▾"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 57,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": "div.fixed.right-4.top-4 «Пасхалки: 0/13 ▴\nЖУРНАЛ ОХОТНИКА\n0/13\n○ ???\nЗаголовок не люб»",
+        "control_page_static": false,
+        "dead_click": false,
+        "screenshot": "screenshots/lost_visitor/phone-390/13.png"
+      },
+      {
+        "i": 14,
+        "el": {
+          "id": "1",
+          "tag": "a",
+          "href": "/en",
+          "target": null,
+          "text": "EN"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/en",
+        "scroll_delta": -182,
+        "visible_elements_delta": -412,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "navigated": true,
+        "page_has_way_home": true,
+        "page_has_contact": true,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 15,
+        "el": {
+          "id": "0",
+          "tag": "a",
+          "href": "/",
+          "target": null,
+          "text": "RU"
+        },
+        "url_before": "https://vanatat.vercel.app/en",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 402,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "navigated": true,
+        "page_has_way_home": true,
+        "page_has_contact": true,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 16,
+        "el": {
+          "id": "0",
+          "tag": "a",
+          "href": "/",
+          "target": null,
+          "text": "RU"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": -520,
+        "visible_elements_delta": 9,
+        "aria_state_changed": false,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 17,
+        "el": {
+          "id": "0",
+          "tag": "a",
+          "href": "/",
+          "target": null,
+          "text": "RU"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": -418,
+        "visible_elements_delta": -3,
+        "aria_state_changed": false,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 18,
+        "el": {
+          "id": "2",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Звук: выкл"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 14,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 19,
+        "el": {
+          "id": "5",
+          "tag": "a",
+          "href": "https://github.com/Fanatat",
+          "target": "_blank",
+          "text": "GitHub"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "opened_new_tab": "https://github.com/Fanatat",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 0,
+        "aria_state_changed": false,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 20,
+        "el": {
+          "id": "0",
+          "tag": "a",
+          "href": "/",
+          "target": null,
+          "text": "RU"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": -384,
+        "visible_elements_delta": 7,
+        "aria_state_changed": false,
+        "text_changed": false,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 21,
+        "el": {
+          "id": "1",
+          "tag": "a",
+          "href": "/en",
+          "target": null,
+          "text": "EN"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/en",
+        "scroll_delta": -74,
+        "visible_elements_delta": -410,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "navigated": true,
+        "page_has_way_home": true,
+        "page_has_contact": true,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 22,
+        "el": {
+          "id": "2",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Sound: on"
+        },
+        "url_before": "https://vanatat.vercel.app/en",
+        "url_after": "https://vanatat.vercel.app/en",
+        "scroll_delta": 0,
+        "visible_elements_delta": 0,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 23,
+        "el": {
+          "id": "1",
+          "tag": "a",
+          "href": "/en",
+          "target": null,
+          "text": "EN"
+        },
+        "url_before": "https://vanatat.vercel.app/en",
+        "url_after": "https://vanatat.vercel.app/en",
+        "scroll_delta": -455,
+        "visible_elements_delta": -1,
+        "aria_state_changed": false,
+        "text_changed": false,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 24,
+        "el": {
+          "id": "2",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Sound: off"
+        },
+        "url_before": "https://vanatat.vercel.app/en",
+        "url_after": "https://vanatat.vercel.app/en",
+        "scroll_delta": 0,
+        "visible_elements_delta": 0,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 25,
+        "el": {
+          "id": "0",
+          "tag": "a",
+          "href": "/",
+          "target": null,
+          "text": "RU"
+        },
+        "url_before": "https://vanatat.vercel.app/en",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": -6,
+        "visible_elements_delta": 401,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "navigated": true,
+        "page_has_way_home": true,
+        "page_has_contact": true,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 26,
+        "el": {
+          "id": "2",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Звук: вкл"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 13,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 27,
+        "el": {
+          "id": "4",
+          "tag": "h1",
+          "href": null,
+          "target": null,
+          "text": "#НЕРЕЗЮМЕ, а список реализованных задач"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": -1,
+        "aria_state_changed": false,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": true,
+        "screenshot": "screenshots/lost_visitor/phone-390/27.png"
+      },
+      {
+        "i": 28,
+        "el": {
+          "id": "0",
+          "tag": "a",
+          "href": "/",
+          "target": null,
+          "text": "RU"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": -713,
+        "visible_elements_delta": 6,
+        "aria_state_changed": false,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 29,
+        "el": {
+          "id": "3",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Пасхалки: 0/13 ▾"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 57,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": "div.fixed.right-4.top-4 «Пасхалки: 0/13 ▴\nЖУРНАЛ ОХОТНИКА\n0/13\n○ ???\nЗаголовок не люб»",
+        "control_page_static": false,
+        "dead_click": false,
+        "screenshot": "screenshots/lost_visitor/phone-390/29.png"
+      },
+      {
+        "i": 30,
+        "el": {
+          "id": "3",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Пасхалки: 0/13 ▾"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 71,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": "div.fixed.right-4.top-4 «Пасхалки: 0/13 ▴\nЖУРНАЛ ОХОТНИКА\n0/13\n○ ???\nЗаголовок не люб»",
+        "control_page_static": true,
+        "dead_click": false,
+        "screenshot": "screenshots/lost_visitor/phone-390/30.png"
+      },
+      {
+        "i": 31,
+        "el": {
+          "id": "3",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Пасхалки: 0/13 ▾"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 59,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": "div.fixed.right-4.top-4 «Пасхалки: 0/13 ▴\nЖУРНАЛ ОХОТНИКА\n0/13\n○ ???\nЗаголовок не люб»",
+        "control_page_static": false,
+        "dead_click": false,
+        "screenshot": "screenshots/lost_visitor/phone-390/31.png"
+      },
+      {
+        "i": 32,
+        "el": {
+          "id": "4",
+          "tag": "h1",
+          "href": null,
+          "target": null,
+          "text": "#НЕРЕЗЮМЕ, а список реализованных задач"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": -62,
+        "visible_elements_delta": -13,
+        "aria_state_changed": false,
+        "text_changed": false,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 33,
+        "el": {
+          "id": "5",
+          "tag": "a",
+          "href": "https://github.com/Fanatat",
+          "target": "_blank",
+          "text": "GitHub"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "opened_new_tab": "https://github.com/Fanatat",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 1,
+        "aria_state_changed": false,
+        "text_changed": false,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 34,
+        "el": {
+          "id": "3",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Пасхалки: 0/13 ▾"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 71,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": "div.fixed.right-4.top-4 «Пасхалки: 0/13 ▴\nЖУРНАЛ ОХОТНИКА\n0/13\n○ ???\nЗаголовок не люб»",
+        "control_page_static": true,
+        "dead_click": false,
+        "screenshot": "screenshots/lost_visitor/phone-390/34.png"
+      },
+      {
+        "i": 35,
+        "el": {
+          "id": "3",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Пасхалки: 0/13 ▾"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 59,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": "div.fixed.right-4.top-4 «Пасхалки: 0/13 ▴\nЖУРНАЛ ОХОТНИКА\n0/13\n○ ???\nЗаголовок не люб»",
+        "control_page_static": true,
+        "dead_click": false,
+        "screenshot": "screenshots/lost_visitor/phone-390/35.png"
+      },
+      {
+        "i": 36,
+        "el": {
+          "id": "3",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Пасхалки: 0/13 ▾"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 45,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": "div.fixed.right-4.top-4 «Пасхалки: 0/13 ▴\nЖУРНАЛ ОХОТНИКА\n0/13\n○ ???\nЗаголовок не люб»",
+        "control_page_static": false,
+        "dead_click": false,
+        "screenshot": "screenshots/lost_visitor/phone-390/36.png"
+      },
+      {
+        "i": 37,
+        "el": {
+          "id": "5",
+          "tag": "a",
+          "href": "https://github.com/Fanatat",
+          "target": "_blank",
+          "text": "GitHub"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "opened_new_tab": "https://github.com/Fanatat",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": -1,
+        "aria_state_changed": false,
+        "text_changed": false,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 38,
+        "el": {
+          "id": "0",
+          "tag": "a",
+          "href": "/",
+          "target": null,
+          "text": "RU"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": -602,
+        "visible_elements_delta": -7,
+        "aria_state_changed": false,
+        "text_changed": false,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 39,
+        "el": {
+          "id": "3",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Пасхалки: 0/13 ▾"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 57,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": "div.fixed.right-4.top-4 «Пасхалки: 0/13 ▴\nЖУРНАЛ ОХОТНИКА\n0/13\n○ ???\nЗаголовок не люб»",
+        "control_page_static": true,
+        "dead_click": false,
+        "screenshot": "screenshots/lost_visitor/phone-390/39.png"
+      },
+      {
+        "i": 40,
+        "el": {
+          "id": "4",
+          "tag": "h1",
+          "href": null,
+          "target": null,
+          "text": "#НЕРЕЗЮМЕ, а список реализованных задач"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": -6,
+        "aria_state_changed": false,
+        "text_changed": false,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": true,
+        "screenshot": "screenshots/lost_visitor/phone-390/40.png"
+      },
+      {
+        "i": 41,
+        "el": {
+          "id": "3",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Пасхалки: 0/13 ▾"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 59,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": "div.fixed.right-4.top-4 «Пасхалки: 0/13 ▴\nЖУРНАЛ ОХОТНИКА\n0/13\n○ ???\nЗаголовок не люб»",
+        "control_page_static": true,
+        "dead_click": false,
+        "screenshot": "screenshots/lost_visitor/phone-390/41.png"
+      },
+      {
+        "i": 42,
+        "el": {
+          "id": "4",
+          "tag": "h1",
+          "href": null,
+          "target": null,
+          "text": "#НЕРЕЗЮМЕ, а список реализованных задач"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": -13,
+        "aria_state_changed": false,
+        "text_changed": false,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": false,
+        "dead_click": true,
+        "screenshot": "screenshots/lost_visitor/phone-390/42.png"
+      },
+      {
+        "i": 43,
+        "el": {
+          "id": "2",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Звук: выкл"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": -1,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 44,
+        "el": {
+          "id": "3",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Пасхалки: 0/13 ▾"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 45,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": "div.fixed.right-4.top-4 «Пасхалки: 0/13 ▴\nЖУРНАЛ ОХОТНИКА\n0/13\n○ ???\nЗаголовок не люб»",
+        "control_page_static": false,
+        "dead_click": false,
+        "screenshot": "screenshots/lost_visitor/phone-390/44.png"
+      },
+      {
+        "i": 45,
+        "el": {
+          "id": "3",
+          "tag": "button",
+          "href": null,
+          "target": null,
+          "text": "Пасхалки: 0/13 ▾"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": 0,
+        "visible_elements_delta": 57,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": "div.fixed.right-4.top-4 «Пасхалки: 0/13 ▴\nЖУРНАЛ ОХОТНИКА\n0/13\n○ ???\nЗаголовок не люб»",
+        "control_page_static": false,
+        "dead_click": false,
+        "screenshot": "screenshots/lost_visitor/phone-390/45.png"
+      },
+      {
+        "i": 46,
+        "el": {
+          "id": "1",
+          "tag": "a",
+          "href": "/en",
+          "target": null,
+          "text": "EN"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/en",
+        "scroll_delta": -954,
+        "visible_elements_delta": -412,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "navigated": true,
+        "page_has_way_home": true,
+        "page_has_contact": true,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 47,
+        "el": {
+          "id": "0",
+          "tag": "a",
+          "href": "/",
+          "target": null,
+          "text": "RU"
+        },
+        "url_before": "https://vanatat.vercel.app/en",
+        "url_after": "https://vanatat.vercel.app/",
+        "scroll_delta": -206,
+        "visible_elements_delta": 399,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "navigated": true,
+        "page_has_way_home": true,
+        "page_has_contact": true,
+        "control_page_static": true,
+        "dead_click": false
+      },
+      {
+        "i": 48,
+        "el": {
+          "id": "1",
+          "tag": "a",
+          "href": "/en",
+          "target": null,
+          "text": "EN"
+        },
+        "url_before": "https://vanatat.vercel.app/",
+        "url_after": "https://vanatat.vercel.app/en",
+        "scroll_delta": -634,
+        "visible_elements_delta": -409,
+        "aria_state_changed": true,
+        "text_changed": true,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "navigated": true,
+        "page_has_way_home": true,
+        "page_has_contact": true,
+        "control_page_static": false,
+        "dead_click": false
+      },
+      {
+        "i": 49,
+        "el": {
+          "id": "1",
+          "tag": "a",
+          "href": "/en",
+          "target": null,
+          "text": "EN"
+        },
+        "url_before": "https://vanatat.vercel.app/en",
+        "url_after": "https://vanatat.vercel.app/en",
+        "scroll_delta": 0,
+        "visible_elements_delta": 0,
+        "aria_state_changed": false,
+        "text_changed": false,
+        "new_errors": [],
+        "fullscreen_overlay": null,
+        "control_page_static": true,
+        "dead_click": true,
+        "screenshot": "screenshots/lost_visitor/phone-390/49.png"
+      }
+    ],
+    "all_errors": [
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      }
+    ],
+    "final_screenshot": "screenshots/lost_visitor/phone-390/final.png"
+  }
+]

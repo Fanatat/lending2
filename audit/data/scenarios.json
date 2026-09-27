@@ -1,0 +1,1142 @@
+[
+  {
+    "scenario": "S1_client_home_project_contact",
+    "viewport": "desktop-1920",
+    "reached_goal": true,
+    "note": null,
+    "actions": 13,
+    "time_s": 42.5,
+    "steps": [
+      {
+        "n": 1,
+        "step": "open /",
+        "t_s": 1.4,
+        "actions_so_far": 1,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S1_client_home_project_contact/desktop-1920/01_open_.png"
+      },
+      {
+        "n": 2,
+        "step": "intro passed (silent)",
+        "t_s": 24.4,
+        "actions_so_far": 1,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S1_client_home_project_contact/desktop-1920/02_intro_passed_silent_.png",
+        "intro": {
+          "how": "silent",
+          "ignored_attempts": 1,
+          "gate_ms": 4030,
+          "start_visible_ms": 13440,
+          "passed": true,
+          "total_ms": 20780
+        }
+      },
+      {
+        "n": 3,
+        "step": "found 'КТО ЗА ПУЛЬТОМ' block",
+        "t_s": 26.9,
+        "actions_so_far": 4,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S1_client_home_project_contact/desktop-1920/03_found_block.png",
+        "wheel_scrolls": 1,
+        "scrolled_px": 590,
+        "screens": 0.5
+      },
+      {
+        "n": 4,
+        "step": "HP100 card in view",
+        "t_s": 29.6,
+        "actions_so_far": 6,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S1_client_home_project_contact/desktop-1920/04_hp100_card_in_view.png",
+        "wheel_scrolls": 2,
+        "scrolled_px": 1516,
+        "screens": 1.4
+      },
+      {
+        "n": 5,
+        "step": "project page HP100 opened",
+        "t_s": 33.0,
+        "actions_so_far": 7,
+        "url": "https://vanatat.vercel.app/projects/hp100",
+        "screenshot": "screenshots/scenarios/S1_client_home_project_contact/desktop-1920/05_project_page_hp100_opened.png",
+        "contact_on_project_page": false
+      },
+      {
+        "n": 6,
+        "step": "back to dashboard",
+        "t_s": 37.0,
+        "actions_so_far": 8,
+        "url": "https://vanatat.vercel.app/#hp100",
+        "screenshot": "screenshots/scenarios/S1_client_home_project_contact/desktop-1920/06_back_to_dashboard.png",
+        "intro_replayed": false,
+        "scroll_y": 2543,
+        "hp100_section_top_px": 0,
+        "y_before": null
+      },
+      {
+        "n": 7,
+        "step": "Telegram button in view",
+        "t_s": 40.9,
+        "actions_so_far": 12,
+        "url": "https://vanatat.vercel.app/#hp100",
+        "screenshot": "screenshots/scenarios/S1_client_home_project_contact/desktop-1920/07_telegram_button_in_view.png",
+        "wheel_scrolls": 4,
+        "scrolled_px": 2965,
+        "screens": 2.7
+      },
+      {
+        "n": 8,
+        "step": "click 'Написать в ТГ'",
+        "t_s": 42.5,
+        "actions_so_far": 13,
+        "url": "https://vanatat.vercel.app/#hp100",
+        "screenshot": "screenshots/scenarios/S1_client_home_project_contact/desktop-1920/08_click_.png",
+        "opened_in_new_tab": true,
+        "destination": "https://t.me/fanatat"
+      }
+    ],
+    "console_errors": [
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      }
+    ]
+  },
+  {
+    "scenario": "S1_client_home_project_contact",
+    "viewport": "phone-390",
+    "reached_goal": true,
+    "note": null,
+    "actions": 41,
+    "time_s": 51.0,
+    "steps": [
+      {
+        "n": 1,
+        "step": "open /",
+        "t_s": 1.3,
+        "actions_so_far": 1,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S1_client_home_project_contact/phone-390/01_open_.png"
+      },
+      {
+        "n": 2,
+        "step": "intro passed (silent)",
+        "t_s": 21.5,
+        "actions_so_far": 1,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S1_client_home_project_contact/phone-390/02_intro_passed_silent_.png",
+        "intro": {
+          "how": "silent",
+          "ignored_attempts": 0,
+          "gate_ms": 3497,
+          "start_visible_ms": 10014,
+          "passed": true,
+          "total_ms": 18151
+        }
+      },
+      {
+        "n": 3,
+        "step": "found 'КТО ЗА ПУЛЬТОМ' block",
+        "t_s": 23.4,
+        "actions_so_far": 4,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S1_client_home_project_contact/phone-390/03_found_block.png",
+        "wheel_scrolls": 1,
+        "scrolled_px": 175,
+        "screens": 0.2
+      },
+      {
+        "n": 4,
+        "step": "HP100 card in view",
+        "t_s": 30.5,
+        "actions_so_far": 16,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S1_client_home_project_contact/phone-390/04_hp100_card_in_view.png",
+        "wheel_scrolls": 12,
+        "scrolled_px": 2658,
+        "screens": 3.1
+      },
+      {
+        "n": 5,
+        "step": "project page HP100 opened",
+        "t_s": 33.3,
+        "actions_so_far": 17,
+        "url": "https://vanatat.vercel.app/projects/hp100",
+        "screenshot": "screenshots/scenarios/S1_client_home_project_contact/phone-390/05_project_page_hp100_opened.png",
+        "contact_on_project_page": false
+      },
+      {
+        "n": 6,
+        "step": "back to dashboard",
+        "t_s": 36.7,
+        "actions_so_far": 18,
+        "url": "https://vanatat.vercel.app/#hp100",
+        "screenshot": "screenshots/scenarios/S1_client_home_project_contact/phone-390/06_back_to_dashboard.png",
+        "intro_replayed": false,
+        "scroll_y": 2985,
+        "hp100_section_top_px": -0.5,
+        "y_before": null
+      },
+      {
+        "n": 7,
+        "step": "Telegram button in view",
+        "t_s": 49.2,
+        "actions_so_far": 40,
+        "url": "https://vanatat.vercel.app/#hp100",
+        "screenshot": "screenshots/scenarios/S1_client_home_project_contact/phone-390/07_telegram_button_in_view.png",
+        "wheel_scrolls": 22,
+        "scrolled_px": 4900,
+        "screens": 5.8
+      },
+      {
+        "n": 8,
+        "step": "click 'Написать в ТГ'",
+        "t_s": 51.0,
+        "actions_so_far": 41,
+        "url": "https://vanatat.vercel.app/#hp100",
+        "screenshot": "screenshots/scenarios/S1_client_home_project_contact/phone-390/08_click_.png",
+        "opened_in_new_tab": true,
+        "destination": "https://t.me/fanatat"
+      }
+    ],
+    "console_errors": [
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      }
+    ]
+  },
+  {
+    "scenario": "S2_contact_right_away",
+    "viewport": "desktop-1920",
+    "reached_goal": true,
+    "note": null,
+    "actions": 10,
+    "time_s": 12.2,
+    "steps": [
+      {
+        "n": 1,
+        "step": "open /",
+        "t_s": 1.5,
+        "actions_so_far": 1,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S2_contact_right_away/desktop-1920/01_open_.png"
+      },
+      {
+        "n": 2,
+        "step": "intro passed (skip)",
+        "t_s": 4.8,
+        "actions_so_far": 2,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S2_contact_right_away/desktop-1920/02_intro_passed_skip_.png",
+        "intro": {
+          "how": "skip",
+          "ignored_attempts": 0,
+          "passed": true,
+          "total_ms": 1058
+        }
+      },
+      {
+        "n": 3,
+        "step": "first screen links",
+        "t_s": 5.5,
+        "actions_so_far": 2,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S2_contact_right_away/desktop-1920/03_first_screen_links.png",
+        "links_on_first_screen": [
+          "https://vanatat.vercel.app/",
+          "https://vanatat.vercel.app/en"
+        ]
+      },
+      {
+        "n": 4,
+        "step": "scrolled to contact",
+        "t_s": 10.7,
+        "actions_so_far": 9,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S2_contact_right_away/desktop-1920/04_scrolled_to_contact.png",
+        "wheel_scrolls": 7,
+        "scrolled_px": 5445,
+        "screens": 5.0
+      },
+      {
+        "n": 5,
+        "step": "click 'Написать в ТГ'",
+        "t_s": 12.1,
+        "actions_so_far": 10,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S2_contact_right_away/desktop-1920/05_click_.png",
+        "opened_in_new_tab": true,
+        "destination": "https://t.me/fanatat"
+      }
+    ],
+    "console_errors": [
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      }
+    ]
+  },
+  {
+    "scenario": "S2_contact_right_away",
+    "viewport": "phone-390",
+    "reached_goal": true,
+    "note": null,
+    "actions": 39,
+    "time_s": 27.2,
+    "steps": [
+      {
+        "n": 1,
+        "step": "open /",
+        "t_s": 1.8,
+        "actions_so_far": 1,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S2_contact_right_away/phone-390/01_open_.png"
+      },
+      {
+        "n": 2,
+        "step": "intro passed (skip)",
+        "t_s": 4.9,
+        "actions_so_far": 2,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S2_contact_right_away/phone-390/02_intro_passed_skip_.png",
+        "intro": {
+          "how": "skip",
+          "ignored_attempts": 0,
+          "passed": true,
+          "total_ms": 928
+        }
+      },
+      {
+        "n": 3,
+        "step": "first screen links",
+        "t_s": 5.5,
+        "actions_so_far": 2,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S2_contact_right_away/phone-390/03_first_screen_links.png",
+        "links_on_first_screen": [
+          "https://vanatat.vercel.app/",
+          "https://vanatat.vercel.app/en"
+        ]
+      },
+      {
+        "n": 4,
+        "step": "scrolled to contact",
+        "t_s": 26.1,
+        "actions_so_far": 38,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S2_contact_right_away/phone-390/04_scrolled_to_contact.png",
+        "wheel_scrolls": 36,
+        "scrolled_px": 8047,
+        "screens": 9.5
+      },
+      {
+        "n": 5,
+        "step": "click 'Написать в ТГ'",
+        "t_s": 27.2,
+        "actions_so_far": 39,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S2_contact_right_away/phone-390/05_click_.png",
+        "opened_in_new_tab": true,
+        "destination": "https://t.me/fanatat"
+      }
+    ],
+    "console_errors": [
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      }
+    ]
+  },
+  {
+    "scenario": "S3_recruiter_en_github_contact",
+    "viewport": "desktop-1920",
+    "reached_goal": true,
+    "note": null,
+    "actions": 11,
+    "time_s": 36.0,
+    "steps": [
+      {
+        "n": 1,
+        "step": "open /en",
+        "t_s": 1.1,
+        "actions_so_far": 1,
+        "url": "https://vanatat.vercel.app/en",
+        "screenshot": "screenshots/scenarios/S3_recruiter_en_github_contact/desktop-1920/01_open_en.png"
+      },
+      {
+        "n": 2,
+        "step": "intro passed (silent)",
+        "t_s": 24.4,
+        "actions_so_far": 1,
+        "url": "https://vanatat.vercel.app/en",
+        "screenshot": "screenshots/scenarios/S3_recruiter_en_github_contact/desktop-1920/02_intro_passed_silent_.png",
+        "intro": {
+          "how": "silent",
+          "ignored_attempts": 1,
+          "gate_ms": 3641,
+          "start_visible_ms": 12979,
+          "passed": true,
+          "total_ms": 20881
+        }
+      },
+      {
+        "n": 3,
+        "step": "GitHub link in view",
+        "t_s": 26.9,
+        "actions_so_far": 4,
+        "url": "https://vanatat.vercel.app/en",
+        "screenshot": "screenshots/scenarios/S3_recruiter_en_github_contact/desktop-1920/03_github_link_in_view.png",
+        "wheel_scrolls": 1,
+        "scrolled_px": 774,
+        "screens": 0.7
+      },
+      {
+        "n": 4,
+        "step": "click GitHub",
+        "t_s": 29.2,
+        "actions_so_far": 5,
+        "url": "https://vanatat.vercel.app/en",
+        "screenshot": "screenshots/scenarios/S3_recruiter_en_github_contact/desktop-1920/04_click_github.png",
+        "opened_in_new_tab": true,
+        "destination": "https://github.com/Fanatat",
+        "note": "ведёт на профиль, не на репозиторий конкретного проекта"
+      },
+      {
+        "n": 5,
+        "step": "Telegram button in view",
+        "t_s": 34.4,
+        "actions_so_far": 10,
+        "url": "https://vanatat.vercel.app/en",
+        "screenshot": "screenshots/scenarios/S3_recruiter_en_github_contact/desktop-1920/05_telegram_button_in_view.png",
+        "wheel_scrolls": 5,
+        "scrolled_px": 3627,
+        "screens": 3.4
+      },
+      {
+        "n": 6,
+        "step": "click 'Message on Telegram'",
+        "t_s": 36.0,
+        "actions_so_far": 11,
+        "url": "https://vanatat.vercel.app/en",
+        "screenshot": "screenshots/scenarios/S3_recruiter_en_github_contact/desktop-1920/06_click_message_on_telegram_.png",
+        "opened_in_new_tab": true,
+        "destination": "https://t.me/fanatat"
+      }
+    ],
+    "console_errors": []
+  },
+  {
+    "scenario": "S3_recruiter_en_github_contact",
+    "viewport": "phone-390",
+    "reached_goal": true,
+    "note": null,
+    "actions": 40,
+    "time_s": 40.2,
+    "steps": [
+      {
+        "n": 1,
+        "step": "open /en",
+        "t_s": 1.9,
+        "actions_so_far": 1,
+        "url": "https://vanatat.vercel.app/en",
+        "screenshot": "screenshots/scenarios/S3_recruiter_en_github_contact/phone-390/01_open_en.png"
+      },
+      {
+        "n": 2,
+        "step": "intro passed (silent)",
+        "t_s": 22.0,
+        "actions_so_far": 1,
+        "url": "https://vanatat.vercel.app/en",
+        "screenshot": "screenshots/scenarios/S3_recruiter_en_github_contact/phone-390/02_intro_passed_silent_.png",
+        "intro": {
+          "how": "silent",
+          "ignored_attempts": 1,
+          "gate_ms": 3138,
+          "start_visible_ms": 10305,
+          "passed": true,
+          "total_ms": 18299
+        }
+      },
+      {
+        "n": 3,
+        "step": "GitHub link in view",
+        "t_s": 24.0,
+        "actions_so_far": 5,
+        "url": "https://vanatat.vercel.app/en",
+        "screenshot": "screenshots/scenarios/S3_recruiter_en_github_contact/phone-390/03_github_link_in_view.png",
+        "wheel_scrolls": 2,
+        "scrolled_px": 345,
+        "screens": 0.4
+      },
+      {
+        "n": 4,
+        "step": "click GitHub",
+        "t_s": 25.3,
+        "actions_so_far": 6,
+        "url": "https://vanatat.vercel.app/en",
+        "screenshot": "screenshots/scenarios/S3_recruiter_en_github_contact/phone-390/04_click_github.png",
+        "opened_in_new_tab": true,
+        "destination": "https://github.com/Fanatat",
+        "note": "ведёт на профиль, не на репозиторий конкретного проекта"
+      },
+      {
+        "n": 5,
+        "step": "Telegram button in view",
+        "t_s": 39.2,
+        "actions_so_far": 39,
+        "url": "https://vanatat.vercel.app/en",
+        "screenshot": "screenshots/scenarios/S3_recruiter_en_github_contact/phone-390/05_telegram_button_in_view.png",
+        "wheel_scrolls": 33,
+        "scrolled_px": 7343,
+        "screens": 8.7
+      },
+      {
+        "n": 6,
+        "step": "click 'Message on Telegram'",
+        "t_s": 40.2,
+        "actions_so_far": 40,
+        "url": "https://vanatat.vercel.app/en",
+        "screenshot": "screenshots/scenarios/S3_recruiter_en_github_contact/phone-390/06_click_message_on_telegram_.png",
+        "opened_in_new_tab": true,
+        "destination": "https://t.me/fanatat"
+      }
+    ],
+    "console_errors": []
+  },
+  {
+    "scenario": "S4_shared_project_link",
+    "viewport": "desktop-1920",
+    "reached_goal": true,
+    "note": null,
+    "actions": 9,
+    "time_s": 42.1,
+    "steps": [
+      {
+        "n": 1,
+        "step": "open /projects/hp100",
+        "t_s": 0.9,
+        "actions_so_far": 1,
+        "url": "https://vanatat.vercel.app/projects/hp100",
+        "screenshot": "screenshots/scenarios/S4_shared_project_link/desktop-1920/01_open_projects_hp100.png"
+      },
+      {
+        "n": 2,
+        "step": "intro passed (silent)",
+        "t_s": 29.6,
+        "actions_so_far": 1,
+        "url": "https://vanatat.vercel.app/projects/hp100",
+        "screenshot": "screenshots/scenarios/S4_shared_project_link/desktop-1920/02_intro_passed_silent_.png",
+        "intro": {
+          "how": "silent",
+          "ignored_attempts": 1,
+          "gate_ms": 4848,
+          "start_visible_ms": 14711,
+          "passed": true,
+          "total_ms": 26087
+        }
+      },
+      {
+        "n": 3,
+        "step": "project first screen",
+        "t_s": 30.5,
+        "actions_so_far": 3,
+        "url": "https://vanatat.vercel.app/projects/hp100",
+        "screenshot": "screenshots/scenarios/S4_shared_project_link/desktop-1920/03_project_first_screen.png",
+        "intro": {
+          "how": "silent",
+          "ignored_attempts": 1,
+          "gate_ms": 4848,
+          "start_visible_ms": 14711,
+          "passed": true,
+          "total_ms": 26087
+        }
+      },
+      {
+        "n": 4,
+        "step": "no contact on project page",
+        "t_s": 31.5,
+        "actions_so_far": 3,
+        "url": "https://vanatat.vercel.app/projects/hp100",
+        "screenshot": "screenshots/scenarios/S4_shared_project_link/desktop-1920/04_no_contact_on_project_page.png"
+      },
+      {
+        "n": 5,
+        "step": "went to dashboard",
+        "t_s": 35.6,
+        "actions_so_far": 4,
+        "url": "https://vanatat.vercel.app/#hp100",
+        "screenshot": "screenshots/scenarios/S4_shared_project_link/desktop-1920/05_went_to_dashboard.png",
+        "intro_replayed": false
+      },
+      {
+        "n": 6,
+        "step": "Telegram button in view",
+        "t_s": 40.6,
+        "actions_so_far": 8,
+        "url": "https://vanatat.vercel.app/#hp100",
+        "screenshot": "screenshots/scenarios/S4_shared_project_link/desktop-1920/06_telegram_button_in_view.png",
+        "wheel_scrolls": 4,
+        "scrolled_px": 2997,
+        "screens": 2.8
+      },
+      {
+        "n": 7,
+        "step": "click 'Написать в ТГ'",
+        "t_s": 42.1,
+        "actions_so_far": 9,
+        "url": "https://vanatat.vercel.app/#hp100",
+        "screenshot": "screenshots/scenarios/S4_shared_project_link/desktop-1920/07_click_.png",
+        "opened_in_new_tab": true,
+        "destination": "https://t.me/fanatat"
+      }
+    ],
+    "console_errors": [
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      }
+    ]
+  },
+  {
+    "scenario": "S4_shared_project_link",
+    "viewport": "phone-390",
+    "reached_goal": true,
+    "note": null,
+    "actions": 28,
+    "time_s": 37.5,
+    "steps": [
+      {
+        "n": 1,
+        "step": "open /projects/hp100",
+        "t_s": 1.0,
+        "actions_so_far": 1,
+        "url": "https://vanatat.vercel.app/projects/hp100",
+        "screenshot": "screenshots/scenarios/S4_shared_project_link/phone-390/01_open_projects_hp100.png"
+      },
+      {
+        "n": 2,
+        "step": "intro passed (silent)",
+        "t_s": 20.3,
+        "actions_so_far": 1,
+        "url": "https://vanatat.vercel.app/projects/hp100",
+        "screenshot": "screenshots/scenarios/S4_shared_project_link/phone-390/02_intro_passed_silent_.png",
+        "intro": {
+          "how": "silent",
+          "ignored_attempts": 0,
+          "gate_ms": 4097,
+          "start_visible_ms": 10478,
+          "passed": true,
+          "total_ms": 17396
+        }
+      },
+      {
+        "n": 3,
+        "step": "project first screen",
+        "t_s": 20.6,
+        "actions_so_far": 3,
+        "url": "https://vanatat.vercel.app/projects/hp100",
+        "screenshot": "screenshots/scenarios/S4_shared_project_link/phone-390/03_project_first_screen.png",
+        "intro": {
+          "how": "silent",
+          "ignored_attempts": 0,
+          "gate_ms": 4097,
+          "start_visible_ms": 10478,
+          "passed": true,
+          "total_ms": 17396
+        }
+      },
+      {
+        "n": 4,
+        "step": "no contact on project page",
+        "t_s": 21.0,
+        "actions_so_far": 3,
+        "url": "https://vanatat.vercel.app/projects/hp100",
+        "screenshot": "screenshots/scenarios/S4_shared_project_link/phone-390/04_no_contact_on_project_page.png"
+      },
+      {
+        "n": 5,
+        "step": "went to dashboard",
+        "t_s": 24.1,
+        "actions_so_far": 4,
+        "url": "https://vanatat.vercel.app/#hp100",
+        "screenshot": "screenshots/scenarios/S4_shared_project_link/phone-390/05_went_to_dashboard.png",
+        "intro_replayed": false
+      },
+      {
+        "n": 6,
+        "step": "Telegram button in view",
+        "t_s": 36.3,
+        "actions_so_far": 27,
+        "url": "https://vanatat.vercel.app/#hp100",
+        "screenshot": "screenshots/scenarios/S4_shared_project_link/phone-390/06_telegram_button_in_view.png",
+        "wheel_scrolls": 23,
+        "scrolled_px": 5113,
+        "screens": 6.1
+      },
+      {
+        "n": 7,
+        "step": "click 'Написать в ТГ'",
+        "t_s": 37.5,
+        "actions_so_far": 28,
+        "url": "https://vanatat.vercel.app/#hp100",
+        "screenshot": "screenshots/scenarios/S4_shared_project_link/phone-390/07_click_.png",
+        "opened_in_new_tab": true,
+        "destination": "https://t.me/fanatat"
+      }
+    ],
+    "console_errors": [
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      }
+    ]
+  },
+  {
+    "scenario": "S5_play_a_game",
+    "viewport": "desktop-1920",
+    "reached_goal": false,
+    "note": "на странице студии нет ни одной ссылки на игру (ни ВК, ни Яндекс, ни демо)",
+    "actions": 4,
+    "time_s": 12.9,
+    "steps": [
+      {
+        "n": 1,
+        "step": "open /",
+        "t_s": 1.3,
+        "actions_so_far": 1,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S5_play_a_game/desktop-1920/01_open_.png"
+      },
+      {
+        "n": 2,
+        "step": "intro passed (skip)",
+        "t_s": 4.8,
+        "actions_so_far": 2,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S5_play_a_game/desktop-1920/02_intro_passed_skip_.png",
+        "intro": {
+          "how": "skip",
+          "ignored_attempts": 0,
+          "passed": true,
+          "total_ms": 1258
+        }
+      },
+      {
+        "n": 3,
+        "step": "Friday studio section",
+        "t_s": 7.1,
+        "actions_so_far": 3,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S5_play_a_game/desktop-1920/03_friday_studio_section.png",
+        "wheel_scrolls": 1,
+        "scrolled_px": 571,
+        "screens": 0.5
+      },
+      {
+        "n": 4,
+        "step": "clicked game cartridge",
+        "t_s": 11.4,
+        "actions_so_far": 4,
+        "url": "https://vanatat.vercel.app/projects/friday-studio",
+        "screenshot": "screenshots/scenarios/S5_play_a_game/desktop-1920/04_clicked_game_cartridge.png",
+        "clicked": "Открыть проект: Словоход",
+        "landed": "https://vanatat.vercel.app/projects/friday-studio"
+      },
+      {
+        "n": 5,
+        "step": "look for a playable game link",
+        "t_s": 12.2,
+        "actions_so_far": 4,
+        "url": "https://vanatat.vercel.app/projects/friday-studio",
+        "screenshot": "screenshots/scenarios/S5_play_a_game/desktop-1920/05_look_for_a_playable_game_link.png",
+        "external_links": [],
+        "game_links": []
+      },
+      {
+        "n": 6,
+        "step": "FAIL: на странице студии нет ни одной ссылки на игру (ни ВК, ни Ян",
+        "t_s": 12.8,
+        "actions_so_far": 4,
+        "url": "https://vanatat.vercel.app/projects/friday-studio",
+        "screenshot": "screenshots/scenarios/S5_play_a_game/desktop-1920/06_fail_.png"
+      }
+    ],
+    "console_errors": [
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      }
+    ]
+  },
+  {
+    "scenario": "S5_play_a_game",
+    "viewport": "phone-390",
+    "reached_goal": false,
+    "note": "на странице студии нет ни одной ссылки на игру (ни ВК, ни Яндекс, ни демо)",
+    "actions": 5,
+    "time_s": 10.8,
+    "steps": [
+      {
+        "n": 1,
+        "step": "open /",
+        "t_s": 1.3,
+        "actions_so_far": 1,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S5_play_a_game/phone-390/01_open_.png"
+      },
+      {
+        "n": 2,
+        "step": "intro passed (skip)",
+        "t_s": 4.2,
+        "actions_so_far": 2,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S5_play_a_game/phone-390/02_intro_passed_skip_.png",
+        "intro": {
+          "how": "skip",
+          "ignored_attempts": 0,
+          "passed": true,
+          "total_ms": 667
+        }
+      },
+      {
+        "n": 3,
+        "step": "Friday studio section",
+        "t_s": 6.4,
+        "actions_so_far": 4,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S5_play_a_game/phone-390/03_friday_studio_section.png",
+        "wheel_scrolls": 2,
+        "scrolled_px": 346,
+        "screens": 0.4
+      },
+      {
+        "n": 4,
+        "step": "clicked game cartridge",
+        "t_s": 10.0,
+        "actions_so_far": 5,
+        "url": "https://vanatat.vercel.app/projects/friday-studio",
+        "screenshot": "screenshots/scenarios/S5_play_a_game/phone-390/04_clicked_game_cartridge.png",
+        "clicked": "Открыть проект: Словоход",
+        "landed": "https://vanatat.vercel.app/projects/friday-studio"
+      },
+      {
+        "n": 5,
+        "step": "look for a playable game link",
+        "t_s": 10.3,
+        "actions_so_far": 5,
+        "url": "https://vanatat.vercel.app/projects/friday-studio",
+        "screenshot": "screenshots/scenarios/S5_play_a_game/phone-390/05_look_for_a_playable_game_link.png",
+        "external_links": [],
+        "game_links": []
+      },
+      {
+        "n": 6,
+        "step": "FAIL: на странице студии нет ни одной ссылки на игру (ни ВК, ни Ян",
+        "t_s": 10.8,
+        "actions_so_far": 5,
+        "url": "https://vanatat.vercel.app/projects/friday-studio",
+        "screenshot": "screenshots/scenarios/S5_play_a_game/phone-390/06_fail_.png"
+      }
+    ],
+    "console_errors": [
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      }
+    ]
+  },
+  {
+    "scenario": "S1b_intro_skip_timing",
+    "viewport": "desktop-1920",
+    "reached_goal": true,
+    "note": null,
+    "actions": 2,
+    "time_s": 4.3,
+    "steps": [
+      {
+        "n": 1,
+        "step": "open /",
+        "t_s": 1.1,
+        "actions_so_far": 1,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S1b_intro_skip_timing/desktop-1920/01_open_.png"
+      },
+      {
+        "n": 2,
+        "step": "intro passed (skip)",
+        "t_s": 4.3,
+        "actions_so_far": 2,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S1b_intro_skip_timing/desktop-1920/02_intro_passed_skip_.png",
+        "intro": {
+          "how": "skip",
+          "ignored_attempts": 0,
+          "passed": true,
+          "total_ms": 841
+        }
+      }
+    ],
+    "console_errors": [
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      }
+    ]
+  },
+  {
+    "scenario": "S1b_intro_skip_timing",
+    "viewport": "phone-390",
+    "reached_goal": true,
+    "note": null,
+    "actions": 2,
+    "time_s": 4.7,
+    "steps": [
+      {
+        "n": 1,
+        "step": "open /",
+        "t_s": 1.3,
+        "actions_so_far": 1,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S1b_intro_skip_timing/phone-390/01_open_.png"
+      },
+      {
+        "n": 2,
+        "step": "intro passed (skip)",
+        "t_s": 4.6,
+        "actions_so_far": 2,
+        "url": "https://vanatat.vercel.app/",
+        "screenshot": "screenshots/scenarios/S1b_intro_skip_timing/phone-390/02_intro_passed_skip_.png",
+        "intro": {
+          "how": "skip",
+          "ignored_attempts": 0,
+          "passed": true,
+          "total_ms": 745
+        }
+      }
+    ],
+    "console_errors": [
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      },
+      {
+        "kind": "pageerror",
+        "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      }
+    ]
+  }
+]

@@ -1,0 +1,219 @@
+{
+  "conditions": "Slow 4G: RTT 150 ms, 1.6 Mbps down, 0.75 Mbps up, CPU 4x (CDP)",
+  "runs": [
+    {
+      "viewport": "phone-390",
+      "target": "https://vanatat.vercel.app/",
+      "load_event_s": 10.5,
+      "shots": [
+        {
+          "t_s": 0.5,
+          "screenshot": "screenshots/slow_network/phone-390/home_0.5s.png",
+          "visible_text": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\nВойти со звуком\nбез звука\n\nЛучше в наушниках\n\nПропустить\n#НЕРЕЗЮМЕ, а список реализованных задач\n\nКТО ЗА ПУЛЬТОМ\nВалерий\n\nПро"
+        },
+        {
+          "t_s": 1,
+          "screenshot": "screenshots/slow_network/phone-390/home_1s.png",
+          "visible_text": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\nВойти со звуком\nбез звука\n\nЛучше в наушниках\n\nПропустить\n#НЕРЕЗЮМЕ, а список реализованных задач\n\nКТО ЗА ПУЛЬТОМ\nВалерий\n\nПро"
+        },
+        {
+          "t_s": 2,
+          "screenshot": "screenshots/slow_network/phone-390/home_2s.png",
+          "visible_text": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\nВойти со звуком\nбез звука\n\nЛучше в наушниках\n\nПропустить\n#НЕРЕЗЮМЕ, а список реализованных задач\n\nКТО ЗА ПУЛЬТОМ\nВалерий\n\nПро"
+        },
+        {
+          "t_s": 3,
+          "screenshot": "screenshots/slow_network/phone-390/home_3s.png",
+          "visible_text": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\nВойти со звуком\nбез звука\n\nЛучше в наушниках\n\nПропустить\n#НЕРЕЗЮМЕ, а список реализованных задач\n\nКТО ЗА ПУЛЬТОМ\nВалерий\n\nПро"
+        },
+        {
+          "t_s": 6,
+          "screenshot": "screenshots/slow_network/phone-390/home_6s.png",
+          "visible_text": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\nВойти со звуком\nбез звука\n\nЛучше в наушниках\n\nПропустить\n#НЕРЕЗЮМЕ, а список реализованных задач\n\nКТО ЗА ПУЛЬТОМ\nВалерий\n\nПро"
+        }
+      ],
+      "silent_intro_to_start_button_s": 7.5,
+      "skip_as_soon_as_visible": {
+        "skip_button_painted_s": 1.9,
+        "clicks_ignored_before_hydration": 1,
+        "site_visible_s": 8.7,
+        "passed": true
+      }
+    },
+    {
+      "viewport": "phone-390",
+      "target": "https://vanatat.vercel.app/projects/friday-studio",
+      "load_event_s": 7.7,
+      "shots": [
+        {
+          "t_s": 0.5,
+          "screenshot": "screenshots/slow_network/phone-390/friday_0.5s.png",
+          "visible_text": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\nВойти со звуком\nбез звука\n\nЛучше в наушниках\n\nПропустить\n← на дашборд\nСИСТЕМА 01\nСтудия «Пятница»\n\nПять игр студии «Пятница» "
+        },
+        {
+          "t_s": 1,
+          "screenshot": "screenshots/slow_network/phone-390/friday_1s.png",
+          "visible_text": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\nВойти со звуком\nбез звука\n\nЛучше в наушниках\n\nПропустить\n← на дашборд\nСИСТЕМА 01\nСтудия «Пятница»\n\nПять игр студии «Пятница» "
+        },
+        {
+          "t_s": 2,
+          "screenshot": "screenshots/slow_network/phone-390/friday_2s.png",
+          "visible_text": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\nВойти со звуком\nбез звука\n\nЛучше в наушниках\n\nПропустить\n← на дашборд\nСИСТЕМА 01\nСтудия «Пятница»\n\nПять игр студии «Пятница» "
+        },
+        {
+          "t_s": 3,
+          "screenshot": "screenshots/slow_network/phone-390/friday_3s.png",
+          "visible_text": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\nВойти со звуком\nбез звука\n\nЛучше в наушниках\n\nПропустить\n← на дашборд\nСИСТЕМА 01\nСтудия «Пятница»\n\nПять игр студии «Пятница» "
+        },
+        {
+          "t_s": 6,
+          "screenshot": "screenshots/slow_network/phone-390/friday_6s.png",
+          "visible_text": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\nВойти со звуком\nбез звука\n\nЛучше в наушниках\n\nПропустить\n← на дашборд\nСИСТЕМА 01\nСтудия «Пятница»\n\nПять игр студии «Пятница» "
+        }
+      ],
+      "silent_intro_to_start_button_s": null,
+      "skip_as_soon_as_visible": null
+    },
+    {
+      "viewport": "phone-390",
+      "target": "https://fanatat.github.io/games-dev/royal-solitaire/",
+      "load_event_s": 18.0,
+      "shots": [
+        {
+          "t_s": 0.5,
+          "screenshot": "screenshots/slow_network/phone-390/royal_solitaire_demo_0.5s.png",
+          "visible_text": "♛\nКоролевская Косынка\nРаскладываем колоду…"
+        },
+        {
+          "t_s": 1,
+          "screenshot": "screenshots/slow_network/phone-390/royal_solitaire_demo_1s.png",
+          "visible_text": "♛\nКоролевская Косынка\nРаскладываем колоду…"
+        },
+        {
+          "t_s": 2,
+          "screenshot": null,
+          "note": "nothing painted yet: Page.screenshot: Timeout 5000ms exceeded.\nCall log:\n  - taking page screenshot\n "
+        },
+        {
+          "t_s": 3,
+          "screenshot": null,
+          "note": "nothing painted yet: Page.screenshot: Timeout 5000ms exceeded.\nCall log:\n  - taking page screenshot\n "
+        },
+        {
+          "t_s": 6,
+          "screenshot": null,
+          "note": "nothing painted yet: Page.screenshot: Timeout 5000ms exceeded.\nCall log:\n  - taking page screenshot\n "
+        }
+      ],
+      "silent_intro_to_start_button_s": null,
+      "skip_as_soon_as_visible": null
+    },
+    {
+      "viewport": "desktop-1920",
+      "target": "https://vanatat.vercel.app/",
+      "load_event_s": 7.9,
+      "shots": [
+        {
+          "t_s": 0.5,
+          "screenshot": "screenshots/slow_network/desktop-1920/home_0.5s.png",
+          "visible_text": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\nВойти со звуком\nбез звука\n\nЛучше в наушниках\n\nПропустить esc\n#НЕРЕЗЮМЕ, а список реализованных задач\n\nКТО ЗА ПУЛЬТОМ\nВалерий\n"
+        },
+        {
+          "t_s": 1,
+          "screenshot": "screenshots/slow_network/desktop-1920/home_1s.png",
+          "visible_text": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\nВойти со звуком\nбез звука\n\nЛучше в наушниках\n\nПропустить esc\n#НЕРЕЗЮМЕ, а список реализованных задач\n\nКТО ЗА ПУЛЬТОМ\nВалерий\n"
+        },
+        {
+          "t_s": 2,
+          "screenshot": "screenshots/slow_network/desktop-1920/home_2s.png",
+          "visible_text": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\nВойти со звуком\nбез звука\n\nЛучше в наушниках\n\nПропустить esc\n#НЕРЕЗЮМЕ, а список реализованных задач\n\nКТО ЗА ПУЛЬТОМ\nВалерий\n"
+        },
+        {
+          "t_s": 3,
+          "screenshot": "screenshots/slow_network/desktop-1920/home_3s.png",
+          "visible_text": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\nВойти со звуком\nбез звука\n\nЛучше в наушниках\n\nПропустить esc\n#НЕРЕЗЮМЕ, а список реализованных задач\n\nКТО ЗА ПУЛЬТОМ\nВалерий\n"
+        },
+        {
+          "t_s": 6,
+          "screenshot": "screenshots/slow_network/desktop-1920/home_6s.png",
+          "visible_text": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\nВойти со звуком\nбез звука\n\nЛучше в наушниках\n\nПропустить esc\n#НЕРЕЗЮМЕ, а список реализованных задач\n\nКТО ЗА ПУЛЬТОМ\nВалерий\n"
+        }
+      ],
+      "silent_intro_to_start_button_s": 9.3,
+      "skip_as_soon_as_visible": {
+        "skip_button_painted_s": 1.3,
+        "clicks_ignored_before_hydration": 1,
+        "site_visible_s": 7.3,
+        "passed": true
+      }
+    },
+    {
+      "viewport": "desktop-1920",
+      "target": "https://vanatat.vercel.app/projects/friday-studio",
+      "load_event_s": 8.0,
+      "shots": [
+        {
+          "t_s": 0.5,
+          "screenshot": "screenshots/slow_network/desktop-1920/friday_0.5s.png",
+          "visible_text": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\nВойти со звуком\nбез звука\n\nЛучше в наушниках\n\nПропустить esc\n← на дашборд\nСИСТЕМА 01\nСтудия «Пятница»\n\nПять игр студии «Пятни"
+        },
+        {
+          "t_s": 1,
+          "screenshot": "screenshots/slow_network/desktop-1920/friday_1s.png",
+          "visible_text": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\nВойти со звуком\nбез звука\n\nЛучше в наушниках\n\nПропустить esc\n← на дашборд\nСИСТЕМА 01\nСтудия «Пятница»\n\nПять игр студии «Пятни"
+        },
+        {
+          "t_s": 2,
+          "screenshot": "screenshots/slow_network/desktop-1920/friday_2s.png",
+          "visible_text": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\nВойти со звуком\nбез звука\n\nЛучше в наушниках\n\nПропустить esc\n← на дашборд\nСИСТЕМА 01\nСтудия «Пятница»\n\nПять игр студии «Пятни"
+        },
+        {
+          "t_s": 3,
+          "screenshot": "screenshots/slow_network/desktop-1920/friday_3s.png",
+          "visible_text": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\nВойти со звуком\nбез звука\n\nЛучше в наушниках\n\nПропустить esc\n← на дашборд\nСИСТЕМА 01\nСтудия «Пятница»\n\nПять игр студии «Пятни"
+        },
+        {
+          "t_s": 6,
+          "screenshot": "screenshots/slow_network/desktop-1920/friday_6s.png",
+          "visible_text": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\nВойти со звуком\nбез звука\n\nЛучше в наушниках\n\nПропустить esc\n← на дашборд\nСИСТЕМА 01\nСтудия «Пятница»\n\nПять игр студии «Пятни"
+        }
+      ],
+      "silent_intro_to_start_button_s": null,
+      "skip_as_soon_as_visible": null
+    },
+    {
+      "viewport": "desktop-1920",
+      "target": "https://fanatat.github.io/games-dev/royal-solitaire/",
+      "load_event_s": 17.6,
+      "shots": [
+        {
+          "t_s": 0.5,
+          "screenshot": "screenshots/slow_network/desktop-1920/royal_solitaire_demo_0.5s.png",
+          "visible_text": "♛\nКоролевская Косынка\nРаскладываем колоду…"
+        },
+        {
+          "t_s": 1,
+          "screenshot": "screenshots/slow_network/desktop-1920/royal_solitaire_demo_1s.png",
+          "visible_text": "♛\nКоролевская Косынка\nРаскладываем колоду…"
+        },
+        {
+          "t_s": 2,
+          "screenshot": null,
+          "note": "nothing painted yet: Page.screenshot: Timeout 5000ms exceeded.\nCall log:\n  - taking page screenshot\n "
+        },
+        {
+          "t_s": 3,
+          "screenshot": null,
+          "note": "nothing painted yet: Page.screenshot: Timeout 5000ms exceeded.\nCall log:\n  - taking page screenshot\n "
+        },
+        {
+          "t_s": 6,
+          "screenshot": null,
+          "note": "nothing painted yet: Page.screenshot: Timeout 5000ms exceeded.\nCall log:\n  - taking page screenshot\n "
+        }
+      ],
+      "silent_intro_to_start_button_s": null,
+      "skip_as_soon_as_visible": null
+    }
+  ]
+}

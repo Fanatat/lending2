@@ -1,0 +1,3625 @@
+{
+  "repo": "/home/vps_home_1/projects/lending2/.claude/worktrees/site-audit",
+  "git_head": "2b3eb0ba73ca5878213025f88bebc7f43933142d",
+  "git_branch": "worktree-site-audit",
+  "tracked_files_total": 155,
+  "inventory": {
+    "per_top_dir": {
+      "(root)": {
+        "files": 10,
+        "loc": 6671,
+        "bytes": 232267
+      },
+      ".github": {
+        "files": 1,
+        "loc": 56,
+        "bytes": 1264
+      },
+      "app": {
+        "files": 6,
+        "loc": 1649,
+        "bytes": 50850
+      },
+      "components": {
+        "files": 76,
+        "loc": 8049,
+        "bytes": 279240
+      },
+      "lib": {
+        "files": 20,
+        "loc": 1831,
+        "bytes": 71431
+      },
+      "public": {
+        "files": 41,
+        "loc": 83,
+        "bytes": 2229247
+      },
+      "styles": {
+        "files": 1,
+        "loc": 20,
+        "bytes": 436
+      }
+    },
+    "per_second_level_dir": {
+      "(root)": {
+        "files": 10,
+        "loc": 6671
+      },
+      ".github/workflows": {
+        "files": 1,
+        "loc": 56
+      },
+      "app": {
+        "files": 3,
+        "loc": 1251
+      },
+      "app/en": {
+        "files": 1,
+        "loc": 338
+      },
+      "app/og.png": {
+        "files": 1,
+        "loc": 11
+      },
+      "app/projects": {
+        "files": 1,
+        "loc": 49
+      },
+      "components/easter-eggs": {
+        "files": 7,
+        "loc": 633
+      },
+      "components/effects": {
+        "files": 15,
+        "loc": 1641
+      },
+      "components/hero": {
+        "files": 6,
+        "loc": 655
+      },
+      "components/intro": {
+        "files": 6,
+        "loc": 1316
+      },
+      "components/projects": {
+        "files": 4,
+        "loc": 416
+      },
+      "components/sections": {
+        "files": 36,
+        "loc": 3239
+      },
+      "components/transitions": {
+        "files": 2,
+        "loc": 149
+      },
+      "lib": {
+        "files": 18,
+        "loc": 1597
+      },
+      "lib/mock": {
+        "files": 2,
+        "loc": 234
+      },
+      "public/sounds": {
+        "files": 27,
+        "loc": 57
+      },
+      "public/textures": {
+        "files": 14,
+        "loc": 26
+      },
+      "styles": {
+        "files": 1,
+        "loc": 20
+      }
+    },
+    "source_files": 106,
+    "source_loc": 11619,
+    "largest_source_files_by_loc": [
+      {
+        "file": "app/globals.css",
+        "loc": 1102
+      },
+      {
+        "file": "components/intro/IntroCosmos.tsx",
+        "loc": 584
+      },
+      {
+        "file": "components/sections/friday/CartridgeScreen.tsx",
+        "loc": 502
+      },
+      {
+        "file": "components/effects/CrowdFall.tsx",
+        "loc": 455
+      },
+      {
+        "file": "app/en/page.tsx",
+        "loc": 338
+      },
+      {
+        "file": "components/intro/IntroWelcome.tsx",
+        "loc": 325
+      },
+      {
+        "file": "components/sections/hp100/HP100Widget.tsx",
+        "loc": 304
+      },
+      {
+        "file": "components/sections/closing/ClosingSection.tsx",
+        "loc": 278
+      },
+      {
+        "file": "components/sections/perimeter/PerimeterMap.tsx",
+        "loc": 261
+      },
+      {
+        "file": "lib/sfx.ts",
+        "loc": 254
+      }
+    ],
+    "largest_files_by_bytes": [
+      {
+        "file": "public/sounds/intro_ambient.mp3",
+        "bytes": 769088,
+        "loc": 0
+      },
+      {
+        "file": "package-lock.json",
+        "bytes": 226530,
+        "loc": 6457
+      },
+      {
+        "file": "public/textures/planets/jupiter.jpg",
+        "bytes": 197210,
+        "loc": 0
+      },
+      {
+        "file": "public/textures/planets/earth_daymap.jpg",
+        "bytes": 185914,
+        "loc": 0
+      },
+      {
+        "file": "public/textures/planets/earth_clouds.jpg",
+        "bytes": 117434,
+        "loc": 0
+      },
+      {
+        "file": "public/textures/planets/moon.jpg",
+        "bytes": 114288,
+        "loc": 0
+      },
+      {
+        "file": "public/textures/planets/sun.jpg",
+        "bytes": 98812,
+        "loc": 0
+      },
+      {
+        "file": "public/textures/planets/mercury.jpg",
+        "bytes": 96448,
+        "loc": 0
+      },
+      {
+        "file": "public/sounds/impact.mp3",
+        "bytes": 81128,
+        "loc": 0
+      },
+      {
+        "file": "public/textures/planets/mars.jpg",
+        "bytes": 77288,
+        "loc": 0
+      }
+    ]
+  },
+  "unused_modules": {
+    "never_imported": [],
+    "unreachable_from_app_entrypoints": [],
+    "unresolved_local_imports": []
+  },
+  "unused_exports": [
+    {
+      "file": "components/easter-eggs/SudoEasterEgg.tsx",
+      "line": 11,
+      "name": "SUDO_LOCK_KEY",
+      "kind": "const",
+      "used_in_same_file": true
+    },
+    {
+      "file": "components/easter-eggs/SudoEasterEgg.tsx",
+      "line": 12,
+      "name": "SUDO_LOCK_HTML_CLASS",
+      "kind": "const",
+      "used_in_same_file": true
+    },
+    {
+      "file": "components/easter-eggs/silhouettes.ts",
+      "line": 1,
+      "name": "Silhouette",
+      "kind": "interface",
+      "used_in_same_file": true
+    },
+    {
+      "file": "components/sections/factory/stages.ts",
+      "line": 11,
+      "name": "IMAGES_STAGE_INDEX",
+      "kind": "const",
+      "used_in_same_file": true
+    },
+    {
+      "file": "lib/bridgeStore.ts",
+      "line": 4,
+      "name": "FallRequest",
+      "kind": "interface",
+      "used_in_same_file": true
+    },
+    {
+      "file": "lib/cosmosAssets.ts",
+      "line": 13,
+      "name": "COSMOS_TEXTURES",
+      "kind": "const",
+      "used_in_same_file": true
+    },
+    {
+      "file": "lib/hp100-live.ts",
+      "line": 40,
+      "name": "Hp100Snapshot",
+      "kind": "type",
+      "used_in_same_file": true
+    },
+    {
+      "file": "lib/hp100-live.ts",
+      "line": 42,
+      "name": "Hp100Status",
+      "kind": "interface",
+      "used_in_same_file": true
+    },
+    {
+      "file": "lib/locale.ts",
+      "line": 5,
+      "name": "Locale",
+      "kind": "type",
+      "used_in_same_file": true
+    },
+    {
+      "file": "lib/mock/hp100.ts",
+      "line": 12,
+      "name": "Hp100MetricDef",
+      "kind": "interface",
+      "used_in_same_file": true
+    },
+    {
+      "file": "lib/mock/portfolio.ts",
+      "line": 4,
+      "name": "PortfolioAsset",
+      "kind": "interface",
+      "used_in_same_file": true
+    },
+    {
+      "file": "lib/mock/portfolio.ts",
+      "line": 10,
+      "name": "RiskMetric",
+      "kind": "interface",
+      "used_in_same_file": true
+    },
+    {
+      "file": "lib/sfx.ts",
+      "line": 17,
+      "name": "SfxName",
+      "kind": "type",
+      "used_in_same_file": true
+    },
+    {
+      "file": "lib/sfx.ts",
+      "line": 137,
+      "name": "audioUnlocked",
+      "kind": "function",
+      "used_in_same_file": true
+    },
+    {
+      "file": "lib/store.ts",
+      "line": 4,
+      "name": "EasterEggId",
+      "kind": "type",
+      "used_in_same_file": true
+    },
+    {
+      "file": "lib/store.ts",
+      "line": 105,
+      "name": "ALL_EASTER_EGGS",
+      "kind": "const",
+      "used_in_same_file": false
+    },
+    {
+      "file": "lib/systemStatus.ts",
+      "line": 14,
+      "name": "SystemStatusEntry",
+      "kind": "interface",
+      "used_in_same_file": true
+    },
+    {
+      "file": "lib/transitionStore.ts",
+      "line": 4,
+      "name": "TransitionRect",
+      "kind": "interface",
+      "used_in_same_file": true
+    }
+  ],
+  "public_assets": {
+    "unused": [],
+    "referenced_only_via_stem_or_template": [
+      {
+        "file": "public/sounds/alarm.mp3",
+        "bytes": 16658,
+        "referenced_by": "stem"
+      },
+      {
+        "file": "public/sounds/egg_found.mp3",
+        "bytes": 17285,
+        "referenced_by": "stem"
+      },
+      {
+        "file": "public/sounds/fall_whistle.mp3",
+        "bytes": 24809,
+        "referenced_by": "stem"
+      },
+      {
+        "file": "public/sounds/flashlight.mp3",
+        "bytes": 2239,
+        "referenced_by": "stem"
+      },
+      {
+        "file": "public/sounds/flyby_1.mp3",
+        "bytes": 30137,
+        "referenced_by": "variant-table"
+      },
+      {
+        "file": "public/sounds/flyby_2.mp3",
+        "bytes": 41422,
+        "referenced_by": "variant-table"
+      },
+      {
+        "file": "public/sounds/impact.mp3",
+        "bytes": 81128,
+        "referenced_by": "stem"
+      },
+      {
+        "file": "public/sounds/intro_ambient.mp3",
+        "bytes": 769088,
+        "referenced_by": "stem"
+      },
+      {
+        "file": "public/sounds/keys_1.mp3",
+        "bytes": 2239,
+        "referenced_by": "variant-table"
+      },
+      {
+        "file": "public/sounds/keys_2.mp3",
+        "bytes": 2239,
+        "referenced_by": "variant-table"
+      },
+      {
+        "file": "public/sounds/keys_3.mp3",
+        "bytes": 2239,
+        "referenced_by": "variant-table"
+      },
+      {
+        "file": "public/sounds/keys_4.mp3",
+        "bytes": 2239,
+        "referenced_by": "variant-table"
+      },
+      {
+        "file": "public/sounds/keys_5.mp3",
+        "bytes": 2239,
+        "referenced_by": "variant-table"
+      },
+      {
+        "file": "public/sounds/keys_6.mp3",
+        "bytes": 1925,
+        "referenced_by": "variant-table"
+      },
+      {
+        "file": "public/sounds/keys_7.mp3",
+        "bytes": 1925,
+        "referenced_by": "variant-table"
+      },
+      {
+        "file": "public/sounds/keys_8.mp3",
+        "bytes": 2239,
+        "referenced_by": "variant-table"
+      },
+      {
+        "file": "public/sounds/matrix.mp3",
+        "bytes": 33062,
+        "referenced_by": "stem"
+      },
+      {
+        "file": "public/sounds/shimmer.mp3",
+        "bytes": 48945,
+        "referenced_by": "stem"
+      },
+      {
+        "file": "public/sounds/start.mp3",
+        "bytes": 15508,
+        "referenced_by": "stem"
+      },
+      {
+        "file": "public/sounds/thud_1.mp3",
+        "bytes": 3806,
+        "referenced_by": "variant-table"
+      },
+      {
+        "file": "public/sounds/thud_2.mp3",
+        "bytes": 4433,
+        "referenced_by": "variant-table"
+      },
+      {
+        "file": "public/sounds/ui_click.mp3",
+        "bytes": 1925,
+        "referenced_by": "stem"
+      },
+      {
+        "file": "public/sounds/unicorn.mp3",
+        "bytes": 26689,
+        "referenced_by": "stem"
+      },
+      {
+        "file": "public/sounds/yelp.mp3",
+        "bytes": 12897,
+        "referenced_by": "stem"
+      },
+      {
+        "file": "public/sounds/zap.mp3",
+        "bytes": 6000,
+        "referenced_by": "stem"
+      },
+      {
+        "file": "public/textures/planets/earth_clouds.jpg",
+        "bytes": 117434,
+        "referenced_by": "stem"
+      },
+      {
+        "file": "public/textures/planets/earth_daymap.jpg",
+        "bytes": 185914,
+        "referenced_by": "stem"
+      },
+      {
+        "file": "public/textures/planets/jupiter.jpg",
+        "bytes": 197210,
+        "referenced_by": "stem"
+      },
+      {
+        "file": "public/textures/planets/mars.jpg",
+        "bytes": 77288,
+        "referenced_by": "stem"
+      },
+      {
+        "file": "public/textures/planets/mercury.jpg",
+        "bytes": 96448,
+        "referenced_by": "stem"
+      },
+      {
+        "file": "public/textures/planets/moon.jpg",
+        "bytes": 114288,
+        "referenced_by": "stem"
+      },
+      {
+        "file": "public/textures/planets/neptune.jpg",
+        "bytes": 13822,
+        "referenced_by": "stem"
+      },
+      {
+        "file": "public/textures/planets/saturn.jpg",
+        "bytes": 25268,
+        "referenced_by": "stem"
+      },
+      {
+        "file": "public/textures/planets/saturn_ring.png",
+        "bytes": 5661,
+        "referenced_by": "stem"
+      },
+      {
+        "file": "public/textures/planets/stars_milky_way.jpg",
+        "bytes": 58613,
+        "referenced_by": "stem"
+      },
+      {
+        "file": "public/textures/planets/sun.jpg",
+        "bytes": 98812,
+        "referenced_by": "stem"
+      },
+      {
+        "file": "public/textures/planets/uranus.jpg",
+        "bytes": 2571,
+        "referenced_by": "stem"
+      },
+      {
+        "file": "public/textures/planets/venus_atmosphere.jpg",
+        "bytes": 29439,
+        "referenced_by": "stem"
+      }
+    ],
+    "total": 39,
+    "total_bytes": 2218340
+  },
+  "npm_dependencies": [
+    {
+      "name": "framer-motion",
+      "section": "dependencies",
+      "version": "^11.11.17",
+      "importer_count": 0,
+      "importers": [],
+      "unused": true,
+      "note": null
+    },
+    {
+      "name": "lenis",
+      "section": "dependencies",
+      "version": "^1.3.26",
+      "importer_count": 1,
+      "importers": [
+        "components/effects/SmoothScroll.tsx"
+      ],
+      "unused": false,
+      "note": null
+    },
+    {
+      "name": "next",
+      "section": "dependencies",
+      "version": "^14.2.35",
+      "importer_count": 16,
+      "importers": [
+        "app/en/page.tsx",
+        "app/layout.tsx",
+        "app/og.png/route.tsx",
+        "app/projects/[slug]/page.tsx",
+        "components/effects/LocaleSwitch.tsx",
+        "components/intro/IntroAnimation.tsx",
+        "components/intro/IntroWelcome.tsx",
+        "components/projects/ProjectShell.tsx",
+        "components/projects/ProjectWidget.tsx",
+        "components/sections/factory/FactorySection.tsx",
+        "components/sections/hp100/HP100Section.tsx",
+        "components/sections/perimeter/PerimeterSection.tsx",
+        "components/transitions/ProjectCardLink.tsx",
+        "components/transitions/ProjectTransitionOverlay.tsx",
+        "lib/locale.ts",
+        "next.config.mjs"
+      ],
+      "unused": false,
+      "note": null
+    },
+    {
+      "name": "react",
+      "section": "dependencies",
+      "version": "^18.3.1",
+      "importer_count": 51,
+      "importers": [
+        "app/en/page.tsx",
+        "components/easter-eggs/AgentVision.tsx",
+        "components/easter-eggs/BranchOverlay.tsx",
+        "components/easter-eggs/BranchTeaser.tsx",
+        "components/easter-eggs/IdleScreensaver.tsx",
+        "components/easter-eggs/SudoEasterEgg.tsx",
+        "components/effects/CrowdFall.tsx",
+        "components/effects/CustomCursor.tsx",
+        "components/effects/EasterEggCounter.tsx",
+        "components/effects/MatrixModeController.tsx",
+        "components/effects/MatrixRain.tsx",
+        "components/effects/ParticleDust.tsx",
+        "components/effects/RevealOnScroll.tsx",
+        "components/effects/ScrollProgress.tsx",
+        "components/effects/SetHtmlLang.tsx",
+        "components/effects/SmokeField.tsx",
+        "components/effects/SmoothScroll.tsx",
+        "components/effects/TrunkNav.tsx",
+        "components/hero/AnomalyBanner.tsx",
+        "components/hero/Hero.tsx",
+        "components/hero/HeroTitleReveal.tsx",
+        "components/hero/SystemsCounter.tsx",
+        "components/intro/IntroAnimation.tsx",
+        "components/intro/IntroCosmos.tsx",
+        "components/intro/IntroGate.tsx",
+        "components/intro/IntroSoundGate.tsx",
+        "components/intro/IntroWelcome.tsx",
+        "components/projects/ProjectShell.tsx",
+        "components/projects/StaffChatSim.tsx",
+        "components/sections/DetailsDisclosure.tsx"
+      ],
+      "unused": false,
+      "note": null
+    },
+    {
+      "name": "react-dom",
+      "section": "dependencies",
+      "version": "^18.3.1",
+      "importer_count": 0,
+      "importers": [],
+      "unused": false,
+      "note": "peer of next (implicit)"
+    },
+    {
+      "name": "three",
+      "section": "dependencies",
+      "version": "^0.180.0",
+      "importer_count": 2,
+      "importers": [
+        "components/intro/IntroCosmos.tsx",
+        "lib/cosmosAssets.ts"
+      ],
+      "unused": false,
+      "note": null
+    },
+    {
+      "name": "zustand",
+      "section": "dependencies",
+      "version": "^5.0.1",
+      "importer_count": 7,
+      "importers": [
+        "lib/branchStore.ts",
+        "lib/bridgeStore.ts",
+        "lib/introStore.ts",
+        "lib/portfolioGuard.ts",
+        "lib/store.ts",
+        "lib/systemStatus.ts",
+        "lib/transitionStore.ts"
+      ],
+      "unused": false,
+      "note": null
+    },
+    {
+      "name": "@types/node",
+      "section": "devDependencies",
+      "version": "^22.9.0",
+      "importer_count": 0,
+      "importers": [],
+      "unused": false,
+      "note": "types for 'node' (imported)"
+    },
+    {
+      "name": "@types/react",
+      "section": "devDependencies",
+      "version": "^18.3.12",
+      "importer_count": 0,
+      "importers": [],
+      "unused": false,
+      "note": "types for 'react' (imported)"
+    },
+    {
+      "name": "@types/react-dom",
+      "section": "devDependencies",
+      "version": "^18.3.1",
+      "importer_count": 0,
+      "importers": [],
+      "unused": false,
+      "note": "types for 'react-dom' (imported)"
+    },
+    {
+      "name": "@types/three",
+      "section": "devDependencies",
+      "version": "^0.180.0",
+      "importer_count": 0,
+      "importers": [],
+      "unused": false,
+      "note": "types for 'three' (imported)"
+    },
+    {
+      "name": "autoprefixer",
+      "section": "devDependencies",
+      "version": "^10.4.20",
+      "importer_count": 0,
+      "importers": [],
+      "unused": false,
+      "note": "referenced from root config/scripts"
+    },
+    {
+      "name": "eslint",
+      "section": "devDependencies",
+      "version": "^8.57.1",
+      "importer_count": 0,
+      "importers": [],
+      "unused": false,
+      "note": "tooling (implicit)"
+    },
+    {
+      "name": "eslint-config-next",
+      "section": "devDependencies",
+      "version": "^14.2.35",
+      "importer_count": 0,
+      "importers": [],
+      "unused": false,
+      "note": "tooling (implicit)"
+    },
+    {
+      "name": "postcss",
+      "section": "devDependencies",
+      "version": "^8.4.47",
+      "importer_count": 0,
+      "importers": [],
+      "unused": false,
+      "note": "referenced from root config/scripts"
+    },
+    {
+      "name": "tailwindcss",
+      "section": "devDependencies",
+      "version": "^3.4.14",
+      "importer_count": 1,
+      "importers": [
+        "tailwind.config.ts"
+      ],
+      "unused": false,
+      "note": null
+    },
+    {
+      "name": "typescript",
+      "section": "devDependencies",
+      "version": "^5.6.3",
+      "importer_count": 0,
+      "importers": [],
+      "unused": false,
+      "note": "referenced from root config/scripts"
+    }
+  ],
+  "package_scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "comment_density": {
+    "per_dir": {
+      "(root)": {
+        "comment_lines": 9,
+        "code_lines": 56,
+        "mixed_lines": 0,
+        "blank_lines": 8,
+        "comment_to_code_ratio": 0.161,
+        "comment_share_of_nonblank": 0.138
+      },
+      "ALL": {
+        "comment_lines": 945,
+        "code_lines": 9681,
+        "mixed_lines": 15,
+        "blank_lines": 1099,
+        "comment_to_code_ratio": 0.098,
+        "comment_share_of_nonblank": 0.089
+      },
+      "app": {
+        "comment_lines": 66,
+        "code_lines": 1080,
+        "mixed_lines": 0,
+        "blank_lines": 108,
+        "comment_to_code_ratio": 0.061,
+        "comment_share_of_nonblank": 0.058
+      },
+      "app/en": {
+        "comment_lines": 14,
+        "code_lines": 309,
+        "mixed_lines": 0,
+        "blank_lines": 16,
+        "comment_to_code_ratio": 0.045,
+        "comment_share_of_nonblank": 0.043
+      },
+      "app/og.png": {
+        "comment_lines": 3,
+        "code_lines": 6,
+        "mixed_lines": 0,
+        "blank_lines": 3,
+        "comment_to_code_ratio": 0.5,
+        "comment_share_of_nonblank": 0.333
+      },
+      "app/projects": {
+        "comment_lines": 1,
+        "code_lines": 43,
+        "mixed_lines": 0,
+        "blank_lines": 6,
+        "comment_to_code_ratio": 0.023,
+        "comment_share_of_nonblank": 0.023
+      },
+      "components/easter-eggs": {
+        "comment_lines": 51,
+        "code_lines": 532,
+        "mixed_lines": 1,
+        "blank_lines": 57,
+        "comment_to_code_ratio": 0.096,
+        "comment_share_of_nonblank": 0.087
+      },
+      "components/effects": {
+        "comment_lines": 128,
+        "code_lines": 1357,
+        "mixed_lines": 2,
+        "blank_lines": 171,
+        "comment_to_code_ratio": 0.094,
+        "comment_share_of_nonblank": 0.086
+      },
+      "components/hero": {
+        "comment_lines": 106,
+        "code_lines": 473,
+        "mixed_lines": 0,
+        "blank_lines": 82,
+        "comment_to_code_ratio": 0.224,
+        "comment_share_of_nonblank": 0.183
+      },
+      "components/intro": {
+        "comment_lines": 113,
+        "code_lines": 1088,
+        "mixed_lines": 6,
+        "blank_lines": 121,
+        "comment_to_code_ratio": 0.104,
+        "comment_share_of_nonblank": 0.094
+      },
+      "components/projects": {
+        "comment_lines": 23,
+        "code_lines": 360,
+        "mixed_lines": 0,
+        "blank_lines": 37,
+        "comment_to_code_ratio": 0.064,
+        "comment_share_of_nonblank": 0.06
+      },
+      "components/sections": {
+        "comment_lines": 173,
+        "code_lines": 2829,
+        "mixed_lines": 5,
+        "blank_lines": 273,
+        "comment_to_code_ratio": 0.061,
+        "comment_share_of_nonblank": 0.058
+      },
+      "components/transitions": {
+        "comment_lines": 17,
+        "code_lines": 118,
+        "mixed_lines": 0,
+        "blank_lines": 16,
+        "comment_to_code_ratio": 0.144,
+        "comment_share_of_nonblank": 0.126
+      },
+      "lib": {
+        "comment_lines": 228,
+        "code_lines": 1227,
+        "mixed_lines": 1,
+        "blank_lines": 160,
+        "comment_to_code_ratio": 0.186,
+        "comment_share_of_nonblank": 0.157
+      },
+      "lib/mock": {
+        "comment_lines": 13,
+        "code_lines": 184,
+        "mixed_lines": 0,
+        "blank_lines": 39,
+        "comment_to_code_ratio": 0.071,
+        "comment_share_of_nonblank": 0.066
+      },
+      "styles": {
+        "comment_lines": 0,
+        "code_lines": 19,
+        "mixed_lines": 0,
+        "blank_lines": 2,
+        "comment_to_code_ratio": 0.0,
+        "comment_share_of_nonblank": 0.0
+      }
+    },
+    "top_files_by_ratio": [
+      {
+        "file": "lib/introConfig.ts",
+        "comment_lines": 34,
+        "code_lines": 46,
+        "ratio": 0.74
+      },
+      {
+        "file": "components/sections/perimeter/nodes.ts",
+        "comment_lines": 16,
+        "code_lines": 27,
+        "ratio": 0.59
+      },
+      {
+        "file": "components/hero/AnomalyBanner.tsx",
+        "comment_lines": 16,
+        "code_lines": 28,
+        "ratio": 0.57
+      },
+      {
+        "file": "lib/systemStatus.ts",
+        "comment_lines": 23,
+        "code_lines": 41,
+        "ratio": 0.56
+      },
+      {
+        "file": "lib/bridgeStore.ts",
+        "comment_lines": 10,
+        "code_lines": 26,
+        "ratio": 0.38
+      },
+      {
+        "file": "lib/transitionStore.ts",
+        "comment_lines": 7,
+        "code_lines": 20,
+        "ratio": 0.35
+      },
+      {
+        "file": "components/hero/AnimatedLeadCount.tsx",
+        "comment_lines": 11,
+        "code_lines": 38,
+        "ratio": 0.29
+      },
+      {
+        "file": "components/easter-eggs/SudoEasterEgg.tsx",
+        "comment_lines": 28,
+        "code_lines": 101,
+        "ratio": 0.28
+      },
+      {
+        "file": "components/effects/SmoothScroll.tsx",
+        "comment_lines": 7,
+        "code_lines": 25,
+        "ratio": 0.28
+      },
+      {
+        "file": "lib/hp100-live.ts",
+        "comment_lines": 34,
+        "code_lines": 121,
+        "ratio": 0.28
+      },
+      {
+        "file": "components/intro/IntroMark.tsx",
+        "comment_lines": 10,
+        "code_lines": 37,
+        "ratio": 0.27
+      },
+      {
+        "file": "components/hero/TypewriterLine.tsx",
+        "comment_lines": 11,
+        "code_lines": 43,
+        "ratio": 0.26
+      },
+      {
+        "file": "components/sections/DetailsDisclosure.tsx",
+        "comment_lines": 9,
+        "code_lines": 36,
+        "ratio": 0.25
+      },
+      {
+        "file": "components/sections/friday/Cartridge.tsx",
+        "comment_lines": 9,
+        "code_lines": 38,
+        "ratio": 0.24
+      },
+      {
+        "file": "components/effects/RevealOnScroll.tsx",
+        "comment_lines": 12,
+        "code_lines": 53,
+        "ratio": 0.23
+      }
+    ],
+    "longest_comment_blocks": [
+      {
+        "file": "lib/hp100-live.ts",
+        "line": 3,
+        "lines": 25,
+        "first": "/**"
+      },
+      {
+        "file": "lib/introConfig.ts",
+        "line": 1,
+        "lines": 21,
+        "first": "/**"
+      },
+      {
+        "file": "components/easter-eggs/SudoEasterEgg.tsx",
+        "line": 14,
+        "lines": 20,
+        "first": "/**"
+      },
+      {
+        "file": "components/effects/CrowdFall.tsx",
+        "line": 8,
+        "lines": 17,
+        "first": "/**"
+      },
+      {
+        "file": "components/hero/AnomalyBanner.tsx",
+        "line": 10,
+        "lines": 16,
+        "first": "/**"
+      },
+      {
+        "file": "components/intro/IntroAnimation.tsx",
+        "line": 22,
+        "lines": 15,
+        "first": "/**"
+      },
+      {
+        "file": "components/intro/IntroCosmos.tsx",
+        "line": 8,
+        "lines": 14,
+        "first": "/**"
+      },
+      {
+        "file": "components/effects/MatrixRain.tsx",
+        "line": 10,
+        "lines": 12,
+        "first": "/**"
+      },
+      {
+        "file": "components/sections/closing/ClosingSection.tsx",
+        "line": 32,
+        "lines": 11,
+        "first": "/**"
+      },
+      {
+        "file": "lib/sfx.ts",
+        "line": 6,
+        "lines": 11,
+        "first": "/**"
+      }
+    ],
+    "comment_blocks_ge_5_lines": 77,
+    "comment_blocks_ge_10_lines": 11
+  },
+  "commented_out_code": [],
+  "todo_markers": [
+    {
+      "file": "lib/systemStatus.ts",
+      "line": 20,
+      "marker": "TODO",
+      "text": "* than invent a number for the ones still `null` — see TODO(автор) below."
+    },
+    {
+      "file": "lib/systemStatus.ts",
+      "line": 31,
+      "marker": "TODO",
+      "text": "// TODO(автор): дата запуска студии «Пятница» — заполнить."
+    },
+    {
+      "file": "lib/systemStatus.ts",
+      "line": 37,
+      "marker": "TODO",
+      "text": "// TODO(автор): контент-завод работает на домашнем ПК, вне этого сервера —"
+    }
+  ],
+  "narrative_comments": {
+    "count": 9,
+    "by_match": {
+      "todo(автор": 3,
+      "used to": 2,
+      "per spec": 1,
+      "no longer": 1,
+      "тз": 1,
+      "автор": 1
+    },
+    "items": [
+      {
+        "file": "app/globals.css",
+        "line": 21,
+        "match": "Per spec",
+        "text": "/* Per spec, whenever one axis is non-visible and the other computes to"
+      },
+      {
+        "file": "components/effects/CrowdFall.tsx",
+        "line": 429,
+        "match": "no longer",
+        "text": "// falling and yelling from a section that's no longer there. The heap"
+      },
+      {
+        "file": "lib/hp100-live.ts",
+        "line": 7,
+        "match": "used to",
+        "text": "* the public IP once used to reach it directly is a proxy with a single"
+      },
+      {
+        "file": "lib/mock/hp100.ts",
+        "line": 4,
+        "match": "ТЗ",
+        "text": "* Demo data source for the HP100 widget (see ТЗ раздел 7 — реальных"
+      },
+      {
+        "file": "lib/systemStatus.ts",
+        "line": 20,
+        "match": "TODO(автор",
+        "text": "* than invent a number for the ones still `null` — see TODO(автор) below."
+      },
+      {
+        "file": "lib/systemStatus.ts",
+        "line": 31,
+        "match": "TODO(автор",
+        "text": "// TODO(автор): дата запуска студии «Пятница» — заполнить."
+      },
+      {
+        "file": "lib/systemStatus.ts",
+        "line": 37,
+        "match": "TODO(автор",
+        "text": "// TODO(автор): контент-завод работает на домашнем ПК, вне этого сервера —"
+      },
+      {
+        "file": "lib/systemStatus.ts",
+        "line": 38,
+        "match": "автор",
+        "text": "// точную дату запуска знает только автор, заполнить вручную."
+      },
+      {
+        "file": "lib/useTypewriter.ts",
+        "line": 30,
+        "match": "used to",
+        "text": "// value without needing to restart — toggling sound mid-sentence used to"
+      }
+    ]
+  },
+  "dead_flags": [
+    {
+      "file": "lib/introConfig.ts",
+      "line": 22,
+      "name": "INTRO_SHOW_MARK",
+      "value": "false",
+      "uses": [
+        "components/intro/IntroAnimation.tsx:15",
+        "components/intro/IntroAnimation.tsx:24",
+        "components/intro/IntroAnimation.tsx:132",
+        "components/intro/IntroAnimation.tsx:203",
+        "lib/introConfig.ts:19",
+        "lib/introConfig.ts:23",
+        "lib/introConfig.ts:25"
+      ]
+    }
+  ],
+  "duplication": {
+    "window_lines": 8,
+    "code_window_duplicates": [
+      {
+        "a": "components/hero/HeroTitleReveal.tsx:58-95",
+        "b": "components/hero/SystemsCounter.tsx:69-106",
+        "normalized_lines": 28,
+        "sample": "return;"
+      },
+      {
+        "a": "components/effects/ScrollProgress.tsx:23-36",
+        "b": "components/effects/TrunkNav.tsx:78-90",
+        "normalized_lines": 11,
+        "sample": "function onScroll() {"
+      },
+      {
+        "a": "components/effects/ParticleDust.tsx:27-37",
+        "b": "components/effects/SmokeField.tsx:40-50",
+        "normalized_lines": 10,
+        "sample": "useEffect(() => {"
+      },
+      {
+        "a": "components/sections/allin/PortfolioHealthCard.tsx:19-30",
+        "b": "components/sections/allin/PortfolioWidget.tsx:21-32",
+        "normalized_lines": 10,
+        "sample": "const [values, setValues] = useState(() => portfolioSource.getSnapshot());"
+      },
+      {
+        "a": "components/effects/ParticleDust.tsx:58-66",
+        "b": "components/effects/SmokeField.tsx:87-95",
+        "normalized_lines": 9,
+        "sample": "function resize() {"
+      },
+      {
+        "a": "components/effects/MatrixRain.tsx:29-37",
+        "b": "components/effects/ParticleDust.tsx:28-36",
+        "normalized_lines": 8,
+        "sample": "const canvas = canvasRef.current;"
+      },
+      {
+        "a": "components/effects/MatrixRain.tsx:29-37",
+        "b": "components/effects/SmokeField.tsx:41-49",
+        "normalized_lines": 8,
+        "sample": "const canvas = canvasRef.current;"
+      },
+      {
+        "a": "components/effects/ScrollProgress.tsx:9-17",
+        "b": "components/effects/TrunkNav.tsx:64-72",
+        "normalized_lines": 8,
+        "sample": "useEffect(() => {"
+      }
+    ],
+    "code_window_duplicate_pairs": 8,
+    "duplicated_string_literals": [
+      {
+        "text": "; } else if (phase === \"shrink\" && bar) { bar.style.left =",
+        "len": 58,
+        "files": 2,
+        "locations": [
+          "components/hero/HeroTitleReveal.tsx:84",
+          "components/hero/SystemsCounter.tsx:95"
+        ]
+      },
+      {
+        "text": "pointer-events-none absolute inset-y-0 bg-fg-primary",
+        "len": 52,
+        "files": 2,
+        "locations": [
+          "components/hero/HeroTitleReveal.tsx:155",
+          "components/hero/SystemsCounter.tsx:181"
+        ]
+      },
+      {
+        "text": "text-[10px] uppercase tracking-wide text-fg-muted",
+        "len": 49,
+        "files": 2,
+        "locations": [
+          "app/en/page.tsx:265",
+          "components/sections/allin/PortfolioHealthCard.tsx:48"
+        ]
+      },
+      {
+        "text": "mt-3 text-[10px] leading-relaxed text-fg-muted",
+        "len": 46,
+        "files": 2,
+        "locations": [
+          "components/sections/allin/PortfolioHealthCard.tsx:79",
+          "components/sections/allin/PortfolioWidget.tsx:78"
+        ]
+      },
+      {
+        "text": "mt-2 text-2xl text-fg-primary sm:text-3xl",
+        "len": 41,
+        "files": 2,
+        "locations": [
+          "app/en/page.tsx:178",
+          "components/sections/operator/OperatorSection.tsx:23"
+        ]
+      },
+      {
+        "text": "mt-3 inline-block text-[10px] text-accent",
+        "len": 41,
+        "files": 2,
+        "locations": [
+          "components/sections/allin/PortfolioWidget.tsx:86",
+          "components/sections/hp100/HP100Widget.tsx:298"
+        ]
+      }
+    ],
+    "same_constant_name_in_multiple_files": {
+      "COST_LINES": [
+        "app/en/page.tsx:138",
+        "components/sections/closing/ClosingSection.tsx:10"
+      ],
+      "DESCRIPTION": [
+        "app/en/page.tsx:9",
+        "app/layout.tsx:33"
+      ],
+      "GROW_MS": [
+        "components/hero/HeroTitleReveal.tsx:10",
+        "components/hero/SystemsCounter.tsx:9"
+      ],
+      "HOLD_MS": [
+        "components/easter-eggs/BranchTeaser.tsx:7",
+        "components/hero/HeroTitleReveal.tsx:11",
+        "components/hero/SystemsCounter.tsx:10"
+      ],
+      "OFFLINE_COLOR": [
+        "components/sections/SystemStatusLine.tsx:6",
+        "components/sections/staff/AgentAvatar.tsx:11"
+      ],
+      "ONLINE_COLOR": [
+        "components/sections/SystemStatusLine.tsx:5",
+        "components/sections/staff/AgentAvatar.tsx:10"
+      ],
+      "SHRINK_MS": [
+        "components/hero/HeroTitleReveal.tsx:12",
+        "components/hero/SystemsCounter.tsx:11"
+      ],
+      "TITLE": [
+        "app/en/page.tsx:8",
+        "app/layout.tsx:32",
+        "components/hero/Hero.tsx:13"
+      ],
+      "TOAST_MS": [
+        "components/effects/EasterEggCounter.tsx:8",
+        "components/sections/perimeter/PerimeterMap.tsx:11"
+      ],
+      "TOTAL": [
+        "app/en/page.tsx:143",
+        "components/sections/closing/ClosingSection.tsx:15"
+      ]
+    }
+  },
+  "mock_data": {
+    "mock_files": [
+      {
+        "file": "lib/mock/hp100.ts",
+        "loc": 136,
+        "imported_by": [
+          "components/sections/hp100/HP100Widget.tsx",
+          "lib/hp100-live.ts"
+        ]
+      },
+      {
+        "file": "lib/mock/portfolio.ts",
+        "loc": 98,
+        "imported_by": [
+          "components/sections/allin/PortfolioHealthCard.tsx",
+          "components/sections/allin/PortfolioWidget.tsx"
+        ]
+      }
+    ],
+    "hits": [
+      {
+        "file": "app/en/page.tsx",
+        "line": 69,
+        "match": "mock",
+        "text": "{ title: \"Royal Solitaire\", line: \"A cartoon 2.5D Klondike on Three.js that passed Yandex Games moderation — not a mock-up, a built and released game.\" },"
+      },
+      {
+        "file": "components/projects/StaffChatSim.tsx",
+        "line": 32,
+        "match": "simulator",
+        "text": "* Chat simulator for the Staff project page. Each agent answers in its own"
+      },
+      {
+        "file": "components/projects/StaffChatSim.tsx",
+        "line": 169,
+        "match": "placeholder",
+        "text": "placeholder=\"Сообщение или /help\""
+      },
+      {
+        "file": "components/projects/StaffChatSim.tsx",
+        "line": 171,
+        "match": "placeholder",
+        "text": "className=\"flex-1 bg-void px-3 py-2 text-base text-fg-primary outline-none placeholder:text-fg-muted sm:text-sm\""
+      },
+      {
+        "file": "components/sections/allin/PortfolioHealthCard.tsx",
+        "line": 4,
+        "match": "mock",
+        "text": "import { portfolioSource } from \"@/lib/mock/portfolio\";"
+      },
+      {
+        "file": "components/sections/allin/PortfolioWidget.tsx",
+        "line": 5,
+        "match": "mock",
+        "text": "import { ASSETS, RISK_METRICS, portfolioSource } from \"@/lib/mock/portfolio\";"
+      },
+      {
+        "file": "components/sections/hp100/HP100Widget.tsx",
+        "line": 4,
+        "match": "mock",
+        "text": "import { HP100_METRICS, type Hp100MetricKey, type SeriesPoint } from \"@/lib/mock/hp100\";"
+      },
+      {
+        "file": "components/sections/hp100/HP100Widget.tsx",
+        "line": 174,
+        "match": "simulate",
+        "text": "hp100LiveSource.simulate(\"co2\", next);"
+      },
+      {
+        "file": "lib/hp100-live.ts",
+        "line": 20,
+        "match": "simulated",
+        "text": "* this visit) does it fall back to the simulated source in"
+      },
+      {
+        "file": "lib/hp100-live.ts",
+        "line": 21,
+        "match": "mock",
+        "text": "* `lib/mock/hp100.ts`, labelled as \"нет связи\" in HP100Widget."
+      },
+      {
+        "file": "lib/hp100-live.ts",
+        "line": 34,
+        "match": "mock",
+        "text": "} from \"@/lib/mock/hp100\";"
+      },
+      {
+        "file": "lib/hp100-live.ts",
+        "line": 60,
+        "match": "demo",
+        "text": "// fall back to demo rather than label old numbers \"live\". Comfortably"
+      },
+      {
+        "file": "lib/hp100-live.ts",
+        "line": 127,
+        "match": "simulated",
+        "text": "// (now marked stale) instead of swapping in simulated numbers."
+      },
+      {
+        "file": "lib/hp100-live.ts",
+        "line": 137,
+        "match": "simulate",
+        "text": "/** Console easter egg hook: simulate('co2', 2000). Works in both live and demo mode. */"
+      },
+      {
+        "file": "lib/hp100-live.ts",
+        "line": 138,
+        "match": "simulate",
+        "text": "simulate(key: Hp100MetricKey, value: number) {"
+      },
+      {
+        "file": "lib/hp100-live.ts",
+        "line": 175,
+        "match": "simulate",
+        "text": "simulate: (key: Hp100MetricKey, value: number) =>"
+      },
+      {
+        "file": "lib/hp100-live.ts",
+        "line": 176,
+        "match": "simulate",
+        "text": "hp100LiveSource.simulate(key, value),"
+      },
+      {
+        "file": "lib/mock/hp100.ts",
+        "line": 4,
+        "match": "Demo",
+        "text": "* Demo data source for the HP100 widget (see ТЗ раздел 7 — реальных"
+      },
+      {
+        "file": "lib/mock/hp100.ts",
+        "line": 7,
+        "match": "demo",
+        "text": "* = one \"hour\" of history) so the 24h chart fills up quickly for demo"
+      },
+      {
+        "file": "lib/mock/hp100.ts",
+        "line": 102,
+        "match": "simulate",
+        "text": "/** Console easter egg hook: simulate('co2', 2000). */"
+      },
+      {
+        "file": "lib/mock/hp100.ts",
+        "line": 103,
+        "match": "simulate",
+        "text": "simulate(key: Hp100MetricKey, value: number) {"
+      },
+      {
+        "file": "lib/mock/hp100.ts",
+        "line": 134,
+        "match": "simulate",
+        "text": "simulate: (key: Hp100MetricKey, value: number) => hp100Source.simulate(key, value),"
+      },
+      {
+        "file": "lib/systemStatus.ts",
+        "line": 32,
+        "match": "online: true",
+        "text": "friday: { online: true, since: null },"
+      },
+      {
+        "file": "lib/systemStatus.ts",
+        "line": 33,
+        "match": "online: true",
+        "text": "hp100: { online: true, since: Date.parse(\"2026-06-07T00:00:00Z\") },"
+      },
+      {
+        "file": "lib/systemStatus.ts",
+        "line": 34,
+        "match": "online: true",
+        "text": "autopilot: { online: true, since: Date.parse(\"2025-04-01T00:00:00Z\") },"
+      },
+      {
+        "file": "lib/systemStatus.ts",
+        "line": 35,
+        "match": "online: true",
+        "text": "bridge: { online: true, since: Date.parse(\"2026-08-24T00:00:00Z\") },"
+      },
+      {
+        "file": "lib/systemStatus.ts",
+        "line": 36,
+        "match": "online: true",
+        "text": "allin: { online: true, since: Date.parse(\"2026-08-25T00:00:00Z\") },"
+      },
+      {
+        "file": "lib/systemStatus.ts",
+        "line": 39,
+        "match": "online: true",
+        "text": "factory: { online: true, since: null },"
+      },
+      {
+        "file": "lib/systemStatus.ts",
+        "line": 40,
+        "match": "online: true",
+        "text": "staff: { online: true, since: Date.parse(\"2026-05-18T00:00:00Z\") },"
+      },
+      {
+        "file": "lib/systemStatus.ts",
+        "line": 41,
+        "match": "online: true",
+        "text": "perimeter: { online: true, since: Date.parse(\"2026-08-28T00:00:00Z\") },"
+      },
+      {
+        "file": "lib/systemStatus.ts",
+        "line": 60,
+        "match": "online: true",
+        "text": "* (see HP100Widget); the rest default to `online: true` and are meant to be"
+      }
+    ]
+  },
+  "nondeterministic_apis": [
+    {
+      "file": "app/en/page.tsx",
+      "line": 144,
+      "client": false,
+      "api": "toLocaleString(",
+      "text": "const TOTAL_LABEL = TOTAL.toLocaleString(\"en-US\");"
+    },
+    {
+      "file": "app/layout.tsx",
+      "line": 85,
+      "client": false,
+      "api": "localStorage",
+      "text": "__html: `try{if(localStorage.getItem('lab-terminal:sudo-locked')==='1'){document.documentElement.classList.add('sudo-locked-boot');}}catch(e){}`,"
+    },
+    {
+      "file": "components/easter-eggs/AgentVision.tsx",
+      "line": 59,
+      "client": true,
+      "api": "window.",
+      "text": "window.addEventListener(\"keydown\", onKey);"
+    },
+    {
+      "file": "components/easter-eggs/AgentVision.tsx",
+      "line": 60,
+      "client": true,
+      "api": "window.",
+      "text": "return () => window.removeEventListener(\"keydown\", onKey);"
+    },
+    {
+      "file": "components/easter-eggs/AgentVision.tsx",
+      "line": 75,
+      "client": true,
+      "api": "window.",
+      "text": "window.addEventListener(\"pointermove\", onMove, { passive: true });"
+    },
+    {
+      "file": "components/easter-eggs/AgentVision.tsx",
+      "line": 78,
+      "client": true,
+      "api": "window.",
+      "text": "window.removeEventListener(\"pointermove\", onMove);"
+    },
+    {
+      "file": "components/easter-eggs/BranchOverlay.tsx",
+      "line": 37,
+      "client": true,
+      "api": "window.",
+      "text": "const w = window.innerWidth;"
+    },
+    {
+      "file": "components/easter-eggs/BranchOverlay.tsx",
+      "line": 38,
+      "client": true,
+      "api": "window.",
+      "text": "const h = window.innerHeight;"
+    },
+    {
+      "file": "components/easter-eggs/BranchOverlay.tsx",
+      "line": 59,
+      "client": true,
+      "api": "window.",
+      "text": "window.addEventListener(\"pointermove\", onPointerMove);"
+    },
+    {
+      "file": "components/easter-eggs/BranchOverlay.tsx",
+      "line": 60,
+      "client": true,
+      "api": "window.",
+      "text": "window.addEventListener(\"keydown\", onKeyDown);"
+    },
+    {
+      "file": "components/easter-eggs/BranchOverlay.tsx",
+      "line": 62,
+      "client": true,
+      "api": "window.",
+      "text": "window.removeEventListener(\"pointermove\", onPointerMove);"
+    },
+    {
+      "file": "components/easter-eggs/BranchOverlay.tsx",
+      "line": 63,
+      "client": true,
+      "api": "window.",
+      "text": "window.removeEventListener(\"keydown\", onKeyDown);"
+    },
+    {
+      "file": "components/easter-eggs/BranchTeaser.tsx",
+      "line": 17,
+      "client": true,
+      "api": "window.",
+      "text": "holdTimer.current = window.setTimeout(() => setHeld(true), HOLD_MS);"
+    },
+    {
+      "file": "components/easter-eggs/BranchTeaser.tsx",
+      "line": 21,
+      "client": true,
+      "api": "window.",
+      "text": "if (holdTimer.current) window.clearTimeout(holdTimer.current);"
+    },
+    {
+      "file": "components/easter-eggs/IdleScreensaver.tsx",
+      "line": 34,
+      "client": true,
+      "api": "window.",
+      "text": "window.clearTimeout(timer);"
+    },
+    {
+      "file": "components/easter-eggs/IdleScreensaver.tsx",
+      "line": 36,
+      "client": true,
+      "api": "window.",
+      "text": "timer = window.setTimeout(() => {"
+    },
+    {
+      "file": "components/easter-eggs/IdleScreensaver.tsx",
+      "line": 41,
+      "client": true,
+      "api": "window.",
+      "text": "events.forEach((e) => window.addEventListener(e, reset, { passive: true }));"
+    },
+    {
+      "file": "components/easter-eggs/IdleScreensaver.tsx",
+      "line": 44,
+      "client": true,
+      "api": "window.",
+      "text": "window.clearTimeout(timer);"
+    },
+    {
+      "file": "components/easter-eggs/IdleScreensaver.tsx",
+      "line": 45,
+      "client": true,
+      "api": "window.",
+      "text": "events.forEach((e) => window.removeEventListener(e, reset));"
+    },
+    {
+      "file": "components/easter-eggs/IdleScreensaver.tsx",
+      "line": 56,
+      "client": true,
+      "api": "window.",
+      "text": "const w = window.innerWidth - el.offsetWidth;"
+    },
+    {
+      "file": "components/easter-eggs/IdleScreensaver.tsx",
+      "line": 57,
+      "client": true,
+      "api": "window.",
+      "text": "const h = window.innerHeight - el.offsetHeight;"
+    },
+    {
+      "file": "components/easter-eggs/IdleScreensaver.tsx",
+      "line": 58,
+      "client": true,
+      "api": "Math.random(",
+      "text": "let x = Math.random() * w * 0.6 + w * 0.2;"
+    },
+    {
+      "file": "components/easter-eggs/IdleScreensaver.tsx",
+      "line": 59,
+      "client": true,
+      "api": "Math.random(",
+      "text": "let y = Math.random() * h * 0.6 + h * 0.2;"
+    },
+    {
+      "file": "components/easter-eggs/IdleScreensaver.tsx",
+      "line": 60,
+      "client": true,
+      "api": "Math.random(",
+      "text": "let vx = SPEED * (Math.random() < 0.5 ? -1 : 1);"
+    },
+    {
+      "file": "components/easter-eggs/IdleScreensaver.tsx",
+      "line": 61,
+      "client": true,
+      "api": "Math.random(",
+      "text": "let vy = SPEED * 0.8 * (Math.random() < 0.5 ? -1 : 1);"
+    },
+    {
+      "file": "components/easter-eggs/IdleScreensaver.tsx",
+      "line": 65,
+      "client": true,
+      "api": "performance.now(",
+      "text": "let last = performance.now();"
+    },
+    {
+      "file": "components/easter-eggs/SudoEasterEgg.tsx",
+      "line": 50,
+      "client": true,
+      "api": "window.",
+      "text": "window.localStorage.setItem(SUDO_LOCK_KEY, \"1\");"
+    },
+    {
+      "file": "components/easter-eggs/SudoEasterEgg.tsx",
+      "line": 62,
+      "client": true,
+      "api": "window.",
+      "text": "window.localStorage.removeItem(SUDO_LOCK_KEY);"
+    },
+    {
+      "file": "components/easter-eggs/SudoEasterEgg.tsx",
+      "line": 72,
+      "client": true,
+      "api": "window.",
+      "text": "alreadyLocked = window.localStorage.getItem(SUDO_LOCK_KEY) === \"1\";"
+    },
+    {
+      "file": "components/easter-eggs/SudoEasterEgg.tsx",
+      "line": 101,
+      "client": true,
+      "api": "window.",
+      "text": "window.addEventListener(\"keydown\", handleKeydown);"
+    },
+    {
+      "file": "components/easter-eggs/SudoEasterEgg.tsx",
+      "line": 102,
+      "client": true,
+      "api": "window.",
+      "text": "return () => window.removeEventListener(\"keydown\", handleKeydown);"
+    },
+    {
+      "file": "components/easter-eggs/SudoEasterEgg.tsx",
+      "line": 108,
+      "client": true,
+      "api": "window.",
+      "text": "const t = window.setTimeout(() => setShowClose(true), CLOSE_BUTTON_DELAY_MS);"
+    },
+    {
+      "file": "components/easter-eggs/SudoEasterEgg.tsx",
+      "line": 109,
+      "client": true,
+      "api": "window.",
+      "text": "return () => window.clearTimeout(t);"
+    },
+    {
+      "file": "components/effects/CrowdFall.tsx",
+      "line": 58,
+      "client": true,
+      "api": "Math.random(",
+      "text": "return a + Math.random() * (b - a);"
+    },
+    {
+      "file": "components/effects/CrowdFall.tsx",
+      "line": 132,
+      "client": true,
+      "api": "performance.now(",
+      "text": "let last = performance.now();"
+    },
+    {
+      "file": "components/effects/CrowdFall.tsx",
+      "line": 139,
+      "client": true,
+      "api": "window.",
+      "text": "dpr = Math.min(window.devicePixelRatio || 1, 2);"
+    },
+    {
+      "file": "components/effects/CrowdFall.tsx",
+      "line": 140,
+      "client": true,
+      "api": "window.",
+      "text": "vw = window.innerWidth;"
+    },
+    {
+      "file": "components/effects/CrowdFall.tsx",
+      "line": 141,
+      "client": true,
+      "api": "window.",
+      "text": "vh = window.innerHeight;"
+    },
+    {
+      "file": "components/effects/CrowdFall.tsx",
+      "line": 147,
+      "client": true,
+      "api": "window.",
+      "text": "window.addEventListener(\"resize\", resize);"
+    },
+    {
+      "file": "components/effects/CrowdFall.tsx",
+      "line": 154,
+      "client": true,
+      "api": "performance.now(",
+      "text": "pointer.at = performance.now();"
+    },
+    {
+      "file": "components/effects/CrowdFall.tsx",
+      "line": 156,
+      "client": true,
+      "api": "window.",
+      "text": "window.addEventListener(\"pointermove\", onPointerMove, { passive: true });"
+    },
+    {
+      "file": "components/effects/CrowdFall.tsx",
+      "line": 175,
+      "client": true,
+      "api": "window.",
+      "text": "x: xv + window.scrollX,"
+    },
+    {
+      "file": "components/effects/CrowdFall.tsx",
+      "line": 176,
+      "client": true,
+      "api": "window.",
+      "text": "y: pageH - (yv + window.scrollY),"
+    },
+    {
+      "file": "components/effects/CrowdFall.tsx",
+      "line": 186,
+      "client": true,
+      "api": "Math.random(",
+      "text": "yell: Math.random() < 0.35 ? YELLS[Math.floor(Math.random() * YELLS.length)]! : null,"
+    },
+    {
+      "file": "components/effects/CrowdFall.tsx",
+      "line": 188,
+      "client": true,
+      "api": "Math.random(",
+      "text": "seed: Math.random(),"
+    },
+    {
+      "file": "components/effects/CrowdFall.tsx",
+      "line": 202,
+      "client": true,
+      "api": "window.",
+      "text": "const sy = pageH - b.y - window.scrollY;"
+    },
+    {
+      "file": "components/effects/CrowdFall.tsx",
+      "line": 212,
+      "client": true,
+      "api": "performance.now(",
+      "text": "const poking = performance.now() - pointer.at < 60;"
+    },
+    {
+      "file": "components/effects/CrowdFall.tsx",
+      "line": 213,
+      "client": true,
+      "api": "window.",
+      "text": "const px = pointer.x + window.scrollX;"
+    },
+    {
+      "file": "components/effects/CrowdFall.tsx",
+      "line": 214,
+      "client": true,
+      "api": "window.",
+      "text": "const py = pageH - (pointer.y + window.scrollY);"
+    },
+    {
+      "file": "components/effects/CrowdFall.tsx",
+      "line": 342,
+      "client": true,
+      "api": "performance.now(",
+      "text": "const now = performance.now();"
+    },
+    {
+      "file": "components/effects/CrowdFall.tsx",
+      "line": 347,
+      "client": true,
+      "api": "window.",
+      "text": "const sx0 = window.scrollX;"
+    },
+    {
+      "file": "components/effects/CrowdFall.tsx",
+      "line": 348,
+      "client": true,
+      "api": "window.",
+      "text": "const sy0 = window.scrollY;"
+    },
+    {
+      "file": "components/effects/CrowdFall.tsx",
+      "line": 417,
+      "client": true,
+      "api": "window.",
+      "text": "const scrollKey = window.scrollY * 7 + window.scrollX + pageH * 0.001;"
+    },
+    {
+      "file": "components/effects/CrowdFall.tsx",
+      "line": 443,
+      "client": true,
+      "api": "window.",
+      "text": "window.removeEventListener(\"resize\", resize);"
+    },
+    {
+      "file": "components/effects/CrowdFall.tsx",
+      "line": 444,
+      "client": true,
+      "api": "window.",
+      "text": "window.removeEventListener(\"pointermove\", onPointerMove);"
+    },
+    {
+      "file": "components/effects/CustomCursor.tsx",
+      "line": 38,
+      "client": true,
+      "api": "window.",
+      "text": "let targetX = window.innerWidth / 2;"
+    },
+    {
+      "file": "components/effects/CustomCursor.tsx",
+      "line": 39,
+      "client": true,
+      "api": "window.",
+      "text": "let targetY = window.innerHeight / 2;"
+    },
+    {
+      "file": "components/effects/CustomCursor.tsx",
+      "line": 95,
+      "client": true,
+      "api": "window.",
+      "text": "window.addEventListener(\"pointermove\", handleMove);"
+    },
+    {
+      "file": "components/effects/CustomCursor.tsx",
+      "line": 96,
+      "client": true,
+      "api": "window.",
+      "text": "window.addEventListener(\"pointerover\", handleOver);"
+    },
+    {
+      "file": "components/effects/CustomCursor.tsx",
+      "line": 97,
+      "client": true,
+      "api": "window.",
+      "text": "window.addEventListener(\"pointerdown\", handleDown);"
+    },
+    {
+      "file": "components/effects/CustomCursor.tsx",
+      "line": 102,
+      "client": true,
+      "api": "window.",
+      "text": "window.removeEventListener(\"pointermove\", handleMove);"
+    },
+    {
+      "file": "components/effects/CustomCursor.tsx",
+      "line": 103,
+      "client": true,
+      "api": "window.",
+      "text": "window.removeEventListener(\"pointerover\", handleOver);"
+    },
+    {
+      "file": "components/effects/CustomCursor.tsx",
+      "line": 104,
+      "client": true,
+      "api": "window.",
+      "text": "window.removeEventListener(\"pointerdown\", handleDown);"
+    },
+    {
+      "file": "components/effects/EasterEggCounter.tsx",
+      "line": 62,
+      "client": true,
+      "api": "window.",
+      "text": "const t0 = window.setTimeout(() => (hydrated = true), 800);"
+    },
+    {
+      "file": "components/effects/EasterEggCounter.tsx",
+      "line": 71,
+      "client": true,
+      "api": "window.",
+      "text": "window.clearTimeout(timer);"
+    },
+    {
+      "file": "components/effects/EasterEggCounter.tsx",
+      "line": 72,
+      "client": true,
+      "api": "window.",
+      "text": "timer = window.setTimeout(() => setToast(null), TOAST_MS);"
+    },
+    {
+      "file": "components/effects/EasterEggCounter.tsx",
+      "line": 76,
+      "client": true,
+      "api": "window.",
+      "text": "window.clearTimeout(t0);"
+    },
+    {
+      "file": "components/effects/EasterEggCounter.tsx",
+      "line": 77,
+      "client": true,
+      "api": "window.",
+      "text": "window.clearTimeout(timer);"
+    },
+    {
+      "file": "components/effects/EasterEggCounter.tsx",
+      "line": 89,
+      "client": true,
+      "api": "window.",
+      "text": "window.addEventListener(\"pointerdown\", onDown);"
+    },
+    {
+      "file": "components/effects/EasterEggCounter.tsx",
+      "line": 90,
+      "client": true,
+      "api": "window.",
+      "text": "window.addEventListener(\"keydown\", onKey);"
+    },
+    {
+      "file": "components/effects/EasterEggCounter.tsx",
+      "line": 92,
+      "client": true,
+      "api": "window.",
+      "text": "window.removeEventListener(\"pointerdown\", onDown);"
+    },
+    {
+      "file": "components/effects/EasterEggCounter.tsx",
+      "line": 93,
+      "client": true,
+      "api": "window.",
+      "text": "window.removeEventListener(\"keydown\", onKey);"
+    },
+    {
+      "file": "components/effects/MatrixRain.tsx",
+      "line": 45,
+      "client": true,
+      "api": "window.",
+      "text": "return Math.max(doc.scrollHeight, doc.clientHeight, window.innerHeight);"
+    },
+    {
+      "file": "components/effects/MatrixRain.tsx",
+      "line": 49,
+      "client": true,
+      "api": "window.",
+      "text": "const newWidth = window.innerWidth;"
+    },
+    {
+      "file": "components/effects/MatrixRain.tsx",
+      "line": 57,
+      "client": true,
+      "api": "Math.random(",
+      "text": "drops = Array.from({ length: columns }, () => Math.random() * -50);"
+    },
+    {
+      "file": "components/effects/MatrixRain.tsx",
+      "line": 69,
+      "client": true,
+      "api": "Math.random(",
+      "text": "const char = CHARS[Math.floor(Math.random() * CHARS.length)] ?? \"0\";"
+    },
+    {
+      "file": "components/effects/MatrixRain.tsx",
+      "line": 74,
+      "client": true,
+      "api": "Math.random(",
+      "text": "Math.random() > 0.97 ? \"rgba(200,255,220,0.8)\" : \"rgba(0,255,65,0.55)\";"
+    },
+    {
+      "file": "components/effects/MatrixRain.tsx",
+      "line": 76,
+      "client": true,
+      "api": "Math.random(",
+      "text": "drops[i] = y > height && Math.random() > 0.975 ? 0 : drop + 1;"
+    },
+    {
+      "file": "components/effects/MatrixRain.tsx",
+      "line": 86,
+      "client": true,
+      "api": "window.",
+      "text": "window.addEventListener(\"resize\", resize);"
+    },
+    {
+      "file": "components/effects/MatrixRain.tsx",
+      "line": 98,
+      "client": true,
+      "api": "window.",
+      "text": "window.removeEventListener(\"resize\", resize);"
+    },
+    {
+      "file": "components/effects/ParticleDust.tsx",
+      "line": 37,
+      "client": true,
+      "api": "window.",
+      "text": "let dpr = Math.min(window.devicePixelRatio || 1, 2);"
+    },
+    {
+      "file": "components/effects/ParticleDust.tsx",
+      "line": 47,
+      "client": true,
+      "api": "Math.random(",
+      "text": "x: Math.random() * width,"
+    },
+    {
+      "file": "components/effects/ParticleDust.tsx",
+      "line": 48,
+      "client": true,
+      "api": "Math.random(",
+      "text": "y: Math.random() * height,"
+    },
+    {
+      "file": "components/effects/ParticleDust.tsx",
+      "line": 49,
+      "client": true,
+      "api": "Math.random(",
+      "text": "vx: (Math.random() - 0.5) * 0.06,"
+    },
+    {
+      "file": "components/effects/ParticleDust.tsx",
+      "line": 50,
+      "client": true,
+      "api": "Math.random(",
+      "text": "vy: (Math.random() - 0.5) * 0.06,"
+    },
+    {
+      "file": "components/effects/ParticleDust.tsx",
+      "line": 51,
+      "client": true,
+      "api": "Math.random(",
+      "text": "r: Math.random() * 1.3 + 0.3,"
+    },
+    {
+      "file": "components/effects/ParticleDust.tsx",
+      "line": 52,
+      "client": true,
+      "api": "Math.random(",
+      "text": "alpha: Math.random() * 0.12 + 0.05,"
+    },
+    {
+      "file": "components/effects/ParticleDust.tsx",
+      "line": 53,
+      "client": true,
+      "api": "Math.random(",
+      "text": "twinklePhase: Math.random() * Math.PI * 2,"
+    },
+    {
+      "file": "components/effects/ParticleDust.tsx",
+      "line": 54,
+      "client": true,
+      "api": "Math.random(",
+      "text": "twinkleSpeed: 0.0008 + Math.random() * 0.0012,"
+    },
+    {
+      "file": "components/effects/ParticleDust.tsx",
+      "line": 59,
+      "client": true,
+      "api": "window.",
+      "text": "width = window.innerWidth;"
+    },
+    {
+      "file": "components/effects/ParticleDust.tsx",
+      "line": 60,
+      "client": true,
+      "api": "window.",
+      "text": "height = window.innerHeight;"
+    },
+    {
+      "file": "components/effects/ParticleDust.tsx",
+      "line": 61,
+      "client": true,
+      "api": "window.",
+      "text": "dpr = Math.min(window.devicePixelRatio || 1, 2);"
+    },
+    {
+      "file": "components/effects/ParticleDust.tsx",
+      "line": 107,
+      "client": true,
+      "api": "window.",
+      "text": "window.addEventListener(\"resize\", resize);"
+    },
+    {
+      "file": "components/effects/ParticleDust.tsx",
+      "line": 117,
+      "client": true,
+      "api": "window.",
+      "text": "window.removeEventListener(\"resize\", resize);"
+    },
+    {
+      "file": "components/effects/ScrollProgress.tsx",
+      "line": 30,
+      "client": true,
+      "api": "window.",
+      "text": "window.addEventListener(\"scroll\", onScroll, { passive: true });"
+    },
+    {
+      "file": "components/effects/ScrollProgress.tsx",
+      "line": 31,
+      "client": true,
+      "api": "window.",
+      "text": "window.addEventListener(\"resize\", onScroll);"
+    },
+    {
+      "file": "components/effects/ScrollProgress.tsx",
+      "line": 34,
+      "client": true,
+      "api": "window.",
+      "text": "window.removeEventListener(\"scroll\", onScroll);"
+    },
+    {
+      "file": "components/effects/ScrollProgress.tsx",
+      "line": 35,
+      "client": true,
+      "api": "window.",
+      "text": "window.removeEventListener(\"resize\", onScroll);"
+    },
+    {
+      "file": "components/effects/SmokeField.tsx",
+      "line": 50,
+      "client": true,
+      "api": "window.",
+      "text": "let dpr = Math.min(window.devicePixelRatio || 1, 2);"
+    },
+    {
+      "file": "components/effects/SmokeField.tsx",
+      "line": 54,
+      "client": true,
+      "api": "window.",
+      "text": "let lastScrollY = window.scrollY;"
+    },
+    {
+      "file": "components/effects/SmokeField.tsx",
+      "line": 74,
+      "client": true,
+      "api": "Math.random(",
+      "text": "const x = Math.random() * width;"
+    },
+    {
+      "file": "components/effects/SmokeField.tsx",
+      "line": 75,
+      "client": true,
+      "api": "Math.random(",
+      "text": "const y = Math.random() * height;"
+    },
+    {
+      "file": "components/effects/SmokeField.tsx",
+      "line": 81,
+      "client": true,
+      "api": "Math.random(",
+      "text": "r: Math.min(width, height) * (0.16 + Math.random() * 0.16),"
+    },
+    {
+      "file": "components/effects/SmokeField.tsx",
+      "line": 82,
+      "client": true,
+      "api": "Math.random(",
+      "text": "alpha: 0.03 + Math.random() * 0.03,"
+    },
+    {
+      "file": "components/effects/SmokeField.tsx",
+      "line": 88,
+      "client": true,
+      "api": "window.",
+      "text": "width = window.innerWidth;"
+    },
+    {
+      "file": "components/effects/SmokeField.tsx",
+      "line": 89,
+      "client": true,
+      "api": "window.",
+      "text": "height = window.innerHeight;"
+    },
+    {
+      "file": "components/effects/SmokeField.tsx",
+      "line": 90,
+      "client": true,
+      "api": "window.",
+      "text": "dpr = Math.min(window.devicePixelRatio || 1, 2);"
+    },
+    {
+      "file": "components/effects/SmokeField.tsx",
+      "line": 124,
+      "client": true,
+      "api": "window.",
+      "text": "const scrollY = window.scrollY;"
+    },
+    {
+      "file": "components/effects/SmokeField.tsx",
+      "line": 162,
+      "client": true,
+      "api": "window.",
+      "text": "window.addEventListener(\"resize\", resize);"
+    },
+    {
+      "file": "components/effects/SmokeField.tsx",
+      "line": 168,
+      "client": true,
+      "api": "window.",
+      "text": "window.addEventListener(\"pointermove\", handlePointerMove);"
+    },
+    {
+      "file": "components/effects/SmokeField.tsx",
+      "line": 173,
+      "client": true,
+      "api": "window.",
+      "text": "window.removeEventListener(\"resize\", resize);"
+    },
+    {
+      "file": "components/effects/SmokeField.tsx",
+      "line": 174,
+      "client": true,
+      "api": "window.",
+      "text": "window.removeEventListener(\"pointermove\", handlePointerMove);"
+    },
+    {
+      "file": "components/effects/TrunkNav.tsx",
+      "line": 40,
+      "client": true,
+      "api": "window.",
+      "text": "document.documentElement.scrollHeight - window.innerHeight;"
+    },
+    {
+      "file": "components/effects/TrunkNav.tsx",
+      "line": 46,
+      "client": true,
+      "api": "window.",
+      "text": "const top = el.getBoundingClientRect().top + window.scrollY;"
+    },
+    {
+      "file": "components/effects/TrunkNav.tsx",
+      "line": 55,
+      "client": true,
+      "api": "window.",
+      "text": "window.addEventListener(\"resize\", measure);"
+    },
+    {
+      "file": "components/effects/TrunkNav.tsx",
+      "line": 56,
+      "client": true,
+      "api": "window.",
+      "text": "const t = window.setTimeout(measure, 500);"
+    },
+    {
+      "file": "components/effects/TrunkNav.tsx",
+      "line": 58,
+      "client": true,
+      "api": "window.",
+      "text": "window.removeEventListener(\"resize\", measure);"
+    },
+    {
+      "file": "components/effects/TrunkNav.tsx",
+      "line": 59,
+      "client": true,
+      "api": "window.",
+      "text": "window.clearTimeout(t);"
+    },
+    {
+      "file": "components/effects/TrunkNav.tsx",
+      "line": 85,
+      "client": true,
+      "api": "window.",
+      "text": "window.addEventListener(\"scroll\", onScroll, { passive: true });"
+    },
+    {
+      "file": "components/effects/TrunkNav.tsx",
+      "line": 86,
+      "client": true,
+      "api": "window.",
+      "text": "window.addEventListener(\"resize\", onScroll);"
+    },
+    {
+      "file": "components/effects/TrunkNav.tsx",
+      "line": 88,
+      "client": true,
+      "api": "window.",
+      "text": "window.removeEventListener(\"scroll\", onScroll);"
+    },
+    {
+      "file": "components/effects/TrunkNav.tsx",
+      "line": 89,
+      "client": true,
+      "api": "window.",
+      "text": "window.removeEventListener(\"resize\", onScroll);"
+    },
+    {
+      "file": "components/hero/AnomalyBanner.tsx",
+      "line": 41,
+      "client": true,
+      "api": "window.",
+      "text": "const t = window.setTimeout(() => setVisible(false), VISIBLE_MS);"
+    },
+    {
+      "file": "components/hero/AnomalyBanner.tsx",
+      "line": 42,
+      "client": true,
+      "api": "window.",
+      "text": "return () => window.clearTimeout(t);"
+    },
+    {
+      "file": "components/hero/Hero.tsx",
+      "line": 67,
+      "client": true,
+      "api": "window.",
+      "text": "pauseTimer = window.setTimeout(() => setRevealStart(true), REVEAL_PAUSE_MS);"
+    },
+    {
+      "file": "components/hero/Hero.tsx",
+      "line": 72,
+      "client": true,
+      "api": "window.",
+      "text": "window.clearTimeout(fallback);"
+    },
+    {
+      "file": "components/hero/Hero.tsx",
+      "line": 76,
+      "client": true,
+      "api": "window.",
+      "text": "const fallback = window.setTimeout(startReveal, FLY_IN_FALLBACK_MS);"
+    },
+    {
+      "file": "components/hero/Hero.tsx",
+      "line": 80,
+      "client": true,
+      "api": "window.",
+      "text": "window.clearTimeout(fallback);"
+    },
+    {
+      "file": "components/hero/Hero.tsx",
+      "line": 81,
+      "client": true,
+      "api": "window.",
+      "text": "window.clearTimeout(pauseTimer);"
+    },
+    {
+      "file": "components/hero/Hero.tsx",
+      "line": 88,
+      "client": true,
+      "api": "window.",
+      "text": "const t = window.setTimeout("
+    },
+    {
+      "file": "components/hero/Hero.tsx",
+      "line": 92,
+      "client": true,
+      "api": "window.",
+      "text": "return () => window.clearTimeout(t);"
+    },
+    {
+      "file": "components/hero/HeroTitleReveal.tsx",
+      "line": 70,
+      "client": true,
+      "api": "window.",
+      "text": "const t = window.setTimeout(() => setPhase(\"shrink\"), HOLD_MS);"
+    },
+    {
+      "file": "components/hero/HeroTitleReveal.tsx",
+      "line": 71,
+      "client": true,
+      "api": "window.",
+      "text": "return () => window.clearTimeout(t);"
+    },
+    {
+      "file": "components/hero/HeroTitleReveal.tsx",
+      "line": 75,
+      "client": true,
+      "api": "performance.now(",
+      "text": "const startTime = performance.now();"
+    },
+    {
+      "file": "components/hero/HeroTitleReveal.tsx",
+      "line": 106,
+      "client": true,
+      "api": "Date.now(",
+      "text": "const now = Date.now();"
+    },
+    {
+      "file": "components/hero/SystemsCounter.tsx",
+      "line": 81,
+      "client": true,
+      "api": "window.",
+      "text": "const t = window.setTimeout(() => setPhase(\"shrink\"), HOLD_MS);"
+    },
+    {
+      "file": "components/hero/SystemsCounter.tsx",
+      "line": 82,
+      "client": true,
+      "api": "window.",
+      "text": "return () => window.clearTimeout(t);"
+    },
+    {
+      "file": "components/hero/SystemsCounter.tsx",
+      "line": 86,
+      "client": true,
+      "api": "performance.now(",
+      "text": "const startTime = performance.now();"
+    },
+    {
+      "file": "components/hero/SystemsCounter.tsx",
+      "line": 133,
+      "client": true,
+      "api": "window.",
+      "text": "timer = window.setTimeout(tick, delay);"
+    },
+    {
+      "file": "components/hero/SystemsCounter.tsx",
+      "line": 136,
+      "client": true,
+      "api": "window.",
+      "text": "timer = window.setTimeout(tick, TALLY_STEP_MS);"
+    },
+    {
+      "file": "components/hero/SystemsCounter.tsx",
+      "line": 137,
+      "client": true,
+      "api": "window.",
+      "text": "return () => window.clearTimeout(timer);"
+    },
+    {
+      "file": "components/intro/IntroAnimation.tsx",
+      "line": 79,
+      "client": true,
+      "api": "window.",
+      "text": "setMobile(window.innerWidth < MOBILE_BREAKPOINT_PX);"
+    },
+    {
+      "file": "components/intro/IntroAnimation.tsx",
+      "line": 84,
+      "client": true,
+      "api": "window.",
+      "text": "new URLSearchParams(window.location.search).has(\"introT\")"
+    },
+    {
+      "file": "components/intro/IntroAnimation.tsx",
+      "line": 90,
+      "client": true,
+      "api": "window.",
+      "text": "timers.forEach((id) => window.clearTimeout(id));"
+    },
+    {
+      "file": "components/intro/IntroAnimation.tsx",
+      "line": 107,
+      "client": true,
+      "api": "window.",
+      "text": "new Promise((resolve) => window.setTimeout(resolve, ASSET_WAIT_MS)),"
+    },
+    {
+      "file": "components/intro/IntroAnimation.tsx",
+      "line": 117,
+      "client": true,
+      "api": "window.",
+      "text": "const reduced = window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches;"
+    },
+    {
+      "file": "components/intro/IntroAnimation.tsx",
+      "line": 121,
+      "client": true,
+      "api": "performance.now(",
+      "text": "setOrigin(performance.now() - offset);"
+    },
+    {
+      "file": "components/intro/IntroAnimation.tsx",
+      "line": 125,
+      "client": true,
+      "api": "window.",
+      "text": "timersRef.current.push(window.setTimeout(fn, ms - offset));"
+    },
+    {
+      "file": "components/intro/IntroAnimation.tsx",
+      "line": 144,
+      "client": true,
+      "api": "window.",
+      "text": "timersRef.current.push(window.setTimeout(() => setShowSkip(true), INTRO_SKIP_DELAY_MS));"
+    },
+    {
+      "file": "components/intro/IntroAnimation.tsx",
+      "line": 163,
+      "client": true,
+      "api": "window.",
+      "text": "timersRef.current.forEach((id) => window.clearTimeout(id));"
+    },
+    {
+      "file": "components/intro/IntroAnimation.tsx",
+      "line": 165,
+      "client": true,
+      "api": "performance.now(",
+      "text": "const next = { kind, at: performance.now() };"
+    },
+    {
+      "file": "components/intro/IntroAnimation.tsx",
+      "line": 175,
+      "client": true,
+      "api": "window.",
+      "text": "const later = (ms: number, fn: () => void) => timersRef.current.push(window.setTimeout(fn, ms));"
+    },
+    {
+      "file": "components/intro/IntroAnimation.tsx",
+      "line": 187,
+      "client": true,
+      "api": "window.",
+      "text": "window.addEventListener(\"keydown\", onKeydown);"
+    },
+    {
+      "file": "components/intro/IntroAnimation.tsx",
+      "line": 188,
+      "client": true,
+      "api": "window.",
+      "text": "return () => window.removeEventListener(\"keydown\", onKeydown);"
+    },
+    {
+      "file": "components/intro/IntroCosmos.tsx",
+      "line": 198,
+      "client": true,
+      "api": "window.",
+      "text": "process.env.NODE_ENV !== \"production\" ? new URLSearchParams(window.location.search) : null;"
+    },
+    {
+      "file": "components/intro/IntroCosmos.tsx",
+      "line": 237,
+      "client": true,
+      "api": "window.",
+      "text": "renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, mobile ? 1.5 : 2));"
+    },
+    {
+      "file": "components/intro/IntroCosmos.tsx",
+      "line": 293,
+      "client": true,
+      "api": "Math.random(",
+      "text": "const u = Math.random() * 2 - 1;"
+    },
+    {
+      "file": "components/intro/IntroCosmos.tsx",
+      "line": 294,
+      "client": true,
+      "api": "Math.random(",
+      "text": "const a = Math.random() * Math.PI * 2;"
+    },
+    {
+      "file": "components/intro/IntroCosmos.tsx",
+      "line": 297,
+      "client": true,
+      "api": "Math.random(",
+      "text": "const warm = Math.random();"
+    },
+    {
+      "file": "components/intro/IntroCosmos.tsx",
+      "line": 298,
+      "client": true,
+      "api": "Math.random(",
+      "text": "const b = 0.35 + Math.pow(Math.random(), 3) * 0.9;"
+    },
+    {
+      "file": "components/intro/IntroCosmos.tsx",
+      "line": 325,
+      "client": true,
+      "api": "Math.random(",
+      "text": "dustPos.set([5 + Math.random() * 70, -5 + Math.random() * 16, -8 + Math.random() * 26], i * 3);"
+    },
+    {
+      "file": "components/intro/IntroCosmos.tsx",
+      "line": 438,
+      "client": true,
+      "api": "Math.random(",
+      "text": "body.rotation.y = Math.random() * Math.PI * 2;"
+    },
+    {
+      "file": "components/intro/IntroCosmos.tsx",
+      "line": 511,
+      "client": true,
+      "api": "window.",
+      "text": "const w = window.innerWidth;"
+    },
+    {
+      "file": "components/intro/IntroCosmos.tsx",
+      "line": 512,
+      "client": true,
+      "api": "window.",
+      "text": "const h = window.innerHeight;"
+    },
+    {
+      "file": "components/intro/IntroCosmos.tsx",
+      "line": 523,
+      "client": true,
+      "api": "window.",
+      "text": "window.addEventListener(\"resize\", resize);"
+    },
+    {
+      "file": "components/intro/IntroCosmos.tsx",
+      "line": 580,
+      "client": true,
+      "api": "window.",
+      "text": "window.removeEventListener(\"resize\", resize);"
+    },
+    {
+      "file": "components/intro/IntroGate.tsx",
+      "line": 26,
+      "client": true,
+      "api": "window.",
+      "text": "window.scrollTo(0, 0);"
+    },
+    {
+      "file": "components/intro/IntroWelcome.tsx",
+      "line": 174,
+      "client": true,
+      "api": "performance.now(",
+      "text": "/** performance.now() when \"Начать\" was pressed, or null. */"
+    },
+    {
+      "file": "components/intro/IntroWelcome.tsx",
+      "line": 202,
+      "client": true,
+      "api": "window.",
+      "text": "let layout = sphereLayout(window.innerWidth, window.innerHeight);"
+    },
+    {
+      "file": "components/intro/IntroWelcome.tsx",
+      "line": 205,
+      "client": true,
+      "api": "window.",
+      "text": "const w = window.innerWidth;"
+    },
+    {
+      "file": "components/intro/IntroWelcome.tsx",
+      "line": 206,
+      "client": true,
+      "api": "window.",
+      "text": "const h = window.innerHeight;"
+    },
+    {
+      "file": "components/intro/IntroWelcome.tsx",
+      "line": 212,
+      "client": true,
+      "api": "window.",
+      "text": "const dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1 : 1.5);"
+    },
+    {
+      "file": "components/intro/IntroWelcome.tsx",
+      "line": 219,
+      "client": true,
+      "api": "window.",
+      "text": "window.addEventListener(\"resize\", resize);"
+    },
+    {
+      "file": "components/intro/IntroWelcome.tsx",
+      "line": 222,
+      "client": true,
+      "api": "window.",
+      "text": "return () => window.removeEventListener(\"resize\", resize);"
+    },
+    {
+      "file": "components/intro/IntroWelcome.tsx",
+      "line": 272,
+      "client": true,
+      "api": "window.",
+      "text": "window.removeEventListener(\"resize\", resize);"
+    },
+    {
+      "file": "components/projects/StaffChatSim.tsx",
+      "line": 19,
+      "client": true,
+      "api": "Math.random(",
+      "text": "return list[Math.floor(Math.random() * list.length)]!;"
+    },
+    {
+      "file": "components/projects/StaffChatSim.tsx",
+      "line": 46,
+      "client": true,
+      "api": "window.",
+      "text": "useEffect(() => () => timers.current.forEach((t) => window.clearTimeout(t)), []);"
+    },
+    {
+      "file": "components/projects/StaffChatSim.tsx",
+      "line": 55,
+      "client": true,
+      "api": "window.",
+      "text": "timers.current.push(window.setTimeout(fn, ms));"
+    },
+    {
+      "file": "components/sections/SystemStatusLine.tsx",
+      "line": 41,
+      "client": true,
+      "api": "Date.now(",
+      "text": "entry.since !== null ? Math.floor((Date.now() - entry.since) / 86_400_000) : null;"
+    },
+    {
+      "file": "components/sections/allin/AccessDeniedOverlay.tsx",
+      "line": 21,
+      "client": true,
+      "api": "window.",
+      "text": "const t = window.setTimeout(clear, AUTO_DISMISS_MS);"
+    },
+    {
+      "file": "components/sections/allin/AccessDeniedOverlay.tsx",
+      "line": 22,
+      "client": true,
+      "api": "window.",
+      "text": "return () => window.clearTimeout(t);"
+    },
+    {
+      "file": "components/sections/allin/FlipNumber.tsx",
+      "line": 17,
+      "client": true,
+      "api": "window.",
+      "text": "const t = window.setTimeout(() => setFlipping(false), 400);"
+    },
+    {
+      "file": "components/sections/allin/FlipNumber.tsx",
+      "line": 18,
+      "client": true,
+      "api": "window.",
+      "text": "return () => window.clearTimeout(t);"
+    },
+    {
+      "file": "components/sections/autopilot/AutoPilotRing.tsx",
+      "line": 44,
+      "client": true,
+      "api": "window.",
+      "text": "delayTimer = window.setTimeout(() => {"
+    },
+    {
+      "file": "components/sections/autopilot/AutoPilotRing.tsx",
+      "line": 45,
+      "client": true,
+      "api": "performance.now(",
+      "text": "const startTime = performance.now();"
+    },
+    {
+      "file": "components/sections/autopilot/AutoPilotRing.tsx",
+      "line": 59,
+      "client": true,
+      "api": "window.",
+      "text": "window.clearTimeout(delayTimer);"
+    },
+    {
+      "file": "components/sections/autopilot/AutopilotCard.tsx",
+      "line": 15,
+      "client": true,
+      "api": "Date.now(",
+      "text": "return since === null ? 0 : Math.floor((Date.now() - since) / 86_400_000);"
+    },
+    {
+      "file": "components/sections/autopilot/Odometer.tsx",
+      "line": 37,
+      "client": true,
+      "api": "window.",
+      "text": "const t = window.setTimeout(() => setDisplayed(target), 300);"
+    },
+    {
+      "file": "components/sections/autopilot/Odometer.tsx",
+      "line": 38,
+      "client": true,
+      "api": "window.",
+      "text": "return () => window.clearTimeout(t);"
+    },
+    {
+      "file": "components/sections/bridge/BridgeDiagram.tsx",
+      "line": 110,
+      "client": true,
+      "api": "window.",
+      "text": "const id = window.setInterval(() => {"
+    },
+    {
+      "file": "components/sections/bridge/BridgeDiagram.tsx",
+      "line": 120,
+      "client": true,
+      "api": "window.",
+      "text": "return () => window.clearInterval(id);"
+    },
+    {
+      "file": "components/sections/bridge/BridgeDiagram.tsx",
+      "line": 128,
+      "client": true,
+      "api": "Date.now(",
+      "text": "const now = Date.now();"
+    },
+    {
+      "file": "components/sections/bridge/BridgeSection.tsx",
+      "line": 32,
+      "client": true,
+      "api": "window.",
+      "text": "const t = window.setTimeout("
+    },
+    {
+      "file": "components/sections/bridge/BridgeSection.tsx",
+      "line": 33,
+      "client": true,
+      "api": "window.",
+      "text": "() => window.dispatchEvent(new Event(\"resize\")),"
+    },
+    {
+      "file": "components/sections/bridge/BridgeSection.tsx",
+      "line": 36,
+      "client": true,
+      "api": "window.",
+      "text": "return () => window.clearTimeout(t);"
+    },
+    {
+      "file": "components/sections/closing/ClosingSection.tsx",
+      "line": 63,
+      "client": true,
+      "api": "window.",
+      "text": "window.addEventListener(\"pointermove\", onPointerMove, { passive: true });"
+    },
+    {
+      "file": "components/sections/closing/ClosingSection.tsx",
+      "line": 103,
+      "client": true,
+      "api": "window.",
+      "text": "window.removeEventListener(\"pointermove\", onPointerMove);"
+    },
+    {
+      "file": "components/sections/closing/ClosingSection.tsx",
+      "line": 115,
+      "client": true,
+      "api": "new Date(",
+      "text": "new Date().toLocaleString(\"ru-RU\", { dateStyle: \"short\", timeStyle: \"short\" })"
+    },
+    {
+      "file": "components/sections/closing/ClosingSection.tsx",
+      "line": 166,
+      "client": true,
+      "api": "performance.now(",
+      "text": "const now = performance.now();"
+    },
+    {
+      "file": "components/sections/closing/SiteFooter.tsx",
+      "line": 22,
+      "client": false,
+      "api": "new Date(",
+      "text": "const year = new Date().getFullYear();"
+    },
+    {
+      "file": "components/sections/factory/ConveyorBelt.tsx",
+      "line": 39,
+      "client": true,
+      "api": "performance.now(",
+      "text": "let last = performance.now();"
+    },
+    {
+      "file": "components/sections/friday/CartridgeScreen.tsx",
+      "line": 454,
+      "client": true,
+      "api": "performance.now(",
+      "text": "const t0 = performance.now() - offset;"
+    },
+    {
+      "file": "components/sections/friday/CartridgeScreen.tsx",
+      "line": 457,
+      "client": true,
+      "api": "window.",
+      "text": "const dpr = Math.min(window.devicePixelRatio || 1, 2);"
+    },
+    {
+      "file": "components/sections/friday/CartridgeScreen.tsx",
+      "line": 483,
+      "client": true,
+      "api": "performance.now(",
+      "text": "draw(performance.now());"
+    },
+    {
+      "file": "components/sections/friday/CartridgeScreen.tsx",
+      "line": 492,
+      "client": true,
+      "api": "performance.now(",
+      "text": "draw(performance.now());"
+    },
+    {
+      "file": "components/sections/hp100/HP100Widget.tsx",
+      "line": 22,
+      "client": true,
+      "api": "new Date(",
+      "text": "return new Date(ms).toLocaleString(\"ru-RU\", {"
+    },
+    {
+      "file": "components/sections/hp100/HP100Widget.tsx",
+      "line": 171,
+      "client": true,
+      "api": "window.",
+      "text": "breathRef.current = window.setInterval(() => {"
+    },
+    {
+      "file": "components/sections/hp100/HP100Widget.tsx",
+      "line": 182,
+      "client": true,
+      "api": "window.",
+      "text": "window.clearInterval(breathRef.current);"
+    },
+    {
+      "file": "components/sections/perimeter/PerimeterMap.tsx",
+      "line": 74,
+      "client": true,
+      "api": "window.",
+      "text": "timer = window.setTimeout(() => setIntruder(\"moving\"), DWELL_MS);"
+    },
+    {
+      "file": "components/sections/perimeter/PerimeterMap.tsx",
+      "line": 76,
+      "client": true,
+      "api": "window.",
+      "text": "window.clearTimeout(timer);"
+    },
+    {
+      "file": "components/sections/perimeter/PerimeterMap.tsx",
+      "line": 84,
+      "client": true,
+      "api": "window.",
+      "text": "if (timer) window.clearTimeout(timer);"
+    },
+    {
+      "file": "components/sections/perimeter/PerimeterMap.tsx",
+      "line": 90,
+      "client": true,
+      "api": "performance.now(",
+      "text": "const t0 = performance.now();"
+    },
+    {
+      "file": "components/sections/perimeter/PerimeterMap.tsx",
+      "line": 115,
+      "client": true,
+      "api": "window.",
+      "text": "window.setTimeout(() => setShake(false), 400),"
+    },
+    {
+      "file": "components/sections/perimeter/PerimeterMap.tsx",
+      "line": 116,
+      "client": true,
+      "api": "window.",
+      "text": "window.setTimeout(() => setToast(null), TOAST_MS),"
+    },
+    {
+      "file": "components/sections/perimeter/PerimeterMap.tsx",
+      "line": 117,
+      "client": true,
+      "api": "window.",
+      "text": "window.setTimeout(() => setIntruder(\"hidden\"), RETRY_MS),"
+    },
+    {
+      "file": "components/sections/perimeter/PerimeterMap.tsx",
+      "line": 119,
+      "client": true,
+      "api": "window.",
+      "text": "return () => timers.forEach((id) => window.clearTimeout(id));"
+    },
+    {
+      "file": "components/sections/perimeter/PerimeterMap.tsx",
+      "line": 129,
+      "client": true,
+      "api": "window.",
+      "text": "window.setTimeout(() => setShake(false), 300);"
+    },
+    {
+      "file": "components/sections/perimeter/PerimeterMap.tsx",
+      "line": 130,
+      "client": true,
+      "api": "window.",
+      "text": "window.setTimeout(() => setIntruder(\"hidden\"), 700);"
+    },
+    {
+      "file": "components/sections/perimeter/PerimeterMap.tsx",
+      "line": 132,
+      "client": true,
+      "api": "window.",
+      "text": "window.setTimeout(() => setToast(null), TOAST_MS);"
+    },
+    {
+      "file": "components/transitions/ProjectCardLink.tsx",
+      "line": 48,
+      "client": true,
+      "api": "window.",
+      "text": "window.setTimeout(() => router.push(href), OVERLAY_MS);"
+    },
+    {
+      "file": "components/transitions/ProjectTransitionOverlay.tsx",
+      "line": 45,
+      "client": true,
+      "api": "window.",
+      "text": "const t = window.setTimeout(reset, 200);"
+    },
+    {
+      "file": "components/transitions/ProjectTransitionOverlay.tsx",
+      "line": 46,
+      "client": true,
+      "api": "window.",
+      "text": "return () => window.clearTimeout(t);"
+    },
+    {
+      "file": "lib/hp100-live.ts",
+      "line": 113,
+      "client": true,
+      "api": "Date.now(",
+      "text": "const stale = Date.now() - updatedMs > STALE_AFTER_MS;"
+    },
+    {
+      "file": "lib/locale.ts",
+      "line": 24,
+      "client": true,
+      "api": "window.",
+      "text": "const path = window.location.pathname;"
+    },
+    {
+      "file": "lib/mock/hp100.ts",
+      "line": 48,
+      "client": true,
+      "api": "Math.random(",
+      "text": "v += (Math.random() - 0.5) * (def.max - def.min) * 0.06;"
+    },
+    {
+      "file": "lib/mock/hp100.ts",
+      "line": 74,
+      "client": true,
+      "api": "window.",
+      "text": "this.timer = window.setInterval(() => this.tick(), TICK_MS);"
+    },
+    {
+      "file": "lib/mock/hp100.ts",
+      "line": 79,
+      "client": true,
+      "api": "window.",
+      "text": "window.clearInterval(this.timer);"
+    },
+    {
+      "file": "lib/mock/hp100.ts",
+      "line": 93,
+      "client": true,
+      "api": "Math.random(",
+      "text": "const drift = (Math.random() - 0.5) * (def.max - def.min) * 0.05;"
+    },
+    {
+      "file": "lib/mock/portfolio.ts",
+      "line": 56,
+      "client": true,
+      "api": "window.",
+      "text": "this.timer = window.setInterval(() => this.tick(), UPDATE_MS);"
+    },
+    {
+      "file": "lib/mock/portfolio.ts",
+      "line": 61,
+      "client": true,
+      "api": "Math.random(",
+      "text": "this.values[m.key] = m.min + Math.random() * (m.max - m.min);"
+    },
+    {
+      "file": "lib/mock/portfolio.ts",
+      "line": 68,
+      "client": true,
+      "api": "window.",
+      "text": "window.clearInterval(this.timer);"
+    },
+    {
+      "file": "lib/mock/portfolio.ts",
+      "line": 75,
+      "client": true,
+      "api": "Math.random(",
+      "text": "const drift = (Math.random() - 0.5) * (m.max - m.min) * 0.2;"
+    },
+    {
+      "file": "lib/motion.ts",
+      "line": 15,
+      "client": true,
+      "api": "window.",
+      "text": "const mql = window.matchMedia(\"(prefers-reduced-motion: reduce)\");"
+    },
+    {
+      "file": "lib/motion.ts",
+      "line": 50,
+      "client": true,
+      "api": "window.",
+      "text": "window.addEventListener(\"pointermove\", onMove, { passive: true });"
+    },
+    {
+      "file": "lib/motion.ts",
+      "line": 52,
+      "client": true,
+      "api": "window.",
+      "text": "window.removeEventListener(\"pointermove\", onMove);"
+    },
+    {
+      "file": "lib/motion.ts",
+      "line": 64,
+      "client": true,
+      "api": "window.",
+      "text": "const mql = window.matchMedia(\"(hover: hover) and (pointer: fine)\");"
+    },
+    {
+      "file": "lib/sfx.ts",
+      "line": 84,
+      "client": true,
+      "api": "window.",
+      "text": "window.AudioContext ||"
+    },
+    {
+      "file": "lib/sfx.ts",
+      "line": 146,
+      "client": true,
+      "api": "window.",
+      "text": "if (audioUnlocked()) events.forEach((e) => window.removeEventListener(e, handler));"
+    },
+    {
+      "file": "lib/sfx.ts",
+      "line": 148,
+      "client": true,
+      "api": "window.",
+      "text": "events.forEach((e) => window.addEventListener(e, handler, { passive: true }));"
+    },
+    {
+      "file": "lib/sfx.ts",
+      "line": 168,
+      "client": true,
+      "api": "performance.now(",
+      "text": "const now = performance.now();"
+    },
+    {
+      "file": "lib/sfx.ts",
+      "line": 173,
+      "client": true,
+      "api": "Math.random(",
+      "text": "const file = list[Math.floor(Math.random() * list.length)]!;"
+    },
+    {
+      "file": "lib/sfx.ts",
+      "line": 184,
+      "client": true,
+      "api": "Math.random(",
+      "text": "src.playbackRate.value = (opts.rate ?? 1) * (1 + (Math.random() * 2 - 1) * jitter);"
+    },
+    {
+      "file": "lib/store.ts",
+      "line": 113,
+      "client": true,
+      "api": "window.",
+      "text": "const raw = window.localStorage.getItem(STORAGE_KEY);"
+    },
+    {
+      "file": "lib/store.ts",
+      "line": 124,
+      "client": true,
+      "api": "window.",
+      "text": "window.localStorage.setItem(STORAGE_KEY, JSON.stringify(ids));"
+    },
+    {
+      "file": "lib/store.ts",
+      "line": 135,
+      "client": true,
+      "api": "window.",
+      "text": "const raw = window.localStorage.getItem(SOUND_KEY);"
+    },
+    {
+      "file": "lib/store.ts",
+      "line": 193,
+      "client": true,
+      "api": "window.",
+      "text": "window.localStorage.setItem(SOUND_KEY, on ? \"1\" : \"0\");"
+    },
+    {
+      "file": "lib/useTypewriter.ts",
+      "line": 51,
+      "client": true,
+      "api": "window.",
+      "text": "const id = window.setInterval(() => {"
+    },
+    {
+      "file": "lib/useTypewriter.ts",
+      "line": 56,
+      "client": true,
+      "api": "window.",
+      "text": "window.clearInterval(id);"
+    },
+    {
+      "file": "lib/useTypewriter.ts",
+      "line": 62,
+      "client": true,
+      "api": "window.",
+      "text": "return () => window.clearInterval(id);"
+    }
+  ],
+  "secrets": {
+    "working_tree_hits": [
+      {
+        "file": ".env.local.example",
+        "line": 2,
+        "kind": "home_path",
+        "value": "~/projects/hp100-live-feed/update_feed.py"
+      },
+      {
+        "file": "lib/hp100-live.ts",
+        "line": 5,
+        "kind": "home_path",
+        "value": "~/projects/health_air/airmonitor_vps.py"
+      },
+      {
+        "file": "lib/hp100-live.ts",
+        "line": 10,
+        "kind": "home_path",
+        "value": "~/projects/hp100-live-feed/update_feed.py"
+      }
+    ],
+    "env_files_tracked": [
+      ".env.local.example"
+    ],
+    "history_added_line_hits": [
+      {
+        "commit": "9fcb611",
+        "kind": "public_ipv4",
+        "value": "178*********25",
+        "line": "+NEX***********************************************80"
+      },
+      {
+        "commit": "9fcb611",
+        "kind": "public_ipv4",
+        "value": "178*********25",
+        "line": "+  p******************************************************************0\""
+      }
+    ],
+    "files_deleted_but_still_in_history": [
+      "# Текст сайта-портфолио. Версия v7.md",
+      "TZ_sait_portfolio.md",
+      "app/en/opengraph-image.tsx",
+      "app/en/twitter-image.tsx",
+      "app/opengraph-image.tsx",
+      "app/twitter-image.tsx",
+      "components/effects/PacketPile.tsx",
+      "components/intro/IntroCore.tsx",
+      "components/intro/IntroFloatingShapes.tsx",
+      "components/intro/IntroLogo.tsx",
+      "components/intro/IntroOrbs.tsx",
+      "components/intro/IntroParticles.tsx",
+      "components/intro/IntroStarfield.tsx",
+      "components/sections/closing/ContactPhonePanel.tsx",
+      "lib/sound.ts",
+      "Визуальная концепция и интерактив с.txt",
+      "ПРОМПТ_ОПИСАНИЕ_САЙТА_2026-09-03.md",
+      "список доработок1.txt"
+    ],
+    "remote_branches": [
+      "origin/intro-cosmos",
+      "origin/main",
+      "origin/worktree-lending2-portfolio-tz",
+      "origin/worktree-lending2-systems-fixes",
+      "origin/worktree-polish-round4"
+    ]
+  },
+  "repo_hygiene": {
+    "tracked_.claude": [],
+    "tracked_reference": [],
+    "tracked_tsbuildinfo": [],
+    "tracked_binaries_over_500kb": [
+      {
+        "file": "public/sounds/intro_ambient.mp3",
+        "bytes": 769088
+      }
+    ],
+    "untracked_local_heavy_files_in_main_checkout": [
+      {
+        "file": "reference/design_reference_2026-09-03.mp4",
+        "bytes": 28995619
+      },
+      {
+        "file": "reference/intro_reference.mp4",
+        "bytes": 28643791
+      },
+      {
+        "file": "tsconfig.tsbuildinfo",
+        "bytes": 99100
+      }
+    ],
+    "gitignore_mentions": [
+      "*.tsbuildinfo",
+      "# local-only design reference material, not for the public repo",
+      "/reference/",
+      "/TZ_sait_portfolio.md",
+      "/ПРОМПТ_ОПИСАНИЕ_САЙТА_2026-09-03.md",
+      "/список доработок1.txt",
+      "/Визуальная концепция и интерактив с.txt",
+      "/\\# Текст сайта-портфолио. Версия v7.md",
+      "/ТЗ lending3 .md",
+      "/.claude/"
+    ],
+    "git_count_objects": [
+      "count: 661",
+      "size: 23.20 MiB",
+      "in-pack: 123",
+      "packs: 1",
+      "size-pack: 80.38 KiB",
+      "prune-packable: 8",
+      "garbage: 0",
+      "size-garbage: 0 bytes"
+    ]
+  },
+  "docs": {
+    "readme_present": true,
+    "readme_lines": 36,
+    "readme_bytes": 1312,
+    "readme_mentions_ai_process": false,
+    "readme_mentions": {
+      "three": false,
+      "zustand": false,
+      "Tailwind": true,
+      "GitHub Pages": false,
+      "Vercel": false,
+      "лиценз|license": false,
+      "скриншот|screenshot|demo|vercel.app": false
+    },
+    "license_files": [],
+    "credits_files": [
+      "public/sounds/CREDITS.md",
+      "public/textures/planets/CREDITS.md"
+    ],
+    "ci_workflows": [
+      ".github/workflows/pages.yml"
+    ],
+    "tests_present": []
+  },
+  "console_calls": [
+    {
+      "file": "components/intro/IntroWelcome.tsx",
+      "line": 154,
+      "method": "warn",
+      "text": "console.warn(\"[intro] shader:\", gl.getShaderInfoLog(s));"
+    },
+    {
+      "file": "lib/portfolioGuard.ts",
+      "line": 36,
+      "method": "log",
+      "text": "console.log("
+    }
+  ],
+  "lint_type_escapes": {
+    "count": 16,
+    "items": [
+      {
+        "file": "components/easter-eggs/SudoEasterEgg.tsx",
+        "line": 103,
+        "text": "// eslint-disable-next-line react-hooks/exhaustive-deps"
+      },
+      {
+        "file": "components/effects/MatrixModeController.tsx",
+        "line": 16,
+        "text": "// eslint-disable-next-line react-hooks/exhaustive-deps"
+      },
+      {
+        "file": "components/hero/HeroTitleReveal.tsx",
+        "line": 63,
+        "text": "// eslint-disable-next-line react-hooks/exhaustive-deps"
+      },
+      {
+        "file": "components/hero/HeroTitleReveal.tsx",
+        "line": 102,
+        "text": "// eslint-disable-next-line react-hooks/exhaustive-deps"
+      },
+      {
+        "file": "components/hero/SystemsCounter.tsx",
+        "line": 74,
+        "text": "// eslint-disable-next-line react-hooks/exhaustive-deps"
+      },
+      {
+        "file": "components/hero/SystemsCounter.tsx",
+        "line": 113,
+        "text": "// eslint-disable-next-line react-hooks/exhaustive-deps"
+      },
+      {
+        "file": "components/hero/SystemsCounter.tsx",
+        "line": 138,
+        "text": "// eslint-disable-next-line react-hooks/exhaustive-deps"
+      },
+      {
+        "file": "components/hero/SystemsCounter.tsx",
+        "line": 144,
+        "text": "// eslint-disable-next-line react-hooks/exhaustive-deps"
+      },
+      {
+        "file": "components/intro/IntroAnimation.tsx",
+        "line": 93,
+        "text": "// eslint-disable-next-line react-hooks/exhaustive-deps"
+      },
+      {
+        "file": "components/intro/IntroAnimation.tsx",
+        "line": 189,
+        "text": "// eslint-disable-next-line react-hooks/exhaustive-deps"
+      },
+      {
+        "file": "components/sections/autopilot/Odometer.tsx",
+        "line": 39,
+        "text": "// eslint-disable-next-line react-hooks/exhaustive-deps"
+      },
+      {
+        "file": "lib/hp100-live.ts",
+        "line": 172,
+        "text": "const w = window as unknown as { __lab?: Record<string, unknown> };"
+      },
+      {
+        "file": "lib/mock/hp100.ts",
+        "line": 131,
+        "text": "const w = window as unknown as { __lab?: Record<string, unknown> };"
+      },
+      {
+        "file": "lib/portfolioGuard.ts",
+        "line": 32,
+        "text": "const w = window as unknown as {"
+      },
+      {
+        "file": "lib/sfx.ts",
+        "line": 85,
+        "text": "(window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;"
+      },
+      {
+        "file": "lib/useTypewriter.ts",
+        "line": 63,
+        "text": "// eslint-disable-next-line react-hooks/exhaustive-deps"
+      }
+    ]
+  },
+  "heavy_client_imports": {
+    "by_lib": {
+      "three": [
+        {
+          "file": "components/intro/IntroCosmos.tsx",
+          "use_client": true,
+          "reachable_from_app": true,
+          "static_value_import": false,
+          "dynamic_import": true
+        },
+        {
+          "file": "lib/cosmosAssets.ts",
+          "use_client": true,
+          "reachable_from_app": true,
+          "static_value_import": false,
+          "dynamic_import": true
+        }
+      ],
+      "framer-motion": [],
+      "lenis": [
+        {
+          "file": "components/effects/SmoothScroll.tsx",
+          "use_client": true,
+          "reachable_from_app": true,
+          "static_value_import": true,
+          "dynamic_import": false
+        }
+      ],
+      "zustand": [
+        {
+          "file": "lib/branchStore.ts",
+          "use_client": true,
+          "reachable_from_app": true,
+          "static_value_import": true,
+          "dynamic_import": false
+        },
+        {
+          "file": "lib/bridgeStore.ts",
+          "use_client": true,
+          "reachable_from_app": true,
+          "static_value_import": true,
+          "dynamic_import": false
+        },
+        {
+          "file": "lib/introStore.ts",
+          "use_client": true,
+          "reachable_from_app": true,
+          "static_value_import": true,
+          "dynamic_import": false
+        },
+        {
+          "file": "lib/portfolioGuard.ts",
+          "use_client": true,
+          "reachable_from_app": true,
+          "static_value_import": true,
+          "dynamic_import": false
+        },
+        {
+          "file": "lib/store.ts",
+          "use_client": true,
+          "reachable_from_app": true,
+          "static_value_import": true,
+          "dynamic_import": false
+        },
+        {
+          "file": "lib/systemStatus.ts",
+          "use_client": true,
+          "reachable_from_app": true,
+          "static_value_import": true,
+          "dynamic_import": false
+        },
+        {
+          "file": "lib/transitionStore.ts",
+          "use_client": true,
+          "reachable_from_app": true,
+          "static_value_import": true,
+          "dynamic_import": false
+        }
+      ]
+    },
+    "next_dynamic_imports": [
+      {
+        "file": "components/projects/ProjectWidget.tsx",
+        "line": 14,
+        "target": "@/components/sections/hp100/HP100Widget"
+      },
+      {
+        "file": "components/projects/ProjectWidget.tsx",
+        "line": 18,
+        "target": "@/components/sections/factory/ConveyorBelt"
+      },
+      {
+        "file": "components/projects/ProjectWidget.tsx",
+        "line": 22,
+        "target": "@/components/sections/perimeter/PerimeterMap"
+      },
+      {
+        "file": "components/sections/factory/FactorySection.tsx",
+        "line": 8,
+        "target": "./ConveyorBelt"
+      },
+      {
+        "file": "components/sections/hp100/HP100Section.tsx",
+        "line": 6,
+        "target": "./HP100Widget"
+      },
+      {
+        "file": "components/sections/perimeter/PerimeterSection.tsx",
+        "line": 6,
+        "target": "./PerimeterMap"
+      }
+    ],
+    "use_client_files": 75,
+    "code_files": 104
+  },
+  "checks": {
+    "typecheck": "skipped: no node_modules with .bin/tsc found (checked: /home/vps_home_1/projects/lending2/.claude/worktrees/site-audit/node_modules[missing], /home/vps_home_1/projects/lending2/node_modules[0 entries])",
+    "lint": "skipped: no node_modules with .bin/tsc found (checked: /home/vps_home_1/projects/lending2/.claude/worktrees/site-audit/node_modules[missing], /home/vps_home_1/projects/lending2/node_modules[0 entries])"
+  }
+}

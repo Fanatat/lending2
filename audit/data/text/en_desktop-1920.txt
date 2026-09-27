@@ -1,0 +1,114 @@
+RU
+/
+EN
+Sound: on
+Easter eggs: 0/13 ▾
+#NOTARESUME — a list of shipped tasks
+
+Eight autonomous systems. Zero employees, one AI subscription, zero promises. While you're reading this line, they keep working.
+
+All of this costs 2,000 ₽ a month. The proof is below.
+
+WHO'S AT THE CONSOLE
+Valery
+
+Producer of AI-agent systems: I set the task, accept the result by facts and take it to production. The code is written by agents — it's on GitHub.
+
+SYSTEM 01
+Five games by the “Friday” studio, plus promo materials
+
+The full cycle — from clean, fast code to promo videos. While a competitor is still loading megabytes of framework, our game has already taken the player's first move.
+
+▸ More
+
+A separate system first develops a game, then puts it in the maintenance queue. It prepares promo materials and store-page copy for the platforms. Scripts launch the game in a headless browser on their own, record gameplay in vertical and horizontal formats, check that no Cyrillic has leaked into the English build, and cut the video.
+
+Slovokhod
+
+A hundred word-search levels and not a single audio file in the build: the game synthesises every sound itself.
+
+Pictures by Numbers
+
+130 nonograms, checked by 338 automated tests before every release.
+
+Color Sort
+
+Flask sorting that a colour-blind player beats on equal terms: you sort by colour and shape at once.
+
+Lane Battler
+in development
+
+The combat rules come from 375 negative reviews of the genre leader: we fixed exactly what players complain about. Not taste — facts.
+
+Royal Solitaire
+
+A cartoon 2.5D Klondike on Three.js that passed Yandex Games moderation — not a mock-up, a built and released game.
+
+SYSTEM 02
+While you're in the flow and losing track of time, the board keeps an eye on what you breathe
+
+CO₂ and dust are invisible, but they drain your HP. Your nose can't sense them — the board can. (Actually, the board doesn't care. We taught it to worry.)
+
+A board with seven sensors sends temperature, humidity, pressure, light level, volatile compounds, three fractions of dust and CO₂ to the server once a minute. When the server is unreachable, the board notices by itself, buffers readings in its own memory and sends them with their real timestamps as soon as the connection is back. One of the sensors turned out to be a clone with its own protocol: we decoded it by hand, standard libraries can't see it. The setup moves to a greenhouse, a server room or any workplace without a single change to the logic.
+SYSTEM 03
+Channels that publish and live without me
+
+I filled a folder with 169,000+ photos once — from then on the channel runs itself: it posts during the day at unpredictable times, so the feed doesn't look robotic.
+
+Two bots. The first posts a set of nine photos with a caption once a day and moves what it used into an archive, so nothing repeats. The second wakes up on schedule: text at 5:50, video at 6:30; it collects material in advance from source channels by itself and hands it out one piece a day. Both have an admin panel right in the chat: status, manual run, subscriber analytics, automatic database backup. The first has run as a system service for months without a crash. The second was started by hand and still hasn't missed a single post.
+SYSTEM 04
+A fix for the RuNet that's coming.
+
+The bridge connects SOCKS5 to HTTP and brings Telegram Desktop back to working order in a couple of minutes.
+
+A local server starts on the computer and takes over all the dirty work: authorisation, tunnelling, handling connections, with a log of every one of them. The instructions are built like proper diagnostics, from cheap to expensive: first two checkboxes in the app's own settings, and only if that didn't help does the bridge start. It runs as a system service, self-test green. The task is a standard one: the same cure works for any application that speaks one protocol while you have another one paid for and available.
+SYSTEM 05
+All in
+
+what?
+
+Crypto portfolio analytics that sees where the market punishes the greedy: the market situation, your assets, a comparison of instruments and the maths of risk. What it can't do is press “Buy” — it's built that way.
+
+The system reads a portfolio on the exchange and explains in plain language what is happening to it: the exact picture of the money, concentration, drawdown, liquidity, a calendar of token unlocks. It sees when the market situation has changed and there is potential to earn more by moving into another asset or changing the way it yields. It gives no trading signals and doesn't predict prices — by a deliberate decision. All numbers are calculated by Python using carefully verified formulas in a separate module — the module runs on my server and updates the calculations on a schedule; the language model receives ready-made figures and writes the sentences, so no invented numbers appear in the report. The portfolio on the Russian page is a masked snapshot of the same data structure: real amounts and holdings aren't published for privacy reasons, not because the connection isn't ready. The framework carries over to any operational monitoring where the conclusions are worded by AI.
+SYSTEM 06
+One idea can turn into a whole season of cartoons in three languages
+
+One production line serves three channels: the script, the voice-over and all the material for editing are assembled and numbered — the editor only has to create.
+
+The system gets a topic and carries on by itself: writes the story, splits it into scenes, sets up characters and settings, lays it out shot by shot, assembles image descriptions, generates images, records the voice-over, edits and exports almost-finished material — all that's left is to put the video together in Premiere. The story is written once in canonical form; the English, Spanish and Russian versions are derived from it. Twelve real videos have already been assembled from start to finish. All generation runs on an ordinary home computer, with no subscriptions or APIs — including the review stage, where an LLM itself checks that the script follows the plan, the characters in the pictures don't change, and the overall setting holds. This way several cartoon series can run in parallel.
+SYSTEM 07
+An operations HQ of eight autonomous agents
+
+Every project needs focus. To keep it from blurring as I switch between tasks, I set up a department that has effectively become my deputies.
+
+A shared chat where eight different characters live: each has a name, a manner of speaking and its own memory area. No noise, only pragmatic calculation. Sometimes they joke around — I couldn't do without that option. No project here is frozen: all eight keep developing, and the agents are responsible precisely for that development. Today the HQ lives in Telegram; soon it will run in MAX in parallel.
+SYSTEM 08
+AI makes mistakes even in the right hands. It needs an oversight body.
+
+An autonomous system checks the network for data leaks and unauthorised intrusion. It is forbidden to act on its own — only with the founder's permission.
+
+A full check of the local network for internal and external threats: from the outside, a public IP leads straight to the router, and behind it stand four equal devices — a server, a PC, a nettop and a laptop. For months the server's network share exposed the entire home directory for reading, and it held an exchange key and bot tokens. One computer served its user profile anonymously, without a password. The report separately records a case where drafts of the audit itself once saved some of the secrets in plain text to that same shared folder: the inconvenient fact stayed in the document. The most useful thing in the work turned out to be the order of actions. First close the doors, then rotate the secrets — and do it from a device known to be clean.
+
+Every system above has a live, interactive version — widgets, not just text — on the Russian page.
+
+INFRASTRUCTURE UPKEEP
+Rented server	300 ₽
+Third-party proxy	200 ₽
+AI subscription	1500 ₽
+Total per month	2,000 ₽
+Infrastructure upkeep: 2,000 roubles a month
+
+The line-by-line breakdown is in the block next to this. Nothing else was needed.
+
+I build systems, and sometimes I can get too deep into them. So that I don't end up at the clinic later, HP100 keeps an eye on my room. And keeping all of this running takes 2,000 roubles a month.
+
+I don't take orders. I take on tasks I'm genuinely curious to solve — that's what keeps the work creative. If you have a task like that and understand its value, write to me. I'll see whether it's worth solving. And if it is, I'll take your problem and hand you back a working mechanism.
+
+Message on Telegram
+Message on MAX
+
+© 2026 Valery. All rights reserved.
+
+Copying or using the site's materials without the author's written consent is prohibited.
+
+Planet textures: Solar System Scope (CC BY 4.0). Sounds: Freesound (CC0).

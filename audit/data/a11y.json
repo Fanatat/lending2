@@ -1,0 +1,1432 @@
+{
+  "axe": {
+    "/": {
+      "intro_gate": {
+        "violations": [],
+        "violation_count": 0,
+        "node_count": 0
+      },
+      "page": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": 4,
+            "samples": [
+              {
+                "target": ".order-2 > .p-5.max-w-sm.bg-panel > .tracking-wide.uppercase.text-\\[10px\\]",
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.42 (foreground color: #7a7a7a, background color: #101012, font size: 7.5pt (10px), font weight: normal). Expected contrast rati",
+                "html": "<div class=\"text-[10px] uppercase tracking-wide text-fg-muted\">Содержание инфраструктуры</div>"
+              },
+              {
+                "target": ".border-b.border-line\\/50:nth-child(1) > .py-2:nth-child(1)",
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.42 (foreground color: #7a7a7a, background color: #101012, font size: 10.5pt (14px), font weight: normal). Expected contrast rat",
+                "html": "<td class=\"py-2 text-fg-muted\">Арендованный сервер</td>"
+              },
+              {
+                "target": ".border-b.border-line\\/50:nth-child(2) > .py-2:nth-child(1)",
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.42 (foreground color: #7a7a7a, background color: #101012, font size: 10.5pt (14px), font weight: normal). Expected contrast rat",
+                "html": "<td class=\"py-2 text-fg-muted\">Сторонний прокси</td>"
+              },
+              {
+                "target": ".border-b.border-line\\/50:nth-child(3) > .py-2:nth-child(1)",
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.42 (foreground color: #7a7a7a, background color: #101012, font size: 10.5pt (14px), font weight: normal). Expected contrast rat",
+                "html": "<td class=\"py-2 text-fg-muted\">Подписка на нейросеть</td>"
+              }
+            ]
+          }
+        ],
+        "violation_count": 1,
+        "node_count": 4
+      }
+    },
+    "/en": {
+      "intro_gate": {
+        "violations": [],
+        "violation_count": 0,
+        "node_count": 0
+      },
+      "page": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": 13,
+            "samples": [
+              {
+                "target": ".shrink-0",
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.42 (foreground color: #7a7a7a, background color: #101012, font size: 7.5pt (10px), font weight: normal). Expected contrast rati",
+                "html": "<span class=\"shrink-0 text-[10px] text-fg-muted\">in development</span>"
+              },
+              {
+                "target": "#system-02 > .gap-8.items-start.lg\\:grid-cols-2 > .p-5.bg-panel.leading-relaxed",
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.42 (foreground color: #7a7a7a, background color: #101012, font size: 10.5pt (14px), font weight: normal). Expected contrast rat",
+                "html": "<div class=\"min-w-0 border border-line bg-panel p-5 text-sm leading-relaxed text-fg-muted\">"
+              },
+              {
+                "target": "#system-03 > .gap-8.items-start.lg\\:grid-cols-2 > .p-5.bg-panel.leading-relaxed",
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.42 (foreground color: #7a7a7a, background color: #101012, font size: 10.5pt (14px), font weight: normal). Expected contrast rat",
+                "html": "<div class=\"min-w-0 border border-line bg-panel p-5 text-sm leading-relaxed text-fg-muted\">"
+              },
+              {
+                "target": "#system-04 > .gap-8.items-start.lg\\:grid-cols-2 > .p-5.bg-panel.leading-relaxed",
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.42 (foreground color: #7a7a7a, background color: #101012, font size: 10.5pt (14px), font weight: normal). Expected contrast rat",
+                "html": "<div class=\"min-w-0 border border-line bg-panel p-5 text-sm leading-relaxed text-fg-muted\">"
+              },
+              {
+                "target": "#system-05 > .gap-8.items-start.lg\\:grid-cols-2 > .p-5.bg-panel.leading-relaxed",
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.42 (foreground color: #7a7a7a, background color: #101012, font size: 10.5pt (14px), font weight: normal). Expected contrast rat",
+                "html": "<div class=\"min-w-0 border border-line bg-panel p-5 text-sm leading-relaxed text-fg-muted\">"
+              }
+            ]
+          }
+        ],
+        "violation_count": 1,
+        "node_count": 13
+      }
+    },
+    "/projects/hp100": {
+      "intro_gate": {
+        "violations": [],
+        "violation_count": 0,
+        "node_count": 0
+      },
+      "page": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": 11,
+            "samples": [
+              {
+                "target": ".tracking-wide.uppercase.text-\\[10px\\]",
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.42 (foreground color: #7a7a7a, background color: #101012, font size: 7.5pt (10px), font weight: normal). Expected contrast rati",
+                "html": "<span class=\"text-[10px] uppercase tracking-wide text-fg-muted\">HP100</span>"
+              },
+              {
+                "target": ".block.text-left[data-cursor=\"interactive\"]:nth-child(1) > div > .mb-1.justify-between.items-center > span:nth-child(1)",
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.42 (foreground color: #7a7a7a, background color: #101012, font size: 7.5pt (10px), font weight: normal). Expected contrast rati",
+                "html": "<span>CO₂</span>"
+              },
+              {
+                "target": ".block.text-left[data-cursor=\"interactive\"]:nth-child(2) > div > .mb-1.justify-between.items-center > span:nth-child(1)",
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.42 (foreground color: #7a7a7a, background color: #101012, font size: 7.5pt (10px), font weight: normal). Expected contrast rati",
+                "html": "<span>Темп.</span>"
+              },
+              {
+                "target": ".block.text-left[data-cursor=\"interactive\"]:nth-child(3) > div > .mb-1.justify-between.items-center > span:nth-child(1)",
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.42 (foreground color: #7a7a7a, background color: #101012, font size: 7.5pt (10px), font weight: normal). Expected contrast rati",
+                "html": "<span>Влажн.</span>"
+              },
+              {
+                "target": ".block.text-left[data-cursor=\"interactive\"]:nth-child(4) > div > .mb-1.justify-between.items-center > span:nth-child(1)",
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.42 (foreground color: #7a7a7a, background color: #101012, font size: 7.5pt (10px), font weight: normal). Expected contrast rati",
+                "html": "<span>Пыль</span>"
+              }
+            ]
+          }
+        ],
+        "violation_count": 1,
+        "node_count": 11
+      }
+    },
+    "/projects/staff": {
+      "intro_gate": {
+        "violations": [],
+        "violation_count": 0,
+        "node_count": 0
+      },
+      "page": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": 13,
+            "samples": [
+              {
+                "target": ".px-2.py-1[type=\"button\"]:nth-child(2)",
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.42 (foreground color: #7a7a7a, background color: #101012, font size: 7.5pt (10px), font weight: normal). Expected contrast rati",
+                "html": "<button type=\"button\" data-cursor=\"interactive\" class=\"border px-2 py-1 text-[10px] border-line text-fg-muted\">ПТ</button>"
+              },
+              {
+                "target": ".px-2.py-1[type=\"button\"]:nth-child(3)",
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.42 (foreground color: #7a7a7a, background color: #101012, font size: 7.5pt (10px), font weight: normal). Expected contrast rati",
+                "html": "<button type=\"button\" data-cursor=\"interactive\" class=\"border px-2 py-1 text-[10px] border-line text-fg-muted\">HP</button>"
+              },
+              {
+                "target": ".px-2.py-1[type=\"button\"]:nth-child(4)",
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.42 (foreground color: #7a7a7a, background color: #101012, font size: 7.5pt (10px), font weight: normal). Expected contrast rati",
+                "html": "<button type=\"button\" data-cursor=\"interactive\" class=\"border px-2 py-1 text-[10px] border-line text-fg-muted\">АП</button>"
+              },
+              {
+                "target": ".px-2.py-1[type=\"button\"]:nth-child(5)",
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.42 (foreground color: #7a7a7a, background color: #101012, font size: 7.5pt (10px), font weight: normal). Expected contrast rati",
+                "html": "<button type=\"button\" data-cursor=\"interactive\" class=\"border px-2 py-1 text-[10px] border-line text-fg-muted\">МТ</button>"
+              },
+              {
+                "target": ".px-2.py-1[type=\"button\"]:nth-child(6)",
+                "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.42 (foreground color: #7a7a7a, background color: #101012, font size: 7.5pt (10px), font weight: normal). Expected contrast rati",
+                "html": "<button type=\"button\" data-cursor=\"interactive\" class=\"border px-2 py-1 text-[10px] border-line text-fg-muted\">OI</button>"
+              }
+            ]
+          }
+        ],
+        "violation_count": 1,
+        "node_count": 13
+      }
+    }
+  },
+  "keyboard": {
+    "gate_autofocus": {
+      "tag": "button",
+      "role": null,
+      "text": "Войти со звуком",
+      "href": null,
+      "outline": null,
+      "box_shadow": "rgba(120, 200, 200, 0.18) 0px 0px 32px 0px",
+      "in_viewport": true,
+      "url": "/",
+      "covered": false,
+      "visible": true
+    },
+    "intro_passable_by_keyboard": "no: 20 Tab presses did not reach «Начать»",
+    "intro_tab_stops": [
+      {
+        "tag": "button",
+        "role": null,
+        "text": "Пропустить esc",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "a",
+        "role": null,
+        "text": "GitHub",
+        "href": "https://github.com/Fanatat",
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "▸ Подробнее",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Словоход звуки — синтез, не файлы",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Картинки по числам 338 тестов зелёных",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Color Sort дальтоник проходит наравне",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Lane Battler в разработке 375 отзывов → патч",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Royal Solitaire Three.js, прошла модерацию",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "▸ Подробнее",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "CO₂ 677ppm",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "Темп. 25.6°C",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "Влажн. 47%",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "Пыль 6µg/m³",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Как устроена плата →",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "▸ Подробнее",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "В ЭФИРЕ 100% рассылок без пропусков Последняя публикация сег",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "▸ Подробнее",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Как устроен модуль →",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "▸ Подробнее",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Как устроен конвейер →",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      }
+    ],
+    "intro_focus_on_covered_elements": [
+      {
+        "tag": "a",
+        "role": null,
+        "text": "GitHub",
+        "href": "https://github.com/Fanatat",
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "▸ Подробнее",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Словоход звуки — синтез, не файлы",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Картинки по числам 338 тестов зелёных",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Color Sort дальтоник проходит наравне",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Lane Battler в разработке 375 отзывов → патч",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Royal Solitaire Three.js, прошла модерацию",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "▸ Подробнее",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "CO₂ 677ppm",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "Темп. 25.6°C",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "Влажн. 47%",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "Пыль 6µg/m³",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Как устроена плата →",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "▸ Подробнее",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "В ЭФИРЕ 100% рассылок без пропусков Последняя публикация сег",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "▸ Подробнее",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Как устроен модуль →",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "▸ Подробнее",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Как устроен конвейер →",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": true,
+        "visible": true
+      }
+    ],
+    "tab_sequence": [
+      {
+        "tag": "a",
+        "role": null,
+        "text": "GitHub",
+        "href": "https://github.com/Fanatat",
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "▸ Подробнее",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Словоход звуки — синтез, не файлы",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Картинки по числам 338 тестов зелёных",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Color Sort дальтоник проходит наравне",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Lane Battler в разработке 375 отзывов → патч",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Royal Solitaire Three.js, прошла модерацию",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "▸ Подробнее",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "CO₂ 677ppm",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "Темп. 25.6°C",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "Влажн. 47%",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "Пыль 6µg/m³",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Как устроена плата →",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "▸ Подробнее",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "В ЭФИРЕ 100% рассылок без пропусков Последняя публикация сег",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "▸ Подробнее",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Как устроен модуль →",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "▸ Подробнее",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Как устроен конвейер →",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "▸ Подробнее",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "ШТ Координатор Штаб",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "ПТ Менеджер game4 / Пятница",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "HP Дежурный датчики HP100",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "АП Смотритель каналы",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "МТ Инженер связи Мост",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "OI Аналитик рисков All in",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "КЗ Продюсер сцен Контент-завод",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "ПР Служба безопасности Периметр",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "▸ Подробнее",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Внешний периметр",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Роутер",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Сервер",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "ПК 1",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Неттоп",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Ноутбук",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "2000 ₽",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "a",
+        "role": null,
+        "text": "Написать в ТГ",
+        "href": "https://t.me/fanatat",
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "a",
+        "role": null,
+        "text": "Написать в MAX",
+        "href": "https://max.ru/se14158141_bot",
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "Coming soon",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "a",
+        "role": null,
+        "text": "Solar System Scope",
+        "href": "https://www.solarsystemscope.com/textures/",
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "a",
+        "role": null,
+        "text": "Freesound",
+        "href": "https://freesound.org/",
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      null,
+      {
+        "tag": "a",
+        "role": null,
+        "text": "RU",
+        "href": "/",
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "a",
+        "role": null,
+        "text": "EN",
+        "href": "/en",
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "Звук: вкл",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "Пасхалки: 0/13 ▾",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "a",
+        "role": null,
+        "text": "GitHub",
+        "href": "https://github.com/Fanatat",
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "▸ Подробнее",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Словоход звуки — синтез, не файлы",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Картинки по числам 338 тестов зелёных",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Color Sort дальтоник проходит наравне",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Lane Battler в разработке 375 отзывов → патч",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Royal Solitaire Three.js, прошла модерацию",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "▸ Подробнее",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "CO₂ 632ppm",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "Темп. 25.4°C",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "Влажн. 46%",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "Пыль 20µg/m³",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "div",
+        "role": "button",
+        "text": "Как устроена плата →",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      },
+      {
+        "tag": "button",
+        "role": null,
+        "text": "▸ Подробнее",
+        "href": null,
+        "outline": "solid 1px rgb(255, 197, 61)",
+        "box_shadow": null,
+        "in_viewport": true,
+        "url": "/",
+        "covered": false,
+        "visible": true
+      }
+    ],
+    "tabs_to_telegram": 37,
+    "focus_stops": 59,
+    "focus_without_outline_or_shadow": 0,
+    "focus_without_indicator_samples": [],
+    "offscreen_focus": [],
+    "screenshots": [
+      "screenshots/a11y/keyboard_tab_3.png",
+      "screenshots/a11y/keyboard_tab_9.png",
+      "screenshots/a11y/keyboard_tab_16.png"
+    ]
+  },
+  "zoom200": {
+    "/": {
+      "css_viewport": "640x360 (1280x720 at 200%)",
+      "horizontal_scroll": false,
+      "scroll_width": 640,
+      "screenshots": [
+        "screenshots/a11y/zoom200_home.png",
+        "screenshots/a11y/zoom200_home_scrolled.png"
+      ]
+    },
+    "/projects/hp100": {
+      "css_viewport": "640x360 (1280x720 at 200%)",
+      "horizontal_scroll": false,
+      "scroll_width": 640,
+      "screenshots": [
+        "screenshots/a11y/zoom200_projects_hp100.png",
+        "screenshots/a11y/zoom200_projects_hp100_scrolled.png"
+      ]
+    },
+    "/en": {
+      "css_viewport": "640x360 (1280x720 at 200%)",
+      "horizontal_scroll": false,
+      "scroll_width": 640,
+      "screenshots": [
+        "screenshots/a11y/zoom200_en.png",
+        "screenshots/a11y/zoom200_en_scrolled.png"
+      ]
+    }
+  },
+  "reduced_motion": {
+    "intro_gate_shown": true,
+    "intro_timing_silent_path": {
+      "how": "silent",
+      "ignored_attempts": 0,
+      "gate_ms": 127,
+      "start_visible_ms": 3399,
+      "passed": true,
+      "total_ms": 12048
+    },
+    "screenshot": "screenshots/a11y/reduced_motion_after_intro.png"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "site-audit",
+  "private": true,
+  "description": "Audit tooling for the portfolio site (see README.md)",
+  "scripts": {
+    "audit": "python3 run_all.py"
+  },
+  "devDependencies": {
+    "axe-core": "^4.13.0",
+    "lighthouse": "^12.8.0"
+  }
+}

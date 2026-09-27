@@ -1,0 +1,1799 @@
+{
+  "method": "Block 2, per project: does the demo open, how fast it becomes interactive,\nconsole errors in the first 30 s, does it work on a phone.\n\n\"Demo\" of a system = its /projects/<slug> page with the «Вживую» widget\n(nothing else is linked from the site). The five games have public builds on\nGitHub Pages / Vercel that the site does NOT link to — they are checked too,\nbecause the report has to say whether linking them is safe.\n\nInteractivity: a long-task observer is injected before the page loads;\n\"TTI (approx.)\" = end of the last long task that is followed by ≥ 5 s of\nquiet within the 30 s window (Lighthouse-style heuristic), or DCL if no\nlong tasks. On this site background canvas effects keep producing long\ntasks, so TTI often equals the 30 s window: read it together with\nlong_tasks / blocking_ms_30s. For site pages the clock includes the intro\ngate being skipped; \"widget_section_visible_s\" is measured only after the\nintro is really gone.\nOutput: data/projects_check.json, screenshots/projects/<viewport>/",
+  "site_projects": {
+    "friday-studio": {
+      "desktop-1920": {
+        "target": "https://vanatat.vercel.app/projects/friday-studio",
+        "viewport": "desktop-1920",
+        "status": 200,
+        "intro": {
+          "how": "skip",
+          "ignored_attempts": 1,
+          "passed": true,
+          "total_ms": 3378
+        },
+        "intro_passed_s": 4.0,
+        "widget_section_visible_s": 4.1,
+        "dcl_ms": 644,
+        "load_ms": 1015,
+        "long_tasks": 317,
+        "long_task_total_ms": 21441,
+        "blocking_ms_30s": 5591,
+        "tti_approx_ms": 29988,
+        "title": "Студия «Пятница»",
+        "text_len": 1172,
+        "text_head": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\n← на дашборд\nСИСТЕМА 01\nСтудия «Пятница»\n\nПять игр студии «Пятница» и промо-материалы\n\nНОРМА\nЧТО ЭТО\n\nОтдельная система сначала разрабатывает игру, а потом ставит её",
+        "canvases": [
+          [
+            1920,
+            1080
+          ],
+          [
+            1920,
+            1080
+          ],
+          [
+            417,
+            281
+          ],
+          [
+            417,
+            281
+          ],
+          [
+            417,
+            281
+          ],
+          [
+            417,
+            281
+          ],
+          [
+            417,
+            281
+          ],
+          [
+            1920,
+            1080
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 7,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/desktop-1920/friday-studio_30s.png",
+        "console_errors_30s": [],
+        "failed_requests_30s": []
+      },
+      "phone-390": {
+        "target": "https://vanatat.vercel.app/projects/friday-studio",
+        "viewport": "phone-390",
+        "status": 200,
+        "intro": {
+          "how": "skip",
+          "ignored_attempts": 1,
+          "passed": true,
+          "total_ms": 2853
+        },
+        "intro_passed_s": 3.4,
+        "widget_section_visible_s": 3.6,
+        "dcl_ms": 576,
+        "load_ms": 854,
+        "long_tasks": 9,
+        "long_task_total_ms": 526,
+        "blocking_ms_30s": 76,
+        "tti_approx_ms": 21107,
+        "title": "Студия «Пятница»",
+        "text_len": 1172,
+        "text_head": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\n← на дашборд\nСИСТЕМА 01\nСтудия «Пятница»\n\nПять игр студии «Пятница» и промо-материалы\n\nНОРМА\nЧТО ЭТО\n\nОтдельная система сначала разрабатывает игру, а потом ставит её",
+        "canvases": [
+          [
+            390,
+            844
+          ],
+          [
+            390,
+            844
+          ],
+          [
+            356,
+            234
+          ],
+          [
+            356,
+            234
+          ],
+          [
+            356,
+            234
+          ],
+          [
+            356,
+            233
+          ],
+          [
+            356,
+            234
+          ],
+          [
+            390,
+            844
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 7,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/phone-390/friday-studio_30s.png",
+        "console_errors_30s": [],
+        "failed_requests_30s": []
+      }
+    },
+    "hp100": {
+      "desktop-1920": {
+        "target": "https://vanatat.vercel.app/projects/hp100",
+        "viewport": "desktop-1920",
+        "status": 200,
+        "intro": {
+          "how": "skip",
+          "ignored_attempts": 0,
+          "passed": true,
+          "total_ms": 1416
+        },
+        "intro_passed_s": 2.0,
+        "widget_section_visible_s": 2.1,
+        "dcl_ms": 547,
+        "load_ms": 769,
+        "long_tasks": 331,
+        "long_task_total_ms": 21661,
+        "blocking_ms_30s": 5111,
+        "tti_approx_ms": 29978,
+        "title": "HP100",
+        "text_len": 1435,
+        "text_head": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\n← на дашборд\nСИСТЕМА 02\nHP100\n\nПока вы в потоке и теряете счёт времени, плата следит за тем, чем вы дышите\n\nНЕ В СЕТИ\nUptime: 112 дней\nЧТО ЭТО\n\nПлата с семью датчика",
+        "canvases": [
+          [
+            1920,
+            1080
+          ],
+          [
+            1920,
+            1080
+          ],
+          [
+            1920,
+            1080
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 11,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/desktop-1920/hp100_30s.png",
+        "console_errors_30s": [
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          }
+        ],
+        "failed_requests_30s": []
+      },
+      "phone-390": {
+        "target": "https://vanatat.vercel.app/projects/hp100",
+        "viewport": "phone-390",
+        "status": 200,
+        "intro": {
+          "how": "skip",
+          "ignored_attempts": 1,
+          "passed": true,
+          "total_ms": 3036
+        },
+        "intro_passed_s": 3.6,
+        "widget_section_visible_s": 3.9,
+        "dcl_ms": 606,
+        "load_ms": 948,
+        "long_tasks": 20,
+        "long_task_total_ms": 1298,
+        "blocking_ms_30s": 298,
+        "tti_approx_ms": 4024,
+        "title": "HP100",
+        "text_len": 1485,
+        "text_head": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 1/13 ▾\n← на дашборд\nСИСТЕМА 02\nHP100\n\nПока вы в потоке и теряете счёт времени, плата следит за тем, чем вы дышите\n\nНЕ В СЕТИ\nUptime: 112 дней\nЧТО ЭТО\n\nПлата с семью датчика",
+        "canvases": [
+          [
+            390,
+            844
+          ],
+          [
+            390,
+            844
+          ],
+          [
+            390,
+            844
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 11,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/phone-390/hp100_30s.png",
+        "console_errors_30s": [
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          }
+        ],
+        "failed_requests_30s": []
+      }
+    },
+    "channel-autopilot": {
+      "desktop-1920": {
+        "target": "https://vanatat.vercel.app/projects/channel-autopilot",
+        "viewport": "desktop-1920",
+        "status": 200,
+        "intro": {
+          "how": "skip",
+          "ignored_attempts": 1,
+          "passed": true,
+          "total_ms": 3448
+        },
+        "intro_passed_s": 4.0,
+        "widget_section_visible_s": 4.1,
+        "dcl_ms": 555,
+        "load_ms": 819,
+        "long_tasks": 362,
+        "long_task_total_ms": 21374,
+        "blocking_ms_30s": 3274,
+        "tti_approx_ms": 30009,
+        "title": "Автопилот канала",
+        "text_len": 1382,
+        "text_head": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\n← на дашборд\nСИСТЕМА 03\nАвтопилот канала\n\nКаналы, которые публикуют и живут без меня\n\nНОРМА\nUptime: 544 дня\nЧТО ЭТО\n\nДва бота. Первый раз в день выкладывает подборку",
+        "canvases": [
+          [
+            1920,
+            1080
+          ],
+          [
+            1920,
+            1080
+          ],
+          [
+            1920,
+            1080
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 7,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/desktop-1920/channel-autopilot_30s.png",
+        "console_errors_30s": [
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          }
+        ],
+        "failed_requests_30s": []
+      },
+      "phone-390": {
+        "target": "https://vanatat.vercel.app/projects/channel-autopilot",
+        "viewport": "phone-390",
+        "status": 200,
+        "intro": {
+          "how": "skip",
+          "ignored_attempts": 1,
+          "passed": true,
+          "total_ms": 2585
+        },
+        "intro_passed_s": 3.1,
+        "widget_section_visible_s": 3.2,
+        "dcl_ms": 559,
+        "load_ms": 864,
+        "long_tasks": 0,
+        "long_task_total_ms": 0,
+        "blocking_ms_30s": 0,
+        "tti_approx_ms": 559,
+        "title": "Автопилот канала",
+        "text_len": 1382,
+        "text_head": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\n← на дашборд\nСИСТЕМА 03\nАвтопилот канала\n\nКаналы, которые публикуют и живут без меня\n\nНОРМА\nUptime: 544 дня\nЧТО ЭТО\n\nДва бота. Первый раз в день выкладывает подборку",
+        "canvases": [
+          [
+            390,
+            844
+          ],
+          [
+            390,
+            844
+          ],
+          [
+            390,
+            844
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 7,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/phone-390/channel-autopilot_30s.png",
+        "console_errors_30s": [
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          }
+        ],
+        "failed_requests_30s": []
+      }
+    },
+    "bridge": {
+      "desktop-1920": {
+        "target": "https://vanatat.vercel.app/projects/bridge",
+        "viewport": "desktop-1920",
+        "status": 200,
+        "intro": {
+          "how": "skip",
+          "ignored_attempts": 1,
+          "passed": true,
+          "total_ms": 2854
+        },
+        "intro_passed_s": 3.4,
+        "widget_section_visible_s": 3.5,
+        "dcl_ms": 497,
+        "load_ms": 783,
+        "long_tasks": 182,
+        "long_task_total_ms": 13759,
+        "blocking_ms_30s": 4659,
+        "tti_approx_ms": 30081,
+        "title": "Мост",
+        "text_len": 1201,
+        "text_head": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\n← на дашборд\nСИСТЕМА 04\nМост\n\nФикс для приближающегося рунета.\n\nНОРМА\nUptime: 34 дня\nЧТО ЭТО\n\nЛокальный сервер поднимается на компьютере и берёт на себя всю грязную ",
+        "canvases": [
+          [
+            1920,
+            1080
+          ],
+          [
+            1920,
+            1080
+          ],
+          [
+            1920,
+            1080
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 8,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/desktop-1920/bridge_30s.png",
+        "console_errors_30s": [
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          }
+        ],
+        "failed_requests_30s": []
+      },
+      "phone-390": {
+        "target": "https://vanatat.vercel.app/projects/bridge",
+        "viewport": "phone-390",
+        "status": 200,
+        "intro": {
+          "how": "skip",
+          "ignored_attempts": 1,
+          "passed": true,
+          "total_ms": 3533
+        },
+        "intro_passed_s": 4.0,
+        "widget_section_visible_s": 4.1,
+        "dcl_ms": 507,
+        "load_ms": 897,
+        "long_tasks": 159,
+        "long_task_total_ms": 10667,
+        "blocking_ms_30s": 2717,
+        "tti_approx_ms": 20174,
+        "title": "Мост",
+        "text_len": 1201,
+        "text_head": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\n← на дашборд\nСИСТЕМА 04\nМост\n\nФикс для приближающегося рунета.\n\nНОРМА\nUptime: 34 дня\nЧТО ЭТО\n\nЛокальный сервер поднимается на компьютере и берёт на себя всю грязную ",
+        "canvases": [
+          [
+            390,
+            844
+          ],
+          [
+            390,
+            844
+          ],
+          [
+            390,
+            844
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 8,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/phone-390/bridge_30s.png",
+        "console_errors_30s": [
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          }
+        ],
+        "failed_requests_30s": []
+      }
+    },
+    "all-in": {
+      "desktop-1920": {
+        "target": "https://vanatat.vercel.app/projects/all-in",
+        "viewport": "desktop-1920",
+        "status": 200,
+        "intro": {
+          "how": "skip",
+          "ignored_attempts": 1,
+          "passed": true,
+          "total_ms": 2785
+        },
+        "intro_passed_s": 3.4,
+        "widget_section_visible_s": 3.5,
+        "dcl_ms": 652,
+        "load_ms": 1479,
+        "long_tasks": 195,
+        "long_task_total_ms": 11780,
+        "blocking_ms_30s": 2031,
+        "tti_approx_ms": 29627,
+        "title": "All in",
+        "text_len": 2083,
+        "text_head": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\n← на дашборд\nСИСТЕМА 05\nAll in\nНОРМА\nUptime: 33 дня\nЧТО ЭТО\n\nСистема читает портфель на бирже и объясняет человеческим языком, что с ним происходит: точная картина д",
+        "canvases": [
+          [
+            1920,
+            1080
+          ],
+          [
+            1920,
+            1080
+          ],
+          [
+            1920,
+            1080
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 7,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/desktop-1920/all-in_30s.png",
+        "console_errors_30s": [
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          }
+        ],
+        "failed_requests_30s": []
+      },
+      "phone-390": {
+        "target": "https://vanatat.vercel.app/projects/all-in",
+        "viewport": "phone-390",
+        "status": 200,
+        "intro": {
+          "how": "skip",
+          "ignored_attempts": 1,
+          "passed": true,
+          "total_ms": 3065
+        },
+        "intro_passed_s": 3.8,
+        "widget_section_visible_s": 3.8,
+        "dcl_ms": 721,
+        "load_ms": 897,
+        "long_tasks": 7,
+        "long_task_total_ms": 395,
+        "blocking_ms_30s": 45,
+        "tti_approx_ms": 3660,
+        "title": "All in",
+        "text_len": 2084,
+        "text_head": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\n← на дашборд\nСИСТЕМА 05\nAll in\nНОРМА\nUptime: 33 дня\nЧТО ЭТО\n\nСистема читает портфель на бирже и объясняет человеческим языком, что с ним происходит: точная картина д",
+        "canvases": [
+          [
+            390,
+            844
+          ],
+          [
+            390,
+            844
+          ],
+          [
+            390,
+            844
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 7,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/phone-390/all-in_30s.png",
+        "console_errors_30s": [
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          }
+        ],
+        "failed_requests_30s": []
+      }
+    },
+    "content-factory": {
+      "desktop-1920": {
+        "target": "https://vanatat.vercel.app/projects/content-factory",
+        "viewport": "desktop-1920",
+        "status": 200,
+        "intro": {
+          "how": "skip",
+          "ignored_attempts": 0,
+          "passed": true,
+          "total_ms": 1053
+        },
+        "intro_passed_s": 1.7,
+        "widget_section_visible_s": 1.7,
+        "dcl_ms": 607,
+        "load_ms": 882,
+        "long_tasks": 245,
+        "long_task_total_ms": 14384,
+        "blocking_ms_30s": 2134,
+        "tti_approx_ms": 29960,
+        "title": "Контент-завод",
+        "text_len": 1507,
+        "text_head": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\n← на дашборд\nСИСТЕМА 06\nКонтент-завод\n\nОдна мысль может превратиться в целый сезон мультфильмов на трёх языках\n\nНОРМА\nЧТО ЭТО\n\nСистема получает тему и дальше идёт са",
+        "canvases": [
+          [
+            1920,
+            1080
+          ],
+          [
+            1920,
+            1080
+          ],
+          [
+            1920,
+            1080
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 7,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/desktop-1920/content-factory_30s.png",
+        "console_errors_30s": [],
+        "failed_requests_30s": []
+      },
+      "phone-390": {
+        "target": "https://vanatat.vercel.app/projects/content-factory",
+        "viewport": "phone-390",
+        "status": 200,
+        "intro": {
+          "how": "skip",
+          "ignored_attempts": 1,
+          "passed": true,
+          "total_ms": 2791
+        },
+        "intro_passed_s": 3.3,
+        "widget_section_visible_s": 3.3,
+        "dcl_ms": 513,
+        "load_ms": 813,
+        "long_tasks": 7,
+        "long_task_total_ms": 371,
+        "blocking_ms_30s": 21,
+        "tti_approx_ms": 911,
+        "title": "Контент-завод",
+        "text_len": 1550,
+        "text_head": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\n← на дашборд\nСИСТЕМА 06\nКонтент-завод\n\nОдна мысль может превратиться в целый сезон мультфильмов на трёх языках\n\nНОРМА\nЧТО ЭТО\n\nСистема получает тему и дальше идёт са",
+        "canvases": [
+          [
+            390,
+            844
+          ],
+          [
+            390,
+            844
+          ],
+          [
+            390,
+            844
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 7,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/phone-390/content-factory_30s.png",
+        "console_errors_30s": [],
+        "failed_requests_30s": []
+      }
+    },
+    "staff": {
+      "desktop-1920": {
+        "target": "https://vanatat.vercel.app/projects/staff",
+        "viewport": "desktop-1920",
+        "status": 200,
+        "intro": {
+          "how": "skip",
+          "ignored_attempts": 1,
+          "passed": true,
+          "total_ms": 3400
+        },
+        "intro_passed_s": 3.9,
+        "widget_section_visible_s": 4.0,
+        "dcl_ms": 487,
+        "load_ms": 694,
+        "long_tasks": 400,
+        "long_task_total_ms": 24639,
+        "blocking_ms_30s": 4639,
+        "tti_approx_ms": 29825,
+        "title": "Штаб",
+        "text_len": 991,
+        "text_head": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\n← на дашборд\nСИСТЕМА 07\nШтаб\n\nОперационный штаб из восьми автономных агентов\n\nНОРМА\nUptime: 132 дня\nЧТО ЭТО\n\nОбщий чат, в котором живут восемь разных характеров: у к",
+        "canvases": [
+          [
+            1920,
+            1080
+          ],
+          [
+            1920,
+            1080
+          ],
+          [
+            1920,
+            1080
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 16,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/desktop-1920/staff_30s.png",
+        "console_errors_30s": [
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          }
+        ],
+        "failed_requests_30s": []
+      },
+      "phone-390": {
+        "target": "https://vanatat.vercel.app/projects/staff",
+        "viewport": "phone-390",
+        "status": 200,
+        "intro": {
+          "how": "skip",
+          "ignored_attempts": 1,
+          "passed": true,
+          "total_ms": 2642
+        },
+        "intro_passed_s": 3.2,
+        "widget_section_visible_s": 3.2,
+        "dcl_ms": 548,
+        "load_ms": 761,
+        "long_tasks": 3,
+        "long_task_total_ms": 160,
+        "blocking_ms_30s": 10,
+        "tti_approx_ms": 10272,
+        "title": "Штаб",
+        "text_len": 991,
+        "text_head": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\n← на дашборд\nСИСТЕМА 07\nШтаб\n\nОперационный штаб из восьми автономных агентов\n\nНОРМА\nUptime: 132 дня\nЧТО ЭТО\n\nОбщий чат, в котором живут восемь разных характеров: у к",
+        "canvases": [
+          [
+            390,
+            844
+          ],
+          [
+            390,
+            844
+          ],
+          [
+            390,
+            844
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 16,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/phone-390/staff_30s.png",
+        "console_errors_30s": [
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          }
+        ],
+        "failed_requests_30s": []
+      }
+    },
+    "perimeter": {
+      "desktop-1920": {
+        "target": "https://vanatat.vercel.app/projects/perimeter",
+        "viewport": "desktop-1920",
+        "status": 200,
+        "intro": {
+          "how": "skip",
+          "ignored_attempts": 1,
+          "passed": true,
+          "total_ms": 2946
+        },
+        "intro_passed_s": 3.7,
+        "widget_section_visible_s": 3.8,
+        "dcl_ms": 725,
+        "load_ms": 969,
+        "long_tasks": 321,
+        "long_task_total_ms": 21023,
+        "blocking_ms_30s": 4973,
+        "tti_approx_ms": 29914,
+        "title": "Периметр",
+        "text_len": 1493,
+        "text_head": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\n← на дашборд\nСИСТЕМА 08\nПериметр\n\nИИ ошибается даже в правильных руках. Нужен контролирующий орган.\n\nНОРМА\nUptime: 30 дней\nЧТО ЭТО\n\nПолная проверка локальной сети на",
+        "canvases": [
+          [
+            1920,
+            1080
+          ],
+          [
+            1920,
+            1080
+          ],
+          [
+            1920,
+            1080
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 8,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/desktop-1920/perimeter_30s.png",
+        "console_errors_30s": [
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          }
+        ],
+        "failed_requests_30s": []
+      },
+      "phone-390": {
+        "target": "https://vanatat.vercel.app/projects/perimeter",
+        "viewport": "phone-390",
+        "status": 200,
+        "intro": {
+          "how": "skip",
+          "ignored_attempts": 1,
+          "passed": true,
+          "total_ms": 2676
+        },
+        "intro_passed_s": 3.3,
+        "widget_section_visible_s": 3.5,
+        "dcl_ms": 658,
+        "load_ms": 852,
+        "long_tasks": 32,
+        "long_task_total_ms": 1862,
+        "blocking_ms_30s": 262,
+        "tti_approx_ms": 17653,
+        "title": "Периметр",
+        "text_len": 1491,
+        "text_head": "RU\n/\nEN\nЗвук: вкл\nПасхалки: 0/13 ▾\n← на дашборд\nСИСТЕМА 08\nПериметр\n\nИИ ошибается даже в правильных руках. Нужен контролирующий орган.\n\nНОРМА\nUptime: 30 дней\nЧТО ЭТО\n\nПолная проверка локальной сети на",
+        "canvases": [
+          [
+            390,
+            844
+          ],
+          [
+            390,
+            844
+          ],
+          [
+            390,
+            844
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 7,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/phone-390/perimeter_30s.png",
+        "console_errors_30s": [
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          },
+          {
+            "kind": "pageerror",
+            "text": "Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+          }
+        ],
+        "failed_requests_30s": []
+      }
+    }
+  },
+  "external_demos": {
+    "Словоход (VK build on Vercel)": {
+      "desktop-1920": {
+        "target": "https://slovokhod-vk.vercel.app",
+        "viewport": "desktop-1920",
+        "status": 200,
+        "dcl_ms": 890,
+        "load_ms": 892,
+        "long_tasks": 0,
+        "long_task_total_ms": 0,
+        "blocking_ms_30s": 0,
+        "tti_approx_ms": 890,
+        "title": "Словоход",
+        "text_len": 285,
+        "text_head": "Словоход\n\nнаходи слова на ощупь\n\n⚡\n15 / 15\nХватит на 15 новых уровней подряд\n\nДень 1 из 7 · награда ждёт\n\nИграть\nУровни\n\nДень 1 из 7\n\n1\n+1\n2\n+2\n3\n⚡5\n4\n+3\n5\n⚡5\n6\n+5\n7\n★\n\n+1 подсказка\n\nЗабрать и играть\n",
+        "canvases": [
+          [
+            1920,
+            1080
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 15,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/desktop-1920/slovokhod-vk_vercel_app_30s.png",
+        "console_errors_30s": [],
+        "failed_requests_30s": []
+      },
+      "phone-390": {
+        "target": "https://slovokhod-vk.vercel.app",
+        "viewport": "phone-390",
+        "status": 200,
+        "dcl_ms": 654,
+        "load_ms": 655,
+        "long_tasks": 0,
+        "long_task_total_ms": 0,
+        "blocking_ms_30s": 0,
+        "tti_approx_ms": 654,
+        "title": "Словоход",
+        "text_len": 285,
+        "text_head": "Словоход\n\nнаходи слова на ощупь\n\n⚡\n15 / 15\nХватит на 15 новых уровней подряд\n\nДень 1 из 7 · награда ждёт\n\nИграть\nУровни\n\nДень 1 из 7\n\n1\n+1\n2\n+2\n3\n⚡5\n4\n+3\n5\n⚡5\n6\n+5\n7\n★\n\n+1 подсказка\n\nЗабрать и играть\n",
+        "canvases": [
+          [
+            390,
+            844
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 15,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/phone-390/slovokhod-vk_vercel_app_30s.png",
+        "console_errors_30s": [],
+        "failed_requests_30s": []
+      }
+    },
+    "Картинки по числам / catnonogram (Vercel)": {
+      "desktop-1920": {
+        "target": "https://catnonogram-vk.vercel.app",
+        "viewport": "desktop-1920",
+        "status": 200,
+        "dcl_ms": 918,
+        "load_ms": 920,
+        "long_tasks": 0,
+        "long_task_total_ms": 0,
+        "blocking_ms_30s": 0,
+        "tti_approx_ms": 918,
+        "title": "Кот и японские кроссворды",
+        "text_len": 277,
+        "text_head": "♪\nКот и японские кроссворды\n\nяпонский кроссворд\n\nИграть\nЕжедневный\n\nСерия: 1 дн. · день 1 из 7\n\n▦\n\ndev-режим: платформа не подключена\n\nСерия: 1 дн.\n\nДень 1 из 7\n\n1\n💡\n2\n💡\n3\n🎨\n4\n💡\n5\n🎁\n6\n💡\n7\n🎨\n\nСе",
+        "canvases": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 25,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/desktop-1920/catnonogram-vk_vercel_app_30s.png",
+        "console_errors_30s": [],
+        "failed_requests_30s": []
+      },
+      "phone-390": {
+        "target": "https://catnonogram-vk.vercel.app",
+        "viewport": "phone-390",
+        "status": 200,
+        "dcl_ms": 784,
+        "load_ms": 785,
+        "long_tasks": 0,
+        "long_task_total_ms": 0,
+        "blocking_ms_30s": 0,
+        "tti_approx_ms": 784,
+        "title": "Кот и японские кроссворды",
+        "text_len": 277,
+        "text_head": "♪\nКот и японские кроссворды\n\nяпонский кроссворд\n\nИграть\nЕжедневный\n\nСерия: 1 дн. · день 1 из 7\n\n▦\n\ndev-режим: платформа не подключена\n\nСерия: 1 дн.\n\nДень 1 из 7\n\n1\n💡\n2\n💡\n3\n🎨\n4\n💡\n5\n🎁\n6\n💡\n7\n🎨\n\nСе",
+        "canvases": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 25,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/phone-390/catnonogram-vk_vercel_app_30s.png",
+        "console_errors_30s": [],
+        "failed_requests_30s": []
+      }
+    },
+    "Color Sort (Vercel)": {
+      "desktop-1920": {
+        "target": "https://color-sort-vk.vercel.app",
+        "viewport": "desktop-1920",
+        "status": 200,
+        "dcl_ms": 910,
+        "load_ms": 910,
+        "long_tasks": 2,
+        "long_task_total_ms": 117,
+        "blocking_ms_30s": 17,
+        "tti_approx_ms": 2963,
+        "title": "Сортировка: Цвет и Форма",
+        "text_len": 409,
+        "text_head": "Сортировка: Цвет и Форма\nСортировка: Цвет и Форма\n\nСерия входов: 1 из 3 · завтра +2 подсказки\n\nЦель дня: пройти 3 уровня — 0/3\n\nЭнергия\n50\nИграть\nУровни\nОформление\n♪\n←\nМагазин\nТёплая тема\nАктивна ✓\n←\n",
+        "canvases": [
+          [
+            771,
+            546
+          ],
+          [
+            1920,
+            1080
+          ],
+          [
+            1920,
+            1080
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 18,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/desktop-1920/color-sort-vk_vercel_app_30s.png",
+        "console_errors_30s": [
+          {
+            "kind": "console",
+            "type": "error",
+            "text": "[vk_platform] VKWebAppInit не ответил/ошибка: Error: timeout\n    at https://color-sort-vk.vercel.app/vk_platform.js?v=47:204:45"
+          }
+        ],
+        "failed_requests_30s": []
+      },
+      "phone-390": {
+        "target": "https://color-sort-vk.vercel.app",
+        "viewport": "phone-390",
+        "status": 200,
+        "dcl_ms": 832,
+        "load_ms": 832,
+        "long_tasks": 2,
+        "long_task_total_ms": 165,
+        "blocking_ms_30s": 65,
+        "tti_approx_ms": 2917,
+        "title": "Сортировка: Цвет и Форма",
+        "text_len": 409,
+        "text_head": "Сортировка: Цвет и Форма\nСортировка: Цвет и Форма\n\nСерия входов: 1 из 3 · завтра +2 подсказки\n\nЦель дня: пройти 3 уровня — 0/3\n\nЭнергия\n50\nИграть\nУровни\nОформление\n♪\n←\nМагазин\nТёплая тема\nАктивна ✓\n←\n",
+        "canvases": [
+          [
+            366,
+            236
+          ],
+          [
+            390,
+            844
+          ],
+          [
+            390,
+            844
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 18,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/phone-390/color-sort-vk_vercel_app_30s.png",
+        "console_errors_30s": [
+          {
+            "kind": "console",
+            "type": "error",
+            "text": "[vk_platform] VKWebAppInit не ответил/ошибка: Error: timeout\n    at https://color-sort-vk.vercel.app/vk_platform.js?v=47:204:45"
+          }
+        ],
+        "failed_requests_30s": []
+      }
+    },
+    "Словоход (games-dev)": {
+      "desktop-1920": {
+        "target": "https://fanatat.github.io/games-dev/slovokhod/",
+        "viewport": "desktop-1920",
+        "status": 200,
+        "dcl_ms": 998,
+        "load_ms": 1002,
+        "long_tasks": 0,
+        "long_task_total_ms": 0,
+        "blocking_ms_30s": 0,
+        "tti_approx_ms": 998,
+        "title": "Словоход",
+        "text_len": 285,
+        "text_head": "Словоход\n\nнаходи слова на ощупь\n\n⚡\n15 / 15\nХватит на 15 новых уровней подряд\n\nДень 1 из 7 · награда ждёт\n\nИграть\nУровни\n\nДень 1 из 7\n\n1\n+1\n2\n+2\n3\n⚡5\n4\n+3\n5\n⚡5\n6\n+5\n7\n★\n\n+1 подсказка\n\nЗабрать и играть\n",
+        "canvases": [
+          [
+            1920,
+            1080
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 15,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/desktop-1920/slovokhod_30s.png",
+        "console_errors_30s": [],
+        "failed_requests_30s": []
+      },
+      "phone-390": {
+        "target": "https://fanatat.github.io/games-dev/slovokhod/",
+        "viewport": "phone-390",
+        "status": 200,
+        "dcl_ms": 683,
+        "load_ms": 686,
+        "long_tasks": 0,
+        "long_task_total_ms": 0,
+        "blocking_ms_30s": 0,
+        "tti_approx_ms": 683,
+        "title": "Словоход",
+        "text_len": 285,
+        "text_head": "Словоход\n\nнаходи слова на ощупь\n\n⚡\n15 / 15\nХватит на 15 новых уровней подряд\n\nДень 1 из 7 · награда ждёт\n\nИграть\nУровни\n\nДень 1 из 7\n\n1\n+1\n2\n+2\n3\n⚡5\n4\n+3\n5\n⚡5\n6\n+5\n7\n★\n\n+1 подсказка\n\nЗабрать и играть\n",
+        "canvases": [
+          [
+            390,
+            844
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 15,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/phone-390/slovokhod_30s.png",
+        "console_errors_30s": [],
+        "failed_requests_30s": []
+      }
+    },
+    "Картинки по числам (games-dev)": {
+      "desktop-1920": {
+        "target": "https://fanatat.github.io/games-dev/catnonogram/",
+        "viewport": "desktop-1920",
+        "status": 200,
+        "dcl_ms": 949,
+        "load_ms": 953,
+        "long_tasks": 0,
+        "long_task_total_ms": 0,
+        "blocking_ms_30s": 0,
+        "tti_approx_ms": 949,
+        "title": "Кот и японские кроссворды",
+        "text_len": 277,
+        "text_head": "♪\nКот и японские кроссворды\n\nяпонский кроссворд\n\nИграть\nЕжедневный\n\nСерия: 1 дн. · день 1 из 7\n\n▦\n\ndev-режим: платформа не подключена\n\nСерия: 1 дн.\n\nДень 1 из 7\n\n1\n💡\n2\n💡\n3\n🎨\n4\n💡\n5\n💡\n6\n💡\n7\n🎨\n\nСе",
+        "canvases": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 24,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/desktop-1920/catnonogram_30s.png",
+        "console_errors_30s": [],
+        "failed_requests_30s": []
+      },
+      "phone-390": {
+        "target": "https://fanatat.github.io/games-dev/catnonogram/",
+        "viewport": "phone-390",
+        "status": 200,
+        "dcl_ms": 793,
+        "load_ms": 795,
+        "long_tasks": 0,
+        "long_task_total_ms": 0,
+        "blocking_ms_30s": 0,
+        "tti_approx_ms": 793,
+        "title": "Кот и японские кроссворды",
+        "text_len": 277,
+        "text_head": "♪\nКот и японские кроссворды\n\nяпонский кроссворд\n\nИграть\nЕжедневный\n\nСерия: 1 дн. · день 1 из 7\n\n▦\n\ndev-режим: платформа не подключена\n\nСерия: 1 дн.\n\nДень 1 из 7\n\n1\n💡\n2\n💡\n3\n🎨\n4\n💡\n5\n💡\n6\n💡\n7\n🎨\n\nСе",
+        "canvases": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 24,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/phone-390/catnonogram_30s.png",
+        "console_errors_30s": [],
+        "failed_requests_30s": []
+      }
+    },
+    "Color Sort (games-dev)": {
+      "desktop-1920": {
+        "target": "https://fanatat.github.io/games-dev/color-sort/",
+        "viewport": "desktop-1920",
+        "status": 200,
+        "dcl_ms": 999,
+        "load_ms": 1000,
+        "long_tasks": 2,
+        "long_task_total_ms": 177,
+        "blocking_ms_30s": 77,
+        "tti_approx_ms": 3853,
+        "title": "Сортировка: Цвет и Форма",
+        "text_len": 409,
+        "text_head": "Сортировка: Цвет и Форма\nСортировка: Цвет и Форма\n\nСерия входов: 1 из 3 · завтра +2 подсказки\n\nЦель дня: пройти 3 уровня — 0/3\n\nЭнергия\n50\nИграть\nУровни\nОформление\n♪\n←\nМагазин\nТёплая тема\nАктивна ✓\n←\n",
+        "canvases": [
+          [
+            771,
+            546
+          ],
+          [
+            1920,
+            1080
+          ],
+          [
+            1920,
+            1080
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 18,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/desktop-1920/color-sort_30s.png",
+        "console_errors_30s": [
+          {
+            "kind": "console",
+            "type": "error",
+            "text": "[vk_platform] VKWebAppInit не ответил/ошибка: Error: timeout\n    at https://fanatat.github.io/games-dev/color-sort/vk_platform.js?v=53:204:45"
+          },
+          {
+            "kind": "console",
+            "type": "error",
+            "text": "Failed to load resource: net::ERR_CERT_AUTHORITY_INVALID"
+          },
+          {
+            "kind": "console",
+            "type": "error",
+            "text": "Failed to load resource: net::ERR_CERT_AUTHORITY_INVALID"
+          }
+        ],
+        "failed_requests_30s": [
+          {
+            "kind": "requestfailed",
+            "url": "https://hdrc.yandex.net/",
+            "failure": "net::ERR_CERT_AUTHORITY_INVALID"
+          },
+          {
+            "kind": "requestfailed",
+            "url": "https://mdd.yandex.net/",
+            "failure": "net::ERR_CERT_AUTHORITY_INVALID"
+          }
+        ]
+      },
+      "phone-390": {
+        "target": "https://fanatat.github.io/games-dev/color-sort/",
+        "viewport": "phone-390",
+        "status": 200,
+        "dcl_ms": 858,
+        "load_ms": 858,
+        "long_tasks": 2,
+        "long_task_total_ms": 432,
+        "blocking_ms_30s": 332,
+        "tti_approx_ms": 3973,
+        "title": "Сортировка: Цвет и Форма",
+        "text_len": 409,
+        "text_head": "Сортировка: Цвет и Форма\nСортировка: Цвет и Форма\n\nСерия входов: 1 из 3 · завтра +2 подсказки\n\nЦель дня: пройти 3 уровня — 0/3\n\nЭнергия\n50\nИграть\nУровни\nОформление\n♪\n←\nМагазин\nТёплая тема\nАктивна ✓\n←\n",
+        "canvases": [
+          [
+            366,
+            236
+          ],
+          [
+            390,
+            844
+          ],
+          [
+            390,
+            844
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 18,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/phone-390/color-sort_30s.png",
+        "console_errors_30s": [
+          {
+            "kind": "console",
+            "type": "error",
+            "text": "[vk_platform] VKWebAppInit не ответил/ошибка: Error: timeout\n    at https://fanatat.github.io/games-dev/color-sort/vk_platform.js?v=53:204:45"
+          },
+          {
+            "kind": "console",
+            "type": "error",
+            "text": "Failed to load resource: net::ERR_CERT_AUTHORITY_INVALID"
+          },
+          {
+            "kind": "console",
+            "type": "error",
+            "text": "Failed to load resource: net::ERR_CERT_AUTHORITY_INVALID"
+          }
+        ],
+        "failed_requests_30s": [
+          {
+            "kind": "requestfailed",
+            "url": "https://hdrc.yandex.net/",
+            "failure": "net::ERR_CERT_AUTHORITY_INVALID"
+          },
+          {
+            "kind": "requestfailed",
+            "url": "https://mdd.yandex.net/",
+            "failure": "net::ERR_CERT_AUTHORITY_INVALID"
+          }
+        ]
+      }
+    },
+    "Lane Battler (games-dev)": {
+      "desktop-1920": {
+        "target": "https://fanatat.github.io/games-dev/lane-battle/",
+        "viewport": "desktop-1920",
+        "status": 200,
+        "dcl_ms": 1098,
+        "load_ms": 1502,
+        "long_tasks": 285,
+        "long_task_total_ms": 20912,
+        "blocking_ms_30s": 6662,
+        "tti_approx_ms": 30017,
+        "title": "Twin Forts",
+        "text_len": 123,
+        "text_head": "HP\n1000/1000\n0\nМиссия 1 — Каменный век\n520/520\nHP\n?\n100\nHP\n20\n1\n34\n2\n40\n3\n💲\n40\nQ\nЗалп\nV\nЭра\nT\nВихрь\nR\nКирка\nF\nКупи бойца\n1",
+        "canvases": [
+          [
+            1920,
+            1080
+          ],
+          [
+            60,
+            66
+          ],
+          [
+            60,
+            66
+          ],
+          [
+            60,
+            66
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 37,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/desktop-1920/lane-battle_30s.png",
+        "console_errors_30s": [],
+        "failed_requests_30s": []
+      },
+      "phone-390": {
+        "target": "https://fanatat.github.io/games-dev/lane-battle/",
+        "viewport": "phone-390",
+        "status": 200,
+        "dcl_ms": 907,
+        "load_ms": 1124,
+        "long_tasks": 4,
+        "long_task_total_ms": 380,
+        "blocking_ms_30s": 180,
+        "tti_approx_ms": 6751,
+        "title": "Twin Forts",
+        "text_len": 80,
+        "text_head": "⟳\n\nПоверните устройство горизонтально —\nигра рассчитана на альбомную ориентацию.",
+        "canvases": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 37,
+        "mobile_warning": true,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/phone-390/lane-battle_30s.png",
+        "console_errors_30s": [],
+        "failed_requests_30s": []
+      }
+    },
+    "Royal Solitaire (games-dev)": {
+      "desktop-1920": {
+        "target": "https://fanatat.github.io/games-dev/royal-solitaire/",
+        "viewport": "desktop-1920",
+        "status": 200,
+        "dcl_ms": 1357,
+        "load_ms": 1567,
+        "long_tasks": 6,
+        "long_task_total_ms": 29595,
+        "blocking_ms_30s": 29295,
+        "tti_approx_ms": 31101,
+        "title": "Королевская Косынка",
+        "text_len": 100,
+        "text_head": "🪙\n100\n♛\n0\nКоролевская\nКосынка\n🂡\nИграть\n🏰\nАрены\n👤\nПрофиль\n🛍\nЛавка\n⚙\nНастройки\nИграть по номеру\n?",
+        "canvases": [
+          [
+            1920,
+            1080
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 16,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/desktop-1920/royal-solitaire_30s.png",
+        "console_errors_30s": [],
+        "failed_requests_30s": []
+      },
+      "phone-390": {
+        "target": "https://fanatat.github.io/games-dev/royal-solitaire/",
+        "viewport": "phone-390",
+        "status": 200,
+        "dcl_ms": 3589,
+        "load_ms": 3830,
+        "long_tasks": 18,
+        "long_task_total_ms": 29070,
+        "blocking_ms_30s": 28170,
+        "tti_approx_ms": 30354,
+        "title": "Королевская Косынка",
+        "text_len": 100,
+        "text_head": "🪙\n100\n♛\n0\nКоролевская\nКосынка\n🂡\nИграть\n🏰\nАрены\n👤\nПрофиль\n🛍\nЛавка\n⚙\nНастройки\nИграть по номеру\n?",
+        "canvases": [
+          [
+            390,
+            844
+          ]
+        ],
+        "horizontal_scroll": false,
+        "buttons": 16,
+        "mobile_warning": false,
+        "external_links": [],
+        "screenshot_30s": "screenshots/projects/phone-390/royal-solitaire_30s.png",
+        "console_errors_30s": [],
+        "failed_requests_30s": []
+      }
+    }
+  },
+  "code_links": [
+    {
+      "url": "https://github.com/Fanatat",
+      "status": 200,
+      "linked_from_site": true
+    },
+    {
+      "url": "https://github.com/Fanatat/lending2",
+      "status": 200,
+      "linked_from_site": false
+    },
+    {
+      "url": "https://github.com/Fanatat/slovokhod-vk",
+      "status": 200,
+      "linked_from_site": false
+    },
+    {
+      "url": "https://github.com/Fanatat/catnonogram-vk",
+      "status": 200,
+      "linked_from_site": false
+    },
+    {
+      "url": "https://github.com/Fanatat/Color_Sort-Vk",
+      "status": 200,
+      "linked_from_site": false
+    },
+    {
+      "url": "https://github.com/Fanatat/lane-battle-vk",
+      "status": 200,
+      "linked_from_site": false
+    },
+    {
+      "url": "https://github.com/Fanatat/Royal_solitaire",
+      "status": 200,
+      "linked_from_site": false
+    },
+    {
+      "url": "https://github.com/Fanatat/hp100-live-feed",
+      "status": 200,
+      "linked_from_site": false
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+[
+  {
+    "viewport": "desktop-1920",
+    "intro_path": "skip",
+    "sound_toggle_label": "Звук: вкл",
+    "audio_starts_in_8s_after_intro": 32,
+    "intro": {
+      "how": "skip",
+      "total_ms": 1124
+    }
+  },
+  {
+    "viewport": "desktop-1920",
+    "intro_path": "silent",
+    "sound_toggle_label": "Звук: выкл",
+    "audio_starts_in_8s_after_intro": 0,
+    "intro": {
+      "how": "silent",
+      "gate_ms": 5569,
+      "start_visible_ms": 15339,
+      "total_ms": 25470
+    }
+  },
+  {
+    "viewport": "phone-390",
+    "intro_path": "skip",
+    "sound_toggle_label": "Звук: вкл",
+    "audio_starts_in_8s_after_intro": 45,
+    "intro": {
+      "how": "skip",
+      "total_ms": 1253
+    }
+  },
+  {
+    "viewport": "phone-390",
+    "intro_path": "silent",
+    "sound_toggle_label": "Звук: выкл",
+    "audio_starts_in_8s_after_intro": 0,
+    "intro": {
+      "how": "silent",
+      "gate_ms": 3977,
+      "start_visible_ms": 11131,
+      "total_ms": 16929
+    }
+  }
+]
