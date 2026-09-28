@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import SetHtmlLang from "@/components/effects/SetHtmlLang";
 import DetailsDisclosure from "@/components/sections/DetailsDisclosure";
 import SiteFooter from "@/components/sections/closing/SiteFooter";
-import { GITHUB_URL, MAX_URL, OG_IMAGE, TELEGRAM_URL, asset } from "@/lib/site";
+import { GITHUB_URL, MAX_URL, OG_IMAGE, TELEGRAM_URL, asset, pageUrl } from "@/lib/site";
 
 const TITLE = "Hi, I'm Valery";
 const DESCRIPTION =
@@ -13,16 +13,16 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: {
-    canonical: asset("/en"),
+    canonical: pageUrl("/en"),
     languages: {
-      ru: asset("/"),
-      en: asset("/en"),
+      ru: pageUrl("/"),
+      en: pageUrl("/en"),
     },
   },
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
-    url: asset("/en"),
+    url: pageUrl("/en"),
     siteName: TITLE,
     locale: "en_US",
     type: "website",
@@ -46,7 +46,7 @@ interface System {
   footnote?: string;
   line: ReactNode;
   details: ReactNode;
-  games?: { title: string; line: string; inDevelopment?: boolean }[];
+  games?: { title: string; line: string; inDevelopment?: boolean; playUrl: string; codeUrl: string }[];
 }
 
 /**
@@ -62,11 +62,11 @@ const SYSTEMS: System[] = [
     details:
       "A separate system first develops a game, then puts it in the maintenance queue. It prepares promo materials and store-page copy for the platforms. Scripts launch the game in a headless browser on their own, record gameplay in vertical and horizontal formats, check that no Cyrillic has leaked into the English build, and cut the video.",
     games: [
-      { title: "Slovokhod", line: "A hundred word-search levels and not a single audio file in the build: the game synthesises every sound itself." },
-      { title: "Pictures by Numbers", line: "130 nonograms, checked by 338 automated tests before every release." },
-      { title: "Color Sort", line: "Flask sorting that a colour-blind player beats on equal terms: you sort by colour and shape at once." },
-      { title: "Lane Battler", line: "The combat rules come from 375 negative reviews of the genre leader: we fixed exactly what players complain about. Not taste — facts.", inDevelopment: true },
-      { title: "Royal Solitaire", line: "A cartoon 2.5D Klondike on Three.js that passed Yandex Games moderation — not a mock-up, a built and released game." },
+      { title: "Slovokhod", playUrl: "https://slovokhod-vk.vercel.app", codeUrl: "https://github.com/Fanatat/slovokhod-vk", line: "A hundred word-search levels and not a single audio file in the build: the game synthesises every sound itself." },
+      { title: "Pictures by Numbers", playUrl: "https://catnonogram-vk.vercel.app", codeUrl: "https://github.com/Fanatat/catnonogram-vk", line: "130 nonograms, checked by 338 automated tests before every release." },
+      { title: "Color Sort", playUrl: "https://color-sort-vk.vercel.app", codeUrl: "https://github.com/Fanatat/Color_Sort-Vk", line: "Flask sorting that a colour-blind player beats on equal terms: you sort by colour and shape at once." },
+      { title: "Lane Battler", playUrl: "https://fanatat.github.io/games-dev/lane-battle/", codeUrl: "https://github.com/Fanatat/lane-battle-vk", line: "The combat rules come from 375 negative reviews of the genre leader: we fixed exactly what players complain about. Not taste — facts.", inDevelopment: true },
+      { title: "Royal Solitaire", playUrl: "https://fanatat.github.io/games-dev/royal-solitaire/", codeUrl: "https://github.com/Fanatat/Royal_solitaire", line: "A cartoon 2.5D Klondike on Three.js that passed Yandex Games moderation — not a mock-up, a built and released game." },
     ],
   },
   {
@@ -101,14 +101,14 @@ const SYSTEMS: System[] = [
     footnote: "what?",
     line: "Crypto portfolio analytics that sees where the market punishes the greedy: the market situation, your assets, a comparison of instruments and the maths of risk. What it can't do is press “Buy” — it's built that way.",
     details:
-      "The system reads a portfolio on the exchange and explains in plain language what is happening to it: the exact picture of the money, concentration, drawdown, liquidity, a calendar of token unlocks. It sees when the market situation has changed and there is potential to earn more by moving into another asset or changing the way it yields. It gives no trading signals and doesn't predict prices — by a deliberate decision. All numbers are calculated by Python using carefully verified formulas in a separate module — the module runs on my server and updates the calculations on a schedule; the language model receives ready-made figures and writes the sentences, so no invented numbers appear in the report. The portfolio on the Russian page is a masked snapshot of the same data structure: real amounts and holdings aren't published for privacy reasons, not because the connection isn't ready. The framework carries over to any operational monitoring where the conclusions are worded by AI.",
+      "The system reads a portfolio on the exchange and explains in plain language what is happening to it: the exact picture of the money, concentration, drawdown, liquidity, a calendar of token unlocks. It sees when the market situation has changed and there is potential to earn more by moving into another asset or changing the way it yields. It gives no trading signals and doesn't predict prices — by a deliberate decision. All numbers are calculated by Python using carefully verified formulas in a separate module — the module runs on my server and updates the calculations on a schedule; the language model receives ready-made figures and writes the sentences, so no invented numbers appear in the report. The portfolio on the Russian page is the same data structure filled with generated figures: real amounts and holdings aren't published for privacy reasons, not because the connection isn't ready. The framework carries over to any operational monitoring where the conclusions are worded by AI.",
   },
   {
     number: "SYSTEM 06",
     title: "One idea can turn into a whole season of cartoons in three languages",
     line: "One production line serves three channels: the script, the voice-over and all the material for editing are assembled and numbered — the editor only has to create.",
     details:
-      "The system gets a topic and carries on by itself: writes the story, splits it into scenes, sets up characters and settings, lays it out shot by shot, assembles image descriptions, generates images, records the voice-over, edits and exports almost-finished material — all that's left is to put the video together in Premiere. The story is written once in canonical form; the English, Spanish and Russian versions are derived from it. Twelve real videos have already been assembled from start to finish. All generation runs on an ordinary home computer, with no subscriptions or APIs — including the review stage, where an LLM itself checks that the script follows the plan, the characters in the pictures don't change, and the overall setting holds. This way several cartoon series can run in parallel.",
+      "The system gets a topic and carries on by itself: writes the story, splits it into scenes, sets up characters and settings, lays it out shot by shot, assembles image descriptions, generates images, records the voice-over, edits and exports almost-finished material — all that's left is to put the video together in Premiere. The story is written once in canonical form; the English, Spanish and Russian versions are derived from it. Twelve videos have already been assembled from start to finish in a technical run — still with placeholder pictures: image generation is connected, the visual style is still being chosen. All generation runs on an ordinary home computer, with no subscriptions or APIs — including the review stage, where an LLM itself checks that the script follows the plan, the characters in the pictures don't change, and the overall setting holds. This way several cartoon series can run in parallel.",
   },
   {
     number: "SYSTEM 07",
@@ -143,6 +143,9 @@ const COST_LINES = [
 const TOTAL = COST_LINES.reduce((sum, l) => sum + l.amount, 0);
 const TOTAL_LABEL = TOTAL.toLocaleString("en-US");
 
+const gameLinkClass =
+  "text-[11px] text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:decoration-accent";
+
 const buttonClass =
   "inline-block border border-accent px-6 py-3 text-sm text-accent transition-[filter] duration-200 hover:[filter:drop-shadow(0_0_6px_var(--accent))]";
 
@@ -158,6 +161,9 @@ export default function EnglishHomePage() {
       <SetHtmlLang lang="en" />
 
       <section id="hero" className="flex min-h-[100svh] flex-col justify-center gap-6 px-4 py-20 sm:px-6 sm:py-24 md:px-10 lg:px-16">
+        <p className="text-sm text-fg-primary/80 sm:text-base">
+          Valery — AI systems producer
+        </p>
         <h1 className="max-w-3xl text-3xl text-fg-primary sm:text-4xl">
           #NOTARESUME — a list of shipped tasks
         </h1>
@@ -168,6 +174,24 @@ export default function EnglishHomePage() {
         <p className="max-w-xl text-xs text-fg-muted">
           All of this costs 2,000 ₽ a month. The proof is below.
         </p>
+        <div className="flex flex-wrap gap-3">
+          <a
+            href="#system-01"
+            data-cursor="interactive"
+            className="inline-block border border-line px-5 py-3 text-sm text-fg-primary transition-colors hover:border-accent hover:text-accent"
+          >
+            Projects ↓
+          </a>
+          <a
+            href={TELEGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-cursor="interactive"
+            className={buttonClass}
+          >
+            Message on Telegram
+          </a>
+        </div>
       </section>
 
       <section id="operator" className="border-t border-line px-4 py-14 sm:px-6 sm:py-20 md:px-10 lg:px-16">
@@ -239,6 +263,28 @@ export default function EnglishHomePage() {
                     <p className="mt-2 text-xs leading-relaxed text-fg-primary/75">
                       {g.line}
                     </p>
+                    <div className="mt-3 flex gap-4">
+                      <a
+                        href={g.playUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-cursor="interactive"
+                        aria-label={`Play ${g.title}`}
+                        className={gameLinkClass}
+                      >
+                        Play ↗
+                      </a>
+                      <a
+                        href={g.codeUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-cursor="interactive"
+                        aria-label={`${g.title} source code on GitHub`}
+                        className={gameLinkClass}
+                      >
+                        Code ↗
+                      </a>
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -301,12 +347,11 @@ export default function EnglishHomePage() {
               roubles a month.
             </p>
             <p className="mt-4 text-sm leading-relaxed text-fg-primary/90 sm:text-base">
-              I don&apos;t take orders. I take on tasks I&apos;m genuinely
-              curious to solve — that&apos;s what keeps the work creative. If
-              you have a task like that and understand its value, write to me.
-              I&apos;ll see whether it&apos;s worth solving. And if it is,
-              I&apos;ll take your problem and hand you back a working
-              mechanism.
+              I take on tasks that are interesting to solve: AI-agent
+              automation, bots, monitoring, games. Write to me with what needs
+              doing — I&apos;ll reply and tell you how I&apos;d approach it. If
+              I take it on, I&apos;ll take your problem off your hands and give
+              you back a working mechanism.
             </p>
             <div className="mt-8 flex flex-col items-center gap-3 lg:items-start">
               <a

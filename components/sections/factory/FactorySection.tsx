@@ -12,7 +12,7 @@ const ConveyorBelt = dynamic(() => import("./ConveyorBelt"), {
   ),
 });
 
-/** Both straight from the details copy: twelve finished videos, three languages. */
+/** Both straight from the details copy: twelve videos from the technical run, three languages. */
 const VIDEOS_FINISHED = 12;
 const LANGUAGES = 3;
 
@@ -34,7 +34,7 @@ export default function FactorySection() {
         <ConveyorBelt />
         <div className="flex w-full max-w-sm items-center justify-center gap-8 border-t border-line pt-3 text-center">
           <div>
-            <div className="text-[10px] text-fg-muted">Роликов собрано целиком</div>
+            <div className="text-[10px] text-fg-muted">Роликов в тех. прогоне</div>
             <Odometer value={VIDEOS_FINISHED} />
           </div>
           <div>

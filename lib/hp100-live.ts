@@ -46,6 +46,8 @@ export interface Hp100Status {
   /** Real reading, but older than STALE_AFTER_MS — the feed bot is down. */
   stale: boolean;
   lastUpdated: number | null;
+  /** The first poll has finished (either way) — "no data" now means no link, not "not asked yet". */
+  checked: boolean;
 }
 
 type Listener = (snapshot: Hp100Snapshot, status: Hp100Status) => void;
@@ -75,7 +77,7 @@ class Hp100LiveSource {
   private mockUnsub: (() => void) | null = null;
   private inFlight = false;
   private snapshot: Hp100Snapshot = hp100Source.getSnapshot();
-  private status: Hp100Status = { live: false, stale: false, lastUpdated: null };
+  private status: Hp100Status = { live: false, stale: false, lastUpdated: null, checked: false };
 
   start() {
     if (this.timer !== undefined) return;
@@ -120,13 +122,16 @@ class Hp100LiveSource {
       }
 
       this.snapshot = nextSnapshot;
-      this.status = { live: !stale, stale, lastUpdated: updatedMs };
+      this.status = { live: !stale, stale, lastUpdated: updatedMs, checked: true };
       this.emit();
     } catch {
       // A failed poll after real data keeps the last real reading on screen
       // (now marked stale) instead of swapping in simulated numbers.
       if (this.status.live) {
-        this.status = { live: false, stale: true, lastUpdated: this.status.lastUpdated };
+        this.status = { ...this.status, live: false, stale: true, checked: true };
+        this.emit();
+      } else if (!this.status.checked) {
+        this.status = { ...this.status, checked: true };
         this.emit();
       }
     } finally {

@@ -1,6 +1,6 @@
 "use client";
 
-/** Masked data for the "All in" widget: the real module runs on the author's server; real amounts are deliberately not published. */
+/** Generated demo data for the "All in" widget (and labelled as such there): the real module runs on the author's server; real amounts are deliberately not published. */
 
 export interface PortfolioAsset {
   symbol: string;

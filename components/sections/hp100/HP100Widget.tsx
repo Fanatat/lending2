@@ -8,6 +8,7 @@ import { useReducedMotion } from "@/lib/motion";
 import { useSystemStatusStore } from "@/lib/systemStatus";
 import { useLabStore } from "@/lib/store";
 import { playSfx } from "@/lib/sfx";
+import { HP100_FEED_REPO_URL } from "@/lib/site";
 
 // "Подышать на датчик" easter egg: keeping the pointer on the CO₂ row makes
 // the reading climb as if someone breathed right into the sensor.
@@ -188,18 +189,20 @@ export default function HP100Widget() {
   const co2Def = HP100_METRICS[0]!;
   const co2Critical = co2 && co2.latest > co2Def.warnMax;
 
-  // Feeds the shared "Норма" indicator (SystemStatusLine, also read by the
-  // Staff agent grid) with the plate's actual reading instead of a
-  // permanently-green decoration — any metric outside its normal range
-  // flips the whole site's HP100 status to offline/red, not just this
-  // widget's own bars.
-  const setOnline = useSystemStatusStore((s) => s.setOnline);
+  // Feeds the shared HP100 indicator (SystemStatusLine, the hero tally and
+  // the Staff agent grid) with the state of the link to the board. The air
+  // itself is judged separately, right here in the widget (`offNorm`):
+  // a warm room is a reading, not an outage.
+  const setHp100Link = useSystemStatusStore((s) => s.setHp100Link);
   useEffect(() => {
-    const allNormal = HP100_METRICS.every(
-      (def) => levelFor(snapshot[def.key].latest, def.normalMax, def.warnMax) === "normal"
-    );
-    setOnline("hp100", allNormal);
-  }, [snapshot, setOnline]);
+    const link = status.live ? "live" : status.stale ? "stale" : status.checked ? "offline" : "checking";
+    setHp100Link(link, status.lastUpdated);
+  }, [status, setHp100Link]);
+
+  const offNorm = HP100_METRICS.filter(
+    (def) => levelFor(snapshot[def.key].latest, def.normalMax, def.warnMax) !== "normal"
+  );
+  const realData = status.live || status.stale;
 
   const selectedDef = selected ? HP100_METRICS.find((d) => d.key === selected) : null;
   const selectedLevel =
@@ -226,6 +229,17 @@ export default function HP100Widget() {
           {status.live ? "live" : status.stale ? "архив" : "нет связи"}
         </span>
       </div>
+
+      {realData && (
+        <p
+          className="mb-3 text-[10px] uppercase tracking-wide"
+          style={{ color: offNorm.length ? LEVEL_COLOR.warn : LEVEL_COLOR.normal }}
+        >
+          {offNorm.length
+            ? `Воздух: выше нормы — ${offNorm.map((d) => d.label).join(", ")}`
+            : "Воздух: в норме"}
+        </p>
+      )}
 
       <div className="space-y-3">
         {HP100_METRICS.map((def) => {
@@ -291,14 +305,25 @@ export default function HP100Widget() {
             : "Нет связи с лентой данных платы — показана симуляция на её формулах, пока связь не вернётся."}
       </p>
 
-      <ProjectCardLink
-        href="/projects/hp100"
-        hideWhenCurrent
-        ariaLabel="Открыть проект HP100 целиком"
-        className="mt-3 inline-block text-[10px] text-accent"
-      >
-        Как устроена плата →
-      </ProjectCardLink>
+      <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[10px]">
+        <ProjectCardLink
+          href="/projects/hp100"
+          hideWhenCurrent
+          ariaLabel="Открыть проект HP100 целиком"
+          className="inline-block text-accent"
+        >
+          Как устроена плата →
+        </ProjectCardLink>
+        <a
+          href={HP100_FEED_REPO_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-cursor="interactive"
+          className="text-accent"
+        >
+          Лента показаний на GitHub ↗
+        </a>
+      </div>
     </div>
   );
 }
