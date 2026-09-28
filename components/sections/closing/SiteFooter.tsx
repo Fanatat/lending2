@@ -1,4 +1,5 @@
 import HeapSweep from "@/components/effects/HeapSweep";
+import IntroReplayButton from "@/components/intro/IntroReplayButton";
 import { SITE_REPO_URL } from "@/lib/site";
 
 const START_YEAR = 2026;
@@ -10,6 +11,7 @@ const COPY = {
     textures: "Текстуры планет:",
     sounds: "Звуки:",
     source: "Код этого сайта",
+    replayIntro: "Смотреть интро снова",
   },
   en: {
     rights: "Valery. All rights reserved.",
@@ -17,6 +19,7 @@ const COPY = {
     textures: "Planet textures:",
     sounds: "Sounds:",
     source: "This site's source code",
+    replayIntro: "Watch the intro again",
   },
 };
 
@@ -41,6 +44,8 @@ export default function SiteFooter({ lang = "ru" }: { lang?: "ru" | "en" }) {
         >
           {t.source} — GitHub ↗
         </a>
+        {" · "}
+        <IntroReplayButton label={t.replayIntro} />
       </p>
       <p className="mt-1">{t.notice}</p>
       <p className="mt-1">

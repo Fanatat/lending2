@@ -78,11 +78,14 @@ export default function RootLayout({
       <head>
         {/* Runs before hydration so a reload while SudoEasterEgg's lock is
             engaged shows the lock immediately instead of flashing the
-            normal page first. Keys here must match SUDO_LOCK_KEY /
-            SUDO_LOCK_HTML_CLASS in components/easter-eggs/SudoEasterEgg.tsx. */}
+            normal page first, and a returning visitor doesn't see the
+            intro's sound gate flash before IntroAnimation skips it. Keys
+            here must match SUDO_LOCK_KEY / SUDO_LOCK_HTML_CLASS in
+            components/easter-eggs/SudoEasterEgg.tsx and INTRO_SEEN_KEY /
+            INTRO_SEEN_HTML_CLASS in lib/introStore.ts. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{if(localStorage.getItem('lab-terminal:sudo-locked')==='1'){document.documentElement.classList.add('sudo-locked-boot');}}catch(e){}`,
+            __html: `try{var c=document.documentElement.classList;if(localStorage.getItem('lab-terminal:sudo-locked')==='1'){c.add('sudo-locked-boot');}if(localStorage.getItem('lab-terminal:intro-seen')==='1'){c.add('intro-seen-boot');}}catch(e){}`,
           }}
         />
       </head>

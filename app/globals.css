@@ -959,6 +959,11 @@ html.agent-vision canvas {
   opacity: 0;
   pointer-events: none;
 }
+/* Returning visitor (see INTRO_SEEN_HTML_CLASS): the gate is skipped, so
+   don't let the pre-rendered one show for the moment before hydration. */
+html.intro-seen-boot .intro-gate {
+  display: none;
+}
 .intro-gate-inner {
   display: flex;
   flex-direction: column;
