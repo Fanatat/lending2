@@ -1,13 +1,12 @@
 /**
- * Where the site lives. The same code is deployed twice — Vercel and GitHub
- * Pages (see next.config.mjs and .github/workflows/pages.yml); Pages may
- * serve it from a sub-path, which arrives through the environment.
+ * Base path for the selected deployment. GitHub Pages can serve a static
+ * export from a sub-path; regular Next.js hosting uses the root by default.
  */
 export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 /**
  * The one address search engines and link previews should use, whichever
- * copy (Vercel or GitHub Pages) served the page. Pages serves directories
+ * deployment served the page. Pages serves directories
  * with a trailing slash and redirects without one, so canonical paths carry
  * it too — a canonical that itself redirects is worse than none. Metadata
  * URLs are written out in full with it, so Next's basePath handling never

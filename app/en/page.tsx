@@ -62,11 +62,11 @@ const SYSTEMS: System[] = [
     details:
       "A separate system first develops a game, then puts it in the maintenance queue. It prepares promo materials and store-page copy for the platforms. Scripts launch the game in a headless browser on their own, record gameplay in vertical and horizontal formats, check that no Cyrillic has leaked into the English build, and cut the video.",
     games: [
-      { title: "Slovokhod", playUrl: "https://slovokhod-vk.vercel.app", codeUrl: "https://github.com/Fanatat/slovokhod-vk", line: "A hundred word-search levels and not a single audio file in the build: the game synthesises every sound itself." },
-      { title: "Pictures by Numbers", playUrl: "https://catnonogram-vk.vercel.app", codeUrl: "https://github.com/Fanatat/catnonogram-vk", line: "130 nonograms, checked by 338 automated tests before every release." },
-      { title: "Color Sort", playUrl: "https://color-sort-vk.vercel.app", codeUrl: "https://github.com/Fanatat/Color_Sort-Vk", line: "Flask sorting that a colour-blind player beats on equal terms: you sort by colour and shape at once." },
-      { title: "Lane Battler", playUrl: "https://fanatat.github.io/games-dev/lane-battle/", codeUrl: "https://github.com/Fanatat/lane-battle-vk", line: "The combat rules come from 375 negative reviews of the genre leader: we fixed exactly what players complain about. Not taste — facts.", inDevelopment: true },
-      { title: "Royal Solitaire", playUrl: "https://fanatat.github.io/games-dev/royal-solitaire/", codeUrl: "https://github.com/Fanatat/Royal_solitaire", line: "A cartoon 2.5D Klondike on Three.js that passed Yandex Games moderation — not a mock-up, a built and released game." },
+      { title: "Slovokhod", playUrl: "https://slovokhod-vk.vercel.app", codeUrl: "https://github.com/Fanatat/slovokhod-vk", line: "Published on VK. A hundred word-search levels and not a single audio file in the build: the game synthesises every sound itself." },
+      { title: "Cat Nonograms", playUrl: "https://catnonogram-vk.vercel.app", codeUrl: "https://github.com/Fanatat/catnonogram-vk", line: "Published on VK. 130 nonograms across themed chapters, with daily puzzles." },
+      { title: "Color and Shape Sort", playUrl: "https://color-sort-vk.vercel.app", codeUrl: "https://github.com/Fanatat/Color_Sort-Vk", line: "Published on VK. Sort pieces by both colour and shape, so colour is not the only cue." },
+      { title: "Two Fortresses (Lane Battler)", playUrl: "https://fanatat.github.io/games-dev/lane-battle/", codeUrl: "https://github.com/Fanatat/lane-battle-vk", line: "Published on VK. Recruit a squad, upgrade your economy and control a hero on a single battlefield. A browser test build is available." },
+      { title: "Royal Solitaire", playUrl: "https://fanatat.github.io/games-dev/royal-solitaire/", codeUrl: "https://github.com/Fanatat/Royal_solitaire", line: "Published on VK. Klondike with arenas and rewards, rendered with Three.js/WebGL. A browser test build is available." },
     ],
   },
   {
@@ -272,7 +272,7 @@ export default function EnglishHomePage() {
                         aria-label={`Play ${g.title}`}
                         className={gameLinkClass}
                       >
-                        Play ↗
+                        {g.playUrl.includes("/games-dev/") ? "Test build ↗" : "Play ↗"}
                       </a>
                       <a
                         href={g.codeUrl}

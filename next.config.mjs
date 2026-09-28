@@ -1,9 +1,9 @@
 /**
  * Two targets from one codebase:
- * - Vercel (default): regular Next.js build.
+ * - Default: regular Next.js build for a Node.js host.
  * - GitHub Pages (PAGES_BASE_PATH set by the workflow): fully static export
- *   served from a sub-path like /lending2. vercel.app is unreachable from
- *   part of Russian networks, github.io isn't.
+ *   served from a sub-path like /lending2. Network availability depends
+ *   on the visitor's connection.
  */
 const pagesBasePath = process.env.PAGES_BASE_PATH;
 const isPages = pagesBasePath !== undefined;

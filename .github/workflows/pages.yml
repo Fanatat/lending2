@@ -1,6 +1,5 @@
 # Static build of the site for GitHub Pages (https://fanatat.github.io/lending2/).
-# vercel.app is unreachable from part of Russian networks; github.io is not.
-# Vercel keeps building from the same main branch as before.
+# This workflow publishes the Pages copy. The primary domain is configured separately.
 name: GitHub Pages
 
 on:
