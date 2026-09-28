@@ -9,6 +9,7 @@ import IntroSoundGate from "./IntroSoundGate";
 import { loadCosmosAssets } from "@/lib/cosmosAssets";
 import { playLoop, playSfx, preloadSfx, unlockAudio, type LoopHandle } from "@/lib/sfx";
 import { useLabStore } from "@/lib/store";
+import { INTRO_SEEN_HTML_CLASS, introSeen, markIntroSeen } from "@/lib/introStore";
 import {
   INTRO_COPY,
   INTRO_EXIT_MS,
@@ -33,6 +34,11 @@ import {
  * Like the reference, the last scene waits for the visitor: "Начать" blooms
  * the planet over the screen and the site shows through. Skip / Esc leave
  * straight away at any point.
+ *
+ * The parade is a first-visit thing: once the visitor has left the intro
+ * (INTRO_SEEN_KEY), later loads skip the gate and the parade and open
+ * straight on the "Начать" scene — silent, since there's been no gesture
+ * to unlock audio. `full` (from "Смотреть интро снова") plays it all again.
  */
 
 type Exit = null | { kind: "start" | "skip"; at: number };
@@ -52,9 +58,12 @@ const ASSET_WAIT_MS = 4000;
 const RISER_MS = 2600;
 
 export default function IntroAnimation({
+  full = false,
   onReveal,
   onComplete,
 }: {
+  /** Play the gate and the parade even for a returning visitor. */
+  full?: boolean;
   onReveal: () => void;
   onComplete: () => void;
 }) {
@@ -77,7 +86,16 @@ export default function IntroAnimation({
 
   useEffect(() => {
     setMobile(window.innerWidth < MOBILE_BREAKPOINT_PX);
-    void loadCosmosAssets();
+    if (!full && introSeen()) {
+      // Returning visitor: the "Начать" scene is a shader, it needs none of
+      // the planet textures, so it starts right away.
+      startedRef.current = true;
+      setGate(false);
+      startClock(false, true);
+    } else {
+      document.documentElement.classList.remove(INTRO_SEEN_HTML_CLASS);
+      void loadCosmosAssets();
+    }
     // Dev shortcut for screenshots: ?introT=<ms> skips the gate, silently.
     if (
       process.env.NODE_ENV !== "production" &&
@@ -113,11 +131,12 @@ export default function IntroAnimation({
     });
   }
 
-  function startClock(withSound: boolean) {
+  function startClock(withSound: boolean, returning = false) {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    // Reduced motion: no flight through the planets — open on the calm
-    // last scene (nebula → planet → text) instead.
-    const offset = reduced ? INTRO_T.nebula - 400 : 0;
+    // Reduced motion or a returning visitor: no flight through the planets —
+    // open on the calm last scene (nebula → planet → text) instead.
+    const calm = reduced || returning;
+    const offset = calm ? INTRO_T.nebula - 400 : 0;
     setOrigin(performance.now() - offset);
 
     const at = (ms: number, fn: () => void) => {
@@ -126,7 +145,7 @@ export default function IntroAnimation({
     };
     const patch = (p: Partial<Stages>) => setStages((s) => ({ ...s, ...p }));
 
-    if (reduced) {
+    if (calm) {
       setStages({ cosmos: false, mark: "hidden", welcome: null });
     } else {
       if (INTRO_SHOW_MARK) {
@@ -166,6 +185,7 @@ export default function IntroAnimation({
     exitRef.current = next;
     setExit(next);
     setShowSkip(false);
+    markIntroSeen();
     if (kind === "start") playSfx("start");
     ambientRef.current?.stop(kind === "start" ? 2.5 : 0.8);
 
