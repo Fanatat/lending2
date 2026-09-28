@@ -9,6 +9,11 @@ import AnomalyBanner from "./AnomalyBanner";
 import { useReducedMotion } from "@/lib/motion";
 import { useTypewriter } from "@/lib/useTypewriter";
 import { useIntroStore } from "@/lib/introStore";
+import { TELEGRAM_URL } from "@/lib/site";
+
+// Who is behind the page and how to reach them, readable in the first
+// second — static, not part of the typed reveal below.
+const WHO = "Валерий — продюсер ИИ-систем";
 
 const TITLE = "#НЕРЕЗЮМЕ, а список реализованных задач";
 // The leading "Восемь автономных систем." is rendered live by
@@ -98,6 +103,7 @@ export default function Hero() {
       id="hero"
       className="hero-fly-in flex min-h-[100svh] flex-col justify-center gap-6 px-4 py-20 sm:px-6 sm:py-24 md:px-10 lg:px-16"
     >
+      <p className="text-sm text-fg-primary/80 sm:text-base">{WHO}</p>
       <HeroTitleReveal text={TITLE} start={revealStart} />
       <AnomalyBanner />
       <SystemsCounter
@@ -132,6 +138,24 @@ export default function Hero() {
         speedMs={30}
         className="max-w-xl text-xs text-fg-muted"
       />
+      <div className="flex flex-wrap gap-3">
+        <a
+          href="#friday-studio"
+          data-cursor="interactive"
+          className="inline-block border border-line px-5 py-3 text-sm text-fg-primary transition-colors hover:border-accent hover:text-accent"
+        >
+          Проекты ↓
+        </a>
+        <a
+          href={TELEGRAM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-cursor="interactive"
+          className="inline-block border border-accent px-5 py-3 text-sm text-accent transition-[filter] duration-200 hover:[filter:drop-shadow(0_0_6px_var(--accent))]"
+        >
+          Написать в Telegram
+        </a>
+      </div>
     </section>
   );
 }

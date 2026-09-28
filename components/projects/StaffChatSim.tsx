@@ -135,6 +135,10 @@ export default function StaffChatSim() {
         ))}
       </div>
 
+      <p className="border-b border-line px-4 py-2 text-[10px] leading-relaxed text-fg-muted">
+        Демо: симуляция характеров агентов на заготовленных репликах. Настоящий
+        штаб работает в закрытом рабочем чате.
+      </p>
       <div ref={logRef} className="max-h-[320px] min-h-[180px] space-y-2 overflow-y-auto p-4 text-sm">
         <p className="text-xs text-fg-muted">
           Чат с: {activeAgent.name} — {activeAgent.status}

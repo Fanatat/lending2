@@ -16,8 +16,8 @@ export interface SystemStatusEntry {
   online: boolean;
   /**
    * Epoch ms this system has been verifiably running since, or `null` when
-   * no confirmed date exists yet. StatusLine omits the uptime line rather
-   * than invent a number for the ones still `null` — see TODO(автор) below.
+   * no confirmed date exists yet. StatusLine omits the start date rather
+   * than invent one for the ones still `null` — see TODO(автор) below.
    */
   since: number | null;
 }
@@ -46,26 +46,43 @@ export const INITIAL_SINCE = Object.fromEntries(
   Object.entries(INITIAL_STATUS).map(([id, s]) => [id, s.since])
 ) as Record<SystemId, number | null>;
 
+/**
+ * HP100's link to its board, as seen through the feed (lib/hp100-live.ts):
+ * still waiting for the first answer, fresh reading, only an old reading
+ * (the feed bot stopped), or no answer at all. Deliberately separate from
+ * the air itself — a warm room is a reading, not an outage.
+ */
+export type Hp100Link = "checking" | "live" | "stale" | "offline";
+
 interface SystemStatusStore {
   status: Record<SystemId, SystemStatusEntry>;
-  setOnline: (id: SystemId, online: boolean) => void;
+  hp100Link: Hp100Link;
+  /** Epoch ms of the board's latest real reading, once one has arrived. */
+  hp100Updated: number | null;
+  setHp100Link: (link: Hp100Link, updated: number | null) => void;
 }
 
 /**
- * Single source of truth for the "Норма" pulsing indicator duplicated across
- * every system block (see SystemStatusLine) and for each agent's status dot
- * in the Staff section (see AgentAvatar) — flipping one system's `online`
- * flag here updates both places at once instead of two separately-maintained
- * stubs drifting apart. HP100 is the one system wired to a real live signal
- * (see HP100Widget); the rest default to `online: true` and are meant to be
- * flipped by hand the day a system actually goes down.
+ * Source of truth for the hero's "N систем работают" tally (SystemsCounter)
+ * and each agent's status dot in the Staff section (AgentAvatar). HP100 is
+ * the one system wired to a real live signal (see HP100Widget), so it is
+ * the only one whose `online` ever changes; the others have no signal to
+ * read, which is why their status lines show only the start date and no
+ * green "all good" light.
  */
 export const useSystemStatusStore = create<SystemStatusStore>((set) => ({
   status: INITIAL_STATUS,
-  setOnline: (id, online) =>
+  hp100Link: "checking",
+  hp100Updated: null,
+  setHp100Link: (link, updated) =>
     set((s) => {
-      const current = s.status[id];
-      if (current.online === online) return s;
-      return { status: { ...s.status, [id]: { ...current, online } } };
+      if (s.hp100Link === link && s.hp100Updated === updated) return s;
+      // Until the first answer arrives the board keeps its benefit of the doubt.
+      const online = link === "live" || link === "checking";
+      return {
+        hp100Link: link,
+        hp100Updated: updated,
+        status: { ...s.status, hp100: { ...s.status.hp100, online } },
+      };
     }),
 }));
