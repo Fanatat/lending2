@@ -1,11 +1,9 @@
 import RevealOnScroll from "@/components/effects/RevealOnScroll";
-import { GITHUB_URL } from "@/lib/site";
 
 /**
  * Recruiter-facing "who is behind this" block — the page otherwise shows
  * systems, not a candidate. Sits right after Hero, before the systems start.
- * Kept to a couple of lines on purpose: the systems below are the résumé,
- * and the code behind them is one click away on GitHub.
+ * Kept to a couple of lines on purpose: the systems below are the résumé.
  */
 export default function OperatorSection() {
   return (
@@ -27,17 +25,7 @@ export default function OperatorSection() {
         <RevealOnScroll index={2}>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-fg-primary/90 sm:text-base">
             Продюсер систем на ИИ-агентах: ставлю задачу, принимаю результат
-            фактами и довожу до продакшна. Код пишут агенты — он лежит на{" "}
-            <a
-              href={GITHUB_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor="interactive"
-              className="text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:decoration-accent"
-            >
-              GitHub
-            </a>
-            .
+            фактами и довожу до продакшна.
           </p>
         </RevealOnScroll>
       </div>

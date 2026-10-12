@@ -11,6 +11,8 @@
  * - pipeline: the founder's count, 2026-10-12.
  * - servers and services: the founder's description, 2026-10-12. No
  *   addresses, ports, software versions or what exactly is stored.
+ * The hero shows the bare figures: the founder asked to drop the long
+ * explanations under the first two (2026-10-12), the sources stay here.
  */
 
 export type Lang = "ru" | "en";
@@ -27,45 +29,47 @@ export const GAME_PIPELINE = [
 
 export const GAMES_TOTAL = GAME_PIPELINE.reduce((sum, s) => sum + s.count, 0);
 
-export const STUDIO_STATS = {
+export interface StudioStat {
+  value: string;
+  label: string;
+  note?: string;
+}
+
+export const STUDIO_STATS: Record<Lang, StudioStat[]> = {
   ru: [
     {
       value: "4 000+",
-      label: "игроков добавили игры студии",
-      note: `только кабинет ВК, на ${PLAYERS_AS_OF.ru}; Яндекс Игры сверху`,
+      label: "пользователей",
     },
     {
       value: String(GAMES_TOTAL),
-      label: "игр в конвейере",
-      note: "4 опубликованы, 2 на модерации, 3 в разработке, 3 в концепции",
+      label: "игр",
     },
     {
-      value: "3",
-      label: "сервера студии",
-      note: "мастерская, данные игроков, шлюз",
+      value: "4",
+      label: "сервера",
+      note: "мастерская, обработка платежей + хостинг, шлюз, прокси-сервер",
     },
   ],
   en: [
     {
       value: "4,000+",
-      label: "players have added the studio's games",
-      note: `VK developer cabinet alone, as of ${PLAYERS_AS_OF.en}; Yandex Games on top`,
+      label: "users",
     },
     {
       value: String(GAMES_TOTAL),
-      label: "games in the pipeline",
-      note: "4 live, 2 in review, 3 in development, 3 at concept stage",
+      label: "games",
     },
     {
-      value: "3",
-      label: "studio servers",
-      note: "workshop, player data, gateway",
+      value: "4",
+      label: "servers",
+      note: "workshop, payment processing + hosting, gateway, proxy server",
     },
   ],
 };
 
 export interface StudioNode {
-  key: "gateway" | "workshop" | "data";
+  key: "gateway" | "workshop" | "data" | "proxy";
   name: string;
   role: string;
   text: string;
@@ -77,7 +81,7 @@ export const STUDIO_NODES: Record<Lang, StudioNode[]> = {
       key: "gateway",
       name: "Шлюз",
       role: "сервер в Москве",
-      text: "Единая точка входа. Раздаёт игры, принимает все входящие подключения и направляет каждое в нужный отдел.",
+      text: "Единая точка входа. Принимает все входящие подключения и направляет каждое в нужный отдел.",
     },
     {
       key: "workshop",
@@ -87,9 +91,15 @@ export const STUDIO_NODES: Record<Lang, StudioNode[]> = {
     },
     {
       key: "data",
-      name: "Данные игроков",
+      name: "Платежи и хостинг",
       role: "сервер релизов",
-      text: "Обработка платежей и хранение данных игроков. Стоит отдельно от мастерской: разработка не трогает то, что принадлежит игрокам.",
+      text: "Обработка платежей, хранение данных игроков и хостинг игр. Стоит отдельно от мастерской: разработка не трогает то, что принадлежит игрокам.",
+    },
+    {
+      key: "proxy",
+      name: "Прокси-сервер",
+      role: "сетевой маршрут",
+      text: "Отдельный узел для сетевого трафика студии: соединения идут через него, а не напрямую.",
     },
   ],
   en: [
@@ -97,7 +107,7 @@ export const STUDIO_NODES: Record<Lang, StudioNode[]> = {
       key: "gateway",
       name: "Gateway",
       role: "server in Moscow",
-      text: "The single point of entry. Serves the games, accepts every incoming connection and routes each one to the right department.",
+      text: "The single point of entry. Accepts every incoming connection and routes each one to the right department.",
     },
     {
       key: "workshop",
@@ -107,9 +117,15 @@ export const STUDIO_NODES: Record<Lang, StudioNode[]> = {
     },
     {
       key: "data",
-      name: "Player data",
+      name: "Payments and hosting",
       role: "release server",
-      text: "Processes payments and stores player data. Kept apart from the workshop: development never touches what belongs to players.",
+      text: "Payment processing, player data storage and game hosting. Kept apart from the workshop: development never touches what belongs to players.",
+    },
+    {
+      key: "proxy",
+      name: "Proxy server",
+      role: "network route",
+      text: "A separate node for the studio's network traffic: connections go through it rather than directly.",
     },
   ],
 };
@@ -122,8 +138,8 @@ export interface StudioService {
 export const STUDIO_SERVICES: Record<Lang, StudioService[]> = {
   ru: [
     {
-      name: "Платежи в играх",
-      text: "Покупки внутри игр за валюту площадки. Каждую покупку подтверждает свой сервер, а не сама игра.",
+      name: "Обработка платежей",
+      text: "Внутриигровые покупки: они обрабатываются и хранятся на собственном сервере.",
     },
     {
       name: "Рейтинги",
@@ -131,17 +147,17 @@ export const STUDIO_SERVICES: Record<Lang, StudioService[]> = {
     },
     {
       name: "Аналитика",
-      text: "Своя система сбора данных: от 100 меток на каждый проект — сайт, игру или бота. Плюс Яндекс Метрика и статистика площадок. Цифры нужны, чтобы улучшать то, чем пользуются люди.",
+      text: "Независимая система сбора данных: более 100 меток на проект. И это помимо собственной аналитики площадок — VK, Яндекса и других.",
     },
     {
       name: "Контент",
-      text: "Два направления ведутся постоянно, каждое выходит на двух и более площадках.",
+      text: "Два канала на основе фото и текста. И ещё два направления по видео — каждое публикуется автоматически на двух и более площадках.",
     },
   ],
   en: [
     {
-      name: "In-game payments",
-      text: "Purchases inside the games in the platform's currency. Every purchase is confirmed by our own server, not by the game itself.",
+      name: "Payment processing",
+      text: "In-game purchases: they are processed and stored on our own server.",
     },
     {
       name: "Leaderboards",
@@ -149,11 +165,11 @@ export const STUDIO_SERVICES: Record<Lang, StudioService[]> = {
     },
     {
       name: "Analytics",
-      text: "Our own data collection: 100+ tracking points per project — a site, a game or a bot. Plus Yandex Metrica and platform statistics. The numbers are there to improve what people actually use.",
+      text: "An independent data collection system: 100+ tracking points per project. And that's on top of each platform's own analytics — VK, Yandex and others.",
     },
     {
       name: "Content",
-      text: "Two content lines run continuously, each published on two or more platforms.",
+      text: "Two channels built on photos and text. Plus two video lines — each published automatically on two or more platforms.",
     },
   ],
 };
@@ -161,7 +177,7 @@ export const STUDIO_SERVICES: Record<Lang, StudioService[]> = {
 export const STUDIO_COPY = {
   ru: {
     eyebrow: "КАК УСТРОЕНА СТУДИЯ",
-    title: "Три сервера, у каждого своя работа",
+    title: "Четыре сервера, у каждого своя работа",
     line: "Мастерская, где делаются игры, отделена от данных игроков, а снаружи всё встречает один шлюз. Адреса и начинку не публикую: это не секрет фирмы, а обычная гигиена.",
     internet: "игроки и посетители",
     servicesTitle: "Сервисы студии",
@@ -169,7 +185,7 @@ export const STUDIO_COPY = {
   },
   en: {
     eyebrow: "HOW THE STUDIO IS BUILT",
-    title: "Three servers, each with its own job",
+    title: "Four servers, each with its own job",
     line: "The workshop where games are made is kept apart from player data, and a single gateway meets everything from outside. Addresses and internals aren't published: not a trade secret, just basic hygiene.",
     internet: "players and visitors",
     servicesTitle: "Studio services",

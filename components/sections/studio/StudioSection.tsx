@@ -26,8 +26,8 @@ function Wire() {
 }
 
 /**
- * The studio's three servers as a scheme — outside world → gateway → the
- * workshop and the player-data server side by side — plus the services
+ * The studio's four servers as a scheme — outside world → gateway → the
+ * workshop, the payments-and-hosting server and the proxy — plus the services
  * the games run on. Sits right after the games block: it's what stands
  * behind them.
  */
@@ -62,7 +62,9 @@ export default function StudioSection({ lang = "ru" }: { lang?: Lang }) {
           <Wire />
           <div className="grid min-w-0 gap-3 sm:grid-cols-2">
             {inner.map((n) => (
-              <NodeCard key={n.key} node={n} />
+              <div key={n.key} className="min-w-0 sm:last:odd:col-span-2">
+                <NodeCard node={n} />
+              </div>
             ))}
           </div>
         </RevealOnScroll>

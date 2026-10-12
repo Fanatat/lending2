@@ -6,7 +6,7 @@ import SiteFooter from "@/components/sections/closing/SiteFooter";
 import StudioStats from "@/components/hero/StudioStats";
 import GamePipeline from "@/components/sections/friday/GamePipeline";
 import StudioSection from "@/components/sections/studio/StudioSection";
-import { GITHUB_URL, MAX_URL, OG_IMAGE, TELEGRAM_URL, asset, pageUrl } from "@/lib/site";
+import { MAX_URL, OG_IMAGE, TELEGRAM_URL, asset, pageUrl } from "@/lib/site";
 
 const TITLE = "Hi, I'm Valery";
 const DESCRIPTION =
@@ -49,7 +49,7 @@ interface System {
   footnote?: string;
   line: ReactNode;
   details: ReactNode;
-  games?: { title: string; line: string; inDevelopment?: boolean; playUrl: string; codeUrl: string }[];
+  games?: { title: string; line: string; inDevelopment?: boolean; playUrl: string }[];
 }
 
 /**
@@ -65,22 +65,22 @@ const SYSTEMS: System[] = [
     details:
       "A separate system first develops a game, then puts it in the maintenance queue. It prepares promo materials and store-page copy for the platforms. Scripts launch the game in a headless browser on their own, record gameplay in vertical and horizontal formats, check that no Cyrillic has leaked into the English build, and cut the video.",
     games: [
-      { title: "Slovokhod", playUrl: "https://vk.com/app54674073", codeUrl: "https://github.com/Fanatat/slovokhod-vk", line: "Published on VK. A hundred word-search levels and not a single audio file in the build: the game synthesises every sound itself." },
-      { title: "Cat Nonograms", playUrl: "https://vk.com/app54676906", codeUrl: "https://github.com/Fanatat/catnonogram-vk", line: "Published on VK. 130 nonograms across themed chapters, with daily puzzles." },
-      { title: "Color and Shape Sort", playUrl: "https://vk.com/app54683949", codeUrl: "https://github.com/Fanatat/Color_Sort-Vk", line: "Published on VK. Sort pieces by both colour and shape, so colour is not the only cue." },
-      { title: "Two Fortresses", playUrl: "https://vk.com/app54759696", codeUrl: "https://github.com/Fanatat/lane-battle-vk", line: "Published on VK. Recruit a squad, upgrade your economy and control a hero on a single battlefield." },
+      { title: "Slovokhod", playUrl: "https://vk.com/app54674073", line: "Published on VK. A hundred word-search levels and not a single audio file in the build: the game synthesises every sound itself." },
+      { title: "Cat Nonograms", playUrl: "https://vk.com/app54676906", line: "Published on VK. 130 nonograms across themed chapters, with daily puzzles." },
+      { title: "Color and Shape Sort", playUrl: "https://vk.com/app54683949", line: "Published on VK. Sort pieces by both colour and shape, so colour is not the only cue." },
+      { title: "Two Fortresses", playUrl: "https://vk.com/app54759696", line: "Published on VK. Recruit a squad, upgrade your economy and control a hero on a single battlefield." },
     ],
   },
   {
     number: "SYSTEM 02",
-    title: "While you're in the flow and losing track of time, the board keeps an eye on what you breathe",
-    line: "CO₂ and dust are invisible, but they drain your HP. Your nose can't sense them — the board can. (Actually, the board doesn't care. We taught it to worry.)",
+    title: "Human health comes before any automation",
+    line: "While you're in the flow and losing track of time, the board keeps an eye on what you breathe. CO₂ and dust are invisible, but they drain your HP. Your nose can't sense them — the board can. (Actually, the board doesn't care. We taught it to worry.)",
     details:
       "A board with seven sensors sends temperature, humidity, pressure, light level, volatile compounds, three fractions of dust and CO₂ to the server once a minute. When the server is unreachable, the board notices by itself, buffers readings in its own memory and sends them with their real timestamps as soon as the connection is back. One of the sensors turned out to be a clone with its own protocol: we decoded it by hand, standard libraries can't see it. The setup moves to a greenhouse, a server room or any workplace without a single change to the logic.",
   },
   {
     number: "SYSTEM 03",
-    title: "Channels that publish and live without me",
+    title: "Media. What's the use of all of the above if nobody knows about you?",
     line: "I filled a folder with 169,000+ photos once — from then on the channel runs itself: it posts during the day at unpredictable times, so the feed doesn't look robotic.",
     details:
       "Two bots. The first posts a set of nine photos with a caption once a day and moves what it used into an archive, so nothing repeats. The second wakes up on schedule: text at 5:50, video at 6:30; it collects material in advance from source channels by itself and hands it out one piece a day. Both have an admin panel right in the chat: status, manual run, subscriber analytics, automatic database backup. The first has run as a system service for months without a crash. The second was started by hand and still hasn't missed a single post.",
@@ -107,7 +107,7 @@ const SYSTEMS: System[] = [
   },
   {
     number: "SYSTEM 06",
-    title: "One idea can turn into a whole season of cartoons in three languages",
+    title: "Our own cartoons",
     line: "One production line serves three channels: the script, the voice-over and all the material for editing are assembled and numbered — the editor only has to create.",
     details:
       "The system gets a topic and carries on by itself: writes the story, splits it into scenes, sets up characters and settings, lays it out shot by shot, assembles image descriptions, generates images, records the voice-over, edits and exports almost-finished material — all that's left is to put the video together in Premiere. The story is written once in canonical form; the English, Spanish and Russian versions are derived from it. Twelve videos have already been assembled from start to finish in a technical run — still with placeholder pictures: image generation is connected, the visual style is still being chosen. All generation runs on an ordinary home computer, with no subscriptions or APIs — including the review stage, where an LLM itself checks that the script follows the plan, the characters in the pictures don't change, and the overall setting holds. This way several cartoon series can run in parallel.",
@@ -205,18 +205,7 @@ export default function EnglishHomePage() {
           <h2 className="mt-2 text-2xl text-fg-primary sm:text-3xl">Valery</h2>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-fg-primary/90 sm:text-base">
             Producer of AI-agent systems: I set the task, accept the result by
-            facts and take it to production. The code is written by agents —
-            it&apos;s on{" "}
-            <a
-              href={GITHUB_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor="interactive"
-              className="text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:decoration-accent"
-            >
-              GitHub
-            </a>
-            .
+            facts and take it to production.
           </p>
         </div>
       </section>
@@ -278,16 +267,6 @@ export default function EnglishHomePage() {
                             className={gameLinkClass}
                           >
                             Play on VK ↗
-                          </a>
-                          <a
-                            href={g.codeUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            data-cursor="interactive"
-                            aria-label={`${g.title} source code on GitHub`}
-                            className={gameLinkClass}
-                          >
-                            Code ↗
                           </a>
                         </div>
                       </li>
