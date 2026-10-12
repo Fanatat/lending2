@@ -21,6 +21,7 @@ import SudoEasterEgg from "@/components/easter-eggs/SudoEasterEgg";
 import AgentVision from "@/components/easter-eggs/AgentVision";
 import IdleScreensaver from "@/components/easter-eggs/IdleScreensaver";
 import IntroGate from "@/components/intro/IntroGate";
+import YandexMetrika from "@/components/effects/YandexMetrika";
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin", "cyrillic"],
@@ -111,6 +112,7 @@ export default function RootLayout({
         <SudoEasterEgg />
         <AgentVision />
         <IdleScreensaver />
+        <YandexMetrika />
       </body>
     </html>
   );

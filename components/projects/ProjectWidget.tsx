@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import type { SystemKey } from "@/lib/systemCopy";
 import CartridgeGrid from "@/components/sections/friday/CartridgeGrid";
+import GamePipeline from "@/components/sections/friday/GamePipeline";
 import AutopilotCard from "@/components/sections/autopilot/AutopilotCard";
 import BridgeDiagram from "@/components/sections/bridge/BridgeDiagram";
 import PortfolioWidget from "@/components/sections/allin/PortfolioWidget";
@@ -32,7 +33,12 @@ const PerimeterMap = dynamic(() => import("@/components/sections/perimeter/Perim
 export default function ProjectWidget({ system }: { system: SystemKey }) {
   switch (system) {
     case "friday":
-      return <CartridgeGrid />;
+      return (
+        <div className="flex w-full min-w-0 flex-col gap-6">
+          <GamePipeline />
+          <CartridgeGrid />
+        </div>
+      );
     case "hp100":
       return <HP100Widget />;
     case "autopilot":

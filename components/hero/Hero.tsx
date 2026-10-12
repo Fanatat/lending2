@@ -6,6 +6,7 @@ import SystemsCounter from "./SystemsCounter";
 import AnimatedLeadCount from "./AnimatedLeadCount";
 import TypewriterLine from "./TypewriterLine";
 import AnomalyBanner from "./AnomalyBanner";
+import StudioStats from "./StudioStats";
 import { useReducedMotion } from "@/lib/motion";
 import { useTypewriter } from "@/lib/useTypewriter";
 import { useIntroStore } from "@/lib/introStore";
@@ -156,6 +157,7 @@ export default function Hero() {
           Написать в Telegram
         </a>
       </div>
+      <StudioStats />
     </section>
   );
 }

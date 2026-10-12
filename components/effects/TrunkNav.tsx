@@ -6,6 +6,7 @@ const SECTION_IDS = [
   "hero",
   "operator",
   "friday-studio",
+  "studio",
   "hp100",
   "channel-autopilot",
   "bridge",
