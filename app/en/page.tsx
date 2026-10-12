@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 import SetHtmlLang from "@/components/effects/SetHtmlLang";
 import DetailsDisclosure from "@/components/sections/DetailsDisclosure";
 import SiteFooter from "@/components/sections/closing/SiteFooter";
+import StudioStats from "@/components/hero/StudioStats";
+import GamePipeline from "@/components/sections/friday/GamePipeline";
+import StudioSection from "@/components/sections/studio/StudioSection";
 import { GITHUB_URL, MAX_URL, OG_IMAGE, TELEGRAM_URL, asset, pageUrl } from "@/lib/site";
 
 const TITLE = "Hi, I'm Valery";
@@ -57,16 +60,15 @@ interface System {
 const SYSTEMS: System[] = [
   {
     number: "SYSTEM 01",
-    title: "Five games by the “Friday” studio, plus promo materials",
+    title: "Games by the “Friday” studio, plus promo materials",
     line: "The full cycle — from clean, fast code to promo videos. While a competitor is still loading megabytes of framework, our game has already taken the player's first move.",
     details:
       "A separate system first develops a game, then puts it in the maintenance queue. It prepares promo materials and store-page copy for the platforms. Scripts launch the game in a headless browser on their own, record gameplay in vertical and horizontal formats, check that no Cyrillic has leaked into the English build, and cut the video.",
     games: [
-      { title: "Slovokhod", playUrl: "https://slovokhod-vk.vercel.app", codeUrl: "https://github.com/Fanatat/slovokhod-vk", line: "Published on VK. A hundred word-search levels and not a single audio file in the build: the game synthesises every sound itself." },
-      { title: "Cat Nonograms", playUrl: "https://catnonogram-vk.vercel.app", codeUrl: "https://github.com/Fanatat/catnonogram-vk", line: "Published on VK. 130 nonograms across themed chapters, with daily puzzles." },
-      { title: "Color and Shape Sort", playUrl: "https://color-sort-vk.vercel.app", codeUrl: "https://github.com/Fanatat/Color_Sort-Vk", line: "Published on VK. Sort pieces by both colour and shape, so colour is not the only cue." },
-      { title: "Two Fortresses (Lane Battler)", playUrl: "https://fanatat.github.io/games-dev/lane-battle/", codeUrl: "https://github.com/Fanatat/lane-battle-vk", line: "Published on VK. Recruit a squad, upgrade your economy and control a hero on a single battlefield. A browser test build is available." },
-      { title: "Royal Solitaire", playUrl: "https://fanatat.github.io/games-dev/royal-solitaire/", codeUrl: "https://github.com/Fanatat/Royal_solitaire", line: "Published on VK. Klondike with arenas and rewards, rendered with Three.js/WebGL. A browser test build is available." },
+      { title: "Slovokhod", playUrl: "https://vk.com/app54674073", codeUrl: "https://github.com/Fanatat/slovokhod-vk", line: "Published on VK. A hundred word-search levels and not a single audio file in the build: the game synthesises every sound itself." },
+      { title: "Cat Nonograms", playUrl: "https://vk.com/app54676906", codeUrl: "https://github.com/Fanatat/catnonogram-vk", line: "Published on VK. 130 nonograms across themed chapters, with daily puzzles." },
+      { title: "Color and Shape Sort", playUrl: "https://vk.com/app54683949", codeUrl: "https://github.com/Fanatat/Color_Sort-Vk", line: "Published on VK. Sort pieces by both colour and shape, so colour is not the only cue." },
+      { title: "Two Fortresses", playUrl: "https://vk.com/app54759696", codeUrl: "https://github.com/Fanatat/lane-battle-vk", line: "Published on VK. Recruit a squad, upgrade your economy and control a hero on a single battlefield." },
     ],
   },
   {
@@ -192,6 +194,7 @@ export default function EnglishHomePage() {
             Message on Telegram
           </a>
         </div>
+        <StudioStats lang="en" />
       </section>
 
       <section id="operator" className="border-t border-line px-4 py-14 sm:px-6 sm:py-20 md:px-10 lg:px-16">
@@ -218,79 +221,85 @@ export default function EnglishHomePage() {
         </div>
       </section>
 
-      {SYSTEMS.map((s) => (
-        <section
-          key={s.number}
-          id={s.number.toLowerCase().replace(" ", "-")}
-          className="border-t border-line px-4 py-14 sm:px-6 sm:py-20 md:px-10 lg:px-16"
-        >
-          <div className="grid min-w-0 items-start gap-8 lg:grid-cols-2 lg:gap-16">
-            <div className="min-w-0">
-              <div className="text-xs tracking-widest text-fg-muted">
-                {s.number}
+      {SYSTEMS.map((s, i) => (
+        <Fragment key={s.number}>
+          <section
+            id={s.number.toLowerCase().replace(" ", "-")}
+            className="border-t border-line px-4 py-14 sm:px-6 sm:py-20 md:px-10 lg:px-16"
+          >
+            <div className="grid min-w-0 items-start gap-8 lg:grid-cols-2 lg:gap-16">
+              <div className="min-w-0">
+                <div className="text-xs tracking-widest text-fg-muted">
+                  {s.number}
+                </div>
+                <h2 className="mt-2 max-w-xl text-2xl text-fg-primary sm:text-3xl">
+                  {s.title}
+                </h2>
+                {s.footnote && (
+                  <p className="mt-1 text-[9px] text-fg-muted/60">{s.footnote}</p>
+                )}
+                <p className="mt-4 max-w-xl text-sm text-fg-primary/90 sm:text-base">
+                  {s.line}
+                </p>
+                {s.games && <DetailsDisclosure text={s.details} label="More" />}
               </div>
-              <h2 className="mt-2 max-w-xl text-2xl text-fg-primary sm:text-3xl">
-                {s.title}
-              </h2>
-              {s.footnote && (
-                <p className="mt-1 text-[9px] text-fg-muted/60">{s.footnote}</p>
+              {/* The RU page has a live widget in this column; here the
+                  system's "more" text takes its place (System 01 lists its
+                  games instead and keeps the text behind a disclosure). */}
+              {!s.games && (
+                <div className="min-w-0 border border-line bg-panel p-5 text-sm leading-relaxed text-fg-muted">
+                  {s.details}
+                </div>
               )}
-              <p className="mt-4 max-w-xl text-sm text-fg-primary/90 sm:text-base">
-                {s.line}
-              </p>
-              {s.games && <DetailsDisclosure text={s.details} label="More" />}
+              {s.games && (
+                <div className="flex min-w-0 flex-col gap-6">
+                  <GamePipeline lang="en" />
+                  <ul className="grid min-w-0 gap-3 sm:grid-cols-2">
+                    {s.games.map((g) => (
+                      <li key={g.title} className="border border-line bg-panel p-4">
+                        <div className="flex items-baseline justify-between gap-2">
+                          <span className="text-sm text-fg-primary">{g.title}</span>
+                          {g.inDevelopment && (
+                            <span className="shrink-0 text-[10px] text-fg-muted">
+                              in development
+                            </span>
+                          )}
+                        </div>
+                        <p className="mt-2 text-xs leading-relaxed text-fg-primary/75">
+                          {g.line}
+                        </p>
+                        <div className="mt-3 flex gap-4">
+                          <a
+                            href={g.playUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            data-cursor="interactive"
+                            aria-label={`Play ${g.title}`}
+                            className={gameLinkClass}
+                          >
+                            Play on VK ↗
+                          </a>
+                          <a
+                            href={g.codeUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            data-cursor="interactive"
+                            aria-label={`${g.title} source code on GitHub`}
+                            className={gameLinkClass}
+                          >
+                            Code ↗
+                          </a>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
-            {/* The RU page has a live widget in this column; here the
-                system's "more" text takes its place (System 01 lists its
-                games instead and keeps the text behind a disclosure). */}
-            {!s.games && (
-              <div className="min-w-0 border border-line bg-panel p-5 text-sm leading-relaxed text-fg-muted">
-                {s.details}
-              </div>
-            )}
-            {s.games && (
-              <ul className="grid min-w-0 gap-3 sm:grid-cols-2">
-                {s.games.map((g) => (
-                  <li key={g.title} className="border border-line bg-panel p-4">
-                    <div className="flex items-baseline justify-between gap-2">
-                      <span className="text-sm text-fg-primary">{g.title}</span>
-                      {g.inDevelopment && (
-                        <span className="shrink-0 text-[10px] text-fg-muted">
-                          in development
-                        </span>
-                      )}
-                    </div>
-                    <p className="mt-2 text-xs leading-relaxed text-fg-primary/75">
-                      {g.line}
-                    </p>
-                    <div className="mt-3 flex gap-4">
-                      <a
-                        href={g.playUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        data-cursor="interactive"
-                        aria-label={`Play ${g.title}`}
-                        className={gameLinkClass}
-                      >
-                        {g.playUrl.includes("/games-dev/") ? "Test build ↗" : "Play ↗"}
-                      </a>
-                      <a
-                        href={g.codeUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        data-cursor="interactive"
-                        aria-label={`${g.title} source code on GitHub`}
-                        className={gameLinkClass}
-                      >
-                        Code ↗
-                      </a>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        </section>
+          </section>
+          {/* Same place as on the RU page: right after the games. */}
+          {i === 0 && <StudioSection lang="en" />}
+        </Fragment>
       ))}
 
       <section className="border-t border-line px-4 py-10 sm:px-6 md:px-10 lg:px-16">

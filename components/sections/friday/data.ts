@@ -4,15 +4,19 @@ export interface FridayGame {
   line: string;
   microFact: string;
   inDevelopment?: boolean;
-  /** A build anyone can open in the browser right now. */
+  /** The published game on its platform. */
   playUrl: string;
   codeUrl: string;
 }
 
+/**
+ * Only games players can open today. Games still in review or in
+ * development are counted in GamePipeline (lib/studio.ts) without titles.
+ */
 export const FRIDAY_GAMES: FridayGame[] = [
   {
     slug: "slovohod",
-    playUrl: "https://slovokhod-vk.vercel.app",
+    playUrl: "https://vk.com/app54674073",
     codeUrl: "https://github.com/Fanatat/slovokhod-vk",
     title: "Словоход",
     line: "Опубликована в VK. Сто уровней филворда и ни одного звукового файла в сборке: все звуки игра синтезирует сама.",
@@ -20,7 +24,7 @@ export const FRIDAY_GAMES: FridayGame[] = [
   },
   {
     slug: "nonograms",
-    playUrl: "https://catnonogram-vk.vercel.app",
+    playUrl: "https://vk.com/app54676906",
     codeUrl: "https://github.com/Fanatat/catnonogram-vk",
     title: "Кот и японские кроссворды",
     line: "Опубликована в VK. Сто тридцать нонограмм в тематических главах и отдельные ежедневные задания.",
@@ -28,7 +32,7 @@ export const FRIDAY_GAMES: FridayGame[] = [
   },
   {
     slug: "color-sort",
-    playUrl: "https://color-sort-vk.vercel.app",
+    playUrl: "https://vk.com/app54683949",
     codeUrl: "https://github.com/Fanatat/Color_Sort-Vk",
     title: "Сортировка: Цвет и Форма",
     line: "Опубликована в VK. Элементы различаются цветом и формой, поэтому цвет — не единственный ориентир.",
@@ -36,19 +40,10 @@ export const FRIDAY_GAMES: FridayGame[] = [
   },
   {
     slug: "lane-battler",
-    playUrl: "https://fanatat.github.io/games-dev/lane-battle/",
+    playUrl: "https://vk.com/app54759696",
     codeUrl: "https://github.com/Fanatat/lane-battle-vk",
-    title: "Две крепости (Lane Battler)",
-    line: "Опубликована в VK. Стратегия на одной линии: нанимайте отряд, улучшайте экономику и управляйте героем. Доступна тестовая сборка.",
+    title: "Две крепости",
+    line: "Опубликована в VK. Стратегия на одной линии: нанимайте отряд, улучшайте экономику и управляйте героем.",
     microFact: "отряд, экономика и герой",
-
-  },
-  {
-    slug: "royal-solitaire",
-    playUrl: "https://fanatat.github.io/games-dev/royal-solitaire/",
-    codeUrl: "https://github.com/Fanatat/Royal_solitaire",
-    title: "Королевская Косынка (Royal Solitaire)",
-    line: "Опубликована в VK. Косынка с аренами и наградами, сцена на Three.js/WebGL. Доступна тестовая браузерная сборка.",
-    microFact: "Three.js · тестовая сборка",
   },
 ];

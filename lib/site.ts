@@ -21,6 +21,13 @@ export const HP100_FEED_REPO_URL = `${GITHUB_URL}/hp100-live-feed`;
 export const TELEGRAM_URL = "https://t.me/fanatat";
 export const MAX_URL = "https://max.ru/se14158141_bot";
 
+/**
+ * Yandex Metrica counter of this site (not the games' one — their data
+ * must not mix with the site's). 0 keeps Metrica off; put the counter
+ * number here once it's created for vanatat.ru.
+ */
+export const YANDEX_METRIKA_ID: number = 0;
+
 /** Prefix a file from /public for code paths Next doesn't rewrite itself (fetch, three.js loaders). */
 export function asset(path: string) {
   return `${BASE_PATH}${path}`;

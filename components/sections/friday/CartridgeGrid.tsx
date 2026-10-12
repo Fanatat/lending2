@@ -28,7 +28,7 @@ export default function CartridgeGrid() {
               aria-label={`Играть: ${game.title}`}
               className={gameLink}
             >
-              {game.playUrl.includes("/games-dev/") ? "Тестовая сборка ↗" : "Играть ↗"}
+              Играть в ВК ↗
             </a>
             <a
               href={game.codeUrl}

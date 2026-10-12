@@ -1,6 +1,7 @@
 import SectionShell from "@/components/sections/SectionShell";
 import SystemStatusLine from "@/components/sections/SystemStatusLine";
 import CartridgeGrid from "./CartridgeGrid";
+import GamePipeline from "./GamePipeline";
 import { SYSTEM_COPY } from "@/lib/systemCopy";
 
 export default function FridaySection() {
@@ -17,7 +18,10 @@ export default function FridaySection() {
       }
       details={SYSTEM_COPY.friday.details}
     >
-      <CartridgeGrid />
+      <div className="flex w-full min-w-0 flex-col gap-6">
+        <GamePipeline />
+        <CartridgeGrid />
+      </div>
     </SectionShell>
   );
 }
