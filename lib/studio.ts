@@ -77,7 +77,7 @@ export const STUDIO_NODES: Record<Lang, StudioNode[]> = {
       key: "gateway",
       name: "Шлюз",
       role: "сервер в Москве",
-      text: "Единая точка входа. Раздаёт сайт и игры, принимает все входящие подключения и направляет каждое в нужный отдел.",
+      text: "Единая точка входа. Раздаёт игры, принимает все входящие подключения и направляет каждое в нужный отдел.",
     },
     {
       key: "workshop",
@@ -97,7 +97,7 @@ export const STUDIO_NODES: Record<Lang, StudioNode[]> = {
       key: "gateway",
       name: "Gateway",
       role: "server in Moscow",
-      text: "The single point of entry. Serves the site and the games, accepts every incoming connection and routes each one to the right department.",
+      text: "The single point of entry. Serves the games, accepts every incoming connection and routes each one to the right department.",
     },
     {
       key: "workshop",
