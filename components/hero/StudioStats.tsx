@@ -14,9 +14,11 @@ export default function StudioStats({ lang = "ru" }: { lang?: Lang }) {
             {s.value}
           </span>
           <span className="mt-1 block text-sm text-fg-primary">{s.label}</span>
-          <span className="mt-1 block text-xs leading-relaxed text-fg-muted">
-            {s.note}
-          </span>
+          {s.note && (
+            <span className="mt-1 block text-xs leading-relaxed text-fg-muted">
+              {s.note}
+            </span>
+          )}
         </li>
       ))}
     </ul>

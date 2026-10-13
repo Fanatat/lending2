@@ -6,7 +6,8 @@ import SiteFooter from "@/components/sections/closing/SiteFooter";
 import StudioStats from "@/components/hero/StudioStats";
 import GamePipeline from "@/components/sections/friday/GamePipeline";
 import StudioSection from "@/components/sections/studio/StudioSection";
-import { GITHUB_URL, MAX_URL, OG_IMAGE, TELEGRAM_URL, asset, pageUrl } from "@/lib/site";
+import OperatorSection from "@/components/sections/operator/OperatorSection";
+import { MAX_URL, OG_IMAGE, TELEGRAM_URL, asset, pageUrl } from "@/lib/site";
 
 const TITLE = "Hi, I'm Valery";
 const DESCRIPTION =
@@ -49,7 +50,7 @@ interface System {
   footnote?: string;
   line: ReactNode;
   details: ReactNode;
-  games?: { title: string; line: string; inDevelopment?: boolean; playUrl: string; codeUrl: string }[];
+  games?: { title: string; line: string; inDevelopment?: boolean; playUrl: string }[];
 }
 
 /**
@@ -63,24 +64,24 @@ const SYSTEMS: System[] = [
     title: "Games by the “Friday” studio, plus promo materials",
     line: "The full cycle — from clean, fast code to promo videos. While a competitor is still loading megabytes of framework, our game has already taken the player's first move.",
     details:
-      "A separate system first develops a game, then puts it in the maintenance queue. It prepares promo materials and store-page copy for the platforms. Scripts launch the game in a headless browser on their own, record gameplay in vertical and horizontal formats, check that no Cyrillic has leaked into the English build, and cut the video.",
+      "A separate system first develops a game, then puts it in the maintenance queue. It prepares promo materials and store-page copy for the platforms. Scripts launch the game in a headless browser on their own, record gameplay in vertical and horizontal formats, check that no Cyrillic has leaked into the English build, and cut the video. The full cycle up to revenue on the platform: platform SDKs, ads, in-game purchases, VK payments, cloud saves, leaderboards, passing moderation. The terms of use and the privacy policy for every game are drawn up in-house. Nine games in three months on JavaScript, Three.js, Godot and Unity — one of them is being prepared for Steam, with around 1,500 automated tests and checks across the projects.",
     games: [
-      { title: "Slovokhod", playUrl: "https://vk.com/app54674073", codeUrl: "https://github.com/Fanatat/slovokhod-vk", line: "Published on VK. A hundred word-search levels and not a single audio file in the build: the game synthesises every sound itself." },
-      { title: "Cat Nonograms", playUrl: "https://vk.com/app54676906", codeUrl: "https://github.com/Fanatat/catnonogram-vk", line: "Published on VK. 130 nonograms across themed chapters, with daily puzzles." },
-      { title: "Color and Shape Sort", playUrl: "https://vk.com/app54683949", codeUrl: "https://github.com/Fanatat/Color_Sort-Vk", line: "Published on VK. Sort pieces by both colour and shape, so colour is not the only cue." },
-      { title: "Two Fortresses", playUrl: "https://vk.com/app54759696", codeUrl: "https://github.com/Fanatat/lane-battle-vk", line: "Published on VK. Recruit a squad, upgrade your economy and control a hero on a single battlefield." },
+      { title: "Slovokhod", playUrl: "https://vk.com/app54674073", line: "Published on VK. A hundred word-search levels and not a single audio file in the build: the game synthesises every sound itself." },
+      { title: "Cat Nonograms", playUrl: "https://vk.com/app54676906", line: "Published on VK. 130 nonograms across themed chapters, with daily puzzles." },
+      { title: "Color and Shape Sort", playUrl: "https://vk.com/app54683949", line: "Published on VK. Sort pieces by both colour and shape, so colour is not the only cue." },
+      { title: "Two Fortresses", playUrl: "https://vk.com/app54759696", line: "Published on VK. Recruit a squad, upgrade your economy and control a hero on a single battlefield." },
     ],
   },
   {
     number: "SYSTEM 02",
-    title: "While you're in the flow and losing track of time, the board keeps an eye on what you breathe",
-    line: "CO₂ and dust are invisible, but they drain your HP. Your nose can't sense them — the board can. (Actually, the board doesn't care. We taught it to worry.)",
+    title: "Human health comes before any automation",
+    line: "While you're in the flow and losing track of time, the board keeps an eye on what you breathe. CO₂ and dust are invisible, but they drain your HP. Your nose can't sense them — the board can. (Actually, the board doesn't care. We taught it to worry.)",
     details:
       "A board with seven sensors sends temperature, humidity, pressure, light level, volatile compounds, three fractions of dust and CO₂ to the server once a minute. When the server is unreachable, the board notices by itself, buffers readings in its own memory and sends them with their real timestamps as soon as the connection is back. One of the sensors turned out to be a clone with its own protocol: we decoded it by hand, standard libraries can't see it. The setup moves to a greenhouse, a server room or any workplace without a single change to the logic.",
   },
   {
     number: "SYSTEM 03",
-    title: "Channels that publish and live without me",
+    title: "Media. What's the use of all of the above if nobody knows about you?",
     line: "I filled a folder with 169,000+ photos once — from then on the channel runs itself: it posts during the day at unpredictable times, so the feed doesn't look robotic.",
     details:
       "Two bots. The first posts a set of nine photos with a caption once a day and moves what it used into an archive, so nothing repeats. The second wakes up on schedule: text at 5:50, video at 6:30; it collects material in advance from source channels by itself and hands it out one piece a day. Both have an admin panel right in the chat: status, manual run, subscriber analytics, automatic database backup. The first has run as a system service for months without a crash. The second was started by hand and still hasn't missed a single post.",
@@ -101,13 +102,13 @@ const SYSTEMS: System[] = [
     number: "SYSTEM 05",
     title: "All in",
     footnote: "what?",
-    line: "Crypto portfolio analytics that sees where the market punishes the greedy: the market situation, your assets, a comparison of instruments and the maths of risk. What it can't do is press “Buy” — it's built that way.",
+    line: "Crypto portfolio analytics that sees where the market punishes the greedy: the market situation, your assets, a comparison of instruments and the maths of risk. It doesn't press “Buy” itself — a trading crypto bot for the exchange built on top of it is in development now.",
     details:
-      "The system reads a portfolio on the exchange and explains in plain language what is happening to it: the exact picture of the money, concentration, drawdown, liquidity, a calendar of token unlocks. It sees when the market situation has changed and there is potential to earn more by moving into another asset or changing the way it yields. It gives no trading signals and doesn't predict prices — by a deliberate decision. All numbers are calculated by Python using carefully verified formulas in a separate module — the module runs on my server and updates the calculations on a schedule; the language model receives ready-made figures and writes the sentences, so no invented numbers appear in the report. The portfolio on the Russian page is the same data structure filled with generated figures: real amounts and holdings aren't published for privacy reasons, not because the connection isn't ready. The framework carries over to any operational monitoring where the conclusions are worded by AI.",
+      "The system reads a portfolio on the exchange and explains in plain language what is happening to it: the exact picture of the money, concentration, drawdown, liquidity, a calendar of token unlocks. It sees when the market situation has changed and there is potential to earn more by moving into another asset or changing the way it yields. It gives no trading signals and doesn't predict prices — by a deliberate decision. All numbers are calculated by Python using carefully verified formulas in a separate module — the module runs on my server and updates the calculations on a schedule; the language model receives ready-made figures and writes the sentences, so no invented numbers appear in the report. The portfolio on the Russian page is the same data structure filled with generated figures: real amounts and holdings aren't published for privacy reasons, not because the connection isn't ready. The framework carries over to any operational monitoring where the conclusions are worded by AI. The next stage is a trading crypto bot that will work on the exchange by itself: it's in development.",
   },
   {
     number: "SYSTEM 06",
-    title: "One idea can turn into a whole season of cartoons in three languages",
+    title: "Our own cartoons",
     line: "One production line serves three channels: the script, the voice-over and all the material for editing are assembled and numbered — the editor only has to create.",
     details:
       "The system gets a topic and carries on by itself: writes the story, splits it into scenes, sets up characters and settings, lays it out shot by shot, assembles image descriptions, generates images, records the voice-over, edits and exports almost-finished material — all that's left is to put the video together in Premiere. The story is written once in canonical form; the English, Spanish and Russian versions are derived from it. Twelve videos have already been assembled from start to finish in a technical run — still with placeholder pictures: image generation is connected, the visual style is still being chosen. All generation runs on an ordinary home computer, with no subscriptions or APIs — including the review stage, where an LLM itself checks that the script follows the plan, the characters in the pictures don't change, and the overall setting holds. This way several cartoon series can run in parallel.",
@@ -115,7 +116,7 @@ const SYSTEMS: System[] = [
   {
     number: "SYSTEM 07",
     title: "An operations HQ of eight autonomous agents",
-    line: "Every project needs focus. To keep it from blurring as I switch between tasks, I set up a department that has effectively become my deputies.",
+    line: "Every project needs focus. To keep it from blurring as I switch between tasks, I set up a department that has effectively become my deputies. I compared five methodologies for working with agents on one task and kept the one with the best result.",
     details: (
       <>
         A shared chat where eight different characters live: each has a name,
@@ -131,7 +132,7 @@ const SYSTEMS: System[] = [
   {
     number: "SYSTEM 08",
     title: "AI makes mistakes even in the right hands. It needs an oversight body.",
-    line: "An autonomous system checks the network for data leaks and unauthorised intrusion. It is forbidden to act on its own — only with the founder's permission.",
+    line: "Every 20 minutes an autonomous system checks the network for data leaks and unauthorised intrusion. It is forbidden to act on its own — only with the founder's permission.",
     details:
       "A full check of the local network for internal and external threats: from the outside, a public IP leads straight to the router, and behind it stand four equal devices — a server, a PC, a nettop and a laptop. For months the server's network share exposed the entire home directory for reading, and it held an exchange key and bot tokens. One computer served its user profile anonymously, without a password. The report separately records a case where drafts of the audit itself once saved some of the secrets in plain text to that same shared folder: the inconvenient fact stayed in the document. The most useful thing in the work turned out to be the order of actions. First close the doors, then rotate the secrets — and do it from a device known to be clean.",
   },
@@ -164,7 +165,7 @@ export default function EnglishHomePage() {
 
       <section id="hero" className="flex min-h-[100svh] flex-col justify-center gap-6 px-4 py-20 sm:px-6 sm:py-24 md:px-10 lg:px-16">
         <p className="text-sm text-fg-primary/80 sm:text-base">
-          Valery — AI systems producer
+          Valery — AI specialist: bringing AI agents into business processes
         </p>
         <h1 className="max-w-3xl text-3xl text-fg-primary sm:text-4xl">
           #NOTARESUME — a list of shipped tasks
@@ -197,29 +198,7 @@ export default function EnglishHomePage() {
         <StudioStats lang="en" />
       </section>
 
-      <section id="operator" className="border-t border-line px-4 py-14 sm:px-6 sm:py-20 md:px-10 lg:px-16">
-        <div className="mx-auto max-w-4xl">
-          <div className="text-xs tracking-widest text-fg-muted">
-            WHO&apos;S AT THE CONSOLE
-          </div>
-          <h2 className="mt-2 text-2xl text-fg-primary sm:text-3xl">Valery</h2>
-          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-fg-primary/90 sm:text-base">
-            Producer of AI-agent systems: I set the task, accept the result by
-            facts and take it to production. The code is written by agents —
-            it&apos;s on{" "}
-            <a
-              href={GITHUB_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor="interactive"
-              className="text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:decoration-accent"
-            >
-              GitHub
-            </a>
-            .
-          </p>
-        </div>
-      </section>
+      <OperatorSection lang="en" />
 
       {SYSTEMS.map((s, i) => (
         <Fragment key={s.number}>
@@ -278,16 +257,6 @@ export default function EnglishHomePage() {
                             className={gameLinkClass}
                           >
                             Play on VK ↗
-                          </a>
-                          <a
-                            href={g.codeUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            data-cursor="interactive"
-                            aria-label={`${g.title} source code on GitHub`}
-                            className={gameLinkClass}
-                          >
-                            Code ↗
                           </a>
                         </div>
                       </li>

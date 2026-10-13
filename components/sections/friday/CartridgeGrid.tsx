@@ -7,7 +7,7 @@ import { FRIDAY_GAMES } from "./data";
 const gameLink =
   "text-[11px] text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:decoration-accent";
 
-/** Each cartridge leads to the studio page; the links under it lead to the game itself and its code. */
+/** Each cartridge leads to the studio page; the link under it leads to the game itself. */
 export default function CartridgeGrid() {
   return (
     <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
@@ -29,16 +29,6 @@ export default function CartridgeGrid() {
               className={gameLink}
             >
               Играть в ВК ↗
-            </a>
-            <a
-              href={game.codeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor="interactive"
-              aria-label={`Код игры ${game.title} на GitHub`}
-              className={gameLink}
-            >
-              Код ↗
             </a>
           </div>
         </div>
