@@ -14,7 +14,7 @@ import { TELEGRAM_URL } from "@/lib/site";
 
 // Who is behind the page and how to reach them, readable in the first
 // second — static, not part of the typed reveal below.
-const WHO = "Валерий — продюсер ИИ-систем";
+const WHO = "Валерий — AI-специалист: внедряю ИИ-агентов в рабочие процессы";
 
 const TITLE = "#НЕРЕЗЮМЕ, а список реализованных задач";
 // The leading "Восемь автономных систем." is rendered live by

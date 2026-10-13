@@ -6,6 +6,7 @@ import SiteFooter from "@/components/sections/closing/SiteFooter";
 import StudioStats from "@/components/hero/StudioStats";
 import GamePipeline from "@/components/sections/friday/GamePipeline";
 import StudioSection from "@/components/sections/studio/StudioSection";
+import OperatorSection from "@/components/sections/operator/OperatorSection";
 import { MAX_URL, OG_IMAGE, TELEGRAM_URL, asset, pageUrl } from "@/lib/site";
 
 const TITLE = "Hi, I'm Valery";
@@ -63,7 +64,7 @@ const SYSTEMS: System[] = [
     title: "Games by the “Friday” studio, plus promo materials",
     line: "The full cycle — from clean, fast code to promo videos. While a competitor is still loading megabytes of framework, our game has already taken the player's first move.",
     details:
-      "A separate system first develops a game, then puts it in the maintenance queue. It prepares promo materials and store-page copy for the platforms. Scripts launch the game in a headless browser on their own, record gameplay in vertical and horizontal formats, check that no Cyrillic has leaked into the English build, and cut the video.",
+      "A separate system first develops a game, then puts it in the maintenance queue. It prepares promo materials and store-page copy for the platforms. Scripts launch the game in a headless browser on their own, record gameplay in vertical and horizontal formats, check that no Cyrillic has leaked into the English build, and cut the video. The full cycle up to revenue on the platform: platform SDKs, ads, in-game purchases, VK payments, cloud saves, leaderboards, passing moderation. The terms of use and the privacy policy for every game are drawn up in-house. Nine games in three months on JavaScript, Three.js, Godot and Unity, with around 1,500 automated tests and checks across the projects.",
     games: [
       { title: "Slovokhod", playUrl: "https://vk.com/app54674073", line: "Published on VK. A hundred word-search levels and not a single audio file in the build: the game synthesises every sound itself." },
       { title: "Cat Nonograms", playUrl: "https://vk.com/app54676906", line: "Published on VK. 130 nonograms across themed chapters, with daily puzzles." },
@@ -115,7 +116,7 @@ const SYSTEMS: System[] = [
   {
     number: "SYSTEM 07",
     title: "An operations HQ of eight autonomous agents",
-    line: "Every project needs focus. To keep it from blurring as I switch between tasks, I set up a department that has effectively become my deputies.",
+    line: "Every project needs focus. To keep it from blurring as I switch between tasks, I set up a department that has effectively become my deputies. I compared five methodologies for working with agents on one task and kept the one with the best result.",
     details: (
       <>
         A shared chat where eight different characters live: each has a name,
@@ -131,7 +132,7 @@ const SYSTEMS: System[] = [
   {
     number: "SYSTEM 08",
     title: "AI makes mistakes even in the right hands. It needs an oversight body.",
-    line: "An autonomous system checks the network for data leaks and unauthorised intrusion. It is forbidden to act on its own — only with the founder's permission.",
+    line: "Every 20 minutes an autonomous system checks the network for data leaks and unauthorised intrusion. It is forbidden to act on its own — only with the founder's permission.",
     details:
       "A full check of the local network for internal and external threats: from the outside, a public IP leads straight to the router, and behind it stand four equal devices — a server, a PC, a nettop and a laptop. For months the server's network share exposed the entire home directory for reading, and it held an exchange key and bot tokens. One computer served its user profile anonymously, without a password. The report separately records a case where drafts of the audit itself once saved some of the secrets in plain text to that same shared folder: the inconvenient fact stayed in the document. The most useful thing in the work turned out to be the order of actions. First close the doors, then rotate the secrets — and do it from a device known to be clean.",
   },
@@ -164,7 +165,7 @@ export default function EnglishHomePage() {
 
       <section id="hero" className="flex min-h-[100svh] flex-col justify-center gap-6 px-4 py-20 sm:px-6 sm:py-24 md:px-10 lg:px-16">
         <p className="text-sm text-fg-primary/80 sm:text-base">
-          Valery — AI systems producer
+          Valery — AI specialist: bringing AI agents into business processes
         </p>
         <h1 className="max-w-3xl text-3xl text-fg-primary sm:text-4xl">
           #NOTARESUME — a list of shipped tasks
@@ -197,18 +198,7 @@ export default function EnglishHomePage() {
         <StudioStats lang="en" />
       </section>
 
-      <section id="operator" className="border-t border-line px-4 py-14 sm:px-6 sm:py-20 md:px-10 lg:px-16">
-        <div className="mx-auto max-w-4xl">
-          <div className="text-xs tracking-widest text-fg-muted">
-            WHO&apos;S AT THE CONSOLE
-          </div>
-          <h2 className="mt-2 text-2xl text-fg-primary sm:text-3xl">Valery</h2>
-          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-fg-primary/90 sm:text-base">
-            Producer of AI-agent systems: I set the task, accept the result by
-            facts and take it to production.
-          </p>
-        </div>
-      </section>
+      <OperatorSection lang="en" />
 
       {SYSTEMS.map((s, i) => (
         <Fragment key={s.number}>

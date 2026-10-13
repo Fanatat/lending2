@@ -72,9 +72,9 @@ export default function StudioSection({ lang = "ru" }: { lang?: Lang }) {
 
       <RevealOnScroll index={3} className="mt-12">
         <h3 className="text-xs tracking-widest text-fg-muted">{copy.servicesTitle.toUpperCase()}</h3>
-        <ul className="mt-4 grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-4 grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {STUDIO_SERVICES[lang].map((s) => (
-            <li key={s.name} className="min-w-0 border border-line bg-panel p-4">
+            <li key={s.name} className="min-w-0 border border-line bg-panel p-4 sm:last:odd:col-span-2 lg:last:odd:col-span-1">
               <div className="flex items-baseline justify-between gap-2">
                 <span className="text-sm text-fg-primary">{s.name}</span>
                 <span className="flex shrink-0 items-center gap-1.5 text-[10px] uppercase tracking-widest text-[#3ddc6a]">

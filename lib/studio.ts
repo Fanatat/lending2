@@ -8,7 +8,8 @@
  * - players: the VK developer cabinet, "Участники (лайфтайм)" summed over
  *   the four published games (export of 2026-10-10: 1058 + 1474 + 474 +
  *   1028 = 4034). Yandex Games has no player count, so it isn't added in.
- * - pipeline: the founder's count, 2026-10-12.
+ * - pipeline: the founder's count, 2026-10-13 (résumé v3): 9 games built —
+ *   4 live, 4 in review, 1 in development — plus 3 concepts.
  * - servers and services: the founder's description, 2026-10-12. No
  *   addresses, ports, software versions or what exactly is stored.
  * The hero shows the bare figures: the founder asked to drop the long
@@ -22,8 +23,8 @@ export const PLAYERS_AS_OF = { ru: "10.10.2026", en: "10 Oct 2026" };
 
 export const GAME_PIPELINE = [
   { key: "concept", count: 3, label: { ru: "концепция", en: "concept" } },
-  { key: "dev", count: 3, label: { ru: "в разработке", en: "in development" } },
-  { key: "review", count: 2, label: { ru: "на модерации", en: "in review" } },
+  { key: "dev", count: 1, label: { ru: "в разработке", en: "in development" } },
+  { key: "review", count: 4, label: { ru: "на модерации", en: "in review" } },
   { key: "live", count: 4, label: { ru: "опубликованы в ВК", en: "live on VK" } },
 ] as const;
 
@@ -99,7 +100,7 @@ export const STUDIO_NODES: Record<Lang, StudioNode[]> = {
       key: "proxy",
       name: "Прокси-сервер",
       role: "сетевой маршрут",
-      text: "Отдельный узел для сетевого трафика студии: соединения идут через него, а не напрямую.",
+      text: "Резервный маршрут: при сбое в дата-центре трафик студии автоматически переключается на него.",
     },
   ],
   en: [
@@ -125,7 +126,7 @@ export const STUDIO_NODES: Record<Lang, StudioNode[]> = {
       key: "proxy",
       name: "Proxy server",
       role: "network route",
-      text: "A separate node for the studio's network traffic: connections go through it rather than directly.",
+      text: "The backup route: if a data centre fails, the studio's traffic switches over to it automatically.",
     },
   ],
 };
@@ -150,6 +151,10 @@ export const STUDIO_SERVICES: Record<Lang, StudioService[]> = {
       text: "Независимая система сбора данных: более 100 меток на проект. И это помимо собственной аналитики площадок — VK, Яндекса и других.",
     },
     {
+      name: "Документы",
+      text: "Пользовательское соглашение и политику конфиденциальности для каждой игры составляю сам.",
+    },
+    {
       name: "Контент",
       text: "Два канала на основе фото и текста. И ещё два направления по видео — каждое публикуется автоматически на двух и более площадках.",
     },
@@ -166,6 +171,10 @@ export const STUDIO_SERVICES: Record<Lang, StudioService[]> = {
     {
       name: "Analytics",
       text: "An independent data collection system: 100+ tracking points per project. And that's on top of each platform's own analytics — VK, Yandex and others.",
+    },
+    {
+      name: "Legal documents",
+      text: "The terms of use and the privacy policy for every game are drawn up in-house.",
     },
     {
       name: "Content",
