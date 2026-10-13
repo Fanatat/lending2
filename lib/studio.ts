@@ -9,7 +9,7 @@
  *   the four published games (export of 2026-10-10: 1058 + 1474 + 474 +
  *   1028 = 4034). Yandex Games has no player count, so it isn't added in.
  * - pipeline: the founder's count, 2026-10-13 (résumé v3): 9 games built —
- *   4 live, 4 in review, 1 in development — plus 3 concepts.
+ *   4 live, 4 in review, 1 in development (the Steam one) — plus 3 concepts.
  * - servers and services: the founder's description, 2026-10-12. No
  *   addresses, ports, software versions or what exactly is stored.
  * The hero shows the bare figures: the founder asked to drop the long
