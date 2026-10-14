@@ -35,7 +35,7 @@ const COPY = {
     submit: "Отправить заявку",
     sending: "Отправляю…",
     privacy:
-      "Заявку прочитаю я; для разбора по пунктам её видит ИИ на моём сервере. Никому не передаю.",
+      "Заявку прочитаю я сам. Чтобы разложить её по пунктам, текст обрабатывает ИИ (Google Gemini); больше никому не передаю.",
     contactError: "Укажите почту, @ник в Telegram (от 4 символов) или телефон.",
     messageShort: `Опишите задачу хотя бы в ${MESSAGE_MIN} символов.`,
     badRequest: "Проверьте поля формы.",
@@ -62,7 +62,7 @@ const COPY = {
     submit: "Send request",
     sending: "Sending…",
     privacy:
-      "I'll read your request myself; an AI on my own server sees it to break it down into points. I don't share it with anyone.",
+      "I'll read your request myself. To break it down into points, the text is processed by an AI (Google Gemini); I don't share it with anyone else.",
     contactError: "Enter an email, a Telegram @handle (4+ characters) or a phone number.",
     messageShort: `Describe the task in at least ${MESSAGE_MIN} characters.`,
     badRequest: "Please check the form fields.",
