@@ -3,6 +3,7 @@ import { Fragment, type ReactNode } from "react";
 import SetHtmlLang from "@/components/effects/SetHtmlLang";
 import DetailsDisclosure from "@/components/sections/DetailsDisclosure";
 import SiteFooter from "@/components/sections/closing/SiteFooter";
+import LeadForm from "@/components/sections/closing/LeadForm";
 import StudioStats from "@/components/hero/StudioStats";
 import GamePipeline from "@/components/sections/friday/GamePipeline";
 import StudioSection from "@/components/sections/studio/StudioSection";
@@ -352,6 +353,10 @@ export default function EnglishHomePage() {
               </a>
             </div>
           </div>
+        </div>
+
+        <div className="mx-auto mt-12 max-w-4xl sm:mt-16">
+          <LeadForm lang="en" />
         </div>
       </section>
 

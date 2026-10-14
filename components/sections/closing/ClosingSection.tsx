@@ -6,6 +6,7 @@ import { useHasFinePointer, useReducedMotion } from "@/lib/motion";
 import { useLabStore } from "@/lib/store";
 import { playSfx } from "@/lib/sfx";
 import { MAX_URL, TELEGRAM_URL } from "@/lib/site";
+import LeadForm from "./LeadForm";
 
 const COST_LINES = [
   { label: "Арендованный сервер", amount: 300 },
@@ -271,6 +272,10 @@ export default function ClosingSection() {
             </a>
           </RevealOnScroll>
         </div>
+      </div>
+
+      <div className="mx-auto mt-12 max-w-4xl sm:mt-16">
+        <LeadForm lang="ru" />
       </div>
     </section>
   );
