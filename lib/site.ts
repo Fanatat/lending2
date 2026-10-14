@@ -22,6 +22,14 @@ export const TELEGRAM_URL = "https://t.me/fanatat";
 export const MAX_URL = "https://max.ru/se14158141_bot";
 
 /**
+ * Where the contact form in the closing section posts its JSON
+ * (n8n behind the server's proxy). Override with NEXT_PUBLIC_LEAD_URL at
+ * build time — e.g. a local mock while testing.
+ */
+export const LEAD_URL =
+  process.env.NEXT_PUBLIC_LEAD_URL ?? "https://api.vanatat.ru/site/lead";
+
+/**
  * Yandex Metrica counter of this site (not the games' one — their data
  * must not mix with the site's). 0 keeps Metrica off; put the counter
  * number here once it's created for vanatat.ru.
