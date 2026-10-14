@@ -17,7 +17,6 @@ export const CANONICAL_ORIGIN =
 
 export const GITHUB_URL = "https://github.com/Fanatat";
 export const SITE_REPO_URL = `${GITHUB_URL}/lending2`;
-export const HP100_FEED_REPO_URL = `${GITHUB_URL}/hp100-live-feed`;
 export const TELEGRAM_URL = "https://t.me/fanatat";
 export const MAX_URL = "https://max.ru/se14158141_bot";
 

@@ -1,29 +1,34 @@
 "use client";
 
 /**
- * Real data source for the HP100 widget. The board's own server
- * (~/projects/health_air/airmonitor_vps.py, systemd service
- * `airmonitor.service`) only answers reliably on the VPS's own network —
- * the public IP once used to reach it directly is a proxy with a single
- * unrelated port forwarded, isn't reliably reachable from a visitor's
- * browser, and is being retired regardless. So instead, a separate bot
- * (~/projects/hp100-live-feed/update_feed.py, run standalone or via
- * systemd, not this repo) polls that local server every 5 minutes and
- * publishes the latest reading as JSON to a public GitHub repo; this file
- * fetches that repo's raw.githubusercontent.com URL, which is always
- * reachable from any browser with no CORS or mixed-content concerns.
+ * Real data source for the HP100 widget. The path is direct, with no
+ * middleman repo: the browser asks `api.vanatat.ru/site/air`, which leads
+ * to a bridge on the home server, which in turn reads the board's own
+ * server (~/projects/health_air/airmonitor_vps.py, systemd
+ * `airmonitor.service`).
+ * The endpoint answers with CORS only for the site's own origins
+ * (vanatat.ru, www, fanatat.github.io, vanatat.vercel.app) and caches for
+ * 30 s; 502 means the board's server is down. That server is switched off
+ * at night (roughly 21:00–05:30 MSK), so the last reading can be hours old.
  *
- * When the feed is reachable but stale (the bot stopped pushing), the
- * widget keeps showing the board's last REAL reading, labelled with its
- * timestamp — never passed off as live, never replaced by made-up numbers.
- * Only if the feed can't be fetched at all (and nothing real has been seen
- * this visit) does it fall back to the simulated source in
- * `lib/mock/hp100.ts`, labelled as "нет связи" in HP100Widget.
+ * When the endpoint answers but the reading is old (board's server off,
+ * board silent), the widget keeps showing the board's last REAL reading,
+ * labelled with its timestamp — never passed off as live, never replaced
+ * by made-up numbers. Only if the endpoint can't be reached at all (and
+ * nothing real has been seen this visit) does it fall back to the
+ * simulated source in `lib/mock/hp100.ts`, labelled "нет связи" in
+ * HP100Widget.
  *
- * Feed shape (see update_feed.py's `build_payload`):
- *   { co2?, temperature?, humidity?, dust?, updated: <ISO 8601 string> }
- * Only one point at a time — no rolling history from this source yet, so
- * the widget's 24ч graph shows a single point in live mode.
+ * Response shape:
+ *   { co2?, temperature?, humidity?, dust?,
+ *     updated: <ISO 8601, time of the measurement itself>,
+ *     history?: [{ t: <ISO 8601>, co2?, temperature?, humidity?, dust? }] }
+ * `history` is the last 24 h in 15-minute buckets, oldest first; any
+ * metric in a bucket may be null. It becomes the widget's 24ч graph: one
+ * point per bucket that has the metric (nulls skipped), `t` = the bucket's
+ * epoch ms, plus the current reading as the last point. EcgChart spaces
+ * points evenly by index, the same as the demo history. Without history
+ * the graph falls back to the single current point.
  */
 
 import {
@@ -43,7 +48,7 @@ export type Hp100Snapshot = Record<Hp100MetricKey, MetricState>;
 export interface Hp100Status {
   /** Fresh reading from the board (younger than STALE_AFTER_MS). */
   live: boolean;
-  /** Real reading, but older than STALE_AFTER_MS — the feed bot is down. */
+  /** Real reading, but older than STALE_AFTER_MS — the board or its server is silent. */
   stale: boolean;
   lastUpdated: number | null;
   /** The first poll has finished (either way) — "no data" now means no link, not "not asked yet". */
@@ -53,22 +58,54 @@ export interface Hp100Status {
 type Listener = (snapshot: Hp100Snapshot, status: Hp100Status) => void;
 
 const FEED_URL =
-  process.env.NEXT_PUBLIC_HP100_FEED_URL ??
-  "https://raw.githubusercontent.com/Fanatat/hp100-live-feed/master/latest.json";
+  process.env.NEXT_PUBLIC_HP100_FEED_URL ?? "https://api.vanatat.ru/site/air";
 
 const POLL_MS = 60_000;
-// If the bot hasn't pushed a fresher reading than this, the feed counts as
-// stale (bot down, GitHub raw CDN serving an old cached copy, etc.) and we
-// fall back to demo rather than label old numbers "live". Comfortably
-// covers a couple of missed 5-minute cycles plus CDN lag.
+// `updated` is the time of the measurement itself, and a working board
+// reports far more often than this, so a reading older than 20 minutes
+// means the board or its server has gone quiet (e.g. the server's nightly
+// downtime): it's shown as the last reading, not as live. Leaves room for
+// the endpoint's 30 s cache and a missed poll or two.
 const STALE_AFTER_MS = 20 * 60 * 1000;
 
-interface FeedPayload {
-  co2?: number;
-  temperature?: number;
-  humidity?: number;
-  dust?: number;
+type Reading = Partial<Record<Hp100MetricKey, number | null>>;
+
+interface FeedPayload extends Reading {
   updated?: string;
+  history?: Array<Reading & { t?: string }>;
+}
+
+/**
+ * One metric's 24 h series from the endpoint's buckets: oldest first,
+ * buckets without the metric skipped, the current reading appended as the
+ * newest point so the graph ends where the bar does.
+ */
+function historyFor(
+  key: Hp100MetricKey,
+  buckets: FeedPayload["history"],
+  current: number | undefined,
+  updatedMs: number
+): SeriesPoint[] {
+  const points: SeriesPoint[] = [];
+  if (Array.isArray(buckets)) {
+    for (const b of buckets) {
+      const v = b?.[key];
+      const t = typeof b?.t === "string" ? Date.parse(b.t) : NaN;
+      if (typeof v === "number" && Number.isFinite(v) && !Number.isNaN(t)) {
+        points.push({ t, v });
+      }
+    }
+    points.sort((a, b) => a.t - b.t);
+  }
+  if (current !== undefined) {
+    const last = points.at(-1);
+    if (last && last.t >= updatedMs) {
+      points[points.length - 1] = { t: last.t, v: current };
+    } else {
+      points.push({ t: updatedMs, v: current });
+    }
+  }
+  return points;
 }
 
 class Hp100LiveSource {
@@ -117,8 +154,15 @@ class Hp100LiveSource {
       const nextSnapshot = {} as Hp100Snapshot;
       for (const def of HP100_METRICS) {
         const raw = payload[def.key];
-        const latest = typeof raw === "number" ? raw : (def.min + def.normalMax) / 2;
-        nextSnapshot[def.key] = { latest, history: [{ t: 0, v: latest }] };
+        const current = typeof raw === "number" && Number.isFinite(raw) ? raw : undefined;
+        const history = historyFor(def.key, payload.history, current, updatedMs);
+        // No current value for this metric: its newest bucket, else the
+        // middle of the normal range (as before history existed).
+        const latest = current ?? history.at(-1)?.v ?? (def.min + def.normalMax) / 2;
+        nextSnapshot[def.key] = {
+          latest,
+          history: history.length ? history : [{ t: updatedMs, v: latest }],
+        };
       }
 
       this.snapshot = nextSnapshot;
