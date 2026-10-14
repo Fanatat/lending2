@@ -9,11 +9,38 @@
  *
  * The page list comes from the site's own sitemap.xml, plus the hidden
  * project page that the sitemap leaves out on purpose.
+ *
+ * The HP100 endpoint (api.vanatat.ru/site/air) answers CORS only for the
+ * site's real origins, so from localhost the browser would block it and
+ * log an error. The run answers it with a fixed sample instead — the same
+ * shape — which also keeps the result independent of the sensor's server.
  */
 import { chromium } from "playwright";
 
 const BASE = (process.env.SMOKE_BASE_URL ?? "http://localhost:3000").replace(/\/$/, "");
 const SETTLE_MS = 5000;
+const AIR_URL = /^https:\/\/api\.vanatat\.ru\/site\/air(\?.*)?$/;
+
+function airSample() {
+  const now = Date.now();
+  const bucket = 15 * 60 * 1000;
+  const last = Math.floor(now / bucket) * bucket;
+  const history = Array.from({ length: 97 }, (_, i) => ({
+    t: new Date(last - (96 - i) * bucket).toISOString(),
+    co2: 450 + i * 2,
+    temperature: 26 + (i % 8) * 0.1,
+    humidity: 42,
+    dust: i % 10 === 0 ? null : 8,
+  }));
+  return {
+    co2: 650,
+    temperature: 26.4,
+    humidity: 41.5,
+    dust: 9,
+    updated: new Date(now - 60_000).toISOString(),
+    history,
+  };
+}
 const EXTRA_PATHS = ["/projects/bridge/"];
 
 async function fetchSitemap() {
@@ -40,6 +67,14 @@ let failed = 0;
 
 for (const path of paths) {
   const context = await browser.newContext();
+  await context.route(AIR_URL, (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      headers: { "access-control-allow-origin": "*" },
+      body: JSON.stringify(airSample()),
+    })
+  );
   const page = await context.newPage();
   const errors = [];
   page.on("console", (msg) => {

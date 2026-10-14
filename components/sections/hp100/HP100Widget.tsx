@@ -8,7 +8,6 @@ import { useReducedMotion } from "@/lib/motion";
 import { useSystemStatusStore } from "@/lib/systemStatus";
 import { useLabStore } from "@/lib/store";
 import { playSfx } from "@/lib/sfx";
-import { HP100_FEED_REPO_URL } from "@/lib/site";
 
 // "Подышать на датчик" easter egg: keeping the pointer on the CO₂ row makes
 // the reading climb as if someone breathed right into the sensor.
@@ -78,7 +77,7 @@ function HorizontalBar({
 
 /**
  * Oscilloscope-style trace that redraws itself whenever fresh history comes
- * in (poll cadence: hp100LiveSource, ~15s) — a stroke-dashoffset reveal
+ * in (poll cadence: hp100LiveSource, ~60s) — a stroke-dashoffset reveal
  * replayed via a `key` remount on the path, rather than a single static
  * line — plus a small pulsing dot marking the most recent reading. Recolors
  * red when the selected metric is outside its normal range (no
@@ -314,15 +313,6 @@ export default function HP100Widget() {
         >
           Как устроена плата →
         </ProjectCardLink>
-        <a
-          href={HP100_FEED_REPO_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          data-cursor="interactive"
-          className="text-accent"
-        >
-          Лента показаний на GitHub ↗
-        </a>
       </div>
     </div>
   );

@@ -47,9 +47,9 @@ export const INITIAL_SINCE = Object.fromEntries(
 ) as Record<SystemId, number | null>;
 
 /**
- * HP100's link to its board, as seen through the feed (lib/hp100-live.ts):
+ * HP100's link to its board, as seen through the endpoint (lib/hp100-live.ts):
  * still waiting for the first answer, fresh reading, only an old reading
- * (the feed bot stopped), or no answer at all. Deliberately separate from
+ * (the board or its server went quiet), or no answer at all. Deliberately separate from
  * the air itself — a warm room is a reading, not an outage.
  */
 export type Hp100Link = "checking" | "live" | "stale" | "offline";
