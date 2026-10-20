@@ -2,12 +2,12 @@
 
 /**
  * Real data source for the HP100 widget. The board's own server
- * (~/projects/health_air/airmonitor_vps.py, systemd service
+ * (~/projects/utility/health_air/airmonitor_vps.py, systemd service
  * `airmonitor.service`) only answers reliably on the VPS's own network —
  * the public IP once used to reach it directly is a proxy with a single
  * unrelated port forwarded, isn't reliably reachable from a visitor's
  * browser, and is being retired regardless. So instead, a separate bot
- * (~/projects/hp100-live-feed/update_feed.py, run standalone or via
+ * (~/projects/utility/hp100-live-feed/update_feed.py, run standalone or via
  * systemd, not this repo) polls that local server every 5 minutes and
  * publishes the latest reading as JSON to a public GitHub repo; this file
  * fetches that repo's raw.githubusercontent.com URL, which is always
