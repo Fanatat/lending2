@@ -20,6 +20,8 @@ export default function SmoothScroll() {
     const lenis = new Lenis({
       duration: 1.1,
       easing: (t: number) => 1 - Math.pow(1 - t, 3),
+      // In-page links (the hero's "Проекты ↓") glide instead of jumping.
+      anchors: true,
     });
 
     let rafId = 0;

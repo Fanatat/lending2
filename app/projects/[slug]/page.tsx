@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PROJECTS, getProjectMeta, getProjectNeighbours } from "@/lib/projects";
 import { SYSTEM_COPY } from "@/lib/systemCopy";
+import { OG_IMAGE, pageUrl } from "@/lib/site";
 import ProjectShell from "@/components/projects/ProjectShell";
 import ProjectWidget from "@/components/projects/ProjectWidget";
 import ProjectFlow from "@/components/projects/ProjectFlow";
@@ -19,9 +20,23 @@ export function generateMetadata({
   const meta = getProjectMeta(params.slug);
   if (!meta) return { title: "Проект" };
   const copy = SYSTEM_COPY[meta.system];
+  const description = "details" in copy ? copy.details : copy.title;
+  const url = pageUrl(`/projects/${meta.slug}`);
   return {
     title: meta.title,
-    description: "details" in copy ? copy.details : copy.title,
+    description,
+    // Without its own canonical the page inherits the layout's, which
+    // points search engines at the home page instead of this one.
+    alternates: { canonical: url },
+    openGraph: {
+      title: meta.title,
+      description,
+      url,
+      siteName: "Привет от Валеры",
+      locale: "ru_RU",
+      type: "article",
+      images: [OG_IMAGE],
+    },
     // The bridge is an easter egg on the dashboard; keep its page out of search.
     robots: meta.hidden ? { index: false } : undefined,
   };

@@ -6,6 +6,7 @@ import { useHasFinePointer, useReducedMotion } from "@/lib/motion";
 import { useLabStore } from "@/lib/store";
 import { playSfx } from "@/lib/sfx";
 import { MAX_URL, TELEGRAM_URL } from "@/lib/site";
+import LeadForm from "./LeadForm";
 
 const COST_LINES = [
   { label: "Арендованный сервер", amount: 300 },
@@ -238,11 +239,10 @@ export default function ClosingSection() {
 
           <RevealOnScroll index={3}>
             <p className="mt-4 text-left text-sm leading-relaxed text-fg-primary/90 sm:text-justify sm:text-base">
-              Я не беру заказы. Я беру задачи, которые мне искренне интересно
-              решить — в этом залог моего творчества. Если у вас есть такая
-              задача и понимание её ценности — напишите. Я посмотрю, стоит ли
-              её решать. И если да — заберу вашу проблему и передам вам
-              работающий механизм.
+              Берусь за задачи, которые интересно решить: автоматизация на
+              ИИ-агентах, боты, мониторинг, игры. Напишите, что нужно сделать, —
+              отвечу и расскажу, как бы я это решал. Если возьмусь — заберу
+              вашу проблему и передам вам работающий механизм.
             </p>
           </RevealOnScroll>
 
@@ -272,6 +272,10 @@ export default function ClosingSection() {
             </a>
           </RevealOnScroll>
         </div>
+      </div>
+
+      <div className="mx-auto mt-12 max-w-4xl sm:mt-16">
+        <LeadForm lang="ru" />
       </div>
     </section>
   );

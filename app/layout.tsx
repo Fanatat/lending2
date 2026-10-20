@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { OG_IMAGE, SITE_ORIGIN, asset } from "@/lib/site";
+import { CANONICAL_ORIGIN, OG_IMAGE, pageUrl } from "@/lib/site";
 import SmoothScroll from "@/components/effects/SmoothScroll";
 import ParticleDust from "@/components/effects/ParticleDust";
 import SmokeField from "@/components/effects/SmokeField";
@@ -21,6 +21,7 @@ import SudoEasterEgg from "@/components/easter-eggs/SudoEasterEgg";
 import AgentVision from "@/components/easter-eggs/AgentVision";
 import IdleScreensaver from "@/components/easter-eggs/IdleScreensaver";
 import IntroGate from "@/components/intro/IntroGate";
+import YandexMetrika from "@/components/effects/YandexMetrika";
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin", "cyrillic"],
@@ -34,23 +35,23 @@ const DESCRIPTION =
   "Восемь автономных систем. Ноль сотрудников, одна подписка на нейросеть, ноль обещаний.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_ORIGIN),
+  metadataBase: new URL(CANONICAL_ORIGIN),
   title: TITLE,
   description: DESCRIPTION,
   icons: {
     icon: "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ctext%20y='.9em'%20font-size='90'%3E%E2%9D%A4%EF%B8%8F%3C/text%3E%3C/svg%3E",
   },
   alternates: {
-    canonical: asset("/"),
+    canonical: pageUrl("/"),
     languages: {
-      ru: asset("/"),
-      en: asset("/en"),
+      ru: pageUrl("/"),
+      en: pageUrl("/en"),
     },
   },
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
-    url: asset("/"),
+    url: pageUrl("/"),
     siteName: TITLE,
     locale: "ru_RU",
     type: "website",
@@ -78,11 +79,14 @@ export default function RootLayout({
       <head>
         {/* Runs before hydration so a reload while SudoEasterEgg's lock is
             engaged shows the lock immediately instead of flashing the
-            normal page first. Keys here must match SUDO_LOCK_KEY /
-            SUDO_LOCK_HTML_CLASS in components/easter-eggs/SudoEasterEgg.tsx. */}
+            normal page first, and a returning visitor doesn't see the
+            intro's sound gate flash before IntroAnimation skips it. Keys
+            here must match SUDO_LOCK_KEY / SUDO_LOCK_HTML_CLASS in
+            components/easter-eggs/SudoEasterEgg.tsx and INTRO_SEEN_KEY /
+            INTRO_SEEN_HTML_CLASS in lib/introStore.ts. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{if(localStorage.getItem('lab-terminal:sudo-locked')==='1'){document.documentElement.classList.add('sudo-locked-boot');}}catch(e){}`,
+            __html: `try{var c=document.documentElement.classList;if(localStorage.getItem('lab-terminal:sudo-locked')==='1'){c.add('sudo-locked-boot');}if(localStorage.getItem('lab-terminal:intro-seen')==='1'){c.add('intro-seen-boot');}}catch(e){}`,
           }}
         />
       </head>
@@ -108,6 +112,7 @@ export default function RootLayout({
         <SudoEasterEgg />
         <AgentVision />
         <IdleScreensaver />
+        <YandexMetrika />
       </body>
     </html>
   );

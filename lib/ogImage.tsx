@@ -1,4 +1,4 @@
-import { SITE_URL } from "./site";
+import { CANONICAL_ORIGIN } from "./site";
 
 export const OG_IMAGE_SIZE = { width: 1200, height: 630 };
 
@@ -37,7 +37,7 @@ export function OgImageCard() {
             background: "#3ddc6a",
           }}
         />
-        {SITE_URL.replace(/^https?:\/\//, "")}
+        {CANONICAL_ORIGIN.replace(/^https?:\/\//, "")}
       </div>
       <div style={{ display: "flex", fontSize: 88, marginTop: 28, lineHeight: 1.05 }}>
         Привет от Валеры

@@ -18,8 +18,8 @@ export default function HP100Section() {
       title={SYSTEM_COPY.hp100.title}
       line={
         <>
-          <SystemStatusLine systemId="hp100" offlineLabel="Отклонение" className="mb-3" />
-          CO₂ и пыль невидимы, но они отнимают ваши HP. Нос их не чувствует, плата — чувствует. (Вообще-то плате всё равно — это мы научили её беспокоиться.)
+          <SystemStatusLine systemId="hp100" className="mb-3" />
+          Пока вы в потоке и теряете счёт времени, плата следит за тем, чем вы дышите. CO₂ и пыль невидимы, но они отнимают ваши HP. Нос их не чувствует, плата — чувствует. (Вообще-то плате всё равно — это мы научили её беспокоиться.)
         </>
       }
       details={SYSTEM_COPY.hp100.details}

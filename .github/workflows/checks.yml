@@ -1,0 +1,39 @@
+# Checks every pull request and every push to main before visitors see it:
+# the build (with lint and types) and a smoke run in a real browser that
+# fails on any console error — a hydration mismatch shows up only there.
+name: Checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # Same static export GitHub Pages serves (see pages.yml).
+      - run: npm run build
+        env:
+          PAGES_BASE_PATH: ""
+
+      - run: npx playwright install --with-deps chromium
+
+      - name: Console stays clean on every page
+        run: |
+          python3 -m http.server 3000 --directory out &
+          npm run smoke
+        env:
+          SMOKE_BASE_URL: http://localhost:3000

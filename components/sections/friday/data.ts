@@ -4,38 +4,41 @@ export interface FridayGame {
   line: string;
   microFact: string;
   inDevelopment?: boolean;
+  /** The published game on its platform. */
+  playUrl: string;
 }
 
+/**
+ * Only games players can open today. Games still in review or in
+ * development are counted in GamePipeline (lib/studio.ts) without titles.
+ */
 export const FRIDAY_GAMES: FridayGame[] = [
   {
     slug: "slovohod",
+    playUrl: "https://vk.com/app54674073",
     title: "Словоход",
-    line: "Сто уровней филворда и ни одного звукового файла в сборке: все звуки игра синтезирует сама.",
+    line: "Опубликована в VK. Сто уровней филворда и ни одного звукового файла в сборке: все звуки игра синтезирует сама.",
     microFact: "звуки — синтез, не файлы",
   },
   {
     slug: "nonograms",
-    title: "Картинки по числам",
-    line: "Сто тридцать нонограмм, которые перед каждым релизом проверяют 338 автотестов.",
-    microFact: "338 тестов зелёных",
+    playUrl: "https://vk.com/app54676906",
+    title: "Кот и японские кроссворды",
+    line: "Опубликована в VK. Сто тридцать нонограмм в тематических главах и отдельные ежедневные задания.",
+    microFact: "130 уровней и ежедневные задания",
   },
   {
     slug: "color-sort",
-    title: "Color Sort",
-    line: "Сортировка колб, которая проходит дальтоник наравне со всеми: сортируем по цвету и форме сразу.",
-    microFact: "дальтоник проходит наравне",
+    playUrl: "https://vk.com/app54683949",
+    title: "Сортировка: Цвет и Форма",
+    line: "Опубликована в VK. Элементы различаются цветом и формой, поэтому цвет — не единственный ориентир.",
+    microFact: "сортировка по цвету и форме",
   },
   {
     slug: "lane-battler",
-    title: "Lane Battler",
-    line: "Правила боя выведены из 375 негативных отзывов на лидера жанра: починено ровно то, на что жалуются игроки. Не вкусовщина — факты.",
-    microFact: "375 отзывов → патч",
-    inDevelopment: true,
-  },
-  {
-    slug: "royal-solitaire",
-    title: "Royal Solitaire",
-    line: "Мультяшная 2.5D косынка на Three.js, прошедшая модерацию Яндекс Игр — не макет, а собранная и выпущенная игра.",
-    microFact: "Three.js, прошла модерацию",
+    playUrl: "https://vk.com/app54759696",
+    title: "Две крепости",
+    line: "Опубликована в VK. Стратегия на одной линии: нанимайте отряд, улучшайте экономику и управляйте героем.",
+    microFact: "отряд, экономика и герой",
   },
 ];
