@@ -10,7 +10,7 @@ import StudioSection from "@/components/sections/studio/StudioSection";
 import OperatorSection from "@/components/sections/operator/OperatorSection";
 import { MAX_URL, OG_IMAGE, TELEGRAM_URL, asset, pageUrl } from "@/lib/site";
 
-const TITLE = "Hi, I'm Valery";
+const TITLE = "Valery — AI & Automation";
 const DESCRIPTION =
   "Eight autonomous systems. Zero employees, one AI subscription, zero promises.";
 
