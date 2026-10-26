@@ -32,7 +32,7 @@ export function generateMetadata({
       title: meta.title,
       description,
       url,
-      siteName: "Привет от Валеры",
+      siteName: "Валера — ИИ и автоматизация",
       locale: "ru_RU",
       type: "article",
       images: [OG_IMAGE],
