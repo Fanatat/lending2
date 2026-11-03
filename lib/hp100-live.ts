@@ -4,7 +4,7 @@
  * Real data source for the HP100 widget. The path is direct, with no
  * middleman repo: the browser asks `api.vanatat.ru/site/air`, which leads
  * to a bridge on the home server, which in turn reads the board's own
- * server (~/projects/health_air/airmonitor_vps.py, systemd
+ * server (~/projects/utility/health_air/airmonitor_vps.py, systemd
  * `airmonitor.service`).
  * The endpoint answers with CORS only for the site's own origins
  * (vanatat.ru, www, fanatat.github.io, vanatat.vercel.app) and caches for
